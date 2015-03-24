@@ -6,19 +6,23 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>fermedesanimaux.com</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css"> 
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.min.css"> 
-        
+        <link rel="stylesheet" type="text/css" href="css/jquery.sidr.light.css"> 
+
         <link rel="stylesheet" type="text/css" href="css/style.css"> 
-
-
 
         <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/jquery.sidr.min.js"></script>
+        <script type="text/javascript" src="js/typeahead.bundle.js"></script>
+
+        <script type="text/javascript" src="js/jssor.js"></script>
+        <script type="text/javascript" src="js/jssor.slider.js"></script>
 
         <script>
             $(document).ready(function () {
@@ -26,17 +30,115 @@ and open the template in the editor.
                 $("#but").click(function () {
                     $("#dialog").dialog();
                 });
+                $('#simple-menu').sidr();
+            });
+            jQuery(document).ready(function ($) {
+                var options = {
+                    $AutoPlay: true, //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                    $PlayOrientation: 2, //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
+                    $DragOrientation: 2, //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+
+                    $ArrowNavigatorOptions: {
+                        $Class: $JssorArrowNavigator$, //[Requried] Class to create arrow navigator instance
+                        $ChanceToShow: 2, //[Required] 0 Never, 1 Mouse Over, 2 Always
+                        $AutoCenter: 1, //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                        $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
+                    }
+                };
+
+                var jssor_slider1 = new $JssorSlider$("slider1_container", options);
             });
         </script>
 
+        <style>
+            /* jssor slider arrow navigator skin 08 css */
+            /*
+            .jssorb08l              (normal)
+            .jssorb08r              (normal)
+            .jssorb08l:hover        (normal mouseover)
+            .jssorb08r:hover        (normal mouseover)
+            .jssorb08ldn            (mousedown)
+            .jssorb08rdn            (mousedown)
+            */
+            .jssorb08l, .jssorb08r, .jssorb08ldn, .jssorb08rdn
+            {
+                position: absolute;
+                cursor: pointer;
+                display: block;
+                background: url(img/a08.png) no-repeat;
+                overflow:hidden;
+                opacity: .4; filter:alpha(opacity=40);
+            }
+            .jssorb08l { background-position: -5px -35px; }
+            .jssorb08r { background-position: -65px -35px; }
+            .jssorb08l:hover { background-position: -5px -35px; opacity: .8; filter:alpha(opacity=80); }
+            .jssorb08r:hover { background-position: -65px -35px; opacity: .8; filter:alpha(opacity=80); }
+            .jssorb08ldn { background-position: -5px -35px; opacity: .3; filter:alpha(opacity=30); }
+            .jssorb08rdn { background-position: -65px -35px; opacity: .3; filter:alpha(opacity=30); }
+        </style>
+
     </head>
     <body>
+
         <p>Date: <input type="text" id="datepicker"></p>
 
         <button id="but">HOULALAAA</button>
 
         <div id="dialog" title="Basic dialog">
             <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+        </div>
+
+        <a id="simple-menu" href="#sidr" class="myButton">
+            <img id="img_fleche" src="img/ui-bg_diagonals-thick_20_666666_40x40.png"/>
+        </a>
+        
+        <br/>
+
+        <button type="button" onclick="document.getElementById('demo').innerHTML = Date()">
+            Click me to display Date and Time.</button>
+        
+        <br/>
+
+        <a href="error.jsp">error</a>
+
+        <form method="post" action="checkuser">
+            <ul>
+                <li> Login : <input type="text" name="login"/></li>
+                <li> Mot de passe : <input type="password" name="password"/></li>
+            </ul>
+            <input type="submit" name="Login"/>
+        </form>
+
+        <a href="First_S">Go Servlet</a>
+
+        <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 600px;
+             height: 300px;">
+
+            <!-- Loading Screen -->
+            <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+                <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                     background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
+                </div>
+                <div style="position: absolute; display: block; background: url(img/loading.gif) no-repeat center center;
+                     top: 0px; left: 0px;width: 100%;height:100%;">
+                </div>
+            </div>
+
+            <!-- Slides Container -->
+            <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 600px; height: 500px; overflow: hidden;">
+                <div><img u="image" src="img/hyun1.jpg" /></div>
+                <div><img u="image" src="img/hyun2.jpg" /></div>
+                <div><img u="image" src="img/hyun3.jpg" /></div>
+                <div><img u="image" src="img/hyun4.jpg" /></div>
+                <div><img u="image" src="img/hyun5.jpg" /></div>
+            </div>
+
+            <!-- Arrow Left -->
+            <span u="arrowleft" class="jssorb08l" style="width: 50px; height: 50px; top: 8px; left: 8px;">
+            </span>
+            <!-- Arrow Right -->
+            <span u="arrowright" class="jssorb08r" style="width: 50px; height: 50px; bottom: 8px; left: 8px">
+            </span>
         </div>
 
     </body>
