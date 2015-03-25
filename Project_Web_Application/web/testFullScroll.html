@@ -6,153 +6,145 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Site du théâtre ***</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css"> 
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.min.css"> 
+        <link rel="stylesheet" type="text/css" href="css/jquery.sidr.light.css"> 
+
+        <link rel="stylesheet" type="text/css" href="css/style.css"> 
+
         <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="js/fullScroll.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/fullScroll.css"> 
+        <script type="text/javascript" src="js/jquery.sidr.min.js"></script>
+        <script type="text/javascript" src="js/typeahead.bundle.js"></script>
+
+        <script type="text/javascript" src="js/jssor.js"></script>
+        <script type="text/javascript" src="js/jssor.slider.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $("#datepicker").datepicker();
+                $("#but").click(function () {
+                    $("#dialog").dialog();
+                });
+                $('#simple-menu').sidr();
+            });
+            jQuery(document).ready(function ($) {
+                var options = {
+                    $AutoPlay: true, //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                    $PlayOrientation: 2, //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
+                    $DragOrientation: 2, //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+
+                    $ArrowNavigatorOptions: {
+                        $Class: $JssorArrowNavigator$, //[Requried] Class to create arrow navigator instance
+                        $ChanceToShow: 2, //[Required] 0 Never, 1 Mouse Over, 2 Always
+                        $AutoCenter: 1, //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                        $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
+                    }
+                };
+
+                var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+            });
+        </script>
+
+        <style>
+            /* jssor slider arrow navigator skin 08 css */
+            /*
+            .jssorb08l              (normal)
+            .jssorb08r              (normal)
+            .jssorb08l:hover        (normal mouseover)
+            .jssorb08r:hover        (normal mouseover)
+            .jssorb08ldn            (mousedown)
+            .jssorb08rdn            (mousedown)
+            */
+            .jssorb08l, .jssorb08r, .jssorb08ldn, .jssorb08rdn
+            {
+/*                position: absolute;*/
+                cursor: pointer;
+                display: block;
+                background: url(img/a08.png) no-repeat;
+                overflow:hidden;
+                opacity: .4; filter:alpha(opacity=40);
+            }
+            .jssorb08l { background-position: -5px -35px; }
+            .jssorb08r { background-position: -65px -35px; }
+            .jssorb08l:hover { background-position: -5px -35px; opacity: .8; filter:alpha(opacity=80); }
+            .jssorb08r:hover { background-position: -65px -35px; opacity: .8; filter:alpha(opacity=80); }
+            .jssorb08ldn { background-position: -5px -35px; opacity: .3; filter:alpha(opacity=30); }
+            .jssorb08rdn { background-position: -65px -35px; opacity: .3; filter:alpha(opacity=30); }
+        </style>
+
     </head>
     <body>
-        <div id="fullpage">
-            <div class="section" id="home-1">
-                <div class="contain">
-                    <div class="row">
-                        <div class="large-6 medium-6 columns">
-                            <h2>We create the future of online shopping,<br />come on board!</h2>
-                            <a href="#" class="button popup">Fitle News</a>
-                        </div>
-                        <div class="large-6 medium-6 columns">
-                            <img src="img/hyun1.jpg" alt="" id="home-woman-1" />
-                            <img src="img/hyun2.jpg" alt="" id="home-woman-2" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
+        <a href="testFullScroll.html"> testFullScroll </a>
 
-            <div class="section row" id="avatar">
-                <div class="large-6 medium-6 small-12 columns">
-                    <h3>Create your 3D avatar</h3>
-                    <p>Download the application (coming soon)
-                        <br />Take a few pictures in tight clothes
-                        <br />Add your height 
-                        <br />And that's it!</p>
-                </div>
-                <div class="large-6 medium-6 small-12 columns">
-                    <img src="img/smartphone.png" alt="" id="smartphone" />
-                    <img src="img/man-front.png" alt="" id="model-front" />
-                    <img src="img/man-side.png" alt="" class="model" id="model-side" />
-                    <figure id="avatar-1">
-                        <img src="img/avatar-1.png" alt="" />
-                        <figcaption>Reconstruction</figcaption>
-                    </figure>
-                    <figure id="avatar-2">
-                        <img src="img/avatar-2.png" alt="" />
-                        <figcaption>Modeling</figcaption>
-                    </figure>
-                    <figure id="avatar-3">
-                        <img src="img/avatar-3.png" alt="" />
-                        <figcaption>Fitting</figcaption>
-                    </figure>
-                </div>	
-            </div>
+        <p>Date: <input type="text" id="datepicker"></p>
 
+        <button id="but">HOULALAAA</button>
 
-            <div class="section row" id="try">
-                <div class="contain">
-                    <div class="small-12 hide-for-medium-up columns">
-                        <h3>Try on clothes</h3>
-                        <p>Try clothes on your avatar
-                            <br />Mix and match the garments
-                            <br />Create your entire look</p>
-                    </div>
-                    <div class="large-5 medium-5 small-6 columns clothes">
-                        <div class="row">
-                            <div class="large-6 medium-6 hide-for-small-only columns">
-                                <figure class="item-1">
-                                    <img src="img/item-1.png" alt="" />
-                                    <span class="text-content"><span>Try on</span></span>
-                                    <figcaption>
-                                        <span class="brand">Brand</span>
-                                        <span class="right">$29</span>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                            <div class="large-6 medium-6 small-12 columns">
-                                <figure class="item-2">
-                                    <img src="img/item-2.png" alt="" />
-                                    <span class="text-content"><span>Try on</span></span>
-                                    <figcaption>
-                                        <span class="brand">Brand</span>
-                                        <span class="right">$10.90</span>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="large-6 medium-6 hide-for-small-only columns">
-                                <figure class="item-3">
-                                    <img src="img/item-3.png" alt="" />
-                                    <span class="text-content"><span>Try on</span></span>
-                                    <figcaption>
-                                        <span class="brand">Brand</span>
-                                        <span class="right">$29</span>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                            <div class="large-6 medium-6 small-12 columns">
-                                <figure class="item-4">
-                                    <img src="img/item-4.png" alt="" />
-                                    <span class="text-content"><span>Try on</span></span>
-                                    <figcaption>
-                                        <span class="brand">Brand</span>
-                                        <span class="right">$10.90</span>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="large-4 medium-4 small-6 columns generator">
-                        <img src="img/try-1.png" alt ="" id="try-1" />
-                        <img src="img/try-2.png" alt ="" id="try-2" />
-                        <img src="img/try-3.png" alt ="" id="try-3" />
-                        <img src="img/try-4.png" alt ="" id="try-4" />
-                    </div>
-                    <div class="large-3 medium-3 hide-for-small-only columns">
-                        <h3 style="text-align: left;">Try on clothes</h3>
-                        <p style="text-align: left;">Try clothes on your avatar
-                            <br />Mix and match the garments
-                            <br />Create your entire look</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section" id="advantages">
-                <div class="contain">
-                    <div id="background"></div>
-                    <h3>Disrupting online shopping</h3>
-                    <div class="row" style="z-index: 100;">
-                        <div class="large-4 medium-4 small-12 columns ">
-                            <p><img src="img/choice.png" alt="" /></p>
-                            <h4>Choose the right clothes</h4>
-                            <p>Finally receive what you expect</p>
-                        </div>
-                        <div class="large-4 medium-4 small-12 columns ">
-                            <p><img src="img/look.png" alt="" /></p>
-                            <h4>Try on entire outfits</h4>
-                            <p>Mix and match a top with a pair of pants
-                                <br />and accessories</p>
-                        </div>
-                        <div class="large-4 medium-4 small-12 columns ">
-                            <p><img src="img/mirror.png" alt="" /></p>
-                            <h4>See yourself from the back</h4>
-                            <p>We've all been waiting for this!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="dialog" title="Basic dialog">
+            <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
         </div>
+
+        <a id="simple-menu" href="#sidr" class="myButton">
+            <img id="img_fleche" src="img/ui-bg_diagonals-thick_20_666666_40x40.png"/>
+        </a>
+
+        <br/>
+
+        <button type="button" onclick="document.getElementById('demo').innerHTML = Date()">
+            Click me to display Date and Time.</button>
+
+        <br/>
+
+        <a href="error.jsp">error</a>
+
+        <form method="post" action="checkuser">
+            <ul>
+                <li> Login : <input type="text" name="login"/></li>
+                <li> Mot de passe : <input type="password" name="password"/></li>
+            </ul>
+            <input type="submit" name="Login"/>
+        </form>
+
+        <a href="First_S">Go Servlet</a>
+
+        <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 600px;
+             height: 300px;">
+
+            <!-- Loading Screen -->
+            <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+                <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                     background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
+                </div>
+                <div style="position: absolute; display: block; background: url(img/loading.gif) no-repeat center center;
+                     top: 0px; left: 0px;width: 100%;height:100%;">
+                </div>
+            </div>
+
+            <!-- Slides Container -->
+            <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 600px; height: 500px; overflow: hidden;">
+                <div><img u="image" src="img/hyun1.jpg" /></div>
+                <div><img u="image" src="img/hyun2.jpg" /></div>
+                <div><img u="image" src="img/hyun3.jpg" /></div>
+                <div><img u="image" src="img/hyun4.jpg" /></div>
+                <div><img u="image" src="img/hyun5.jpg" /></div>
+            </div>
+
+            <!-- Arrow Left -->
+            <span u="arrowleft" class="jssorb08l" style="width: 50px; height: 50px; top: 8px; left: 8px;">
+            </span>
+            <!-- Arrow Right -->
+            <span u="arrowright" class="jssorb08r" style="width: 50px; height: 50px; bottom: 8px; left: 8px">
+            </span>
+        </div>
+
+        <A HREF="????????????">Créer un nouveau compte </A><br><br>
+        <h1>Site de réservation</h1>
+
     </body>
 </html>
