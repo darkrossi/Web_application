@@ -28,6 +28,33 @@ and open the template in the editor.
         <script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
         <script type="text/javascript" src="js/scriptCarousel.js"></script>
 
+        <script>
+            function allowDrop(ev) {
+                ev.preventDefault();
+            }
+
+            function drag(ev) {
+                ev.dataTransfer.setData("text", ev.target.src);
+            }
+
+            function drop(ev) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("text");
+                sessionStorage.setItem("panier" + sessionStorage.getItem("count"), data);
+                sessionStorage.setItem("count", sessionStorage.getItem("count")+0);
+//                var p = document.createElement("p");
+//                p.innerHTML = sessionStorage.getItem("count").getName();
+//                document.getElementById("div1").appendChild(p);
+            }
+            
+            $(document).ready(function () {
+                sessionStorage.setItem("count", "0");
+//                $("img").attr("draggable", "true");
+//                $("img").attr("ondragstart", "drag(event)");
+            });
+
+        </script>
+
     </head>
     <body>
 
@@ -62,23 +89,25 @@ and open the template in the editor.
                                                     </form>
                         
                                                 </li>-->
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li ondrop="drop(event)" ondragover="allowDrop(event)"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                        <li><a href="createCompte.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="monCompte.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
 
+        <!-- CAROUSEL -->
         <div class="wrapper">
             <div class="connected-carousels">
                 <div class="stage">
-                    <div class="carousel carousel-stage">
+                    <div id="divCarousel" class="carousel carousel-stage">
                         <ul>
-                            <li><img src="img/affiche1.jpg" width="300" height="100" alt=""></li>
-                            <li><img src="img/affiche2.jpg" width="300" height="300" alt=""></li>
-                            <li><img src="img/affiche3.jpg" width="300" height="300" alt=""></li>
-                            <li><img src="img/affiche4.jpg" width="300" height="300" alt=""></li>
-                            <li><img src="img/affiche5.jpg" width="300" height="300" alt=""></li>
+                            <li><img id="drag1" draggable="true" ondragstart="drag(event)" src="img/affiche1.jpg" width="300" height="100" alt=""></li>
+                            <li><img id="drag2" draggable="true" ondragstart="drag(event)" src="img/affiche2.jpg" width="300" height="300" alt=""></li>
+                            <li><img id="drag3" draggable="true" ondragstart="drag(event)" src="img/affiche3.jpg" width="300" height="300" alt=""></li>
+                            <li><img id="drag4" draggable="true" ondragstart="drag(event)" src="img/affiche4.jpg" width="300" height="300" alt=""></li>
+                            <li><img id="drag5" draggable="true" ondragstart="drag(event)" src="img/affiche5.jpg" width="300" height="300" alt=""></li>
                         </ul>
                     </div>
                     <a href="#" class="prev prev-stage"><span>&lsaquo;</span></a>
@@ -87,6 +116,7 @@ and open the template in the editor.
             </div>
         </div>
 
+        <!-- CONTAINER BOOTSTRAP -->
         <div class="container" >
 
             <div class="jumbotron">

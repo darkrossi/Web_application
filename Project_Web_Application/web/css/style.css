@@ -45,3 +45,14 @@ a:focus {
     max-width: 100%;
     height: auto;
 }
+
+/* skin.css Style*/
+/*#drop {
+    color: #ccc;
+    border-style: dashed;
+    border-color: #ccc;
+    line-height: 200px;
+    text-align: center
+}*/
+
+#div1 {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
