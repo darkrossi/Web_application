@@ -1,24 +1,27 @@
+package MyPackage;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MyPackage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author oswald
  */
-@WebServlet(name = "First_S", urlPatterns = {"/First_S"})
-public class First_S extends HttpServlet {
+@WebServlet(urlPatterns = {"/logout"})
+public class Logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +40,10 @@ public class First_S extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet First_S</title>");            
+            out.println("<title>Servlet Logout</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet First_S at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Logout at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,7 +61,15 @@ public class First_S extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        session.invalidate();
+        response.setContentType("text/html");
+        ServletOutputStream out = response.getOutputStream();
+        out.println("<html><head>");
+        out.println("<title>Logout</title></head>");
+        out.println("<body>");
+        out.println("<h1>Logout successfull.</h1>");
+        out.println("</body></html>");
     }
 
     /**
