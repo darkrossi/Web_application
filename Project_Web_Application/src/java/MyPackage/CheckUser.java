@@ -52,7 +52,7 @@ public class CheckUser extends HttpServlet {
             out.println("<title>Servlet CheckUser</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<p>" + request.getParameter("login") + "</p>");
+            out.println("<p>" + request.getParameter("mail") + "</p>");
             out.println("<h3><a href=\"index.html\">Index</a></h3>");
             out.println("</body>");
             out.println("</html>");
@@ -85,7 +85,7 @@ public class CheckUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("login");
+        String username = request.getParameter("mail");
         String password = request.getParameter("password");
         PrintWriter out = response.getWriter();
         try {
@@ -114,6 +114,12 @@ public class CheckUser extends HttpServlet {
     }// </editor-fold>
 
     static public boolean isLoginValid(String username, String password) throws ClassNotFoundException, SQLException {
+        
+        //devel lines
+        if (username.equals("admin") && password.equals("admin")){
+            return true;
+        }
+        
         Class.forName("oracle.jdbc.OracleDriver");
         Connection Connexion = DriverManager.getConnection("jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1", "fournimi", "fournimi");
 
