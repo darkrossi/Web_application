@@ -9,24 +9,25 @@ and open the template in the editor.
         <title>Site du théâtre ***</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css"> 
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.min.css"> 
         <link rel="stylesheet" type="text/css" href="css/jquery.sidr.light.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/jquery.carousel.css">
-
         <link rel="stylesheet" type="text/css" href="css/style.css"> 
+        <link href="css/reveal.css" rel="stylesheet" type="text/css"/>
 
         <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/jquery.sidr.min.js"></script>
         <script type="text/javascript" src="js/typeahead.bundle.js"></script>
-
         <script type="text/javascript" src="js/bootstrap.js"></script>
-
         <script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
         <script type="text/javascript" src="js/scriptCarousel.js"></script>
+        <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="js/jquery.reveal.js" type="text/javascript"></script>
 
         <script>
             function allowDrop(ev) {
@@ -41,18 +42,17 @@ and open the template in the editor.
                 ev.preventDefault();
                 var data = ev.dataTransfer.getData("text");
                 sessionStorage.setItem("panier" + sessionStorage.getItem("count"), data);
-                sessionStorage.setItem("count", sessionStorage.getItem("count")+0);
+                sessionStorage.setItem("count", sessionStorage.getItem("count") + 0);
 //                var p = document.createElement("p");
 //                p.innerHTML = sessionStorage.getItem("count").getName();
 //                document.getElementById("div1").appendChild(p);
             }
-            
+
             $(document).ready(function () {
                 sessionStorage.setItem("count", "0");
 //                $("img").attr("draggable", "true");
 //                $("img").attr("ondragstart", "drag(event)");
             });
-
         </script>
 
     </head>
@@ -90,12 +90,18 @@ and open the template in the editor.
                         
                                                 </li>-->
                         <li ondrop="drop(event)" ondragover="allowDrop(event)"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                        <li><a href="createCompte.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="#" data-reveal-id="myModal"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                         <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
+
+        <div id="myModal" class="reveal-modal">
+            <h1>Modal Title</h1>
+            <p>Any content could go in here.</p>
+            <a class="close-reveal-modal">&#215;</a>
+        </div>
 
         <!-- CAROUSEL -->
         <div class="wrapper">
@@ -163,7 +169,6 @@ and open the template in the editor.
         <a href="error.jsp">Error</a>
         <a href="monCompte.html">Mon Compte</a>
         <a href="pieces.html">Pièces</a>
-
     </body>
 </html>
 
