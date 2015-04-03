@@ -5,12 +5,14 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-/Web_application/dist/
 /Project/nbproject/private/
 /Project_Web_Application/build/
-/Project_Web_Application/nbproject/private/
+/Project_Web_Application/nbproject/genfiles.properties
+/Project_Web_Application/nbproject/project.properties
+/Project_Web_Application/nbproject/project.xml
 /Project_Web_Application/dist/
-/FabLab-RobAir/nbproject/private/
-/FabLab-RobAir/build/
-/FablabRobair/nbproject/private/
 /Project_Web_Application/nbproject/
+
+/apache-tomcat-8.0.20/
+notes.txt
+ojdbc7.jar
