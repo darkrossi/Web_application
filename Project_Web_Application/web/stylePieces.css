@@ -1,5 +1,5 @@
 p{
-    color: grey;
+    color: red;
 }
 
 form{
@@ -10,23 +10,25 @@ div{
 background-color: pink;
 border: 2px solid grey;
 vertical-align: top;
-
-}
-
-/* Partie Réservation */
-#colonneDate{
-width: 50%;
-background-color : blue;
-}
-
-#colonneHeure{
-width: 50%;
-background-color : red;
 }
 
 li{
 display: inline;
 text-align: justify;
+}
+/* Partie Réservation */
+#colonneDate{
+background-color : blue;
+}
+
+#colonneHeure{
+background-color : red;
+}
+
+#colonneDate, #colonneHeure{
+    display: inline-block;
+    vertical-align: top;
+	width: 49%;
 }
 
 
@@ -37,14 +39,16 @@ text-align: justify;
     background-color: #b0e0e6;
 }
 
+/* Bouton de Reservation */
 .Reserver{
-width: 350px; 
-height: 300px;
+width: 340px; 
+height: 100px;
 }
 
 nav{
 position: fixed;
 top : 0px;
+color : grey;
 }
 
 .ligne{
