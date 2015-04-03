@@ -7,28 +7,61 @@ form{
 }
 
 div{
-background-color: pink;
-border: 2px solid grey;
-vertical-align: top;
+    background-color: pink;
+    border: 2px solid grey;
+    vertical-align: top;
 }
 
 li{
-display: inline;
-text-align: justify;
+    display: inline;
+    text-align: justify;
 }
 /* Partie Réservation */
+
+.affiche{
+    width:145px; 
+    height:195px;
+}
+
+.fondBlock{
+    height:210px;
+    width:100%;
+    background-color : green;
+}
+
+.boutton{
+    background-color: grey;
+    width : 100%;
+    height: 60px;
+}
+
+#DescriptionColonne1{
+    width:21%;
+}
+#DescriptionColonne2{
+    width:50%;
+}
+#DescriptionColonne3{
+    width:27%;
+    
+}
+#DescriptionColonne1, #DescriptionColonne2, #DescriptionColonne3{
+   display: inline-block;
+   height : 200px;
+    
+}
 #colonneDate{
-background-color : blue;
+    background-color : blue;
 }
 
 #colonneHeure{
-background-color : red;
+    background-color : red;
 }
 
 #colonneDate, #colonneHeure{
     display: inline-block;
     vertical-align: top;
-	width: 49%;
+    width: 49%;
 }
 
 
@@ -41,48 +74,37 @@ background-color : red;
 
 /* Bouton de Reservation */
 .Reserver{
-width: 340px; 
-height: 100px;
+    width: 340px; 
+    height: 100px;
 }
 
 nav{
-position: fixed;
-top : 0px;
-color : grey;
+    position: fixed;
+    top : 0px;
+    color : grey;
 }
 
-.ligne{
-	display : inline-block;
-}
-/*#div1{
-width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;
-}
-#div2{
-width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;
-}
-#div3 {
-width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;
-}*/
+
 /*Footer */
 footer{
-background-color : black;
+    background-color : black;
 }
 
 #colonne1, #colonne2, #colonne3
 {
     display: inline-block;
     vertical-align: top;
-	width : 33%;
-	height : 200px;
+    width : 33%;
+    height : 200px;
 }
 
 #colonne1 li, #colonne2 li, #colonne3 li{
-	display : block;
-	vertical-align: top;
+    display : block;
+    vertical-align: top;
 }
 
 #colonne1 h1, #colonne2 h1, #colonne3 h1{
-	color:white; /* ne marche pas */
+    color:white; /* ne marche pas */
 
 }
 
