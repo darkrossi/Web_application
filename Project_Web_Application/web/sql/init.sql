@@ -1,11 +1,89 @@
-DROP Table SPECTACLES;
+DROP TABLE Dossier;
+DROP TABLE Representation;
+DROP TABLE Place;
+DROP TABLE Rang;
+DROP TABLE Ticket;
+DROP TABLE Spectacle;
+DROP TABLE Salle;
+DROP TABLE Users;
 
-CREATE TABLE Spectacles (
-	Id int primary key,
-	Titre varchar(30),
-	Auteur varchar(30));
+CREATE TABLE Spectacle (
+    NSP int,
+    NomS varchar(30),
+    constraint pk_spectacle primary key (NSP)
+);
 
-INSERT INTO Spectacles
-VALUES (1, 'Hamlet', 'Shakespeare');
+CREATE TABLE Salle (
+    NSA int,
+    constraint pk_salle primary key (NSA)
+);
 
-COMMIT;
+CREATE TABLE Representation (
+    Horaire TIMESTAMP,
+    NSP int,
+    NSA int,
+    constraint pk_repr primary key (Horaire), -- A CHANGER !!
+    constraint fk_repr_nsp_spectacle foreign key (NSP) references Spectacle(NSP),
+    constraint fk_repr_nsa_salle foreign key (NSA) references Salle(NSA),
+    constraint nn_repr_nsa check (NSA is not null),
+    constraint nn_repr_nsp check (NSP is not null)
+);
+
+CREATE TABLE Rang (
+    NR int,
+    CatTarif int,
+    NSA int,
+    constraint pk_rang primary key (NR),
+    constraint fk_rang_nr_salle foreign key (NSA) references Salle(NSA),
+    constraint nn_rang_nsa check (NSA is not null), 
+    constraint CatTarif CHECK(CatTarif >= 0)
+);
+
+CREATE TABLE Place (
+    NP int,
+    NR int,
+    NSA int,
+    constraint pk_table primary key (NP),
+    constraint fk_place_nr_rang foreign key (NR) references Rang(NR),
+    constraint fk_place_nr_salle foreign key (NSA) references Salle(NSA),
+    constraint nn_place_nr check (NR is not null),
+    constraint nn_place_nsa check (NSA is not null)
+);
+
+CREATE TABLE Users (
+    LoginU varchar(30),
+    NomU varchar(30),
+    PrenomU varchar(30),
+    MailU varchar(30),
+    MdpU varchar(30),
+    RoleU int,
+    constraint pk_users primary key (LoginU),
+    CONSTRAINT bin_roleu CHECK(RoleU in (0, 1))
+);
+
+CREATE TABLE Ticket (
+    NT int,
+    constraint pk_ticket primary key (NT)
+);
+
+CREATE TABLE Dossier (
+    ND int,
+    NbP int,
+    LoginU varchar(30),
+    NT int,
+    NSP int,
+    NSA int,
+    Horaire TIMESTAMP,
+    constraint pk_dossier primary key (ND),
+    constraint fk_dossier_loginu_users foreign key (LoginU) references Users(LoginU),
+    constraint fk_dossier_nt_ticket foreign key (NT) references Ticket(NT),
+    constraint fk_dossier_nsp_spectacle foreign key (NSP) references Spectacle(NSP),
+    constraint fk_dossier_nsa_salle foreign key (NSA) references Salle(NSA),
+    constraint fk_dossier_horaire_repr foreign key (Horaire) references Representation(Horaire),
+    constraint nn_dossier_loginu check (LoginU is not null),
+    constraint nn_dossier_nt check (NT is not null),
+    constraint nn_dossier_nsa check (NSA is not null),
+    constraint nn_dossier_nsp check (NSP is not null),
+    constraint nn_dossier_horaire check (Horaire is not null),
+    CONSTRAINT NbP CHECK(NbP >= 1)
+);
