@@ -53,7 +53,7 @@ public class CheckUser extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<p>" + request.getParameter("mail") + "</p>");
-            out.println("<h3><a href=\"index.html\">Index</a></h3>");
+            out.println("<h3><a href=\"index.jsp\">Index</a></h3>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -90,9 +90,9 @@ public class CheckUser extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             if (isLoginValid(username, password)) {
-                HttpSession session = request.getSession();
+                HttpSession session = request.getSession(true);
                 session.setAttribute("utilisateur", username);
-                response.sendRedirect("index.html");
+                response.sendRedirect("index.jsp");
             } else {
                 response.sendRedirect("BadLogin.html");
             }
@@ -119,7 +119,8 @@ public class CheckUser extends HttpServlet {
         if (username.equals("admin") && password.equals("admin")){
             return true;
         }
-        
+        // end of devel lines
+          
         Class.forName("oracle.jdbc.OracleDriver");
         Connection Connexion = DriverManager.getConnection("jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1", "fournimi", "fournimi");
 
