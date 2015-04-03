@@ -7,6 +7,13 @@ package myServlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -77,10 +84,17 @@ public class CheckNewAccount extends HttpServlet {
         String password = request.getParameter("password");
         String email = request.getParameter("mail");
         
-        if(isFormValid(prenom, nom, password, email)){
-            response.sendRedirect("login.html");
-        } else{
-            response.sendRedirect("createCompte.html");
+        try {
+            if(isFormValid(prenom, nom, password, email) && isNewUser(prenom, nom, password, email)){
+                response.sendRedirect("login.html");
+            } else{
+                //message d'erreur à préciser
+                response.sendRedirect("createCompte.html");
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CheckNewAccount.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CheckNewAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         processRequest(request, response);
@@ -97,10 +111,26 @@ public class CheckNewAccount extends HttpServlet {
     }// </editor-fold>
 
     static public boolean isFormValid(String prenom, String nom, String password, String mail){
-        if(prenom.equals("") || nom.equals("") || password.equals("") || mail.equals("")){
+        if(prenom.equals("") || nom.equals("") || password.length()<5 || password.length()>12 || mail.equals("")){
             return false;
         } else{
                 return true;
         }
+    }
+    
+    static public boolean isNewUser(String prenom, String nom, String password, String mail) throws ClassNotFoundException, SQLException{
+        /*Class.forName("oracle.jdbc.OracleDriver");
+        try (Connection Connexion = DriverManager.getConnection
+                ("jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1","boedech","boedech")) { //?
+            Statement State = Connexion.createStatement();
+            ResultSet resultat = State.executeQuery("SELECT * FROM Users"); // ?
+            while (resultat.next()) {
+                if(resultat.getString("login").equals(prenom)){ // ?
+                    Connexion.close();
+                    return false;
+                }
+            }
+        }*/ // à décommenter lorsque bdd opérationnelle
+        return true;
     }
 }
