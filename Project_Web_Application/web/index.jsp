@@ -1,3 +1,10 @@
+<%-- 
+    Document   : index
+    Created on : 3 avr. 2015, 11:39:42
+    Author     : oswald
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.

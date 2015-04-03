@@ -1,8 +1,11 @@
-CREATE TABLE Users(
-login varchar(100) NOT NULL,
-password varchar(100) NOT NULL
-);
-INSERT INTO Users VALUES ('toto', 'toto');
-INSERT INTO Users VALUES ('titi', 'titi');
+DROP Table SPECTACLES;
 
-SELECT * FROM Users;
+CREATE TABLE Spectacles (
+	Id int primary key,
+	Titre varchar(30),
+	Auteur varchar(30));
+
+INSERT INTO Spectacles
+VALUES (1, 'Hamlet', 'Shakespeare');
+
+COMMIT;
