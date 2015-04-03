@@ -131,8 +131,18 @@ and open the template in the editor.
 
         <!-- POPUP SIGN OUT -->
         <div id="myModal" class="reveal-modal">
-            <h1>Modal Title</h1>
-            <p>Any content could go in here.</p>
+            <h1>Créer un compte</h1>
+            <FORM ACTION="/Project_Web_Application/checkNewAccount" METHOD="POST">
+            <label> Prénom       </label><input name="prenom"><br>
+            <label> Nom          </label><input name="nom"><br>
+            <label> Mot de passe (5 à 12 caractères) </label><input name="password" type="PASSWORD"><br>
+            <label> E-mail       </label><input name="mail"><br>
+            <input type="SUBMIT">            
+            </FORM>
+            <br>
+            ajouter un captcha pour la sécu ! 
+            <br>
+            <a href="index.html">Retour à l'accueil</a>
             <a class="close-reveal-modal">&#215;</a>
         </div>
 
