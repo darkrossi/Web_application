@@ -62,10 +62,13 @@ and open the template in the editor.
                 </div>
                 <div class="col-md-3"> 
 					<h2 align="center"> Mes Réservations </h2>
-						<ul>
-  							<li class="Date"><h3>date</h3></li>
-							<li class="Heure"><h3>heure</h3></li>
-						</ul> 
+						<div id="colonneDate">
+  							<h3>Date</h3>
+						</div>
+						<div id="colonneHeure">
+							<h3>Heure</h3>
+						</div>
+						
 					<div class="large-2 columns">
 						<!--<input style="width: 400px; height: 1000px; background-color: blue; position:absolute; /> -->
 
@@ -73,8 +76,11 @@ and open the template in the editor.
 						<h3 align="center"> Choisissez vos places </h3>
 						<h4 class= "ligne"> Choix automatique </h4><form method="post" action="traitement.php">
 						<h4> Choix sur plan </h4>
-						<h3 class="Type"> Carré VIP 
-							<form method="post" action="traitement.php">
+						<h3> Carré VIP </h3>
+						<h4> CORBEILLE </h4>
+							<ul>
+		                    	<li><h5>Offre Adhérent
+									<form method="post" action="traitement.php">
 			   					<select name="NombreDePlace" id="NombreDePlace">
 				   					<option value="0">0</option>
 								    <option value="1">1</option>
@@ -98,21 +104,52 @@ and open the template in the editor.
 								    <option value="19">19</option>
 								    <option value="20">20</option>
 								</select>
-						</h3>
-						</form>
-						<h4> Offre Adhérent </h4>
-						<h4> Offre Normal</h4>
+								</h5></li>
+		                    	<li><h5>Offre Normal</h5></li>
+		                	</ul>
+						<h4> ORCHESTRE </h4>
+							<ul>
+								<li><h5> Offre Adhérent </h5></li>
+								<li><h5> Offre Normal</h5></li>
+							</ul>
 						<h3 > Catégorie 1 </h3>
-						<h4> Offre Adhérent </h4>
-						<h4> Offre Normal</h4>
+						<h4> CORBEILLE </h4>
+						<ul>
+							<li><h5> Offre Adhérent </h5></li>
+							<li><h5> Offre Normal</h5></li>
+						</ul>
+						<h4> ORCHESTRE</h4>
+						<ul>
+							<li><h5> Offre Adhérent </h5></li>
+							<li><h5> Offre Normal</h5></li>
+						</ul>
+						<h4> ORCHESTRE COTE </h4>
+						<ul>
+							<li><h5> Offre Adhérent </h5></li>
+							<li><h5> Offre Normal</h5></li>
+						</ul>
+
+
 						<h3 > Catégorie 2 </h3>
-						<h4> Offre Adhérent </h4>
-						<h4> Offre Normal</h4>
+						<h4> CORBEILLE </h4>
+						<ul>
+							<li><h5> Offre Adhérent </h5></li>
+							<li><h5> Offre Normal</h5></li>
+						</ul>
+						<h4> BALCON </h4>
+						<ul>
+							<li><h5> Offre Adhérent </h5></li>
+							<li><h5> Offre Normal</h5></li>
+						</ul>
+
 						<h3 > Catégorie 3 </h3>
-						<h4> Offre Adhérent </h4>
-						<h4> Offre Normal</h4>
+						<h4> BALCON </h4>
+						<ul>
+							<li><h5> Offre Adhérent </h5></li>
+							<li><h5> Offre Normal</h5></li>
+						</ul>
 						<h4> Total </h4>
-					<input style="width: 340px; height: 100px;" type="submit" value="Reserver" />
+					<input  type="submit" class="Reserver" />
                 <div class="clearfix visible-lg"></div>
             </div>
         </div>
@@ -124,13 +161,13 @@ and open the template in the editor.
                     <ul>
                         <li><a href="#">Le groupe Comed'Imag</a></li>
                         <li><a href="#">Recrutement</a></li>
-                        <li><a href="#">Donnez votre avis</a></li>
+                       <li><a href="#">Donnez votre avis</a></li>
                     </ul>
                 </div>
                 <div id="colonne2">
                     <h1 align="center">AIDES, SAV, SERVICES</h1>
 						<ul>
-		                    <li><a href="#">Retrouver Comed'Imag sur Facebook</a></li>
+							<li><a href="https://www.facebook.com/mickael.fournier.37?ref=ts&fref=ts" title="Facebook">Retrouver Comed'Imag sur Facebook</a></li>
 		                    <li><a href="#">Retrouver Comed'Imag sur Twitter</a></li>
 		                    <li><a href="#">Retrouver Comed'Imag sur Google+</a></li>
 		                    <li><a href="#">Billetterie</a></li>

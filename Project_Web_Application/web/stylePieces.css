@@ -7,21 +7,21 @@ form{
 }
 
 div{
-background-color: brown;
+background-color: pink;
 border: 2px solid grey;
 vertical-align: top;
 
 }
 
-
-.date{
+/* Partie Réservation */
+#colonneDate{
 width: 50%;
 background-color : blue;
 }
 
-.heure{
+#colonneHeure{
 width: 50%;
-background-color : grey;
+background-color : red;
 }
 
 li{
@@ -37,8 +37,9 @@ text-align: justify;
     background-color: #b0e0e6;
 }
 
-Reserver{
-style="width: 350px; height: 300px;"
+.Reserver{
+width: 350px; 
+height: 300px;
 }
 
 nav{
@@ -77,7 +78,7 @@ background-color : black;
 }
 
 #colonne1 h1, #colonne2 h1, #colonne3 h1{
-	color white; /* ne marche pas */
+	color:white; /* ne marche pas */
 
 }
 
