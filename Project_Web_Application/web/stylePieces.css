@@ -1,0 +1,86 @@
+p{
+    color: grey;
+}
+
+form{
+
+}
+
+div{
+background-color: brown;
+border: 2px solid grey;
+vertical-align: top;
+
+}
+
+
+.date{
+width: 50%;
+background-color : blue;
+}
+
+.heure{
+width: 50%;
+background-color : grey;
+}
+
+li{
+display: inline;
+text-align: justify;
+}
+
+
+.right {
+    position: absolute;
+    right: 0px;
+    width: 300px;
+    background-color: #b0e0e6;
+}
+
+Reserver{
+style="width: 350px; height: 300px;"
+}
+
+nav{
+position: fixed;
+top : 0px;
+}
+
+.ligne{
+	display : inline-block;
+}
+/*#div1{
+width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;
+}
+#div2{
+width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;
+}
+#div3 {
+width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;
+}*/
+/*Footer */
+footer{
+background-color : black;
+}
+
+#colonne1, #colonne2, #colonne3
+{
+    display: inline-block;
+    vertical-align: top;
+	width : 33%;
+	height : 200px;
+}
+
+#colonne1 li, #colonne2 li, #colonne3 li{
+	display : block;
+	vertical-align: top;
+}
+
+#colonne1 h1, #colonne2 h1, #colonne3 h1{
+	color white; /* ne marche pas */
+
+}
+
+
+
+
