@@ -91,12 +91,18 @@ and open the template in the editor.
                 sessionStorage.setItem("count", "0");
 //                $("img").attr("draggable", "true");
 //                $("img").attr("ondragstart", "drag(event)");
-            });
+            });</script>
+
+        <script>
+            // Fonction à compléter par Hoël pour la vérif des champs
+            function isValid() {
+                return false; // Si on ne veut pas lancer la servlet
+            }
         </script>
 
     </head>
     <body>
-
+        <!-- Test pour affichage des affiches -->
         <form name="input" action="<%=request.getContextPath()%>/controleur" method="get">
             <input type="submit" value="Modifier" />
         </form>
@@ -154,7 +160,7 @@ and open the template in the editor.
         <!-- POPUP SIGN OUT -->
         <div id="myModal" class="reveal-modal">
             <h1>Créer un compte</h1>
-            <FORM ACTION="/Project_Web_Application/checkNewAccount" METHOD="POST">
+            <FORM ACTION="/Project_Web_Application/checkNewAccount" onsubmit="return isValid()" METHOD="POST">
                 <label> Prénom       </label><input onchange="verif();" name="prenom"><br>
                 <label> Nom          </label><input name="nom"><br>
                 <label> Mot de passe (5 à 12 caractères) </label><input name="password" type="PASSWORD"><br>
