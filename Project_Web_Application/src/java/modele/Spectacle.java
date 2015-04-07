@@ -48,6 +48,15 @@ public class Spectacle {
         this.duree = duree;
     }
 
+    public Spectacle(int id, String titre, String auteur, String metteurEnScene, int duree) {
+        this.id = id;
+        this.titre = titre;
+        this.auteur = auteur;
+        this.metteurEnScene = metteurEnScene;
+        this.comediens = new ArrayList<String>();
+        this.duree = duree;
+    }
+
     public Spectacle(int id, String titre, String auteur) {
         this.id = id;
         this.titre = titre;
@@ -120,7 +129,7 @@ public class Spectacle {
     @Override
     public String toString() {
         return "La piéce " + this.getTitre() + " de " + this.getAuteur() + " et mise en scéne par " + this.getMetteurEnScene()
-                + "regroupe les comédiens " + this.afficheComediens() + "."; //To change body of generated methods, choose Tools | Templates.
+                + " regroupe les comédiens " + this.afficheComediens() + "."; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

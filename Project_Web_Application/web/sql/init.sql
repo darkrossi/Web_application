@@ -10,6 +10,10 @@ DROP TABLE Users;
 CREATE TABLE Spectacle (
     NSP int,
     NomS varchar(30),
+    AuteurS varchar(30),
+    MESS varchar(30),
+    DureeS int,
+    Affiche varchar(30),
     constraint pk_spectacle primary key (NSP)
 );
 

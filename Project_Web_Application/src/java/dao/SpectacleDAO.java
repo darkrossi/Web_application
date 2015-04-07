@@ -38,14 +38,16 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
         try {
             conn = getConnection();
             Statement st = conn.createStatement();
-            requeteSQL = "select * from bibliographie";
+            requeteSQL = "select * from Spectacle";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
-                Spectacle ouvrage = new Spectacle(rs.getInt("id"),
-                        rs.getString("auteur"),
-                        rs.getString("titre"));
-                System.err.println(ouvrage);
-                result.add(ouvrage);
+                Spectacle spectacle = new Spectacle(rs.getInt("NSP"),
+                        rs.getString("NomS"),
+                        rs.getString("AuteurS"),
+                        rs.getString("MESS"),
+                        rs.getInt("DureeS"));
+                System.err.println(spectacle);
+                result.add(spectacle);
             }
         } catch (SQLException e) {
             throw new DAOException("Erreur BD " + e.getMessage(), e);

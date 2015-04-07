@@ -97,6 +97,10 @@ and open the template in the editor.
     </head>
     <body>
 
+        <form name="input" action="<%=request.getContextPath()%>/controleur" method="get">
+            <input type="submit" value="Modifier" />
+        </form>
+
         <!-- NAVBAR -->
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -130,15 +134,15 @@ and open the template in the editor.
                                                 </li>-->
                         <li ondrop="drop(event)" ondragover="allowDrop(event)"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
                         <li><a href="#" data-reveal-id="myModal"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        
+
                         <%@ page import="javax.servlet.http.HttpSession"%>
                         <%
                             HttpSession session2 = request.getSession(false);
                             String userName = (String) session2.getAttribute("utilisateur");
-                            if(session2.isNew()){
+                            if (session2.isNew()) {
                                 out.write("<li><a href=\"login.html\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>");
-                            } else{
-                                out.write("<li><a href=\"/Project_Web_Application/logout\"> Log out</a></li>");                    
+                            } else {
+                                out.write("<li><a href=\"/Project_Web_Application/logout\"> Log out</a></li>");
                                 out.print("<font size=\"3\" color=\"white\"> Bienvenue " + userName + "</font>");
                             }
                         %>
@@ -151,11 +155,11 @@ and open the template in the editor.
         <div id="myModal" class="reveal-modal">
             <h1>Créer un compte</h1>
             <FORM ACTION="/Project_Web_Application/checkNewAccount" METHOD="POST">
-            <label> Prénom       </label><input onchange="verif();" name="prenom"><br>
-            <label> Nom          </label><input name="nom"><br>
-            <label> Mot de passe (5 à 12 caractères) </label><input name="password" type="PASSWORD"><br>
-            <label> E-mail       </label><input name="mail"><br>
-            <input type="SUBMIT">            
+                <label> Prénom       </label><input onchange="verif();" name="prenom"><br>
+                <label> Nom          </label><input name="nom"><br>
+                <label> Mot de passe (5 à 12 caractères) </label><input name="password" type="PASSWORD"><br>
+                <label> E-mail       </label><input name="mail"><br>
+                <input type="SUBMIT">            
             </FORM>
             <br>
             ajouter un captcha pour la sécu ! 
@@ -163,7 +167,7 @@ and open the template in the editor.
             <a href="index.jsp">Retour à l'accueil</a>
             <a class="close-reveal-modal">&#215;</a>
         </div>
-        
+
         <!-- CAROUSEL -->
         <div id="rg-gallery" class="rg-gallery">
             <div class="rg-thumbs">

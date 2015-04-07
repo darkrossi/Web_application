@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Controleur", urlPatterns = {"/controleur"})
 public class Controleur extends HttpServlet {
 
-    @Resource(name = "jdbc/bibliography")
+    @Resource(name = "jdbc/spectacles")
     private DataSource ds;
 
     /**
@@ -34,18 +34,18 @@ public class Controleur extends HttpServlet {
             throws IOException, ServletException {
         PrintWriter out = response.getWriter();
         String action = request.getParameter("action");
-        SpectacleDAO ouvrageDAO = new SpectacleDAO(ds);
+        SpectacleDAO spectacleDAO = new SpectacleDAO(ds);
         try {
             if (action == null) {
-                actionAfficher(request, response, ouvrageDAO);
+                actionAfficher(request, response, spectacleDAO);
             } else if (action.equals("ajouter")) {
-                actionAjouter(request, response, ouvrageDAO);
+                actionAjouter(request, response, spectacleDAO);
             } else if (action.equals("supprimer")) {
-                actionSupprimer(request, response, ouvrageDAO);
+                actionSupprimer(request, response, spectacleDAO);
             } else if (action.equals("modifier")) {
-                actionModifier(request, response, ouvrageDAO);
+                actionModifier(request, response, spectacleDAO);
             } else if (action.equals("getSpectacle")) {
-                actionGetSpectacle(request, response, ouvrageDAO);
+                actionGetSpectacle(request, response, spectacleDAO);
             } else {
                 // ... renvoi vers une page d'erreur controleurErreur.jsp
             }
@@ -57,35 +57,35 @@ public class Controleur extends HttpServlet {
     /**
      * Ajout d'un ouvrage.
      */
-    private void actionAjouter(HttpServletRequest request, HttpServletResponse response, SpectacleDAO ouvrageDAO) {
+    private void actionAjouter(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
      * Suppression d'un ouvrage.
      */
-    private void actionSupprimer(HttpServletRequest request, HttpServletResponse response, SpectacleDAO ouvrageDAO) {
+    private void actionSupprimer(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
      * Modification d'un ouvrage.
      */
-    private void actionModifier(HttpServletRequest request, HttpServletResponse response, SpectacleDAO ouvrageDAO) {
+    private void actionModifier(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void actionAfficher(HttpServletRequest request,
             HttpServletResponse response,
-            SpectacleDAO ouvrageDAO)
+            SpectacleDAO spectacleDAO)
             throws DAOException, ServletException, IOException {
-        request.setAttribute("ouvrages", ouvrageDAO.getListeSpectacles());
+        request.setAttribute("spectacles", spectacleDAO.getListeSpectacles());
         getServletContext()
-                .getRequestDispatcher("/WEB-INF/listAll.jsp")
+                .getRequestDispatcher("/WEB-INF/afficheAffiches.jsp")
                 .forward(request, response);
     }
 
-    private void actionGetSpectacle(HttpServletRequest request, HttpServletResponse response, SpectacleDAO ouvrageDAO) {
+    private void actionGetSpectacle(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

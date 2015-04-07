@@ -1,5 +1,7 @@
 {
-    "elements": {},
+    "elements": {
+        "jsp:include": {}
+    },
     "attributes": {
         "u": {
             "context": "div"

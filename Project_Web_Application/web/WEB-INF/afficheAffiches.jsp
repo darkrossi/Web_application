@@ -7,14 +7,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@page import="modele.Spectacle"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 
 
 <html>
     <head><title>JSP Page</title></head>
     <body>
-        <% Spectacle spectacle = new Spectacle();
-            ArrayList<Spectacle> spectacles = spectacle.getSpectacles(); %>
+        <% List<Spectacle> spectacles = (List<Spectacle>)request.getAttribute("spectacles"); %>
         <table border>
             <tr>
                 <th>Spectacles</th>

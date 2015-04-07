@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class DAOException extends Exception {
 
     DAOException(String problème_fermeture_de_connexion_avec_la_B, SQLException sqle) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(problème_fermeture_de_connexion_avec_la_B); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
