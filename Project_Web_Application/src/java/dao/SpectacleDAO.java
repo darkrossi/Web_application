@@ -27,7 +27,8 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
     /**
      * Renvoie la liste des ouvrages de la table bibliographie sous la forme
      * d'une liste d'instances de la classe métier Spectacle (List<Spectacle>)
-     * @return 
+     *
+     * @return
      * @throws dao.DAOException
      */
     public List<Spectacle> getListeSpectacles() throws DAOException {
@@ -58,21 +59,45 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
     }
 
     /**
-     * Ajoute l'ouvrage d'auteur et de titre spécifié dans la table
-     * bibli
+     * Ajoute l'ouvrage d'auteur et de titre spécifié dans la table bibli
+     *
      * @param auteur
      * @param titre
+     * @param mes
+     * @param duree
      * @throws dao.DAOException
      */
-    public void ajouterSpectacle(String auteur, String titre)
+    public void ajouterSpectacle(String titre, String auteur, String mes, String duree)
             throws DAOException {
-        // ...
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
+        int indiceNSP_Max = 0;
+        try {
+            conn = getConnection();
+            Statement st = conn.createStatement();
+            requeteSQL = "select max(NSP) from Spectacle";
+            rs = st.executeQuery(requeteSQL);
+            while (rs.next()) {
+                indiceNSP_Max = rs.getInt(1);
+            }
+
+            requeteSQL = "INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS)"
+                    + "VALUES ("+ indiceNSP_Max+1 +", '" + titre + "', '" + auteur + "', '" + mes + "', " + Integer.parseInt(duree) + ")";
+            st.executeQuery(requeteSQL);            
+            
+        } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(conn);
+        }
     }
 
     /**
      * Récupère l'ouvrage d'identifiant id dans la table bibliographie.
+     *
      * @param id
-     * @return 
+     * @return
      * @throws dao.DAOException
      */
     public Spectacle getSpectacle(int id) throws DAOException {
@@ -83,6 +108,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
     /**
      * Modifie l'ouvrage d'identifiant id avec le nouvel auteur et le nouveau
      * titre spécifiés dans la table bibliographie
+     *
      * @param id
      * @param auteur
      * @param titre
@@ -95,6 +121,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
 
     /**
      * Supprime l'ouvrage d'identifiant id dans la table bibliographie.
+     *
      * @param id
      * @throws dao.DAOException
      */

@@ -22,15 +22,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Controleur", urlPatterns = {"/controleur"})
 public class Controleur extends HttpServlet {
-
+    
     @Resource(name = "jdbc/spectacles")
     private DataSource ds;
 
     /**
      * La méthode principale d'aiguillage.
      */
-    public void
-            doGet(HttpServletRequest request, HttpServletResponse response)
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         PrintWriter out = response.getWriter();
         String action = request.getParameter("action");
@@ -46,6 +45,8 @@ public class Controleur extends HttpServlet {
                 actionModifier(request, response, spectacleDAO);
             } else if (action.equals("getSpectacle")) {
                 actionGetSpectacle(request, response, spectacleDAO);
+            } else if (action.equals("addS")) {
+                actionAddSpectacle(request, response, spectacleDAO);
             } else {
                 // ... renvoi vers une page d'erreur controleurErreur.jsp
             }
@@ -74,7 +75,7 @@ public class Controleur extends HttpServlet {
     private void actionModifier(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     private void actionAfficher(HttpServletRequest request,
             HttpServletResponse response,
             SpectacleDAO spectacleDAO)
@@ -84,9 +85,18 @@ public class Controleur extends HttpServlet {
                 .getRequestDispatcher("/WEB-INF/afficheAffiches.jsp")
                 .forward(request, response);
     }
-
+    
     private void actionGetSpectacle(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    private void actionAddSpectacle(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO)
+            throws ServletException, IOException, DAOException {
+//        request.setAttribute("spectacles", spectacleDAO.getListeSpectacles());
+        spectacleDAO.ajouterSpectacle(request.getParameter("nomS"),
+                request.getParameter("auteurS"),
+                request.getParameter("mesS"),
+                request.getParameter("dureeS"));        
+        this.actionAfficher(request, response, spectacleDAO);
+    }
 }

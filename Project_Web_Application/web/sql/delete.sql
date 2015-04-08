@@ -1,0 +1,8 @@
+DROP TABLE Dossier;
+DROP TABLE Representation;
+DROP TABLE Place;
+DROP TABLE Rang;
+DROP TABLE Ticket;
+DROP TABLE Spectacle;
+DROP TABLE Salle;
+DROP TABLE Users;
