@@ -26,11 +26,13 @@ CREATE TABLE Representation (
     Horaire TIMESTAMP,
     NSP int,
     NSA int,
+    NbP int,
     constraint pk_repr primary key (Horaire), -- A CHANGER !!
     constraint fk_repr_nsp_spectacle foreign key (NSP) references Spectacle(NSP),
     constraint fk_repr_nsa_salle foreign key (NSA) references Salle(NSA),
     constraint nn_repr_nsa check (NSA is not null),
-    constraint nn_repr_nsp check (NSP is not null)
+    constraint nn_repr_nsp check (NSP is not null),
+    constraint nbp_toral check (NbP >= 70)
 );
 
 CREATE TABLE Rang (

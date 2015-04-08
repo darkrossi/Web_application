@@ -102,10 +102,6 @@ and open the template in the editor.
 
     </head>
     <body>
-        <!-- Test pour affichage des affiches -->
-        <form name="input" action="<%=request.getContextPath()%>/controleur" method="get">
-            <input type="submit" value="Modifier" />
-        </form>
 
         <!-- NAVBAR -->
         <nav class="navbar navbar-inverse">
@@ -156,7 +152,12 @@ and open the template in the editor.
                 </div>
             </div>
         </nav>
-
+                    
+        <!-- Test pour affichage des affiches -->
+        <form name="input" action="<%=request.getContextPath()%>/controleur" method="get">
+            <input type="submit" value="Modifier" />
+        </form>
+            
         <!-- POPUP SIGN OUT -->
         <div id="myModal" class="reveal-modal">
             <h1>Créer un compte</h1>
