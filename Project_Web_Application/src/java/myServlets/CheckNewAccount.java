@@ -88,7 +88,7 @@ public class CheckNewAccount extends HttpServlet {
             if(isFormValid(prenom, nom, password, email) && isNewUser(prenom, nom, password, email)){
                 response.sendRedirect("login.html");
             } else{
-                //message d'erreur à préciser
+                // si l'utilisateur est déjà enregistré dans la bdd
                 response.sendRedirect("createCompte.html");
             }
         } catch (ClassNotFoundException ex) {
@@ -111,11 +111,7 @@ public class CheckNewAccount extends HttpServlet {
     }// </editor-fold>
 
     static public boolean isFormValid(String prenom, String nom, String password, String mail){
-        if(prenom.equals("") || nom.equals("") || password.length()<5 || password.length()>12 || mail.equals("")){
-            return false;
-        } else{
-                return true;
-        }
+        return true; // la vérification des champs est faite directement sur la page index.jsp
     }
     
     static public boolean isNewUser(String prenom, String nom, String password, String mail) throws ClassNotFoundException, SQLException{

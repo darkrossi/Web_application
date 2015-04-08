@@ -100,9 +100,15 @@ and open the template in the editor.
                 var nom = document.getElementById("nom").value;
                 var password = document.getElementById("password").value;
                 var email = document.getElementById("email").value;
+                
+                //clear des champs 'erreur'
+                document.getElementById("prenom_error").innerHTML = "";
+                document.getElementById("nom_error").innerHTML = "";
+                document.getElementById("password_error").innerHTML = "";
+                
                 if(prenom.length < 2 || prenom.length > 12 ){
-                   document.getElementById("prenom_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
-                   return false;
+                    document.getElementById("prenom_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
+                    return false;
                 }
                 if(nom.length < 2 || nom.length > 12 ){
                     document.getElementById("nom_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
@@ -112,6 +118,7 @@ and open the template in the editor.
                     document.getElementById("password_error").innerHTML = "ERREUR - ce champ contient entre 5 et 12 caractères";
                     return false;
                 }
+                
                 return true;
             }
         </script>
@@ -181,9 +188,9 @@ and open the template in the editor.
                 <label> Prénom (2 à 12 caractères)      </label><input id="prenom" name="prenom"><br>
                 <div id="prenom_error"> </div>
                 <label> Nom (2 à 12 caractères)         </label><input id="nom" name="nom"><br>
-                <div id="prenom_error"> </div>
+                <div id="nom_error"> </div>
                 <label> Mot de passe (5 à 12 caractères) </label><input id="password" name="password" type="PASSWORD"><br>
-                <div id="prenom_error"> </div>
+                <div id="password_error"> </div>
                 <label> E-mail       </label><input id="email" name="mail"><br>
                 <input type="SUBMIT">            
             </FORM>
