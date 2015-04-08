@@ -96,7 +96,23 @@ and open the template in the editor.
         <script>
             // Fonction à compléter par Hoël pour la vérif des champs
             function isValid() {
-                return false; // Si on ne veut pas lancer la servlet
+                var prenom = document.getElementById("prenom").value;
+                var nom = document.getElementById("nom").value;
+                var password = document.getElementById("password").value;
+                var email = document.getElementById("email").value;
+                if(prenom.length < 2 || prenom.length > 12 ){
+                   document.getElementById("prenom_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
+                   return false;
+                }
+                if(nom.length < 2 || nom.length > 12 ){
+                    document.getElementById("nom_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
+                    return false;
+                }
+                if(password.length < 5 || password.length > 12 ){
+                    document.getElementById("password_error").innerHTML = "ERREUR - ce champ contient entre 5 et 12 caractères";
+                    return false;
+                }
+                return true;
             }
         </script>
 
@@ -162,10 +178,13 @@ and open the template in the editor.
         <div id="myModal" class="reveal-modal">
             <h1>Créer un compte</h1>
             <FORM ACTION="/Project_Web_Application/checkNewAccount" onsubmit="return isValid()" METHOD="POST">
-                <label> Prénom       </label><input onchange="verif();" name="prenom"><br>
-                <label> Nom          </label><input name="nom"><br>
-                <label> Mot de passe (5 à 12 caractères) </label><input name="password" type="PASSWORD"><br>
-                <label> E-mail       </label><input name="mail"><br>
+                <label> Prénom (2 à 12 caractères)      </label><input id="prenom" name="prenom"><br>
+                <div id="prenom_error"> </div>
+                <label> Nom (2 à 12 caractères)         </label><input id="nom" name="nom"><br>
+                <div id="prenom_error"> </div>
+                <label> Mot de passe (5 à 12 caractères) </label><input id="password" name="password" type="PASSWORD"><br>
+                <div id="prenom_error"> </div>
+                <label> E-mail       </label><input id="email" name="mail"><br>
                 <input type="SUBMIT">            
             </FORM>
             <br>
