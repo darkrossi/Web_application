@@ -1,58 +1,27 @@
+<%-- 
+    Document   : pieces
+    Created on : 8 avr. 2015, 10:39:44
+    Author     : oswald
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>DarkRossi</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
-        <script src="js/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="js/bootstrap.js" type="text/javascript"></script>
-        <script src="js/place.js" type="text/javascript"></script>
+        <jsp:include page="jsp/head.jsp"/>
 
-        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/place.js" type="text/javascript"></script>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="stylePieces.css" />
+        <link rel="stylesheet" href="css/stylePieces.css" />
     </head>
     <body>
         <div class="container-fluid" >
 
-            <!-- NAVBAR -->
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#"><font id="comedimag">Comed'Imag</font></a>
-                    </div>
-                    <div>
-                        <ul class="nav navbar-nav" >
-                            <li class="active"><a href="index.jsp">Home</a></li>
-                            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Page 1-1</a></li>
-                                    <li><a href="#">Page 1-2</a></li>
-                                    <li><a href="#">Page 1-3</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Page 2</a></li>
-                            <li><a href="#">Page 3</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li ondrop="drop(event)" ondragover="allowDrop(event)"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
-                            <li><a href="#" data-reveal-id="myModal"><span class="glyphicon glyphicon-user"></span> Log in</a></li>
-                            <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span>My Account</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
+            <jsp:include page="jsp/navbar.jsp"/>
 
             <div class="row">
                 <div class="col-md-3">
@@ -81,7 +50,7 @@ and open the template in the editor.
                         </div>
                         <div id="DescriptionColonne3">                 
                             <input type="button" style="margin: 0px auto 0px auto;" class="boutton" value="Passer à la commande" >
-                            
+
                         </div>
                     </div>
                 </div>
