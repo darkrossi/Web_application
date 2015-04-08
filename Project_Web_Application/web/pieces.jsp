@@ -64,9 +64,9 @@
                     </div>
 
                     <div class="large-2 columns">
-                        <!--<input style="width: 400px; height: 1000px; background-color: blue; position:absolute; /> -->
 
-
+                        <!-- Proposition : Faire un menu déroulant pour catégorie et un autre pour les types (orchestre, corbeille..) -->
+                        
                         <h3 align="center"> Choisissez vos places </h3>
                         <h4 class= "ligne"> Choix automatique </h4><form method="post" action="traitement.php">
                             <h4> Choix sur plan </h4>

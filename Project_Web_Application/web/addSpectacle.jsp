@@ -12,18 +12,16 @@
         <title>Ajout Spectacle</title>
 
         <link rel="stylesheet" type="text/css" href="css/style.css"> 
-        <!-- Bootstrap -->
-        <script type="text/javascript" src="js/bootstrap.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-        <!-- -->
-
+        
+        <jsp:include page="jsp/head.jsp"/>
+        
         <script>
             // Fonction à compléter par Hoël pour la vérif des champs
             function isValid() {
-                if (document.getElementById("nomS").value !== "" &&
-                        document.getElementById("auteurS").value !== "" &&
-                        document.getElementById("mesS").value !== "" &&
-                        document.getElementById("dureeS").value !== "") {
+                if (document.getElementById("nomS").value != "" &&
+                        document.getElementById("auteurS").value != "" &&
+                        document.getElementById("mesS").value != "" &&
+                        document.getElementById("dureeS").value != "") {
 
                     return true; // Si on ne veut pas lancer la servlet
                 }
@@ -33,7 +31,7 @@
 
     </head>
     <body>
-        <jsp:include page="navbar.jsp"/>
+        <jsp:include page="jsp/navbar.jsp"/>
 
         <div class="container" >
             <form action="<%=request.getContextPath()%>/controleur" onsubmit="return isValid()" method="get">
@@ -42,13 +40,15 @@
                         <label>Nom</label><br>
                         <label>Auteur</label><br>
                         <label>Metteur en scéne</label><br> 
-                        <label>Durée</label><br> 
+                        <label>Durée</label><br>
+                        <label>Image </label>
                     </div>
                     <div class="col-md-2"> 
-                        <input name="nomS"> 
-                        <input name="auteurS"> 
-                        <input name="mesS"> 
-                        <input name="dureeS"> 
+                        <input id="nomS" name="nomS"> 
+                        <input id="auteurS" name="auteurS"> 
+                        <input id="mesS" name="mesS"> 
+                        <input id="dureeS" name="dureeS"> 
+                        <input type="file" id="fileS" name="fileS">
                     </div>
                 </div>
                 <div class="row">

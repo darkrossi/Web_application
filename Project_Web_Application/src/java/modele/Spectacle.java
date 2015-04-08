@@ -5,19 +5,9 @@
  */
 package modele;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
-import java.io.*;
 import org.jdom2.*;
-import org.jdom2.input.*;
-import org.jdom2.filter.*;
-import java.util.List;
-import java.util.Iterator;
 
 /**
  *
@@ -35,6 +25,7 @@ public class Spectacle {
     private String metteurEnScene;
     private ArrayList<String> comediens;
     private int duree; // En minutes
+    private String url;
 
     public Spectacle() {
     }
@@ -116,7 +107,7 @@ public class Spectacle {
 
     public String afficheComediens() {
         String sortie = "";
-        if (this.getComediens().size() != 0) {
+        if (!this.getComediens().isEmpty()) {
             sortie = this.getComediens().get(0);
             for (int i = 1; i < this.getComediens().size(); i++) {
                 String comedien = this.getComediens().get(i);
@@ -141,21 +132,4 @@ public class Spectacle {
             return false;
         }
     }
-
-    //Ajouter cette méthodes à la classe JDOM2
-//    static void afficheALL() {
-//        //On crée une List contenant tous les noeuds "etudiant" de l'Element racine
-//        List listEtudiants = racine.getChildren("etudiant");
-//
-//        //On crée un Iterator sur notre liste
-//        Iterator i = listEtudiants.iterator();
-//        while (i.hasNext()) {
-//            //On recrée l'Element courant à chaque tour de boucle afin de
-//            //pouvoir utiliser les méthodes propres aux Element comme :
-//            //sélectionner un nœud fils, modifier du texte, etc...
-//            Element courant = (Element) i.next();
-//            //On affiche le nom de l’élément courant
-//            System.out.println(courant.getChild("nom").getText());
-//        }
-//    }
 }

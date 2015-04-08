@@ -67,7 +67,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
      * @param duree
      * @throws dao.DAOException
      */
-    public void ajouterSpectacle(String titre, String auteur, String mes, String duree)
+    public void ajouterSpectacle(String titre, String auteur, String mes, String duree, String url)
             throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
@@ -80,10 +80,12 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
                 indiceNSP_Max = rs.getInt(1);
+                indiceNSP_Max++;
             }
 
-            requeteSQL = "INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS)"
-                    + "VALUES ("+ indiceNSP_Max+1 +", '" + titre + "', '" + auteur + "', '" + mes + "', " + Integer.parseInt(duree) + ")";
+            requeteSQL = "INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)"
+                    + "VALUES ("+ indiceNSP_Max +", '" + titre + "', '" + auteur + "', '" + mes +
+                    "', " + Integer.parseInt(duree) + ", '"+ url+ "')";
             st.executeQuery(requeteSQL);            
             
         } catch (SQLException e) {

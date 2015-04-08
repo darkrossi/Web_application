@@ -28,7 +28,12 @@ public class Controleur extends HttpServlet {
 
     /**
      * La méthode principale d'aiguillage.
+     * @param request
+     * @param response
+     * @throws java.io.IOException
+     * @throws javax.servlet.ServletException
      */
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         PrintWriter out = response.getWriter();
@@ -96,7 +101,8 @@ public class Controleur extends HttpServlet {
         spectacleDAO.ajouterSpectacle(request.getParameter("nomS"),
                 request.getParameter("auteurS"),
                 request.getParameter("mesS"),
-                request.getParameter("dureeS"));        
+                request.getParameter("dureeS"),
+                request.getParameter("fileS"));        
         this.actionAfficher(request, response, spectacleDAO);
     }
 }
