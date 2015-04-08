@@ -18,80 +18,18 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" type="text/css" href="css/style.css"> 
-        <!--<script type="text/javascript" src="js/typeahead.bundle.js"></script>-->
-
-        <!-- JQuery -->
-        <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-        <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css"> 
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.min.css"> 
-        <!-- -->    
-
-        <!-- PopUp -->
-        <script src="js/jquery.reveal.js" type="text/javascript"></script>
-        <link href="css/reveal.css" rel="stylesheet" type="text/css"/>
-        <!-- -->
-
-        <!-- Carousel -->
-        <link href="css/elastislide.css" rel="stylesheet" type="text/css"/>
-        <link href="css/reset.css" rel="stylesheet" type="text/css"/>
-        <link href="css/styleCar.css" rel="stylesheet" type="text/css"/>
-        <script src="js/gallery.js" type="text/javascript"></script>
-        <script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
-        <script src="js/jquery.elastislide.js" type="text/javascript"></script>
-        <script src="js/jquery.tmpl.min.js" type="text/javascript"></script>
-        <!-- -->
-
-        <!-- Bootstrap -->
-        <script type="text/javascript" src="js/bootstrap.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-        <!-- -->
-
-        <script id="img-wrapper-tmpl" type="text/x-jquery-tmpl">	
-            <div class="rg-image-wrapper">
-            {{if itemsCount > 1}}
-            <div class="rg-image-nav">
-            <a href="#" class="rg-image-nav-prev">Previous Image</a>
-            <a href="#" class="rg-image-nav-next">Next Image</a>
-            </div>
-            {{/if}}
-            <div class="rg-image"></div>
-            <div class="rg-loading"></div>
-            <div class="rg-caption-wrapper">
-            <div class="rg-caption" style="display:none;">
-            <p></p>
-            </div>
-            </div>
-            </div>
-        </script>
-        <!-- -->
+        <script src="js/functions.js" type="text/javascript"></script>
+        
+        <jsp:include page="jsp/head.jsp"/>
 
         <script>
-            function allowDrop(ev) {
-                ev.preventDefault();
-            }
-
-            function drag(ev) {
-                ev.dataTransfer.setData("text", ev.target.src);
-            }
-
-            function drop(ev) {
-                ev.preventDefault();
-                var data = ev.dataTransfer.getData("text");
-                sessionStorage.setItem("panier" + sessionStorage.getItem("count"), data);
-                sessionStorage.setItem("count", sessionStorage.getItem("count") + 0);
-//                var p = document.createElement("p");
-//                p.innerHTML = sessionStorage.getItem("count").getName();
-//                document.getElementById("div1").appendChild(p);
-            }
 
             $(document).ready(function () {
                 sessionStorage.setItem("count", "0");
 //                $("img").attr("draggable", "true");
 //                $("img").attr("ondragstart", "drag(event)");
-            });</script>
+            });
+        </script>
 
         <script>
             // Fonction à compléter par Hoël pour la vérif des champs
@@ -100,25 +38,25 @@ and open the template in the editor.
                 var nom = document.getElementById("nom").value;
                 var password = document.getElementById("password").value;
                 var email = document.getElementById("email").value;
-                
+
                 //clear des champs 'erreur'
                 document.getElementById("prenom_error").innerHTML = "";
                 document.getElementById("nom_error").innerHTML = "";
                 document.getElementById("password_error").innerHTML = "";
-                
-                if(prenom.length < 2 || prenom.length > 12 ){
+
+                if (prenom.length < 2 || prenom.length > 12) {
                     document.getElementById("prenom_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
                     return false;
                 }
-                if(nom.length < 2 || nom.length > 12 ){
+                if (nom.length < 2 || nom.length > 12) {
                     document.getElementById("nom_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
                     return false;
                 }
-                if(password.length < 5 || password.length > 12 ){
+                if (password.length < 5 || password.length > 12) {
                     document.getElementById("password_error").innerHTML = "ERREUR - ce champ contient entre 5 et 12 caractères";
                     return false;
                 }
-                
+
                 return true;
             }
         </script>
@@ -126,7 +64,7 @@ and open the template in the editor.
     </head>
     <body>
 
-        <jsp:include page="navbar.jsp"/>
+        <jsp:include page="jsp/navbar.jsp"/>
 
         <!-- Test pour affichage des affiches -->
         <form name="input" action="<%=request.getContextPath()%>/controleur" method="get">

@@ -142,49 +142,6 @@ public class Spectacle {
         }
     }
 
-    public ArrayList<Spectacle> getSpectacles() throws ClassNotFoundException, SQLException, IOException {
-        Class.forName("oracle.jdbc.OracleDriver");
-        ArrayList<Spectacle> spectacles = new ArrayList<Spectacle>();
-        this.getLoginPerso();
-        try (Connection Connexion = DriverManager.getConnection("jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1", login, login)) {
-            Statement State = Connexion.createStatement();
-            ResultSet resultat = State.executeQuery("SELECT * FROM Spectacles");
-            while (resultat.next()) {
-                int ID = resultat.getInt("Id");
-                String Titre = resultat.getString("Titre");
-                String Auteur = resultat.getString("Auteur");
-                spectacles.add(new Spectacle(ID, Titre, Auteur));
-            }
-        } catch (SQLException sqle) {
-            spectacles.add(new Spectacle(1, login, "Rien"));
-        }
-        return spectacles;
-    }
-
-    public void getLoginPerso() throws IOException {
-
-        //On crée une instance de SAXBuilder
-        SAXBuilder sxb = new SAXBuilder();
-        File temp = File.createTempFile("i-am-a-temp-file", ".tmp");
-        String absolutePath = temp.getAbsolutePath();
-        String path = absolutePath.split("/Web_application/")[0];
-        path += "/Web_application/Project_Web_Application/perso.xml";
-        try {
-            //On crée un nouveau document JDOM avec en argument le fichier XML
-            //Le parsing est terminé ;)
-//            String path = absolutePath.split("");
-            document = sxb.build(new File(path));
-
-            //On initialise un nouvel élément racine avec l'élément racine du document.
-            racine = document.getRootElement();
-
-            login = racine.getChild("login").getText();
-        } catch (Exception e) {
-            login = path;
-        }
-
-    }
-
     //Ajouter cette méthodes à la classe JDOM2
 //    static void afficheALL() {
 //        //On crée une List contenant tous les noeuds "etudiant" de l'Element racine
