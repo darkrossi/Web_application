@@ -22,12 +22,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Controleur", urlPatterns = {"/controleur"})
 public class Controleur extends HttpServlet {
-    
+
     @Resource(name = "jdbc/spectacles")
     private DataSource ds;
 
     /**
      * La méthode principale d'aiguillage.
+     *
      * @param request
      * @param response
      * @throws java.io.IOException
@@ -51,6 +52,8 @@ public class Controleur extends HttpServlet {
             } else if (action.equals("getSpectacle")) {
                 actionGetSpectacle(request, response, spectacleDAO);
             } else if (action.equals("addS")) {
+                actionAddSpectacle(request, response, spectacleDAO);
+            } else if (action.equals("affiches")) {
                 actionAddSpectacle(request, response, spectacleDAO);
             } else {
                 // ... renvoi vers une page d'erreur controleurErreur.jsp
@@ -80,7 +83,7 @@ public class Controleur extends HttpServlet {
     private void actionModifier(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     private void actionAfficher(HttpServletRequest request,
             HttpServletResponse response,
             SpectacleDAO spectacleDAO)
@@ -90,11 +93,11 @@ public class Controleur extends HttpServlet {
                 .getRequestDispatcher("/WEB-INF/afficheAffiches.jsp")
                 .forward(request, response);
     }
-    
+
     private void actionGetSpectacle(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     private void actionAddSpectacle(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO)
             throws ServletException, IOException, DAOException {
 //        request.setAttribute("spectacles", spectacleDAO.getListeSpectacles());
@@ -102,7 +105,9 @@ public class Controleur extends HttpServlet {
                 request.getParameter("auteurS"),
                 request.getParameter("mesS"),
                 request.getParameter("dureeS"),
-                request.getParameter("fileS"));        
-        this.actionAfficher(request, response, spectacleDAO);
+                request.getParameter("fileS"));
+        getServletContext()
+                .getRequestDispatcher("/addSpectacle.jsp")
+                .forward(request, response);
     }
 }

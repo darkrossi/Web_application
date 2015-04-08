@@ -84,10 +84,10 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
             }
 
             requeteSQL = "INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)"
-                    + "VALUES ("+ indiceNSP_Max +", '" + titre + "', '" + auteur + "', '" + mes +
-                    "', " + Integer.parseInt(duree) + ", '"+ url+ "')";
-            st.executeQuery(requeteSQL);            
-            
+                    + "VALUES (" + indiceNSP_Max + ", '" + titre + "', '" + auteur + "', '" + mes
+                    + "', " + Integer.parseInt(duree) + ", '" + url + "')";
+            st.executeQuery(requeteSQL);
+
         } catch (SQLException e) {
             throw new DAOException("Erreur BD " + e.getMessage(), e);
         } finally {

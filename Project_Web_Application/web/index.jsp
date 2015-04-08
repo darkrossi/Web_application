@@ -4,6 +4,8 @@
     Author     : oswald
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="modele.Affiche"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
@@ -19,7 +21,7 @@ and open the template in the editor.
 
         <link rel="stylesheet" type="text/css" href="css/style.css"> 
         <script src="js/functions.js" type="text/javascript"></script>
-        
+
         <jsp:include page="jsp/head.jsp"/>
 
         <script>
@@ -72,6 +74,8 @@ and open the template in the editor.
             <!--<input name="action" value="afficher"/>-->
         </form>
 
+        <a href="addSpectacle.jsp"> Ajouter un spectacle dans la bdd </a>
+
         <!-- POPUP SIGN OUT -->
         <div id="myModal" class="reveal-modal">
             <div class="container" >
@@ -92,7 +96,7 @@ and open the template in the editor.
                     <div class="row">
                         <label class="col-md-3"> E-mail</label><input class="col-md-2" id="email" name="mail"><br>
                     </div>
-                        <input type="SUBMIT">
+                    <input type="SUBMIT">
                 </FORM>
                 <br>
                 ajouter un captcha pour la sécu ! 
@@ -113,11 +117,13 @@ and open the template in the editor.
                     </div>
                     <div class="es-carousel">
                         <ul>
-                            <li><a href="#"><img src="img/affiche1.jpg" data-large="img/affiche1.jpg" alt="image01" data-description="" /></a></li>
-                            <li><a href="#"><img src="img/affiche2.jpg" data-large="img/affiche2.jpg" alt="image02" data-description="" /></a></li>
-                            <li><a href="#"><img src="img/affiche3.jpg" data-large="img/affiche3.jpg" alt="image03" data-description="" /></a></li>
-                            <li><a href="#"><img src="img/affiche4.jpg" data-large="img/affiche4.jpg" alt="image04" data-description="" /></a></li>
-                            <li><a href="#"><img src="img/affiche5.jpg" data-large="img/affiche5.jpg" alt="image05" data-description="" /></a></li>
+                            <% Affiche affiche = new Affiche();
+                                List<Affiche> affiches = affiche.getListeAffiches();%>
+                            <% if (!affiches.isEmpty()) {
+                                    for (int i = 0; i < affiches.size(); i++) {%>
+                            <li><a href="#"><img src="img/<%=affiches.get(i).toString()%>" data-large="img/<%=affiches.get(i).toString()%>" alt="image01" data-description="" /></a></li>
+                                    <%}
+                                        }%>
                         </ul>
                     </div>
                 </div>

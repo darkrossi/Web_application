@@ -84,3 +84,6 @@ CREATE TABLE Dossier (
     constraint nn_dossier_horaire check (Horaire is not null),
     CONSTRAINT NbP CHECK(NbP >= 1)
 );
+
+INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)
+    VALUES (0, 'init', 'init', 'init', 1, 'init');
