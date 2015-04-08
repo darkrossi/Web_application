@@ -136,22 +136,32 @@ and open the template in the editor.
 
         <!-- POPUP SIGN OUT -->
         <div id="myModal" class="reveal-modal">
-            <h1>Créer un compte</h1>
-            <FORM ACTION="/Project_Web_Application/checkNewAccount" onsubmit="return isValid()" METHOD="POST">
-                <label> Prénom (2 à 12 caractères)      </label><input id="prenom" name="prenom"><br>
-                <div id="prenom_error"> </div>
-                <label> Nom (2 à 12 caractères)         </label><input id="nom" name="nom"><br>
-                <div id="nom_error"> </div>
-                <label> Mot de passe (5 à 12 caractères) </label><input id="password" name="password" type="PASSWORD"><br>
-                <div id="password_error"> </div>
-                <label> E-mail       </label><input id="email" name="mail"><br>
-                <input type="SUBMIT">            
-            </FORM>
-            <br>
-            ajouter un captcha pour la sécu ! 
-            <br>
-            <a href="index.jsp">Retour à l'accueil</a>
-            <a class="close-reveal-modal">&#215;</a>
+            <div class="container" >
+                <h1>Créer un compte</h1>
+                <FORM ACTION="/Project_Web_Application/checkNewAccount" onsubmit="return isValid()" METHOD="POST">
+                    <div class="row">
+                        <label class="col-md-3"> Prénom (2 à 12 caractères)</label><input class="col-md-2" id="prenom" name="prenom"><br>
+                        <div id="prenom_error"> </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-3"> Nom (2 à 12 caractères)</label><input class="col-md-2" id="nom" name="nom"><br>
+                        <div id="nom_error"> </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-3"> Mot de passe (5 à 12 caractères)</label><input class="col-md-2" id="password" name="password" type="PASSWORD"><br>
+                        <div id="password_error"> </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-3"> E-mail</label><input class="col-md-2" id="email" name="mail"><br>
+                    </div>
+                        <input type="SUBMIT">
+                </FORM>
+                <br>
+                ajouter un captcha pour la sécu ! 
+                <br>
+                <a href="index.jsp">Retour à l'accueil</a>
+                <a class="close-reveal-modal">&#215;</a>
+            </div>
         </div>
 
         <!-- CAROUSEL -->

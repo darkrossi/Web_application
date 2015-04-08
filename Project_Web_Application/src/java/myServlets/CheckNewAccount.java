@@ -86,6 +86,7 @@ public class CheckNewAccount extends HttpServlet {
         
         try {
             if(isFormValid(prenom, nom, password, email) && isNewUser(prenom, nom, password, email)){
+                // TODO : ajouter l'utilisateur à la bdd
                 response.sendRedirect("login.html");
             } else{
                 // si l'utilisateur est déjà enregistré dans la bdd
@@ -115,18 +116,18 @@ public class CheckNewAccount extends HttpServlet {
     }
     
     static public boolean isNewUser(String prenom, String nom, String password, String mail) throws ClassNotFoundException, SQLException{
-        /*Class.forName("oracle.jdbc.OracleDriver");
+        Class.forName("oracle.jdbc.OracleDriver");
         try (Connection Connexion = DriverManager.getConnection
-                ("jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1","boedech","boedech")) { //?
+                ("jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1","boedech","boedech")) {
             Statement State = Connexion.createStatement();
-            ResultSet resultat = State.executeQuery("SELECT * FROM Users"); // ?
+            ResultSet resultat = State.executeQuery("SELECT * FROM Users");
             while (resultat.next()) {
-                if(resultat.getString("login").equals(prenom)){ // ?
+                if(resultat.getString("login").equals(prenom)){
                     Connexion.close();
                     return false;
                 }
             }
-        }*/ // à décommenter lorsque bdd opérationnelle
+        }
         return true;
     }
 }
