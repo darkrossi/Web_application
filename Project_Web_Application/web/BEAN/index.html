@@ -62,6 +62,14 @@ and open the template in the editor.
         <!-- -->
 
         <script>
+            $(document).ready(function () {
+                sessionStorage.setItem("count", "0");
+//                $("img").attr("draggable", "true");
+//                $("img").attr("ondragstart", "drag(event)");
+            });
+        </script>
+
+        <script>
             function allowDrop(ev) {
                 ev.preventDefault();
             }
@@ -90,7 +98,7 @@ and open the template in the editor.
     </head>
     <body>
 
-       
+
 
         <!-- NAVBAR -->
         <nav class="navbar navbar-inverse">
