@@ -5,4 +5,4 @@ DROP TABLE Rang;
 DROP TABLE Ticket;
 DROP TABLE Spectacle;
 DROP TABLE Salle;
-DROP TABLE Users;
+DROP TABLE User;

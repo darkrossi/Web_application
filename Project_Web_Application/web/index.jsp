@@ -33,41 +33,6 @@ and open the template in the editor.
             });
         </script>
 
-        <script>
-            // Fonction à compléter par Hoël pour la vérif des champs
-            function isValid() {
-                var prenom = document.getElementById("prenom").value;
-                var nom = document.getElementById("nom").value;
-                var login = document.getElementById("login").value;
-                var password = document.getElementById("password").value;
-                var email = document.getElementById("email").value;
-
-                //clear des champs 'erreur'
-                document.getElementById("prenom_error").innerHTML = "";
-                document.getElementById("nom_error").innerHTML = "";
-                document.getElementById("password_error").innerHTML = "";
-
-                if (prenom.length < 2 || prenom.length > 12) {
-                    document.getElementById("prenom_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
-                    return false;
-                }
-                if (nom.length < 2 || nom.length > 12) {
-                    document.getElementById("nom_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
-                    return false;
-                }
-                if (login.length < 5 || login.length > 12) {
-                    document.getElementById("login_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
-                    return false;
-                }
-                if (password.length < 5 || password.length > 12) {
-                    document.getElementById("password_error").innerHTML = "ERREUR - ce champ contient entre 5 et 12 caractères";
-                    return false;
-                }
-
-                return true;
-            }
-        </script>
-
     </head>
     <body>
 

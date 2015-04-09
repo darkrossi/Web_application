@@ -45,4 +45,31 @@ public class UtilisateurDAO extends AbstractDataBaseDAO {
 
         return sortie;
     }
+
+    public void ajouterUser(String login, String mdp, String nom, String prenom, String mail) throws DAOException {
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
+//        int indiceNSP_Max = 0;
+        try {
+            conn = getConnection();
+            Statement st = conn.createStatement();
+//            requeteSQL = "select max(NSP) from Spectacle";
+//            rs = st.executeQuery(requeteSQL);
+//            while (rs.next()) {
+//                indiceNSP_Max = rs.getInt(1);
+//                indiceNSP_Max++;
+//            }
+
+            requeteSQL = "INSERT INTO User (LoginU, NomU, PrenomU, MailU, MdpU, RoleU)"
+                    + "VALUES (" + login + ", '" + nom + "', '" + prenom + "', '" + mail
+                    + "', " + mdp + ", 0)";
+            st.executeQuery(requeteSQL);
+
+        } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(conn);
+        }
+    }
 }
