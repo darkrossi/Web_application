@@ -130,4 +130,16 @@ public class Controleur extends HttpServlet {
                     .forward(request, response);
         }
     }
+
+    private void actionAddUser(HttpServletRequest request, HttpServletResponse response, UtilisateurDAO utilisateurDAO)
+            throws ServletException, IOException, DAOException {
+        utilisateurDAO.ajouterUser(request.getParameter("login"),
+                request.getParameter("password"),
+                request.getParameter("nom"),
+                request.getParameter("prenom"),
+                request.getParameter("email"));
+        getServletContext()
+                .getRequestDispatcher("/addSpectacle.jsp")
+                .forward(request, response);
+    }
 }
