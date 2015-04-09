@@ -47,7 +47,7 @@ CREATE TABLE Place (
     constraint nn_place_nsa check (NSA is not null)
 );
 
-CREATE TABLE User (
+CREATE TABLE Users (
     LoginU varchar(30),
     NomU varchar(30),
     PrenomU varchar(30),

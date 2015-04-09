@@ -23,7 +23,7 @@
                     </ul>
                 </li>
                 <li><a href="addSpectacle.jsp">Ajouter un spectacle</a></li>
-                <li><a href="#">Page 3</a></li>
+                <li><a href="#">Qui sommes-nous ?</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!--                        <li>
@@ -98,15 +98,15 @@
         <h1>Créer un compte</h1>
         <FORM ACTION="<%=request.getContextPath()%>/controleur" onsubmit="return isValid()" METHOD="get">
             <div class="row">
-                <label class="col-md-3"> Prénom (2 à 12 caractères)</label><input class="col-md-2" id="prenom" name="prenom"><br>
+                <label class="col-md-3"> Prénom</label><input class="col-md-2" id="prenom" name="prenom"><br>
             </div>
             <div id="prenom_error"> </div>
             <div class="row">
-                <label class="col-md-3"> Nom (2 à 12 caractères)</label><input class="col-md-2" id="nom" name="nom"><br>
+                <label class="col-md-3"> Nom</label><input class="col-md-2" id="nom" name="nom"><br>
             </div>
             <div id="nom_error"> </div>
             <div class="row">
-                <label class="col-md-3"> Login (2 à 12 caractères)</label><input class="col-md-2" id="login" name="login"><br>
+                <label class="col-md-3"> Login</label><input class="col-md-2" id="login" name="login"><br>
             </div>
             <div id="login_error"> </div>
 

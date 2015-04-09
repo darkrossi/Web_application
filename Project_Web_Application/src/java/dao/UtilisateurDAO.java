@@ -29,12 +29,12 @@ public class UtilisateurDAO extends AbstractDataBaseDAO {
         try {
             conn = getConnection();
             Statement st = conn.createStatement();
-            requeteSQL = "select * "
-                    + "from Spectacle "
-                    + "where loginU = '" + login + "' and mdpU = '" + mdp + "'";
+            requeteSQL = "SELECT * "
+                    + "FROM Users "
+                    + "WHERE LoginU = '" + login + "' AND MdpU = '" + mdp + "'";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
-                sortie = rs.getString("loginU");
+                sortie = rs.getString("LoginU");
             }
 
         } catch (SQLException e) {
@@ -46,7 +46,7 @@ public class UtilisateurDAO extends AbstractDataBaseDAO {
         return sortie;
     }
 
-    public void ajouterUser(String login, String mdp, String nom, String prenom, String mail) throws DAOException {
+    public boolean ajouterUser(String login, String mdp, String nom, String prenom, String mail) throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
@@ -61,13 +61,21 @@ public class UtilisateurDAO extends AbstractDataBaseDAO {
 //                indiceNSP_Max++;
 //            }
 
-            requeteSQL = "INSERT INTO User (LoginU, NomU, PrenomU, MailU, MdpU, RoleU)"
-                    + "VALUES (" + login + ", '" + nom + "', '" + prenom + "', '" + mail
-                    + "', " + mdp + ", 0)";
+            requeteSQL = "INSERT INTO Users (LoginU, NomU, PrenomU, MailU, MdpU, RoleU)"
+                    + "VALUES ('" + login + "', '" + nom + "', '" + prenom + "', '" + mail
+                    + "', '" + mdp + "', 0)";
             st.executeQuery(requeteSQL);
+            return true;
 
         } catch (SQLException e) {
-            throw new DAOException("Erreur BD " + e.getMessage(), e);
+            // si l'exception concerne l'unicité de chaque login dans la table
+            if(e.getErrorCode() == 1){
+                // alors on redirige vers une page vers une page qui indique que ce login est déjà enregistré dans la bdd
+                return false;
+            } else {
+                // sinon lancer l'exception
+                throw new DAOException("Erreur BD " + e.getMessage(), e);
+            }
         } finally {
             closeConnection(conn);
         }

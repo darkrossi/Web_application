@@ -54,10 +54,10 @@ public class Controleur extends HttpServlet {
                 actionGetSpectacle(request, response, spectacleDAO);
             } else if (action.equals("addS")) {
                 actionAddSpectacle(request, response, spectacleDAO);
-            } else if (action.equals("affiches")) {
-                actionAddSpectacle(request, response, spectacleDAO);
             } else if (action.equals("verifUser")) {
                 actionVerifUser(request, response, userAO);
+            } else if (action.equals("actionAddUser")){
+                actionAddUser(request, response, userAO);
             } else {
                 // ... renvoi vers une page d'erreur controleurErreur.jsp
             }
@@ -121,7 +121,7 @@ public class Controleur extends HttpServlet {
         String sortie = utilisateurDAO.verifUser(request.getParameter("loginU"), request.getParameter("mdpU"));
         if (sortie.equals("")) {
             getServletContext()
-                    .getRequestDispatcher("/login.html")
+                    .getRequestDispatcher("/login.jsp")
                     .forward(request, response);
         } else {
             request.setAttribute("utilisateur", sortie);
@@ -133,13 +133,18 @@ public class Controleur extends HttpServlet {
 
     private void actionAddUser(HttpServletRequest request, HttpServletResponse response, UtilisateurDAO utilisateurDAO)
             throws ServletException, IOException, DAOException {
-        utilisateurDAO.ajouterUser(request.getParameter("login"),
+        if(utilisateurDAO.ajouterUser(request.getParameter("login"),
                 request.getParameter("password"),
                 request.getParameter("nom"),
                 request.getParameter("prenom"),
-                request.getParameter("email"));
-        getServletContext()
-                .getRequestDispatcher("/addSpectacle.jsp")
+                request.getParameter("email"))){
+            getServletContext()
+                    .getRequestDispatcher("/AccountCreationSuccess.html")
+                    .forward(request, response);
+        } else {
+            getServletContext()
+                .getRequestDispatcher("/AccountCreationFailed.html")
                 .forward(request, response);
+        }
     }
 }
