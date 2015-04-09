@@ -69,6 +69,7 @@
         document.getElementById("prenom_error").innerHTML = "";
         document.getElementById("nom_error").innerHTML = "";
         document.getElementById("password_error").innerHTML = "";
+        document.getElementById("login_error").innerHTML = "";
 
         if (prenom.length < 2 || prenom.length > 12) {
             document.getElementById("prenom_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
