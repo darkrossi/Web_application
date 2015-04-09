@@ -44,9 +44,5 @@
                 <button type="button" class="btn btn-primary">Sony</button>
             </div>
         </div>
-
-        <a href="error.jsp">Error</a>
-        <a href="monCompte.html">Mon Compte</a>
-
     </body>
 </html>

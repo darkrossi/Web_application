@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -124,7 +125,8 @@ public class Controleur extends HttpServlet {
                     .getRequestDispatcher("/login.jsp")
                     .forward(request, response);
         } else {
-            request.setAttribute("utilisateur", sortie);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("utilisateur", request.getParameter("loginU"));
             getServletContext()
                     .getRequestDispatcher("/index.jsp")
                     .forward(request, response);
