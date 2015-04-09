@@ -81,11 +81,12 @@ public class CheckNewAccount extends HttpServlet {
             throws ServletException, IOException {
         String prenom = request.getParameter("prenom");
         String nom = request.getParameter("nom");
+        String login = request.getParameter("login");
         String password = request.getParameter("password");
         String email = request.getParameter("mail");
         
         try {
-            if(isFormValid(prenom, nom, password, email) && isNewUser(prenom, nom, password, email)){
+            if(isFormValid(prenom, nom, login, password, email) && isNewUser(prenom, nom, login, password, email)){
                 // TODO : ajouter l'utilisateur à la bdd
                 response.sendRedirect("login.html");
             } else{
@@ -111,11 +112,11 @@ public class CheckNewAccount extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    static public boolean isFormValid(String prenom, String nom, String password, String mail){
+    static public boolean isFormValid(String prenom, String nom, String login, String password, String mail){
         return true; // la vérification des champs est faite directement sur la page index.jsp
     }
     
-    static public boolean isNewUser(String prenom, String nom, String password, String mail) throws ClassNotFoundException, SQLException{
+    static public boolean isNewUser(String prenom, String nom, String password, String login, String mail) throws ClassNotFoundException, SQLException{
         Class.forName("oracle.jdbc.OracleDriver");
         try (Connection Connexion = DriverManager.getConnection
                 ("jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1","boedech","boedech")) {
