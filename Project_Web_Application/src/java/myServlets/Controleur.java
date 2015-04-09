@@ -40,6 +40,7 @@ public class Controleur extends HttpServlet {
         PrintWriter out = response.getWriter();
         String action = request.getParameter("action");
         SpectacleDAO spectacleDAO = new SpectacleDAO(ds);
+        UtilisateurDAO userAO = new UtilisateurDAO(ds);
         try {
             if (action == null) {
                 actionAfficher(request, response, spectacleDAO);
@@ -55,6 +56,8 @@ public class Controleur extends HttpServlet {
                 actionAddSpectacle(request, response, spectacleDAO);
             } else if (action.equals("affiches")) {
                 actionAddSpectacle(request, response, spectacleDAO);
+            } else if (action.equals("verifUser")) {
+                actionVerifUser(request, response, userAO);
             } else {
                 // ... renvoi vers une page d'erreur controleurErreur.jsp
             }
@@ -109,5 +112,22 @@ public class Controleur extends HttpServlet {
         getServletContext()
                 .getRequestDispatcher("/addSpectacle.jsp")
                 .forward(request, response);
+    }
+
+    private void actionVerifUser(HttpServletRequest request,
+            HttpServletResponse response,
+            UtilisateurDAO utilisateurDAO)
+            throws DAOException, ServletException, IOException {
+        String sortie = utilisateurDAO.verifUser(request.getParameter("loginU"), request.getParameter("mdpU"));
+        if (sortie.equals("")) {
+            getServletContext()
+                    .getRequestDispatcher("/login.html")
+                    .forward(request, response);
+        } else {
+            request.setAttribute("utilisateur", sortie);
+            getServletContext()
+                    .getRequestDispatcher("/index.jsp")
+                    .forward(request, response);
+        }
     }
 }

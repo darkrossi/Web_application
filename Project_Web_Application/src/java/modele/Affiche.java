@@ -74,7 +74,7 @@ public class Affiche {
         } catch (SQLException e) {
         }
         if (affiches.isEmpty()) {
-            affiches.add(new Affiche("empty.png"));
+            affiches.add(new Affiche(login));
         }
         return affiches;
     }
@@ -85,8 +85,8 @@ public class Affiche {
         SAXBuilder sxb = new SAXBuilder();
         File temp = File.createTempFile("i-am-a-temp-file", ".tmp");
         String absolutePath = temp.getAbsolutePath();
-        String path = absolutePath.split("/Web_application/")[0];
-        path += "/Web_application/Project_Web_Application/web/META-INF/context.xml";
+        String path = absolutePath.split("/apache-tomcat")[0];
+        path += "/Project_Web_Application/web/META-INF/context.xml";
         try {
             //On crée un nouveau document JDOM avec en argument le fichier XML
             //Le parsing est terminé ;)

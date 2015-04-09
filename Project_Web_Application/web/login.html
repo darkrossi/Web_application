@@ -28,33 +28,6 @@ and open the template in the editor.
         <script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
         <script type="text/javascript" src="js/scriptCarousel.js"></script>
 
-        <script>
-            function allowDrop(ev) {
-                ev.preventDefault();
-            }
-
-            function drag(ev) {
-                ev.dataTransfer.setData("text", ev.target.src);
-            }
-
-            function drop(ev) {
-                ev.preventDefault();
-                var data = ev.dataTransfer.getData("text");
-                sessionStorage.setItem("panier" + sessionStorage.getItem("count"), data);
-                sessionStorage.setItem("count", sessionStorage.getItem("count")+0);
-//                var p = document.createElement("p");
-//                p.innerHTML = sessionStorage.getItem("count").getName();
-//                document.getElementById("div1").appendChild(p);
-            }
-            
-            $(document).ready(function () {
-                sessionStorage.setItem("count", "0");
-//                $("img").attr("draggable", "true");
-//                $("img").attr("ondragstart", "drag(event)");
-            });
-
-        </script>
-
     </head>
     <body>
 
@@ -102,10 +75,10 @@ and open the template in the editor.
 
             <div class="jumbotron">
                 <h1>Connectez-vous à votre compte</h1>    
-        <FORM ACTION="/Project_Web_Application/checkuser" METHOD="POST">
-            <label> Indiquez votre adresse mail : </label><input name="mail"><br>
-            <label> Indiquez votre mot de passe : </label><input name="password" type="PASSWORD"><br>
-            <input type="SUBMIT">
+        <FORM ACTION="<%=request.getContextPath()%>/controleur" METHOD="POST">
+            <label> Indiquez votre login : </label><input name="loginU"><br>
+            <label> Indiquez votre mot de passe : </label><input name="mdpU" type="PASSWORD"><br>
+            <input type="SUBMIT" name="action" value="verifUser">
         </FORM>
         <br>
         <a href="index.jsp">Retour à l'accueil</a>   
