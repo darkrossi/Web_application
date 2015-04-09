@@ -68,14 +68,6 @@ and open the template in the editor.
 
         <jsp:include page="jsp/navbar.jsp"/>
 
-        <!-- Test pour affichage des affiches -->
-        <form name="input" action="<%=request.getContextPath()%>/controleur" method="get">
-            <input type="submit" value="Modifier" />
-            <!--<input name="action" value="afficher"/>-->
-        </form>
-
-        <a href="addSpectacle.jsp"> Ajouter un spectacle dans la bdd </a>
-
         <!-- POPUP SIGN OUT -->
         <div id="myModal" class="reveal-modal">
             <div class="container" >

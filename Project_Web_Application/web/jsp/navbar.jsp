@@ -22,7 +22,7 @@
                         <li><a href="#">Page 1-3</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Page 2</a></li>
+                <li><a href="addSpectacle.jsp">Ajouter un spectacle</a></li>
                 <li><a href="#">Page 3</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
