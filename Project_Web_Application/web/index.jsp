@@ -55,7 +55,7 @@ and open the template in the editor.
                     document.getElementById("nom_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
                     return false;
                 }
-                if (login.length < 5 || login.length > 12) {
+                if (login.length < 2 || login.length > 12) {
                     document.getElementById("login_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
                     return false;
                 }

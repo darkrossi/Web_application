@@ -27,8 +27,12 @@
             <div class="jumbotron">
                 <h1>Connectez-vous à votre compte</h1>    
                 <FORM ACTION="<%=request.getContextPath()%>/controleur" METHOD="get">
-                    <label> Indiquez votre login : </label><input name="loginU"><br>
-                    <label> Indiquez votre mot de passe : </label><input name="mdpU" type="PASSWORD"><br>
+                    <div class="row">
+                        <label class="col-md-3"> Indiquez votre login : </label><input class="col-md-2" name="loginU"><br>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-3"> Indiquez votre mot de passe : </label><input class="col-md-2" name="mdpU" type="PASSWORD"><br>
+                    </div>
                     <input type="SUBMIT" name="action" value="verifUser">
                 </FORM>
                 <br>
