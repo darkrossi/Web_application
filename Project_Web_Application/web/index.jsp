@@ -38,6 +38,7 @@ and open the template in the editor.
             function isValid() {
                 var prenom = document.getElementById("prenom").value;
                 var nom = document.getElementById("nom").value;
+                var login = document.getElementById("login").value;
                 var password = document.getElementById("password").value;
                 var email = document.getElementById("email").value;
 
@@ -52,6 +53,10 @@ and open the template in the editor.
                 }
                 if (nom.length < 2 || nom.length > 12) {
                     document.getElementById("nom_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
+                    return false;
+                }
+                if (login.length < 5 || login.length > 12) {
+                    document.getElementById("login_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
                     return false;
                 }
                 if (password.length < 5 || password.length > 12) {
@@ -89,6 +94,11 @@ and open the template in the editor.
                         <label class="col-md-3"> Nom (2 à 12 caractères)</label><input class="col-md-2" id="nom" name="nom"><br>
                     </div>
                     <div id="nom_error"> </div>
+                    <div class="row">
+                        <label class="col-md-3"> Login (2 à 12 caractères)</label><input class="col-md-2" id="login" name="login"><br>
+                    </div>
+                    <div id="login_error"> </div>
+
                     <div class="row">
                         <label class="col-md-3"> Mot de passe (5 à 12 caractères)</label><input class="col-md-2" id="password" name="password" type="PASSWORD"><br>
                     </div>
