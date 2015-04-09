@@ -83,16 +83,16 @@ and open the template in the editor.
                 <FORM ACTION="/Project_Web_Application/checkNewAccount" onsubmit="return isValid()" METHOD="POST">
                     <div class="row">
                         <label class="col-md-3"> Prénom (2 à 12 caractères)</label><input class="col-md-2" id="prenom" name="prenom"><br>
-                        <div id="prenom_error"> </div>
                     </div>
+                    <div id="prenom_error"> </div>
                     <div class="row">
                         <label class="col-md-3"> Nom (2 à 12 caractères)</label><input class="col-md-2" id="nom" name="nom"><br>
-                        <div id="nom_error"> </div>
                     </div>
+                    <div id="nom_error"> </div>
                     <div class="row">
                         <label class="col-md-3"> Mot de passe (5 à 12 caractères)</label><input class="col-md-2" id="password" name="password" type="PASSWORD"><br>
-                        <div id="password_error"> </div>
                     </div>
+                    <div id="password_error"> </div>
                     <div class="row">
                         <label class="col-md-3"> E-mail</label><input class="col-md-2" id="email" name="mail"><br>
                     </div>
