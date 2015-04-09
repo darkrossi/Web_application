@@ -4,6 +4,7 @@
     Author     : oswald
 --%>
 
+<%@page import="dao.AfficheDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="modele.Affiche"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -48,7 +49,7 @@ and open the template in the editor.
                     </div>
                     <div class="es-carousel">
                         <ul>
-                            <% Affiche affiche = new Affiche();
+                            <% AfficheDAO affiche = new AfficheDAO();
                                 List<Affiche> affiches = affiche.getListeAffiches();%>
                             <% if (!affiches.isEmpty()) {
                                     for (int i = 0; i < affiches.size(); i++) {%>
