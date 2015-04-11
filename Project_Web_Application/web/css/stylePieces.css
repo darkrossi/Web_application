@@ -6,11 +6,11 @@ form{
 
 }
 
-div{
+/*div{
     background-color: pink;
     border: 2px solid grey;
     vertical-align: top;
-}
+}*/
 
 li{
     display: inline;
@@ -83,31 +83,3 @@ nav{
     top : 0px;
     color : grey;
 }
-
-
-/*Footer */
-footer{
-    background-color : black;
-}
-
-#colonne1, #colonne2, #colonne3
-{
-    display: inline-block;
-    vertical-align: top;
-    width : 33%;
-    height : 200px;
-}
-
-#colonne1 li, #colonne2 li, #colonne3 li{
-    display : block;
-    vertical-align: top;
-}
-
-#colonne1 h1, #colonne2 h1, #colonne3 h1{
-    color:white; /* ne marche pas */
-
-}
-
-
-
-

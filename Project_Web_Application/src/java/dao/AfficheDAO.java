@@ -53,7 +53,7 @@ public class AfficheDAO {
         } catch (SQLException e) {
         }
         if (affiches.isEmpty()) {
-            affiches.add(new Affiche(login));
+            affiches.add(new Affiche("empty.png"));
         }
         return affiches;
     }

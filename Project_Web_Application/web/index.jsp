@@ -55,4 +55,7 @@ and open the template in the editor.
             </div><!-- rg-thumbs -->
         </div><!-- rg-gallery -->
     </body>
+
+    <jsp:include page="jsp/footer.jsp"/>
+
 </html>

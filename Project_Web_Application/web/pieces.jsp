@@ -12,11 +12,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <jsp:include page="jsp/head.jsp"/>
-
         <script src="js/place.js" type="text/javascript"></script>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/stylePieces.css" />
+
+        <jsp:include page="jsp/head.jsp"/>
+
     </head>
     <body>
         <div class="container-fluid" >
@@ -66,7 +67,7 @@
                     <div class="large-2 columns">
 
                         <!-- Proposition : Faire un menu déroulant pour catégorie et un autre pour les types (orchestre, corbeille..) -->
-                        
+
                         <h3 align="center"> Choisissez vos places </h3>
                         <h4 class= "ligne"> Choix automatique </h4><form method="post" action="traitement.php">
                             <h4> Choix sur plan </h4>
@@ -154,36 +155,7 @@
                             <div class="clearfix visible-lg"></div>
                     </div>
                 </div>
-
-                </body>
-                <footer>
-                    <div id="colonne1">
-                        <h1 align="center">LE GROUPE COMED'IMAG </h1>
-                        <ul>
-                            <li><a href="#">Le groupe Comed'Imag</a></li>
-                            <li><a href="#">Recrutement</a></li>
-                            <li><a href="#">Donnez votre avis</a></li>
-                        </ul>
-                    </div>
-                    <div id="colonne2">
-                        <h1 align="center">AIDES, SAV, SERVICES</h1>
-                        <ul>
-                            <li><a href="https://www.facebook.com/mickael.fournier.37?ref=ts&fref=ts" title="Facebook">Retrouver Comed'Imag sur Facebook</a></li>
-                            <li><a href="#">Retrouver Comed'Imag sur Twitter</a></li>
-                            <li><a href="#">Retrouver Comed'Imag sur Google+</a></li>
-                            <li><a href="#">Billetterie</a></li>
-                            <li><a href="#">Nous contacter</a></li>
-                            <li><a href="#">FAQ</a></li>
-                        </ul>
-                    </div>
-                    <div id="colonne3">
-                        <h1 align="center">INFOS LEGALES</h1>
-                        <ul>
-                            <li><a href="#">Conditions Générales </a></li>
-                            <li><a href="#">Données Personnelles</a></li>
-                            <li><a href="#">Mentions Légales</a></li>
-                            <li><a href="#">Cookies</a></li>
-                        </ul>
-                    </div>
-                </footer>
-                </html>
+            </div>
+    </body>
+    <jsp:include page="jsp/footer.jsp"/>
+</html>

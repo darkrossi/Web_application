@@ -33,7 +33,9 @@
                     <div class="row">
                         <label class="col-md-3"> Indiquez votre mot de passe : </label><input class="col-md-2" name="mdpU" type="PASSWORD"><br>
                     </div>
-                    <input type="SUBMIT" name="action" value="verifUser">
+                    <input type="SUBMIT">
+                    <input hidden="true" name="action" value="verifUser">
+
                 </FORM>
                 <br>
                 <a href="index.jsp">Retour à l'accueil</a>   
@@ -45,4 +47,7 @@
             </div>
         </div>
     </body>
+    
+    <jsp:include page="jsp/footer.jsp"/>
+
 </html>

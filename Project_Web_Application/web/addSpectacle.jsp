@@ -12,9 +12,9 @@
         <title>Ajout Spectacle</title>
 
         <link rel="stylesheet" type="text/css" href="css/style.css"> 
-        
+
         <jsp:include page="jsp/head.jsp"/>
-        
+
         <script>
             // Fonction à compléter par Hoël pour la vérif des champs
             function isValid() {
@@ -57,4 +57,7 @@
                 <input hidden="true" name="action" value="addS"/>
             </form>
     </body>
+
+    <jsp:include page="jsp/footer.jsp"/>
+
 </html>

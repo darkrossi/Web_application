@@ -10,14 +10,14 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#"><font id="comedimag">Comed'Imag</font></a>
+            <a class="navbar-brand" href="index.jsp"><font id="comedimag">Comed'Imag</font></a>
         </div>
         <div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.jsp">Home</a></li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+<!--                <li class="active"><a href="index.jsp">Home</a></li>-->
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Voir le catalogue<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Page 1-1</a></li>
+                        <li><a href="pieces.jsp">Catalogue</a></li>
                         <li><a href="#">Page 1-2</a></li>
                         <li><a href="#">Page 1-3</a></li>
                     </ul>
@@ -117,7 +117,9 @@
             <div class="row">
                 <label class="col-md-3"> E-mail</label><input class="col-md-2" id="email" name="mail"><br>
             </div>
-            <input type="SUBMIT" name="action" value="actionAddUser">
+            <input type="SUBMIT">
+            <input hidden="true" name="action" value="actionAddUser">
+
         </FORM>
         <br>
         ajouter un captcha pour la sécu ! 
