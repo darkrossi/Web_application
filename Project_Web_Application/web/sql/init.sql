@@ -14,11 +14,13 @@ CREATE TABLE Salle (
 );
 
 CREATE TABLE Representation (
-    Horaire TIMESTAMP,
+    NR int,
+    DateR varchar(30),
+    HeureR varchar(30),
     NSP int,
     NSA int,
     NbP int,
-    constraint pk_repr primary key (Horaire), -- A CHANGER !!
+    constraint pk_repr primary key (NR),
     constraint fk_repr_nsp_spectacle foreign key (NSP) references Spectacle(NSP),
     constraint fk_repr_nsa_salle foreign key (NSA) references Salle(NSA),
     constraint nn_repr_nsa check (NSA is not null),
@@ -70,18 +72,18 @@ CREATE TABLE Dossier (
     NT int,
     NSP int,
     NSA int,
-    Horaire TIMESTAMP,
+    NR int,
     constraint pk_dossier primary key (ND),
     constraint fk_dossier_loginu_users foreign key (LoginU) references Users(LoginU),
     constraint fk_dossier_nt_ticket foreign key (NT) references Ticket(NT),
     constraint fk_dossier_nsp_spectacle foreign key (NSP) references Spectacle(NSP),
     constraint fk_dossier_nsa_salle foreign key (NSA) references Salle(NSA),
-    constraint fk_dossier_horaire_repr foreign key (Horaire) references Representation(Horaire),
+    constraint fk_dossier_nr_repr foreign key (NR) references Representation(NR),
     constraint nn_dossier_loginu check (LoginU is not null),
     constraint nn_dossier_nt check (NT is not null),
     constraint nn_dossier_nsa check (NSA is not null),
     constraint nn_dossier_nsp check (NSP is not null),
-    constraint nn_dossier_horaire check (Horaire is not null),
+    constraint nn_dossier_nr check (NR is not null),
     CONSTRAINT NbP CHECK(NbP >= 1)
 );
 

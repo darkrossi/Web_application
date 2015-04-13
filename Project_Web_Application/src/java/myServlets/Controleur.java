@@ -41,51 +41,28 @@ public class Controleur extends HttpServlet {
         PrintWriter out = response.getWriter();
         String action = request.getParameter("action");
         SpectacleDAO spectacleDAO = new SpectacleDAO(ds);
-        UtilisateurDAO userAO = new UtilisateurDAO(ds);
+        UtilisateurDAO userDAO = new UtilisateurDAO(ds);
+        RepresentationDAO represDAO = new RepresentationDAO(ds);
+        SalleDAO salleDAO = new SalleDAO(ds);
         try {
             if (action == null) {
                 actionAfficher(request, response, spectacleDAO);
-            } else if (action.equals("ajouter")) {
-                actionAjouter(request, response, spectacleDAO);
-            } else if (action.equals("supprimer")) {
-                actionSupprimer(request, response, spectacleDAO);
-            } else if (action.equals("modifier")) {
-                actionModifier(request, response, spectacleDAO);
-            } else if (action.equals("getSpectacle")) {
-                actionGetSpectacle(request, response, spectacleDAO);
             } else if (action.equals("addS")) {
                 actionAddSpectacle(request, response, spectacleDAO);
             } else if (action.equals("verifUser")) {
-                actionVerifUser(request, response, userAO);
-            } else if (action.equals("actionAddUser")){
-                actionAddUser(request, response, userAO);
+                actionVerifUser(request, response, userDAO);
+            } else if (action.equals("addUser")) {
+                actionAddUser(request, response, userDAO);
+            } else if (action.equals("addRepres")) {
+                actionAddRepres(request, response, represDAO);
+            } else if (action.equals("addSalle")) {
+                actionAddSalle(request, response, salleDAO);
             } else {
                 // ... renvoi vers une page d'erreur controleurErreur.jsp
             }
         } catch (DAOException e) {
             // ... renvoi vers une page d'erreur bdErreur.jsp
         }
-    }
-
-    /**
-     * Ajout d'un ouvrage.
-     */
-    private void actionAjouter(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * Suppression d'un ouvrage.
-     */
-    private void actionSupprimer(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * Modification d'un ouvrage.
-     */
-    private void actionModifier(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void actionAfficher(HttpServletRequest request,
@@ -96,10 +73,6 @@ public class Controleur extends HttpServlet {
         getServletContext()
                 .getRequestDispatcher("/WEB-INF/afficheAffiches.jsp")
                 .forward(request, response);
-    }
-
-    private void actionGetSpectacle(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void actionAddSpectacle(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO)
@@ -135,18 +108,46 @@ public class Controleur extends HttpServlet {
 
     private void actionAddUser(HttpServletRequest request, HttpServletResponse response, UtilisateurDAO utilisateurDAO)
             throws ServletException, IOException, DAOException {
-        if(utilisateurDAO.ajouterUser(request.getParameter("login"),
+        if (utilisateurDAO.ajouterUser(request.getParameter("login"),
                 request.getParameter("password"),
                 request.getParameter("nom"),
                 request.getParameter("prenom"),
-                request.getParameter("email"))){
+                request.getParameter("email"))) {
             getServletContext()
                     .getRequestDispatcher("/AccountCreationSuccess.html")
                     .forward(request, response);
         } else {
             getServletContext()
-                .getRequestDispatcher("/AccountCreationFailed.html")
-                .forward(request, response);
+                    .getRequestDispatcher("/AccountCreationFailed.html")
+                    .forward(request, response);
         }
+    }
+
+    private void actionAddRepres(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO)
+            throws DAOException, IOException, ServletException {
+        if (represDAO.ajouterRepresentation(request.getParameter("date"),
+                request.getParameter("valueHeure"),
+                request.getParameter("valueSpect"),
+                request.getParameter("valueSalle"),
+                request.getParameter("nbP"))) {
+            request.setAttribute("bool", 1);
+        } else {
+            request.setAttribute("bool", 0);
+        }
+        getServletContext()
+                .getRequestDispatcher("/LogAddRepresent.jsp")
+                .forward(request, response);
+    }
+
+    private void actionAddSalle(HttpServletRequest request, HttpServletResponse response, SalleDAO salleDAO)
+            throws DAOException, ServletException, IOException {
+        if (salleDAO.ajouterSalle()) {
+            request.setAttribute("bool", 1);
+        } else {
+            request.setAttribute("bool", 0);
+        }
+        getServletContext()
+                .getRequestDispatcher("/LogAddSalle.jsp")
+                .forward(request, response);
     }
 }

@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,6 +20,9 @@ import modele.Spectacle;
  * @author oswald
  */
 public class SpectacleDAO extends AbstractDataBaseDAO {
+    
+    public SpectacleDAO() {
+    }
 
     public SpectacleDAO(DataSource ds) {
         super(ds);
@@ -83,7 +87,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                 indiceNSP_Max++;
             }
 
-            requeteSQL = "INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)"
+            requeteSQL = "INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Spectacle)"
                     + "VALUES (" + indiceNSP_Max + ", '" + titre + "', '" + auteur + "', '" + mes
                     + "', " + Integer.parseInt(duree) + ", '" + url + "')";
             st.executeQuery(requeteSQL);
@@ -129,5 +133,25 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
      */
     public void supprimerSpectacle(int id) throws DAOException {
         //...
+    }
+    
+    private final String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
+    private final String login = "fournimi";
+    
+    public List<Spectacle> getListeSpectaclesMenu() throws DAOException, ClassNotFoundException {
+        Class.forName("oracle.jdbc.OracleDriver");
+        List<Spectacle> spectacles = new ArrayList<>();
+        try (Connection Connexion = DriverManager.getConnection(url, login, login)) {
+            Statement State = Connexion.createStatement();
+            ResultSet resultat = State.executeQuery("SELECT NSP, NomS FROM Spectacle");
+            while (resultat.next()) {
+                if (resultat.getInt("NSP") != 0) {
+                    spectacles.add(new Spectacle(resultat.getInt("NSP"), resultat.getString("NomS")));
+                }
+            }
+        } catch (SQLException e) {
+        }
+        
+        return spectacles;
     }
 }

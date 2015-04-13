@@ -51,6 +51,15 @@ public class Spectacle {
     public Spectacle(int id, String titre, String auteur) {
         this.id = id;
         this.titre = titre;
+        this.auteur = "";
+        this.metteurEnScene = "";
+        this.comediens = new ArrayList<String>();
+        this.duree = 0;
+    }
+
+    public Spectacle(int id, String titre) {
+        this.id = id;
+        this.titre = titre;
         this.auteur = auteur;
         this.metteurEnScene = "";
         this.comediens = new ArrayList<String>();

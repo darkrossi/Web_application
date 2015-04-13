@@ -17,20 +17,22 @@ public abstract class AbstractDataBaseDAO {
 
     protected final DataSource dataSource;
 
-    protected
-            AbstractDataBaseDAO(DataSource ds) {
+    protected AbstractDataBaseDAO() {
+        this.dataSource = null;
+    }
+
+    protected AbstractDataBaseDAO(DataSource ds) {
         this.dataSource = ds;
     }
 
     protected Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
-    
+
     /* fermeture d'une connexion
      * @param c la connexion à fermer
      * @throws DAOException si problème lors de la fermeture de la connexion
      */
-
     protected void closeConnection(Connection c) throws DAOException {
         if (c != null) {
             try {

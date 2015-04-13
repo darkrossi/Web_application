@@ -14,15 +14,16 @@
         </div>
         <div>
             <ul class="nav navbar-nav">
-<!--                <li class="active"><a href="index.jsp">Home</a></li>-->
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Voir le catalogue<span class="caret"></span></a>
+                <!--                <li class="active"><a href="index.jsp">Home</a></li>-->
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="pieces.jsp">Catalogue</a></li>
-                        <li><a href="#">Page 1-2</a></li>
-                        <li><a href="#">Page 1-3</a></li>
+                        <li><a href="addSpectacle.jsp">Ajouter un spectacle</a></li>
+                        <li><a href="addRepresent.jsp">Ajouter une représentation</a></li>
+                        <li><a href="addSalle.jsp">Ajouter une salle</a></li>
                     </ul>
                 </li>
-                <li><a href="addSpectacle.jsp">Ajouter un spectacle</a></li>
+
                 <li><a href="#">Qui sommes-nous ?</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -118,7 +119,7 @@
                 <label class="col-md-3"> E-mail</label><input class="col-md-2" id="email" name="mail"><br>
             </div>
             <input type="SUBMIT">
-            <input hidden="true" name="action" value="actionAddUser">
+            <input hidden="true" name="action" value="addUser">
 
         </FORM>
         <br>
