@@ -113,14 +113,13 @@ public class Controleur extends HttpServlet {
                 request.getParameter("nom"),
                 request.getParameter("prenom"),
                 request.getParameter("email"))) {
-            getServletContext()
-                    .getRequestDispatcher("/AccountCreationSuccess.html")
-                    .forward(request, response);
+            request.setAttribute("bool", 1);
         } else {
-            getServletContext()
-                    .getRequestDispatcher("/AccountCreationFailed.html")
-                    .forward(request, response);
+            request.setAttribute("bool", 0);
         }
+        getServletContext()
+                .getRequestDispatcher("/LogAddUser.jsp")
+                .forward(request, response);
     }
 
     private void actionAddRepres(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO)
