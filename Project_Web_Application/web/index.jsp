@@ -20,11 +20,6 @@ and open the template in the editor.
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <jsp:include page="jsp/head.jsp"/>
-
-        <link rel="stylesheet" type="text/css" href="css/style.css"> 
-        <script src="js/functions.js" type="text/javascript"></script>
-
     </head>
     <body>
 
@@ -57,5 +52,10 @@ and open the template in the editor.
     </body>
 
     <jsp:include page="jsp/footer.jsp"/>
+
+    <jsp:include page="jsp/head.jsp"/>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css"> 
+    <script src="js/functions.js" type="text/javascript"></script>
 
 </html>

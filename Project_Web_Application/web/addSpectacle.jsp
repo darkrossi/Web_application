@@ -11,10 +11,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ajout Spectacle</title>
 
-        <link rel="stylesheet" type="text/css" href="css/style.css"> 
-
-        <jsp:include page="jsp/head.jsp"/>
-
         <script>
             // Fonction à compléter par Hoël pour la vérif des champs
             function isValid() {
@@ -59,5 +55,8 @@
     </body>
 
     <jsp:include page="jsp/footer.jsp"/>
+
+    <jsp:include page="jsp/head.jsp"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"> 
 
 </html>

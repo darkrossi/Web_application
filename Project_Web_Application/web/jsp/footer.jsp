@@ -10,7 +10,7 @@
         background-color : black;
     }
 
-    h1 {
+    footer h1 {
         color:white; /* ne marche pas */
 
     }

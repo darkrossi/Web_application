@@ -12,10 +12,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <jsp:include page="jsp/head.jsp"/>
-
-        <link rel="stylesheet" type="text/css" href="css/style.css"> 
-
     </head>
     <body>
 
@@ -47,7 +43,11 @@
             </div>
         </div>
     </body>
-    
+
     <jsp:include page="jsp/footer.jsp"/>
+
+    <jsp:include page="jsp/head.jsp"/>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css"> 
 
 </html>

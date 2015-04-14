@@ -11,11 +11,19 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="refresh" content="3; url=addSalle.jsp">
         <title>JSP Page</title>
+
     </head>
     <body>
         <% if ((int) request.getAttribute("bool") == 1) { %>
         Compte créé avec succès
         <% } else { %>
         Erreur lors de la création du compte
-        <%}%>    </body>
+        <%}%>    
+    </body>
+
+    <jsp:include page="jsp/footer.jsp"/>
+
+    <jsp:include page="jsp/head.jsp"/>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css"> 
 </html>

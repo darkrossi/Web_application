@@ -14,11 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-
-        <jsp:include page="jsp/head.jsp"/>
-
-        <link rel="stylesheet" type="text/css" href="css/style.css"> 
+        <title>JSP Page</title> 
 
         <script>
             $(function () {
@@ -90,5 +86,8 @@
     </body>
 
     <jsp:include page="jsp/footer.jsp"/>
-</body>
+
+    <jsp:include page="jsp/head.jsp"/>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css"> 
 </html>

@@ -12,12 +12,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <script src="js/place.js" type="text/javascript"></script>
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="css/stylePieces.css" />
-
-        <jsp:include page="jsp/head.jsp"/>
-
     </head>
     <body>
         <div class="container-fluid" >
@@ -158,4 +152,11 @@
             </div>
     </body>
     <jsp:include page="jsp/footer.jsp"/>
+
+    <jsp:include page="jsp/head.jsp"/>
+
+    <script src="js/place.js" type="text/javascript"></script>
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/stylePieces.css" />
+
 </html>
