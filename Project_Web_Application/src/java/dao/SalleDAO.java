@@ -22,30 +22,53 @@ import modele.Salle;
  */
 public class SalleDAO extends AbstractDataBaseDAO {
 
-    private final String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
-    private final String login = "fournimi";
-
-    public SalleDAO() {
-    }
+//    private final String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
+//    private final String login = "fournimi";
+//
+//    public SalleDAO() {
+//    }
 
     public SalleDAO(DataSource ds) {
         super(ds);
     }
 
-    public List<Salle> getListeSalles() throws DAOException, ClassNotFoundException, IOException, Exception {
-        Class.forName("oracle.jdbc.OracleDriver");
-        List<Salle> salles = new ArrayList<>();
-        try (Connection Connexion = DriverManager.getConnection(url, login, login)) {
-            Statement State = Connexion.createStatement();
-            ResultSet resultat = State.executeQuery("SELECT NSA FROM Salle");
-            while (resultat.next()) {
-                int id = resultat.getInt("NSA");
-                salles.add(new Salle(id));
+    public List<Salle> getListeSalles() throws DAOException {
+        List<Salle> result = new ArrayList<Salle>();
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            Statement st = conn.createStatement();
+            requeteSQL = "select NSa from Salle";
+            rs = st.executeQuery(requeteSQL);
+            while (rs.next()) {
+                Salle salle = new Salle(rs.getInt("Nsa"));
+                System.err.println(salle);
+                result.add(salle);
             }
         } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(conn);
         }
-        return salles;
+        return result;
     }
+
+//    public List<Salle> getListeSallesBis() throws DAOException, ClassNotFoundException {
+//        Class.forName("oracle.jdbc.OracleDriver");
+//        List<Salle> salles = new ArrayList<>();
+//        try (Connection Connexion = DriverManager.getConnection(url, login, login)) {
+//            Statement State = Connexion.createStatement();
+//            ResultSet resultat = State.executeQuery("SELECT NSA FROM Salle");
+//            while (resultat.next()) {
+//                int id = resultat.getInt("NSA");
+//                salles.add(new Salle(id));
+//            }
+//        } catch (SQLException e) {
+//        }
+//        return salles;
+//    }
 
     public boolean ajouterSalle() throws DAOException {
         ResultSet rs = null;

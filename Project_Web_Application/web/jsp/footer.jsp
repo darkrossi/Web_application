@@ -8,6 +8,7 @@
 <style>
     footer{
         background-color : black;
+        margin-top: 20px;
     }
 
     footer h1 {

@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="refresh" content="3; url=addRepresent.jsp" />
         <title>JSP Page</title>
+    </head>
 
     <body>
         <% if ((int) request.getAttribute("bool") == 1) { %>
@@ -25,5 +26,5 @@
     <jsp:include page="jsp/head.jsp"/>
 
     <link rel="stylesheet" type="text/css" href="css/style.css"> 
-</head>
+
 </html>

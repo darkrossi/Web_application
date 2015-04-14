@@ -11,7 +11,9 @@ package modele;
  */
 public class Representation {
 
+    private int NR;
     private String date;
+    private String heure;
     private int NSp;
     private int NSa;
     private int NbP;
@@ -19,8 +21,10 @@ public class Representation {
     public Representation() {
     }
 
-    public Representation(String date, int NSp, int NSa, int NbP) {
+    public Representation(int NR, String date, String heure, int NSp, int NSa, int NbP) {
+        this.NR = NR;
         this.date = date;
+        this.heure = heure;
         this.NSp = NSp;
         this.NSa = NSa;
         this.NbP = NbP;

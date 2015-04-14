@@ -19,7 +19,12 @@
                     <ul class="dropdown-menu">
                         <li><a href="pieces.jsp">Catalogue</a></li>
                         <li><a href="addSpectacle.jsp">Ajouter un spectacle</a></li>
-                        <li><a href="addRepresent.jsp">Ajouter une représentation</a></li>
+                        <li>
+                            <form action="<%=request.getContextPath()%>/controleur" method="get">
+                                <a href="addRepresent.jsp">Ajouter une représentation</a>
+                                <input name="action" value="displayAddRepres" hidden="true">
+                            </form>
+                        </li>
                         <li><a href="addSalle.jsp">Ajouter une salle</a></li>
                     </ul>
                 </li>

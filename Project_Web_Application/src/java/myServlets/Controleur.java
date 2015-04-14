@@ -8,6 +8,8 @@ package myServlets;
 import dao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sql.DataSource;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -57,11 +59,15 @@ public class Controleur extends HttpServlet {
                 actionAddRepres(request, response, represDAO);
             } else if (action.equals("addSalle")) {
                 actionAddSalle(request, response, salleDAO);
+            } else if (action.equals("displayAddRepres")) {
+                actionDisplayAddRepres(request, response, spectacleDAO, salleDAO);
             } else {
                 // ... renvoi vers une page d'erreur controleurErreur.jsp
             }
         } catch (DAOException e) {
             // ... renvoi vers une page d'erreur bdErreur.jsp
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -147,6 +153,15 @@ public class Controleur extends HttpServlet {
         }
         getServletContext()
                 .getRequestDispatcher("/LogAddSalle.jsp")
+                .forward(request, response);
+    }
+
+    private void actionDisplayAddRepres(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, SalleDAO salleDAO) 
+            throws DAOException, ClassNotFoundException, IOException, ServletException {
+        request.setAttribute("spectacles", spectacleDAO.getListeSpectacles());
+        request.setAttribute("salles", salleDAO.getListeSalles());
+        getServletContext()
+                .getRequestDispatcher("/addRepresent.jsp")
                 .forward(request, response);
     }
 }
