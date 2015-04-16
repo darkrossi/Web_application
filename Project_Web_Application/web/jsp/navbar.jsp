@@ -43,19 +43,21 @@
                                             </form>
                 
                                         </li>-->
-                <li ondrop="drop(event)" ondragover="allowDrop(event)"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                <li><a href="#" data-reveal-id="myModal"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-
                 <%@ page import="javax.servlet.http.HttpSession"%>
                 <%
                     HttpSession session2 = request.getSession(false);
                     String userName = (String) session2.getAttribute("utilisateur");
+                    
                     if (userName == null) {
+                        out.write("<li><a href=\"#\" data-reveal-id=\"myModal\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li>");
                         out.write("<li><a href=\"login.jsp\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>");
                     } else {
+                        out.write("<li ondrop=\"drop(event)\" ondragover=\"allowDrop(event)\"><a href=\"#\"><span class=\"glyphicon glyphicon-shopping-cart\"></span> Mon Panier</a></li>");
+                        out.write("<li><a href=\"monCompte.jsp\"> Mon Compte</a></li>");
                         out.write("<li><a href=\"/Project_Web_Application/logout\"> Log out</a></li>");
                         out.print("<font size=\"3\" color=\"white\"> Bienvenue " + userName + "</font>");
                     }
+
                 %>
             </ul>
         </div>

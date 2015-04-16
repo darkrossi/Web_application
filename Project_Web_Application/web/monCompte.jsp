@@ -14,10 +14,11 @@
 
     </head>
     <body>
-        <A HREF="????????????">Se déconnecter </A><br><br>
-        <A HREF="????????????">Atteindre mon agenda </A><br><br>
-        <A HREF="????????????">Atteindre mes réservations </A><br><br>
-        <A HREF="????????????">Atteindre le calendrier </A><br><br>
+        <jsp:include page="jsp/navbar.jsp"/>
+        <h2>Mes Places achetées : </h2><br>
+        *liste des places achetées avec leurs caractéristiques (n° place, spectacle, etc)*
+        <h2>Mes Places réservées : </h2><br>
+        *liste des places réservées avec le 'timer' de fin de réservation, et un bouton 'payer la réservation'*
     </body>
     <jsp:include page="jsp/footer.jsp"/>
 
