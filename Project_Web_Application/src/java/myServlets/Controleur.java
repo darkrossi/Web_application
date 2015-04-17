@@ -65,7 +65,9 @@ public class Controleur extends HttpServlet {
                 // ... renvoi vers une page d'erreur controleurErreur.jsp
             }
         } catch (DAOException e) {
-            // ... renvoi vers une page d'erreur bdErreur.jsp
+            getServletContext()
+                    .getRequestDispatcher("/BddError.jsp")
+                    .forward(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -156,7 +158,7 @@ public class Controleur extends HttpServlet {
                 .forward(request, response);
     }
 
-    private void actionDisplayAddRepres(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, SalleDAO salleDAO) 
+    private void actionDisplayAddRepres(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, SalleDAO salleDAO)
             throws DAOException, ClassNotFoundException, IOException, ServletException {
         request.setAttribute("spectacles", spectacleDAO.getListeSpectacles());
         request.setAttribute("salles", salleDAO.getListeSalles());
