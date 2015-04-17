@@ -52,6 +52,7 @@
                 </div>
                 <input hidden="true" name="action" value="addS"/>
             </form>
+        </div>
     </body>
 
     <jsp:include page="jsp/footer.jsp"/>

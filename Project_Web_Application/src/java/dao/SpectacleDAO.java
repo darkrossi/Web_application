@@ -36,7 +36,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
      * @throws dao.DAOException
      */
     public List<Spectacle> getListeSpectacles() throws DAOException {
-        List<Spectacle> result = new ArrayList<Spectacle>();
+        List<Spectacle> result = new ArrayList<>();
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;

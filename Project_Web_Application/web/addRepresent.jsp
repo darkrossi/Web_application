@@ -92,6 +92,7 @@
                 </div>
                 <input hidden="true" name="action" value="addRepres"/>
             </form>
+        </div>
     </body>
 
     <jsp:include page="jsp/footer.jsp"/>

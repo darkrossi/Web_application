@@ -11,21 +11,6 @@
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <title>Ajout Salle</title>
-
-            <script>
-                // Fonction à compléter par Hoël pour la vérif des champs
-                function isValid() {
-                    if (document.getElementById("nomS").value != "" &&
-                            document.getElementById("auteurS").value != "" &&
-                            document.getElementById("mesS").value != "" &&
-                            document.getElementById("dureeS").value != "") {
-
-                        return true; // Si on ne veut pas lancer la servlet
-                    }
-                    return false;
-                }
-            </script>
-
         </head>
         <body>
             <jsp:include page="jsp/navbar.jsp"/>
@@ -35,6 +20,7 @@
                     <button type="submit "> Ajouter salle </button>
                     <input hidden="true" name="action" value="addSalle"/>
                 </form>
+            </div>
         </body>
 
         <jsp:include page="jsp/footer.jsp"/>

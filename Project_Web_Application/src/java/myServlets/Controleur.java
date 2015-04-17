@@ -46,6 +46,7 @@ public class Controleur extends HttpServlet {
         UtilisateurDAO userDAO = new UtilisateurDAO(ds);
         RepresentationDAO represDAO = new RepresentationDAO(ds);
         SalleDAO salleDAO = new SalleDAO(ds);
+        DossierDAO dossierDAO = new DossierDAO(ds);
         try {
             if (action == null) {
                 actionAfficher(request, response, spectacleDAO);
@@ -61,12 +62,16 @@ public class Controleur extends HttpServlet {
                 actionAddSalle(request, response, salleDAO);
             } else if (action.equals("displayAddRepres")) {
                 actionDisplayAddRepres(request, response, spectacleDAO, salleDAO);
+            } else if (action.equals("displayAccount")) {
+                actionDisplayAccount(request, response, dossierDAO);
             } else {
-                // ... renvoi vers une page d'erreur controleurErreur.jsp
+                getServletContext()
+                        .getRequestDispatcher("/ErrorRequest.jsp")
+                        .forward(request, response);
             }
         } catch (DAOException e) {
             getServletContext()
-                    .getRequestDispatcher("/BddError.jsp")
+                    .getRequestDispatcher("/ErrorBdd.jsp")
                     .forward(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
@@ -164,6 +169,13 @@ public class Controleur extends HttpServlet {
         request.setAttribute("salles", salleDAO.getListeSalles());
         getServletContext()
                 .getRequestDispatcher("/addRepresent.jsp")
+                .forward(request, response);
+    }
+
+    private void actionDisplayAccount(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO) throws DAOException, ServletException, IOException {
+        request.setAttribute("dossiers", dossierDAO.getFolders(request.getParameter("login")));
+        getServletContext()
+                .getRequestDispatcher("/monCompte.jsp")
                 .forward(request, response);
     }
 }

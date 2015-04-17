@@ -47,18 +47,22 @@
                 <%
                     HttpSession session2 = request.getSession(false);
                     String userName = (String) session2.getAttribute("utilisateur");
-                    
-                    if (userName == null) {
-                        out.write("<li><a href=\"#\" data-reveal-id=\"myModal\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li>");
-                        out.write("<li><a href=\"login.jsp\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>");
-                    } else {
-                        out.write("<li ondrop=\"drop(event)\" ondragover=\"allowDrop(event)\"><a href=\"#\"><span class=\"glyphicon glyphicon-shopping-cart\"></span> Mon Panier</a></li>");
-                        out.write("<li><a href=\"monCompte.jsp\"> Mon Compte</a></li>");
-                        out.write("<li><a href=\"/Project_Web_Application/logout\"> Log out</a></li>");
-                        out.print("<font size=\"3\" color=\"white\"> Bienvenue " + userName + "</font>");
-                    }
 
-                %>
+                    if (userName == null) { %>
+                <li><a href="#" data-reveal-id="myModal"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <% } else {%>
+                <li ondrop="drop(event)" ondragover="allowDrop(event)"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Mon Panier</a></li>
+                <li>
+                    <form action="<%=request.getContextPath()%>/controleur" method="get">
+                        <a href="monCompte.jsp"> Mon Compte</a>
+                        <input name="action" value="displayAccount" hidden="true">
+                        <input name="login" value="<%= userName %>" hidden="true">
+                    </form>
+                </li>
+                <li><a href="/Project_Web_Application/logout"> Log out</a></li>
+                <font size="3" color="white"> Bienvenue <%= userName%></font>
+                <% }%>
             </ul>
         </div>
     </div>

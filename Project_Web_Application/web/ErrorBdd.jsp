@@ -13,7 +13,7 @@
         <title>Error BDD</title>
     </head>
     <body>
-        <h1>Erreur de base de données</h1>
+        Erreur de base de données
     </body>
     
     <jsp:include page="jsp/footer.jsp"/>
