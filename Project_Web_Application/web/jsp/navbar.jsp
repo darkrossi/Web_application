@@ -6,6 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<% HttpSession session2 = request.getSession(false);
+    String userName = (String) session2.getAttribute("utilisateur");%>
+
 <!-- NAVBAR -->
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -18,6 +21,8 @@
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="pieces.jsp">Catalogue</a></li>
+                            <% if (userName != null) {
+                                    if (userName.equals("admin")) {%>
                         <li><a href="addSpectacle.jsp">Ajouter un spectacle</a></li>
                         <li>
                             <form action="<%=request.getContextPath()%>/controleur" method="get">
@@ -26,6 +31,8 @@
                             </form>
                         </li>
                         <li><a href="addSalle.jsp">Ajouter une salle</a></li>
+                            <% }
+                                }%>
                     </ul>
                 </li>
 
@@ -44,11 +51,7 @@
                 
                                         </li>-->
                 <%@ page import="javax.servlet.http.HttpSession"%>
-                <%
-                    HttpSession session2 = request.getSession(false);
-                    String userName = (String) session2.getAttribute("utilisateur");
-
-                    if (userName == null) { %>
+                <% if (userName == null) { %>
                 <li><a href="#" data-reveal-id="myModal"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                 <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     <% } else {%>
@@ -57,7 +60,7 @@
                     <form action="<%=request.getContextPath()%>/controleur" method="get">
                         <a href="monCompte.jsp"> Mon Compte</a>
                         <input name="action" value="displayAccount" hidden="true">
-                        <input name="login" value="<%= userName %>" hidden="true">
+                        <input name="login" value="<%= userName%>" hidden="true">
                     </form>
                 </li>
                 <li><a href="/Project_Web_Application/logout"> Log out</a></li>
