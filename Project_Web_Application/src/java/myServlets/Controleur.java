@@ -64,6 +64,8 @@ public class Controleur extends HttpServlet {
                 actionDisplayAddRepres(request, response, spectacleDAO, salleDAO);
             } else if (action.equals("displayAccount")) {
                 actionDisplayAccount(request, response, dossierDAO);
+            } else if (action.equals("displayAddBooking")) {
+                actionDisplayAddBooking(request, response, represDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -174,6 +176,13 @@ public class Controleur extends HttpServlet {
 
     private void actionDisplayAccount(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO) throws DAOException, ServletException, IOException {
         request.setAttribute("dossiers", dossierDAO.getFolders(request.getParameter("login")));
+        getServletContext()
+                .getRequestDispatcher("/monCompte.jsp")
+                .forward(request, response);
+    }
+
+    private void actionDisplayAddBooking(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO) throws ServletException, IOException, DAOException {
+        request.setAttribute("repres", represDAO.getRepresFromSp());
         getServletContext()
                 .getRequestDispatcher("/monCompte.jsp")
                 .forward(request, response);

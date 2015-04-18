@@ -56,7 +56,7 @@
 
         <div class="container" id="repres" hidden="true">
             <div class="row">
-                <select id="selectSpect" onchange="
+<%--                <select id="selectSpect" onchange="
                         select_menu = document.getElementById('selectSpect');
                         document.getElementById('valueSpect').value = select_menu.options[select_menu.selectedIndex].value;" >
                     <% spectacle = new SpectacleDAO();
@@ -66,16 +66,16 @@
                     <option value="<%=spectacles.get(i).getId()%>"><%=spectacles.get(i).getTitre()%></option>
                     <%}
                         }%>
-                </select>
+                </select> --%>
                 <input type="text" id ="valueSpect" name="valueSpect" hidden="true"><br>
 
-                <% RepresentationDAO representation = new RepresentationDAO();
+<%--                <% RepresentationDAO representation = new RepresentationDAO();
                     List<Representation> representations = representation.getListeRepres(1);%>
                 <% if (!spectacles.isEmpty()) {
                         for (int i = 0; i < spectacles.size(); i++) {%>
                 <p><%=spectacles.get(i).getTitre()%></p>
                 <%}
-                    }%>
+                    }%> --%>
             </div>
         </div>
 

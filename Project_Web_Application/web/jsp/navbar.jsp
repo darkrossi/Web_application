@@ -21,7 +21,12 @@
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="pieces.jsp">Catalogue</a></li>
-                            <% if (userName != null) {
+                        <li><form action="<%=request.getContextPath()%>/controleur" method="get">
+                                <a href="displayAddBooking.jsp">Réserver une place</a>
+                                <input name="action" value="displayAddBooking" hidden="true">
+                            </form>
+                        </li>
+                        <% if (userName != null) {
                                     if (userName.equals("admin")) {%>
                         <li><a href="addSpectacle.jsp">Ajouter un spectacle</a></li>
                         <li>

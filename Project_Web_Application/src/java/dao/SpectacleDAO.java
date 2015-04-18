@@ -135,23 +135,23 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
         //...
     }
     
-    private final String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
-    private final String login = "fournimi";
-    
-    public List<Spectacle> getListeSpectaclesMenu() throws DAOException, ClassNotFoundException {
-        Class.forName("oracle.jdbc.OracleDriver");
-        List<Spectacle> spectacles = new ArrayList<>();
-        try (Connection Connexion = DriverManager.getConnection(url, login, login)) {
-            Statement State = Connexion.createStatement();
-            ResultSet resultat = State.executeQuery("SELECT NSP, NomS FROM Spectacle");
-            while (resultat.next()) {
-                if (resultat.getInt("NSP") != 0) {
-                    spectacles.add(new Spectacle(resultat.getInt("NSP"), resultat.getString("NomS")));
-                }
-            }
-        } catch (SQLException e) {
-        }
-        
-        return spectacles;
-    }
+//    private final String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
+//    private final String login = "fournimi";
+//    
+//    public List<Spectacle> getListeSpectaclesMenu() throws DAOException, ClassNotFoundException {
+//        Class.forName("oracle.jdbc.OracleDriver");
+//        List<Spectacle> spectacles = new ArrayList<>();
+//        try (Connection Connexion = DriverManager.getConnection(url, login, login)) {
+//            Statement State = Connexion.createStatement();
+//            ResultSet resultat = State.executeQuery("SELECT NSP, NomS FROM Spectacle");
+//            while (resultat.next()) {
+//                if (resultat.getInt("NSP") != 0) {
+//                    spectacles.add(new Spectacle(resultat.getInt("NSP"), resultat.getString("NomS")));
+//                }
+//            }
+//        } catch (SQLException e) {
+//        }
+//        
+//        return spectacles;
+//    }
 }

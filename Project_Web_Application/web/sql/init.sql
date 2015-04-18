@@ -87,5 +87,24 @@ CREATE TABLE Dossier (
     CONSTRAINT NbP CHECK(NbP >= 1)
 );
 
+CREATE TABLE Booking (
+    NB int,
+    LoginU varchar(30),
+    NbP int,
+    NSP int,
+    NR int,
+    NSA int,
+    constraint pk_booking primary key (NB),
+    constraint fk_booking_loginu_users foreign key (LoginU) references Users(LoginU),
+    constraint fk_booking_nsp_spectacle foreign key (NSP) references Spectacle(NSP),
+    constraint fk_booking_nsa_salle foreign key (NSA) references Salle(NSA),
+    constraint fk_booking_nr_repr foreign key (NR) references Representation(NR),
+    constraint nn_booking_loginu check (LoginU is not null),
+    constraint nn_booking_nsa check (NSA is not null),
+    constraint nn_booking_nsp check (NSP is not null),
+    constraint nn_booking_nr check (NR is not null),
+    CONSTRAINT NbP CHECK(NbP >= 1)
+);
+
 INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)
     VALUES (0, 'init', 'init', 'init', 1, 'init');

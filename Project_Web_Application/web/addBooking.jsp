@@ -1,14 +1,13 @@
 <%-- 
-    Document   : addRepresent
-    Created on : 13 avr. 2015, 16:13:40
+    Document   : addBooking
+    Created on : 18 avr. 2015, 09:02:56
     Author     : oswald
 --%>
 
-<%@page import="modele.Salle"%>
-<%@page import="dao.SalleDAO"%>
-<%@page import="modele.Spectacle"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.SpectacleDAO"%>
+<%@page import="java.util.Enumeration"%>
+<%@page import="java.util.Hashtable"%>
+<%@page import="modele.Representation"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,11 +19,6 @@
 
         <link rel="stylesheet" type="text/css" href="css/style.css"> 
 
-        <script>
-            $(function () {
-                $("#datepicker").datepicker();
-            });
-        </script>
     </head>
     <body>
         <jsp:include page="jsp/navbar.jsp"/>
@@ -34,28 +28,33 @@
                 <div class="row">
                     <div class="col-md-2">
                         <label>Spectacle</label><br>
-                        <label>Salle</label><br>
-                        <label>Date</label><br> 
-                        <label>Heure</label><br>
-                        <label>Nombre de place</label>
+                        <label>Représentation(s)</label><br>
                     </div>
                     <div class="col-md-2"> 
 
-                        <select id="selectSpect" onchange="
-                                select_menu = document.getElementById('selectSpect');
-                                document.getElementById('valueSpect').value = select_menu.options[select_menu.selectedIndex].value;" >
-                            <% if (request.getAttribute("spectacles") != null) {
-                                    List<Spectacle> spectacles = (List<Spectacle>) request.getAttribute("spectacles");
-                                    if (!spectacles.isEmpty()) {
-                                        for (int i = 0; i < spectacles.size(); i++) {%>
-                            <option value="<%=spectacles.get(i).getId()%>"><%=spectacles.get(i).getTitre()%></option>
-                            <%}
+                        <% if (request.getAttribute("repres") != null) {
+                                Hashtable<String, Representation> hashRepres = (Hashtable<String, Representation>) request.getAttribute("repres");
+                                if (!hashRepres.isEmpty()) {
+                                    Enumeration keys = hashRepres.keys();
+                                    while (keys.hasMoreElements()) {
+                                        String nomS = (String) keys.nextElement();%>
+                        <h1><%= nomS%> </h1>
+                        <% List<Representation> repres = (List<Representation>) hashRepres.get(nomS);
+                            for (int i = 0; i < repres.size(); i++) {%>
+                        <%= i+1%>
+                        <ul>
+                            <li><%= repres.get(i).getDate()%></li>
+                            <li><%= repres.get(i).getHeure()%></li>
+                            <li><%= repres.get(i).getNSa()%></li>
+                            <li><input type="checkbox"></li>
+                        </ul>
+                        <%}
                                     }
-                                }%>
-                        </select> 
-                        <input type="text" id ="valueSpect" name="valueSpect" hidden="true"> <br>
+                                }
+                            }%>
 
-                        <select id="selectSalle" onchange="
+
+                        <%-- <select id="selectSalle" onchange="
                                 select_menu = document.getElementById('selectSalle');
                                 document.getElementById('valueSalle').value = select_menu.options[select_menu.selectedIndex].value;">
                             <% if (request.getAttribute("salles") != null) {
@@ -68,7 +67,7 @@
                                     }
                                 }%>
                         </select> 
-                        <input id="valueSalle" name="valueSalle" hidden="true">
+                        <input id="valueSalle" name="valueSalle" hidden="true"> --%>
 
                         <input type="text" id="datepicker" name="date">
 
