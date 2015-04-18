@@ -72,6 +72,7 @@ public class Controleur extends HttpServlet {
                         .forward(request, response);
             }
         } catch (DAOException e) {
+            request.setAttribute("log", e.toString());
             getServletContext()
                     .getRequestDispatcher("/ErrorBdd.jsp")
                     .forward(request, response);
@@ -184,7 +185,7 @@ public class Controleur extends HttpServlet {
     private void actionDisplayAddBooking(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO) throws ServletException, IOException, DAOException {
         request.setAttribute("repres", represDAO.getRepresFromSp());
         getServletContext()
-                .getRequestDispatcher("/monCompte.jsp")
+                .getRequestDispatcher("/addBooking.jsp")
                 .forward(request, response);
     }
 }

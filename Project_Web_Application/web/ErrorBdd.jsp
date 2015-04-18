@@ -13,7 +13,7 @@
         <title>Error BDD</title>
     </head>
     <body>
-        Erreur de base de données
+        <%= request.getAttribute("log") %>
     </body>
     
     <jsp:include page="jsp/footer.jsp"/>

@@ -17,17 +17,19 @@ public class Representation {
     private int NSp;
     private int NSa;
     private int NbP;
+    private String urlImg;
 
     public Representation() {
     }
 
-    public Representation(int NR, String date, String heure, int NSp, int NSa, int NbP) {
+    public Representation(int NR, String date, String heure, int NSp, int NSa, int NbP, String urlImg) {
         this.NR = NR;
         this.date = date;
         this.heure = heure;
         this.NSp = NSp;
         this.NSa = NSa;
         this.NbP = NbP;
+        this.urlImg = urlImg;
     }
 
     /**
@@ -112,6 +114,20 @@ public class Representation {
      */
     public void setNbP(int NbP) {
         this.NbP = NbP;
+    }
+
+    /**
+     * @return the urlImg
+     */
+    public String getUrlImg() {
+        return urlImg;
+    }
+
+    /**
+     * @param urlImg the urlImg to set
+     */
+    public void setUrlImg(String urlImg) {
+        this.urlImg = urlImg;
     }
 
 }

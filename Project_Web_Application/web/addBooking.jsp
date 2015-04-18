@@ -26,30 +26,24 @@
         <div class="container" >
             <form action="<%=request.getContextPath()%>/controleur" method="get">
                 <div class="row">
+                    <% if (request.getAttribute("repres") != null) {
+                            Hashtable<String, Representation> hashRepres = (Hashtable<String, Representation>) request.getAttribute("repres");
+                            if (!hashRepres.isEmpty()) {
+                                Enumeration keys = hashRepres.keys();
+                                while (keys.hasMoreElements()) {
+                                    String nomS = (String) keys.nextElement();
+                                    List<Representation> repres = (List<Representation>) hashRepres.get(nomS);%>
                     <div class="col-md-2">
-                        <label>Spectacle</label><br>
-                        <label>Représentation(s)</label><br>
+                        <img src="img/<%=repres.get(0).getUrlImg()%>" data-large="img/<%=repres.get(0).getUrlImg()%>" alt="" data-description="" />
                     </div>
                     <div class="col-md-2"> 
-
-                        <% if (request.getAttribute("repres") != null) {
-                                Hashtable<String, Representation> hashRepres = (Hashtable<String, Representation>) request.getAttribute("repres");
-                                if (!hashRepres.isEmpty()) {
-                                    Enumeration keys = hashRepres.keys();
-                                    while (keys.hasMoreElements()) {
-                                        String nomS = (String) keys.nextElement();%>
-                        <h1><%= nomS%> </h1>
-                        <% List<Representation> repres = (List<Representation>) hashRepres.get(nomS);
-                            for (int i = 0; i < repres.size(); i++) {%>
-                        <%= i+1%>
+                        <h1> <%= nomS%> </h1>
                         <ul>
-                            <li><%= repres.get(i).getDate()%></li>
-                            <li><%= repres.get(i).getHeure()%></li>
-                            <li><%= repres.get(i).getNSa()%></li>
-                            <li><input type="checkbox"></li>
+                            <% for (int i = 0; i < repres.size(); i++) {%>                                       
+                            <li><%= repres.get(i).getDate()%> - <%= repres.get(i).getHeure()%> <input type="checkbox"> </li>
+                                <%} %>
                         </ul>
-                        <%}
-                                    }
+                        <% }
                                 }
                             }%>
 
@@ -69,26 +63,8 @@
                         </select> 
                         <input id="valueSalle" name="valueSalle" hidden="true"> --%>
 
-                        <input type="text" id="datepicker" name="date">
-
-                        <select id="selectHeure" onchange="
-                                select_menu = document.getElementById('selectHeure');
-                                document.getElementById('valueHeure').value = select_menu.options[select_menu.selectedIndex].value;">
-                            <% for (int i = 10;
-                                        i < 24; i++) {%>
-                            <option value="<%=i%>:00"><%=i%>:00</option>
-                            <option value="<%=i%>:30"><%=i%>:30</option>
-                            <%}%>
-                        </select> 
-                        <input id="valueHeure" name="valueHeure" hidden="true">
-
-                        <input type="text" name="nbP">
                     </div>
                 </div>
-                <div class="row">
-                    <input type="SUBMIT">
-                </div>
-                <input hidden="true" name="action" value="addRepres"/>
             </form>
         </div>
     </body>
