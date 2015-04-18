@@ -17,22 +17,28 @@
 
         <jsp:include page="jsp/head.jsp"/>
 
-        <link rel="stylesheet" type="text/css" href="css/style.css"> 
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <script>
+            function verif() {
+
+            }
+        </script>
 
     </head>
     <body>
         <jsp:include page="jsp/navbar.jsp"/>
 
         <div class="container" >
-            <form action="<%=request.getContextPath()%>/controleur" method="get">
+            <form action="<%=request.getContextPath()%>/controleur" onsubmit="return verif();" method="get">
+                <% if (request.getAttribute("repres") != null) {
+                        Hashtable<String, Representation> hashRepres = (Hashtable<String, Representation>) request.getAttribute("repres");
+                        if (!hashRepres.isEmpty()) {
+                            Enumeration keys = hashRepres.keys();
+                            while (keys.hasMoreElements()) {
+                                String nomS = (String) keys.nextElement();
+                                List<Representation> repres = (List<Representation>) hashRepres.get(nomS);%>
                 <div class="row">
-                    <% if (request.getAttribute("repres") != null) {
-                            Hashtable<String, Representation> hashRepres = (Hashtable<String, Representation>) request.getAttribute("repres");
-                            if (!hashRepres.isEmpty()) {
-                                Enumeration keys = hashRepres.keys();
-                                while (keys.hasMoreElements()) {
-                                    String nomS = (String) keys.nextElement();
-                                    List<Representation> repres = (List<Representation>) hashRepres.get(nomS);%>
                     <div class="col-md-2">
                         <img src="img/<%=repres.get(0).getUrlImg()%>" data-large="img/<%=repres.get(0).getUrlImg()%>" alt="" data-description="" />
                     </div>
@@ -40,8 +46,11 @@
                         <h1> <%= nomS%> </h1>
                         <ul>
                             <% for (int i = 0; i < repres.size(); i++) {%>                                       
-                            <li><%= repres.get(i).getDate()%> - <%= repres.get(i).getHeure()%> <input type="checkbox"> </li>
-                                <%} %>
+                            <li>
+                                <%= repres.get(i).getDate()%> - <%= repres.get(i).getHeure()%>
+                                <input id="repr<%=repres.get(i).getNR()%>" type="checkbox">
+                            </li>
+                            <%} %>
                         </ul>
                         <% }
                                 }

@@ -70,7 +70,7 @@
                     </form>
                 </li>
                 <li><a href="/Project_Web_Application/logout"> Log out</a></li>
-                <font size="3" color="white"> Bienvenue <%= userName%></font>
+                <font size="3" color="white" style="padding-top: 15px; padding-bottom: 15px; padding-right: 15px;"> Bienvenue <%= userName%></font>
                 <% }%>
             </ul>
         </div>
