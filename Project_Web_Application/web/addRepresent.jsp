@@ -48,12 +48,14 @@
                                     List<Spectacle> spectacles = (List<Spectacle>) request.getAttribute("spectacles");
                                     if (!spectacles.isEmpty()) {
                                         for (int i = 0; i < spectacles.size(); i++) {%>
-                            <option value="<%=spectacles.get(i).getId()%>"><%=spectacles.get(i).getTitre()%></option>
-                            <%}
-                                    }
-                                }%>
+                            <option value="<%=spectacles.get(i).getId()%>"><%=spectacles.get(i).getId()%></option>
+                            <%}%>
                         </select> 
-                        <input type="text" id ="valueSpect" name="valueSpect" hidden="true"> <br>
+                        <input id="valueSpect" name="valueSpect" value="<%=spectacles.get(0).getId()%>" hidden="true"> <br>
+                        <%
+                                }
+                            }%>
+
 
                         <select id="selectSalle" onchange="
                                 select_menu = document.getElementById('selectSalle');
@@ -64,24 +66,25 @@
                             <% if (!salles.isEmpty()) {
                                     for (int i = 0; i < salles.size(); i++) {%>
                             <option value="<%=salles.get(i).getNSa()%>"><%=salles.get(i).getNSa()%></option>
-                            <%}
-                                    }
-                                }%>
+                            <%} %>
                         </select> 
-                        <input id="valueSalle" name="valueSalle" hidden="true">
+                        <input id="valueSalle" name="valueSalle" value="<%=salles.get(0).getNSa()%>" hidden="true">
+                        <%
+                                }
+                            }%>
+
 
                         <input type="text" id="datepicker" name="date">
 
                         <select id="selectHeure" onchange="
                                 select_menu = document.getElementById('selectHeure');
                                 document.getElementById('valueHeure').value = select_menu.options[select_menu.selectedIndex].value;">
-                            <% for (int i = 10;
-                                        i < 24; i++) {%>
+                            <% for (int i = 10; i < 24; i++) {%>
                             <option value="<%=i%>:00"><%=i%>:00</option>
                             <option value="<%=i%>:30"><%=i%>:30</option>
                             <%}%>
                         </select> 
-                        <input id="valueHeure" name="valueHeure" hidden="true">
+                        <input id="valueHeure" name="valueHeure" value="10:00" hidden="true">
 
                         <input type="text" name="nbP">
                     </div>

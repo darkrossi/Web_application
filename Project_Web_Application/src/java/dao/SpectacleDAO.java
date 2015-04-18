@@ -20,7 +20,7 @@ import modele.Spectacle;
  * @author oswald
  */
 public class SpectacleDAO extends AbstractDataBaseDAO {
-    
+
     public SpectacleDAO() {
     }
 
@@ -46,13 +46,15 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
             requeteSQL = "select * from Spectacle";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
-                Spectacle spectacle = new Spectacle(rs.getInt("NSP"),
-                        rs.getString("NomS"),
-                        rs.getString("AuteurS"),
-                        rs.getString("MESS"),
-                        rs.getInt("DureeS"));
-                System.err.println(spectacle);
-                result.add(spectacle);
+                if (rs.getInt("NSP") != 0) {
+                    Spectacle spectacle = new Spectacle(rs.getInt("NSP"),
+                            rs.getString("NomS"),
+                            rs.getString("AuteurS"),
+                            rs.getString("MESS"),
+                            rs.getInt("DureeS"));
+                    System.err.println(spectacle);
+                    result.add(spectacle);
+                }
             }
         } catch (SQLException e) {
             throw new DAOException("Erreur BD " + e.getMessage(), e);
@@ -134,7 +136,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
     public void supprimerSpectacle(int id) throws DAOException {
         //...
     }
-    
+
 //    private final String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
 //    private final String login = "fournimi";
 //    

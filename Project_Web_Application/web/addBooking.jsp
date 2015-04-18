@@ -19,18 +19,12 @@
 
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
-        <script>
-            function verif() {
-
-            }
-        </script>
-
     </head>
     <body>
         <jsp:include page="jsp/navbar.jsp"/>
 
         <div class="container" >
-            <form action="<%=request.getContextPath()%>/controleur" onsubmit="return verif();" method="get">
+            <form action="<%=request.getContextPath()%>/controleur" method="get">
                 <% if (request.getAttribute("repres") != null) {
                         Hashtable<String, Representation> hashRepres = (Hashtable<String, Representation>) request.getAttribute("repres");
                         if (!hashRepres.isEmpty()) {
@@ -40,40 +34,41 @@
                                 List<Representation> repres = (List<Representation>) hashRepres.get(nomS);%>
                 <div class="row">
                     <div class="col-md-2">
-                        <img src="img/<%=repres.get(0).getUrlImg()%>" data-large="img/<%=repres.get(0).getUrlImg()%>" alt="" data-description="" />
+                        <img src="img/<%=repres.get(0).getUrlImg()%>" data-large="img/<%=repres.get(0).getUrlImg()%>" alt=""
+                             style="width:150px;"/>
                     </div>
                     <div class="col-md-2"> 
                         <h1> <%= nomS%> </h1>
                         <ul>
                             <% for (int i = 0; i < repres.size(); i++) {%>                                       
                             <li>
-                                <%= repres.get(i).getDate()%> - <%= repres.get(i).getHeure()%>
                                 <input id="repr<%=repres.get(i).getNR()%>" type="checkbox">
+                                <%= repres.get(i).getDate()%> - <%= repres.get(i).getHeure()%>
+
                             </li>
                             <%} %>
                         </ul>
-                        <% }
-                                }
-                            }%>
-
-
-                        <%-- <select id="selectSalle" onchange="
-                                select_menu = document.getElementById('selectSalle');
-                                document.getElementById('valueSalle').value = select_menu.options[select_menu.selectedIndex].value;">
-                            <% if (request.getAttribute("salles") != null) {
-                                    List<Salle> salles = (List<Salle>) request.getAttribute("salles");
-                            %>
-                            <% if (!salles.isEmpty()) {
-                                    for (int i = 0; i < salles.size(); i++) {%>
-                            <option value="<%=salles.get(i).getNSa()%>"><%=salles.get(i).getNSa()%></option>
-                            <%}
-                                    }
-                                }%>
-                        </select> 
-                        <input id="valueSalle" name="valueSalle" hidden="true"> --%>
-
                     </div>
                 </div>
+                <% }
+                        }
+                    }%>
+
+
+                <%-- <select id="selectSalle" onchange="
+                        select_menu = document.getElementById('selectSalle');
+                        document.getElementById('valueSalle').value = select_menu.options[select_menu.selectedIndex].value;">
+                    <% if (request.getAttribute("salles") != null) {
+                            List<Salle> salles = (List<Salle>) request.getAttribute("salles");
+                    %>
+                    <% if (!salles.isEmpty()) {
+                            for (int i = 0; i < salles.size(); i++) {%>
+                    <option value="<%=salles.get(i).getNSa()%>"><%=salles.get(i).getNSa()%></option>
+                    <%}
+                            }
+                        }%>
+                </select> 
+                <input id="valueSalle" name="valueSalle" hidden="true"> --%>
             </form>
         </div>
     </body>

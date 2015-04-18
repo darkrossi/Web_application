@@ -12,7 +12,7 @@
     }
 
     footer h1 {
-        color:white; /* ne marche pas */
+        color:white;
 
     }
 </style>
@@ -31,7 +31,7 @@
             <div class="col-md-4"> 
                 <h1 align="center">AIDES, SAV, SERVICES</h1>
                 <ul>
-                    <li><a href="https://www.facebook.com/mickael.fournier.37?ref=ts&fref=ts" title="Facebook">Retrouver Comed'Imag sur Facebook</a></li>
+                    <li><a href="#">Retrouver Comed'Imag sur Facebook</a></li>
                     <li><a href="#">Retrouver Comed'Imag sur Twitter</a></li>
                     <li><a href="#">Retrouver Comed'Imag sur Google+</a></li>
                     <li><a href="#">Billetterie</a></li>
