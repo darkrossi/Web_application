@@ -13,7 +13,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.jsp"><font id="comedimag">Comed'Imag</font></a>
+            <a class="navbar-brand" href="index.jsp"><font id="comedimag">Comed'Imag <span class="glyphicon glyphicon-home"></span></font></a>
         </div>
         <div>
             <ul class="nav navbar-nav">
@@ -58,18 +58,18 @@
                                         </li>-->
                 <%@ page import="javax.servlet.http.HttpSession"%>
                 <% if (userName == null) { %>
-                <li><a href="#" data-reveal-id="myModal"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="#" data-reveal-id="myModal"><span class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>
                 <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     <% } else {%>
                 <li ondrop="drop(event)" ondragover="allowDrop(event)"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Mon Panier</a></li>
                 <li>
                     <form action="<%=request.getContextPath()%>/controleur" method="get">
-                        <a href="monCompte.jsp"> Mon Compte</a>
+                        <a href="monCompte.jsp"><span class="glyphicon glyphicon-user"></span> Mon Compte</a>
                         <input name="action" value="displayAccount" hidden="true">
                         <input name="login" value="<%= userName%>" hidden="true">
                     </form>
                 </li>
-                <li><a href="/Project_Web_Application/logout"> Log out</a></li>
+                <li><a href="/Project_Web_Application/logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
                 <font size="3" color="white" style="padding-top: 15px; padding-bottom: 15px; padding-right: 15px;"> Bienvenue <%= userName%></font>
                 <% }%>
             </ul>
@@ -142,8 +142,6 @@
             <input hidden="true" name="action" value="addUser">
 
         </FORM>
-        <br>
-        ajouter un captcha pour la sécu ! 
         <br>
         <a href="index.jsp">Retour à l'accueil</a>
         <a class="close-reveal-modal">&#215;</a>
