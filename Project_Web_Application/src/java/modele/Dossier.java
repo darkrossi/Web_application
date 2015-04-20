@@ -15,20 +15,16 @@ public class Dossier {
     private int NbP;
     private String LoginU;
     private int NT;
-    private int NSP;
-    private int NSA;
     private int NR;
 
     public Dossier() {
     }
 
-    public Dossier(int ND, int NbP, String LoginU, int NT, int NSP, int NSA, int NR) {
+    public Dossier(int ND, int NbP, String LoginU, int NT, int NR) {
         this.ND = ND;
         this.NbP = NbP;
         this.LoginU = LoginU;
         this.NT = NT;
-        this.NSP = NSP;
-        this.NSA = NSA;
         this.NR = NR;
     }
 
@@ -86,34 +82,6 @@ public class Dossier {
      */
     public void setNT(int NT) {
         this.NT = NT;
-    }
-
-    /**
-     * @return the NSP
-     */
-    public int getNSP() {
-        return NSP;
-    }
-
-    /**
-     * @param NSP the NSP to set
-     */
-    public void setNSP(int NSP) {
-        this.NSP = NSP;
-    }
-
-    /**
-     * @return the NSA
-     */
-    public int getNSA() {
-        return NSA;
-    }
-
-    /**
-     * @param NSA the NSA to set
-     */
-    public void setNSA(int NSA) {
-        this.NSA = NSA;
     }
 
     /**

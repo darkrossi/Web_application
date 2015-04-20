@@ -7,6 +7,10 @@
 <%@page import="java.util.List"%>
 <%@page import="modele.Dossier"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<% HttpSession session2 = request.getSession(false);
+    String userName = (String) session2.getAttribute("utilisateur");%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,18 +30,19 @@
                     <label>Spectacle</label><br>
                     <label>Nombre de places</label><br>
                 </div>
-                <div class="col-md-2"> 
-                    <% if (request.getAttribute("dossiers") != null) {
-                            List<Dossier> dossiers = (List<Dossier>) request.getAttribute("dossiers");
-                    %>
-                    <% if (!dossiers.isEmpty()) {
+
+                <% if (request.getAttribute("dossiers") != null) {
+                        List<Dossier> dossiers = (List<Dossier>) request.getAttribute("dossiers");
+                        if (!dossiers.isEmpty()) {
                             for (int i = 0; i < dossiers.size(); i++) {%>
-                            <p value="<%=dossiers.get(i).getNSP()%>"><%=dossiers.get(i).getNSP()%></p>
-                            <p value="<%=dossiers.get(i).getNbP()%>"><%=dossiers.get(i).getNbP()%></p>
-                    <%}
-                            }
-                        }%>
+                <div class="col-md-2">
+                    <p value="<%=dossiers.get(i).getND()%>"><%=dossiers.get(i).getND()%></p>
+                    <p value="<%=dossiers.get(i).getNbP()%>"><%=dossiers.get(i).getNbP()%></p>
                 </div>
+                <%}
+                        }
+                    }%>
+
             </div>
         </div>
         <h2>Mes Places réservées : </h2><br>

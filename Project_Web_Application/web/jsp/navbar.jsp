@@ -72,15 +72,15 @@
                 <!--<li ondrop="drop(event)" ondragover="allowDrop(event)"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Mon Panier</a></li>
                 -->
                 <li>
-                    <form action="<%=request.getContextPath()%>/controleur" method="get">
-                        <a href="monCompte.jsp"><span class="glyphicon glyphicon-user"></span> Mon Compte</a>
+                    <a href="javascript:document.inputForm3.submit();"><span class="glyphicon glyphicon-user"></span>Mon Compte</a>
+                    <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm3">
                         <input name="action" value="displayAccount" hidden="true">
                         <input name="login" value="<%= userName%>" hidden="true">
                     </form>
                 </li>
                 <li><a href="/Project_Web_Application/logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
                 <li><font size="5" color="white" style="padding-right: 15px;"> <b>Bienvenue</b> <%= userName%></font></li>
-                <% }%>
+                    <% }%>
             </ul>
         </div>
     </div>

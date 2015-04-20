@@ -40,8 +40,6 @@ public class DossierDAO extends AbstractDataBaseDAO {
                         rs.getInt("NbP"),
                         rs.getString("LoginU"),
                         rs.getInt("NT"),
-                        rs.getInt("NSP"),
-                        rs.getInt("NSA"),
                         rs.getInt("NR"));
                 System.err.println(dossier);
                 result.add(dossier);
