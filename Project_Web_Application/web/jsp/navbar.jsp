@@ -18,6 +18,8 @@
         <div>
             <ul class="nav navbar-nav">
                 <!--                <li class="active"><a href="index.jsp">Home</a></li>-->
+                <% if (userName != null) {
+                        if (userName.equals("admin")) {%>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="pieces.jsp">Catalogue</a></li>
@@ -27,8 +29,7 @@
                                 <input name="action" value="displayAddBooking" hidden="true">
                             </form>
                         </li>
-                        <% if (userName != null) {
-                                if (userName.equals("admin")) {%>
+
                         <li><a href="addSpectacle.jsp">Ajouter un spectacle</a></li>
                         <li>
                             <a href="javascript:document.inputForm2.submit();">Ajouter une représentation</a>
@@ -37,10 +38,19 @@
                             </form>
                         </li>
                         <li><a href="addSalle.jsp">Ajouter une salle</a></li>
-                            <% }
-                                }%>
+
                     </ul>
                 </li>
+                <% }
+                }else {%>
+                <li><a href="pieces.jsp">Catalogue</a></li>
+                <li>
+                    <a href="javascript:document.inputForm1.submit();">Réserver une place</a>
+                    <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm1">
+                        <input name="action" value="displayAddBooking" hidden="true">
+                    </form>
+                </li>
+                <%}%>
 
                 <li><a href="#">Qui sommes-nous ?</a></li>
             </ul>
