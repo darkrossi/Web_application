@@ -15,9 +15,9 @@
 
     <body>
         <% if ((int) request.getAttribute("bool") == 1) { %>
-        GOOD
+        <h1>GOOD</h1>
         <% } else { %>
-        BAD
+        <h1>BAD</h1>
         <%}%>
     </body>
 
