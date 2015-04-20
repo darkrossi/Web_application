@@ -41,6 +41,12 @@
                     <p><%=dossiers.get(i).getDate()%></p>
                     <p><%=dossiers.get(i).getHeure()%></p>
                     <p><%=dossiers.get(i).getNbP()%></p>
+                    <form method="get" action="<%=request.getContextPath()%>/printPDF">
+                        <input name="login" value=<%=dossiers.get(i).getLoginU()%> hidden="true">
+                        <input name="ND" value=<%=dossiers.get(i).getND()%> hidden="true">
+                        <input name="NR" value=<%=dossiers.get(i).getNR()%> hidden="true">
+                        <button type="submit">Imprimer en PDF</button>
+                    </form>
                 </div>
                 <%}
                         }

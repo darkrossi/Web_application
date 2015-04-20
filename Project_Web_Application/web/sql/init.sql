@@ -66,11 +66,11 @@ CREATE TABLE Ticket (
 );
 
 CREATE TABLE Dossier (
-    ND int,
-    NR int,
-    LoginU varchar(30),
-    NT int,
-    NbP int,
+    ND int, -- numéro dossier
+    NR int, -- numéro reservation
+    LoginU varchar(30), -- login
+    NT int, -- numéro ticket
+    NbP int, -- nombre de place
     constraint pk_dossier primary key (ND),
     constraint fk_dossier_loginu_users foreign key (LoginU) references Users(LoginU),
     constraint fk_dossier_nt_ticket foreign key (NT) references Ticket(NT),
