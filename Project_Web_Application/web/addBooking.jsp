@@ -41,14 +41,14 @@
                         <img src="img/<%=repres.get(0).getUrlImg()%>" data-large="img/<%=repres.get(0).getUrlImg()%>" alt=""
                              style="width:150px;"/>
                     </div>
-                    <div class="col-md-2"> 
+                    <div class="col-md-6"> 
                         <h1> <%= nomS%> </h1>
                         <ul>
                             <% for (int i = 0; i < repres.size(); i++) {%>                                       
                             <li>
                                 <%= repres.get(i).getDate()%> - <%= repres.get(i).getHeure()%>
-                                <input type="checkbox" name="cbNR" value="<%=repres.get(i).getNR()%>">
                                 <input type="number" name="nbP" value="0">
+                                <input type="checkbox" name="cbNR" value="<%=repres.get(i).getNR()%>">
                             </li>
                             <%} %>
                         </ul>
@@ -61,22 +61,6 @@
                 <button type="submit" >Réserver</button>
                 <input hidden="true" name="action" value="addBooking"/>
                 <input name="login" value="<%= userName%>" hidden="true">
-
-
-                <%-- <select id="selectSalle" onchange="
-                        select_menu = document.getElementById('selectSalle');
-                        document.getElementById('valueSalle').value = select_menu.options[select_menu.selectedIndex].value;">
-                    <% if (request.getAttribute("salles") != null) {
-                            List<Salle> salles = (List<Salle>) request.getAttribute("salles");
-                    %>
-                    <% if (!salles.isEmpty()) {
-                            for (int i = 0; i < salles.size(); i++) {%>
-                    <option value="<%=salles.get(i).getNSa()%>"><%=salles.get(i).getNSa()%></option>
-                    <%}
-                            }
-                        }%>
-                </select> 
-                <input id="valueSalle" name="valueSalle" hidden="true"> --%>
             </form>
         </div>
     </body>

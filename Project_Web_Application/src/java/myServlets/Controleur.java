@@ -61,6 +61,8 @@ public class Controleur extends HttpServlet {
                 actionAddUser(request, response, userDAO);
             } else if (action.equals("addRepres")) {
                 actionAddRepres(request, response, represDAO);
+            } else if (action.equals("displayAddSalle")) {
+                actionDisplayAddSalle(request, response, salleDAO);
             } else if (action.equals("addSalle")) {
                 actionAddSalle(request, response, salleDAO);
             } else if (action.equals("displayAddRepres")) {
@@ -98,14 +100,17 @@ public class Controleur extends HttpServlet {
 
     private void actionAddSpectacle(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO)
             throws ServletException, IOException, DAOException {
-//        request.setAttribute("spectacles", spectacleDAO.getListeSpectacles());
-        spectacleDAO.ajouterSpectacle(request.getParameter("nomS"),
+        if (spectacleDAO.ajouterSpectacle(request.getParameter("nomS"),
                 request.getParameter("auteurS"),
                 request.getParameter("mesS"),
                 request.getParameter("dureeS"),
-                request.getParameter("fileS"));
+                request.getParameter("fileS"))) {
+            request.setAttribute("bool", 1);
+        } else {
+            request.setAttribute("bool", 0);
+        }
         getServletContext()
-                .getRequestDispatcher("/addSpectacle.jsp")
+                .getRequestDispatcher("/LogAddSpect.jsp")
                 .forward(request, response);
     }
 
@@ -148,8 +153,7 @@ public class Controleur extends HttpServlet {
         if (represDAO.ajouterRepresentation(request.getParameter("date"),
                 request.getParameter("valueHeure"),
                 request.getParameter("valueSpect"),
-                request.getParameter("valueSalle"),
-                request.getParameter("nbP"))) {
+                request.getParameter("valueSalle"))) {
             request.setAttribute("bool", 1);
         } else {
             request.setAttribute("bool", 0);
@@ -161,7 +165,9 @@ public class Controleur extends HttpServlet {
 
     private void actionAddSalle(HttpServletRequest request, HttpServletResponse response, SalleDAO salleDAO)
             throws DAOException, ServletException, IOException {
-        if (salleDAO.ajouterSalle()) {
+        if (salleDAO.ajouterSalle(Integer.parseInt(request.getParameter("nbRa")),
+                Integer.parseInt(request.getParameter("nbP")),
+                Integer.parseInt(request.getParameter("catTarif")))) {
             request.setAttribute("bool", 1);
         } else {
             request.setAttribute("bool", 0);
@@ -198,13 +204,20 @@ public class Controleur extends HttpServlet {
             throws ServletException, IOException, DAOException {
         if (bookingDAO.ajouterReservation(request.getParameter("login"),
                 (String[]) request.getParameterValues("cbNR"),
-                Integer.parseInt(request.getParameter("nbP")))) {
+                (String[]) request.getParameterValues("nbP"))) {
             request.setAttribute("bool", 1);
         } else {
             request.setAttribute("bool", 0);
         }
         getServletContext()
                 .getRequestDispatcher("/LogAddAchat.jsp")
+                .forward(request, response);
+    }
+
+    private void actionDisplayAddSalle(HttpServletRequest request, HttpServletResponse response, SalleDAO salleDAO) throws DAOException, ServletException, IOException {
+        request.setAttribute("salles", salleDAO.getListeSalles());
+        getServletContext()
+                .getRequestDispatcher("/addSalle.jsp")
                 .forward(request, response);
     }
 }

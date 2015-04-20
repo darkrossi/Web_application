@@ -26,10 +26,10 @@
         <div class="container" >
             <div class="row">
                 <div class="col-md-2">
-                    <label>Spectacle</label><br>
-                    <label>Date</label><br>
-                    <label>Heure</label><br>
-                    <label>Nombre de places</label><br>
+                    <p><b>Spectacle</b></b></p>
+                    <p><b>Date</b></p>
+                    <p><b>Heure</b></p>
+                    <p><b>Nombre de places</b></p>
                 </div>
 
                 <% if (request.getAttribute("dossiers") != null) {

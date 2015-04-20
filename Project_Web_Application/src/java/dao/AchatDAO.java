@@ -21,7 +21,7 @@ public class AchatDAO extends AbstractDataBaseDAO {
         super(ds);
     }
 
-    public boolean ajouterReservation(String loginU, String[] listRepr, int nbP) throws DAOException {
+    public boolean ajouterReservation(String loginU, String[] listRepr, String[] listNbP) throws DAOException {
         if (listRepr.length == 0) {
             return true;
         } else {
@@ -61,7 +61,7 @@ public class AchatDAO extends AbstractDataBaseDAO {
                     
                     /* On récupère le nombre de place restante pour la représentation donnée */
                     int nbPlacesRestantes = dataRepr[1];
-                    int nbPlacesMAJ = nbPlacesRestantes-nbP;
+                    int nbPlacesMAJ = nbPlacesRestantes-Integer.parseInt(listNbP[i]);
 
                     /* On met à jour le nb de places restantes pour cette représentation */
                     requeteSQL = "UPDATE Representation SET NbP=" + nbPlacesMAJ + " WHERE NR="+currentNR;
@@ -75,7 +75,7 @@ public class AchatDAO extends AbstractDataBaseDAO {
                     /* On ajoute le dossier correspondant */
                     requeteSQL = "INSERT INTO Dossier (ND, NR, LoginU, NT, NbP)"
                             + "VALUES (" + indiceND_Max + ", " + dataRepr[0] + ", '" + loginU + "', "
-                            + indiceNT_Max + ", " + nbP + ")";
+                            + indiceNT_Max + ", " + Integer.parseInt(listNbP[i]) + ")";
                     st.executeQuery(requeteSQL);
                 }
                 return true;

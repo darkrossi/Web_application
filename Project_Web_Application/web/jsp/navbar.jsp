@@ -36,7 +36,13 @@
                                 <input name="action" value="displayAddRepres" hidden="true">
                             </form>
                         </li>
-                        <li><a href="addSalle.jsp">Ajouter une salle</a></li>
+                        <li>
+                            <a href="javascript:document.inputForm4.submit();">Ajouter une salle</a>
+                            <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm4">
+                                <input name="action" value="displayAddSalle" hidden="true">
+                            </form>
+                        </li>
+                        
 
                     </ul>
                 </li>

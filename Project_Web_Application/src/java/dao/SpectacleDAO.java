@@ -73,7 +73,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
      * @param duree
      * @throws dao.DAOException
      */
-    public void ajouterSpectacle(String titre, String auteur, String mes, String duree, String url)
+    public boolean ajouterSpectacle(String titre, String auteur, String mes, String duree, String url)
             throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
@@ -89,13 +89,19 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                 indiceNSP_Max++;
             }
 
-            requeteSQL = "INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Spectacle)"
+            requeteSQL = "INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)"
                     + "VALUES (" + indiceNSP_Max + ", '" + titre + "', '" + auteur + "', '" + mes
                     + "', " + Integer.parseInt(duree) + ", '" + url + "')";
             st.executeQuery(requeteSQL);
-
+            return true;
         } catch (SQLException e) {
-            throw new DAOException("Erreur BD " + e.getMessage(), e);
+            if (e.getErrorCode() == 1) {
+                // alors on redirige vers une page vers une page qui indique que ce login est déjà enregistré dans la bdd
+                return false;
+            } else {
+                // sinon lancer l'exception
+                throw new DAOException("Erreur BD " + e.getMessage(), e);
+            }
         } finally {
             closeConnection(conn);
         }

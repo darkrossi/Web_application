@@ -10,7 +10,9 @@ CREATE TABLE Spectacle (
 
 CREATE TABLE Salle (
     NSA int,
-    constraint pk_salle primary key (NSA)
+    NbRa int,
+    constraint pk_salle primary key (NSA),
+    constraint NbRa CHECK(NbRa >= 1)
 );
 
 CREATE TABLE Representation (
@@ -29,24 +31,28 @@ CREATE TABLE Representation (
 );
 
 CREATE TABLE Rang (
-    NR int,
+    NRa int,
     CatTarif int,
     NSA int,
-    constraint pk_rang primary key (NR),
+    NbP int,
+    constraint pk_rang primary key (NRa),
     constraint fk_rang_nr_salle foreign key (NSA) references Salle(NSA),
     constraint nn_rang_nsa check (NSA is not null), 
-    constraint CatTarif CHECK(CatTarif >= 0)
+    constraint CatTarif CHECK(CatTarif >= 0),
+    constraint NbP CHECK(NbP >= 1)
 );
 
 CREATE TABLE Place (
     NP int,
-    NR int,
+    NumPl int,
+    NRa int,
     NSA int,
     constraint pk_table primary key (NP),
-    constraint fk_place_nr_rang foreign key (NR) references Rang(NR),
+    constraint fk_place_nra_rang foreign key (NRa) references Rang(NRa),
     constraint fk_place_nr_salle foreign key (NSA) references Salle(NSA),
-    constraint nn_place_nr check (NR is not null),
-    constraint nn_place_nsa check (NSA is not null)
+    constraint nn_place_nra check (NRa is not null),
+    constraint nn_place_nsa check (NSA is not null),
+    constraint NumPl CHECK(NumPl >= 1)
 );
 
 CREATE TABLE Users (
@@ -78,7 +84,7 @@ CREATE TABLE Dossier (
     constraint nn_dossier_loginu check (LoginU is not null),
     constraint nn_dossier_nt check (NT is not null),
     constraint nn_dossier_nr check (NR is not null),
-    CONSTRAINT NbP CHECK(NbP >= 1)
+    CONSTRAINT NbPD CHECK(NbP >= 1)
 );
 
 CREATE TABLE Booking (
@@ -97,7 +103,7 @@ CREATE TABLE Booking (
     constraint nn_booking_nsa check (NSA is not null),
     constraint nn_booking_nsp check (NSP is not null),
     constraint nn_booking_nr check (NR is not null),
-    CONSTRAINT NbP CHECK(NbP >= 1)
+    CONSTRAINT NbPB CHECK(NbP >= 1)
 );
 
 INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)

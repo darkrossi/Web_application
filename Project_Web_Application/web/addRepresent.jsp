@@ -33,11 +33,10 @@
             <form action="<%=request.getContextPath()%>/controleur" method="get">
                 <div class="row">
                     <div class="col-md-2">
-                        <label>Spectacle</label><br>
-                        <label>Salle</label><br>
-                        <label>Date</label><br> 
-                        <label>Heure</label><br>
-                        <label>Nombre de place</label>
+                        <p><b>Spectacle</b></p>
+                        <p><b>Salle</b></p>
+                        <p><b>Date</b></p> 
+                        <p><b>Heure</b></p>
                     </div>
                     <div class="col-md-2"> 
 
@@ -48,10 +47,10 @@
                                     List<Spectacle> spectacles = (List<Spectacle>) request.getAttribute("spectacles");
                                     if (!spectacles.isEmpty()) {
                                         for (int i = 0; i < spectacles.size(); i++) {%>
-                            <option value="<%=spectacles.get(i).getId()%>"><%=spectacles.get(i).getId()%></option>
+                            <option value="<%=spectacles.get(i).getId()%>"><%=spectacles.get(i).getTitre()%></option>
                             <%}%>
-                        </select> 
-                        <input id="valueSpect" name="valueSpect" value="<%=spectacles.get(0).getId()%>" hidden="true"> <br>
+                        </select><br>
+                        <input id="valueSpect" name="valueSpect" value="<%=spectacles.get(0).getId()%>" hidden="true">
                         <%
                                 }
                             }%>
@@ -85,8 +84,6 @@
                             <%}%>
                         </select> 
                         <input id="valueHeure" name="valueHeure" value="10:00" hidden="true">
-
-                        <input type="text" name="nbP">
                     </div>
                 </div>
                 <div class="row">

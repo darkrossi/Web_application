@@ -37,12 +37,13 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
      * @param duree
      * @throws dao.DAOException
      */
-    public boolean ajouterRepresentation(String date, String heure, String NSp, String NSa, String NbP)
+    public boolean ajouterRepresentation(String date, String heure, String NSp, String NSa)
             throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
         int indiceNR_Max = 0;
+        int nbPlaceSalle = 0;
         try {
             conn = getConnection();
             Statement st = conn.createStatement();
@@ -54,10 +55,25 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
                 indiceNR_Max++;
             }
 
-            requeteSQL = "INSERT INTO Representation (NR, DateR, HeureR, NSP, NSA, NbP)"
-                    + "VALUES (" + indiceNR_Max + ", '" + date + "', '" + heure + "', " + Integer.parseInt(NSp) + ", " + Integer.parseInt(NSa) + ", " + Integer.parseInt(NbP) + ")";
-            st.executeQuery(requeteSQL);
-            return true;
+            requeteSQL = "select s.NbRa, r.NbP "
+                    + "from Salle s, Rang r "
+                    + "where s.NSA = "+Integer.parseInt(NSa);
+            rs = st.executeQuery(requeteSQL);
+            rs.next();
+            nbPlaceSalle = rs.getInt("NbRa")*rs.getInt("NbP");
+
+            requeteSQL = "select * from Representation "
+                    + "where NSp = " + Integer.parseInt(NSp) + " and DateR = '" + date + "'";
+            rs = st.executeQuery(requeteSQL);
+            if (!rs.next()) { // Si il n'y a pas déjà de représentation pour ce spectacle à cette date
+                requeteSQL = "INSERT INTO Representation (NR, DateR, HeureR, NSP, NSA, NbP)"
+                        + "VALUES (" + indiceNR_Max + ", '" + date + "', '" + heure + "', "
+                        + Integer.parseInt(NSp) + ", " + Integer.parseInt(NSa) + ", " + nbPlaceSalle + ")";
+                st.executeQuery(requeteSQL);
+                return true;
+            } else {
+                return false;
+            }
 
         } catch (SQLException e) {
             if (e.getErrorCode() == 1) {

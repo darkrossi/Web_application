@@ -5,9 +5,7 @@
  */
 package dao;
 
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,25 +25,41 @@ public class SalleDAO extends AbstractDataBaseDAO {
 //
 //    public SalleDAO() {
 //    }
-
     public SalleDAO(DataSource ds) {
         super(ds);
     }
 
     public List<Salle> getListeSalles() throws DAOException {
-        List<Salle> result = new ArrayList<Salle>();
+        List<Salle> result = new ArrayList<>();
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
         try {
             conn = getConnection();
             Statement st = conn.createStatement();
-            requeteSQL = "select NSa from Salle";
+            requeteSQL = "select distinct s.NSA, r.CatTarif, r.NbP, s.NbRa "
+                    + "from Salle s, Rang r "
+                    + "where r.NSA = s.NSA";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
-                Salle salle = new Salle(rs.getInt("Nsa"));
+                Salle salle = new Salle(rs.getInt("NSA"),
+                        rs.getInt("CatTarif"),
+                        rs.getInt("NbRa"),
+                        rs.getInt("NbP"));
                 System.err.println(salle);
                 result.add(salle);
+                
+                
+//                CREATE TABLE Rang (
+//    NRa int,
+//    CatTarif int,
+//    NSA int,
+//    NbP int,
+//    
+//    CREATE TABLE Salle (
+//    NSA int,
+//    NbRa int,
+                
             }
         } catch (SQLException e) {
             throw new DAOException("Erreur BD " + e.getMessage(), e);
@@ -69,12 +83,12 @@ public class SalleDAO extends AbstractDataBaseDAO {
 //        }
 //        return salles;
 //    }
-
-    public boolean ajouterSalle() throws DAOException {
+    public boolean ajouterSalle(int nbRa, int nbP, int catTarif) throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
         int indiceNSa_Max = 0;
+        int indiceNPl_Max = 0;
         try {
             conn = getConnection();
             Statement st = conn.createStatement();
@@ -84,11 +98,28 @@ public class SalleDAO extends AbstractDataBaseDAO {
                 indiceNSa_Max = rs.getInt(1);
                 indiceNSa_Max++;
             }
+            
+            requeteSQL = "select max(NP) from Place";
+            rs = st.executeQuery(requeteSQL);
+            while (rs.next()) {
+                indiceNPl_Max = rs.getInt(1);
+            }
 
-            requeteSQL = "INSERT INTO Salle (NSA) VALUES (" + indiceNSa_Max + ")";
+            requeteSQL = "INSERT INTO Salle (NSA, NbRa) VALUES (" + indiceNSa_Max + ", " + nbRa + ")";
             st.executeQuery(requeteSQL);
-            return true;
 
+            for (int i = 1; i <= nbRa; i++) {
+                requeteSQL = "INSERT INTO Rang (NRA, CatTarif, NSA, NbP) VALUES (" + i + ", " + catTarif + ", "
+                        + indiceNSa_Max + ", " + nbP + ")";
+                st.executeQuery(requeteSQL);
+                for (int j = 1; j <= nbP; j++) {
+                    requeteSQL = "INSERT INTO Place (NP, NumPl, NRa, NSA) "
+                            + "VALUES (" + indiceNPl_Max++ + ", " + j + ", " + i + ", " + indiceNSa_Max + ")";
+                    st.executeQuery(requeteSQL);
+                }
+            }
+
+            return true;
         } catch (SQLException e) {
             // si l'exception concerne l'unicité de chaque login dans la table
             if (e.getErrorCode() == 1) {
