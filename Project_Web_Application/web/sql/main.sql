@@ -2,7 +2,7 @@
 -- INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS) VALUES (2, 'Babar', 'Aristide Euphrate', 'Cageot Miranda', 540);
 
 -- SELECT * from Spectacle;
--- SELECT * from Representation;
+SELECT * from Representation;
 -- SELECT * from Salle;
 -- SELECT * from Rang;
 -- SELECT * from Place;

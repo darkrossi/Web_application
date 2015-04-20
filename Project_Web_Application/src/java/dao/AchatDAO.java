@@ -21,7 +21,7 @@ public class AchatDAO extends AbstractDataBaseDAO {
         super(ds);
     }
 
-    public boolean ajouterReservation(String loginU, String[] listRepr) throws DAOException {
+    public boolean ajouterReservation(String loginU, String[] listRepr, int nbP) throws DAOException {
         if (listRepr.length == 0) {
             return true;
         } else {
@@ -49,10 +49,6 @@ public class AchatDAO extends AbstractDataBaseDAO {
                         indiceNT_Max = rs.getInt(1);
                         indiceNT_Max++;
                     }
-                    /* On ajoute un nouveau ticket */
-                    requeteSQL = "INSERT INTO Ticket (NT)"
-                            + "VALUES (" + indiceNT_Max + ")";
-                    st.executeQuery(requeteSQL);
 
                     /* On récupère les informations de la représentation */
                     int currentNR = Integer.parseInt(listRepr[i]);
@@ -62,11 +58,24 @@ public class AchatDAO extends AbstractDataBaseDAO {
                     rs = st.executeQuery(requeteSQL);
                     rs.next();
                     int[] dataRepr = {rs.getInt(columns[0]), rs.getInt(columns[1])};
+                    
+                    /* On récupère le nombre de place restante pour la représentation donnée */
+                    int nbPlacesRestantes = dataRepr[1];
+                    int nbPlacesMAJ = nbPlacesRestantes-nbP;
+
+                    /* On met à jour le nb de places restantes pour cette représentation */
+                    requeteSQL = "UPDATE Representation SET NbP=" + nbPlacesMAJ + " WHERE NR="+currentNR;
+                    st.executeQuery(requeteSQL);
+
+                    /* On ajoute un nouveau ticket */
+                    requeteSQL = "INSERT INTO Ticket (NT)"
+                            + "VALUES (" + indiceNT_Max + ")";
+                    st.executeQuery(requeteSQL);
 
                     /* On ajoute le dossier correspondant */
                     requeteSQL = "INSERT INTO Dossier (ND, NR, LoginU, NT, NbP)"
                             + "VALUES (" + indiceND_Max + ", " + dataRepr[0] + ", '" + loginU + "', "
-                            + indiceNT_Max + ", " + dataRepr[1] + ")";
+                            + indiceNT_Max + ", " + nbP + ")";
                     st.executeQuery(requeteSQL);
                 }
                 return true;

@@ -36,7 +36,7 @@
                             while (keys.hasMoreElements()) {
                                 String nomS = (String) keys.nextElement();
                                 List<Representation> repres = (List<Representation>) hashRepres.get(nomS);%>
-                <div class="row">
+                <div class="row" style="margin-top: 10px;">
                     <div class="col-md-2">
                         <img src="img/<%=repres.get(0).getUrlImg()%>" data-large="img/<%=repres.get(0).getUrlImg()%>" alt=""
                              style="width:150px;"/>
@@ -46,8 +46,9 @@
                         <ul>
                             <% for (int i = 0; i < repres.size(); i++) {%>                                       
                             <li>
-                                <input type="checkbox" name="cbNR" value="<%=repres.get(i).getNR()%>">
                                 <%= repres.get(i).getDate()%> - <%= repres.get(i).getHeure()%>
+                                <input type="checkbox" name="cbNR" value="<%=repres.get(i).getNR()%>">
+                                <input type="number" name="nbP" value="0">
                             </li>
                             <%} %>
                         </ul>
