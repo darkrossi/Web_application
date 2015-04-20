@@ -32,15 +32,18 @@ public class DossierDAO extends AbstractDataBaseDAO {
         try {
             conn = getConnection();
             Statement st = conn.createStatement();
-            requeteSQL = "select * from Dossier "
-                    + "WHERE LoginU ='" + loginU + "'";
+            requeteSQL = "select * from Dossier d, Spectacle s, Representation r "
+                    + "WHERE d.LoginU ='" + loginU + "' and d.NR = r.NR and r.NSP = s.NSP";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
                 Dossier dossier = new Dossier(rs.getInt("ND"),
                         rs.getInt("NbP"),
                         rs.getString("LoginU"),
                         rs.getInt("NT"),
-                        rs.getInt("NR"));
+                        rs.getInt("NR"),
+                        rs.getString("NomS"),
+                        rs.getString("DateR"),
+                        rs.getString("HeureR"));
                 System.err.println(dossier);
                 result.add(dossier);
             }

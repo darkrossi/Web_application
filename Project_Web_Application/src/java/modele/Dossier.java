@@ -16,16 +16,22 @@ public class Dossier {
     private String LoginU;
     private int NT;
     private int NR;
+    private String nomSpectacle;
+    private String date;
+    private String heure;
 
     public Dossier() {
     }
 
-    public Dossier(int ND, int NbP, String LoginU, int NT, int NR) {
+    public Dossier(int ND, int NbP, String LoginU, int NT, int NR, String nomSpectacle, String date, String heure) {
         this.ND = ND;
         this.NbP = NbP;
         this.LoginU = LoginU;
         this.NT = NT;
         this.NR = NR;
+        this.nomSpectacle = nomSpectacle;
+        this.date = date;
+        this.heure = heure;
     }
 
     /**
@@ -96,6 +102,48 @@ public class Dossier {
      */
     public void setNR(int NR) {
         this.NR = NR;
+    }
+
+    /**
+     * @return the nomSpectacle
+     */
+    public String getNomSpectacle() {
+        return nomSpectacle;
+    }
+
+    /**
+     * @param nomSpectacle the nomSpectacle to set
+     */
+    public void setNomSpectacle(String nomSpectacle) {
+        this.nomSpectacle = nomSpectacle;
+    }
+
+    /**
+     * @return the date
+     */
+    public String getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    /**
+     * @return the heure
+     */
+    public String getHeure() {
+        return heure;
+    }
+
+    /**
+     * @param heure the heure to set
+     */
+    public void setHeure(String heure) {
+        this.heure = heure;
     }
 
 }

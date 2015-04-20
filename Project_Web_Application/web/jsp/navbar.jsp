@@ -72,7 +72,7 @@
                 <!--<li ondrop="drop(event)" ondragover="allowDrop(event)"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Mon Panier</a></li>
                 -->
                 <li>
-                    <a href="javascript:document.inputForm3.submit();"><span class="glyphicon glyphicon-user"></span>Mon Compte</a>
+                    <a href="javascript:document.inputForm3.submit();"><span class="glyphicon glyphicon-user"></span> Mon Compte</a>
                     <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm3">
                         <input name="action" value="displayAccount" hidden="true">
                         <input name="login" value="<%= userName%>" hidden="true">

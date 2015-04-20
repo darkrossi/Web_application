@@ -22,12 +22,13 @@
     <body>
         <jsp:include page="jsp/navbar.jsp"/>
         <h2>Mes Places achetées : </h2><br>
-        *liste des places achetées avec leurs caractéristiques (n° place, spectacle, etc)*
 
         <div class="container" >
             <div class="row">
                 <div class="col-md-2">
                     <label>Spectacle</label><br>
+                    <label>Date</label><br>
+                    <label>Heure</label><br>
                     <label>Nombre de places</label><br>
                 </div>
 
@@ -36,8 +37,10 @@
                         if (!dossiers.isEmpty()) {
                             for (int i = 0; i < dossiers.size(); i++) {%>
                 <div class="col-md-2">
-                    <p value="<%=dossiers.get(i).getND()%>"><%=dossiers.get(i).getND()%></p>
-                    <p value="<%=dossiers.get(i).getNbP()%>"><%=dossiers.get(i).getNbP()%></p>
+                    <p><%=dossiers.get(i).getNomSpectacle()%></p>
+                    <p><%=dossiers.get(i).getDate()%></p>
+                    <p><%=dossiers.get(i).getHeure()%></p>
+                    <p><%=dossiers.get(i).getNbP()%></p>
                 </div>
                 <%}
                         }

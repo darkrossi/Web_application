@@ -196,8 +196,8 @@ public class Controleur extends HttpServlet {
 
     private void actionAddBooking(HttpServletRequest request, HttpServletResponse response, AchatDAO bookingDAO)
             throws ServletException, IOException, DAOException {
-        if (bookingDAO.ajouterReservation(request.getParameter("login"), 
-                (String[]) request.getParameterValues("cbNR"), 
+        if (bookingDAO.ajouterReservation(request.getParameter("login"),
+                (String[]) request.getParameterValues("cbNR"),
                 Integer.parseInt(request.getParameter("nbP")))) {
             request.setAttribute("bool", 1);
         } else {
