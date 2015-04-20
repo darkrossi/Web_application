@@ -42,9 +42,8 @@
                         <ul>
                             <% for (int i = 0; i < repres.size(); i++) {%>                                       
                             <li>
-                                <input id="repr<%=repres.get(i).getNR()%>" type="checkbox">
+                                <input type="checkbox" name="cbNR" value="<%=repres.get(i).getNR()%>">
                                 <%= repres.get(i).getDate()%> - <%= repres.get(i).getHeure()%>
-
                             </li>
                             <%} %>
                         </ul>
@@ -53,6 +52,9 @@
                 <% }
                         }
                     }%>
+
+                <button type="submit" >Réserver</button>
+                <input hidden="true" name="action" value="addBooking"/>
 
 
                 <%-- <select id="selectSalle" onchange="
