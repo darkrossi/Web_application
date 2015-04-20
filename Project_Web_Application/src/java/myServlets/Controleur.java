@@ -42,11 +42,14 @@ public class Controleur extends HttpServlet {
             throws IOException, ServletException {
         PrintWriter out = response.getWriter();
         String action = request.getParameter("action");
+
         SpectacleDAO spectacleDAO = new SpectacleDAO(ds);
         UtilisateurDAO userDAO = new UtilisateurDAO(ds);
         RepresentationDAO represDAO = new RepresentationDAO(ds);
         SalleDAO salleDAO = new SalleDAO(ds);
         DossierDAO dossierDAO = new DossierDAO(ds);
+        BookingDAO bookingDAO = new BookingDAO(ds);
+
         try {
             if (action == null) {
                 actionAfficher(request, response, spectacleDAO);
@@ -66,6 +69,8 @@ public class Controleur extends HttpServlet {
                 actionDisplayAccount(request, response, dossierDAO);
             } else if (action.equals("displayAddBooking")) {
                 actionDisplayAddBooking(request, response, represDAO);
+            } else if (action.equals("addBooking")) {
+                actionAddBooking(request, response, bookingDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -186,6 +191,17 @@ public class Controleur extends HttpServlet {
         request.setAttribute("repres", represDAO.getRepresFromSp());
         getServletContext()
                 .getRequestDispatcher("/addBooking.jsp")
+                .forward(request, response);
+    }
+
+    private void actionAddBooking(HttpServletRequest request, HttpServletResponse response, BookingDAO bookingDAO) throws ServletException, IOException {
+        if (bookingDAO.ajouterReservation(request.getParameter("login"), (String[])request.getParameterValues("cbNR"))) {
+            request.setAttribute("bool", 1);
+        } else {
+            request.setAttribute("bool", 0);
+        }
+        getServletContext()
+                .getRequestDispatcher("/LogAddReserv.jsp")
                 .forward(request, response);
     }
 }

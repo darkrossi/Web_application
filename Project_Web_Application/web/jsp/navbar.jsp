@@ -18,8 +18,7 @@
         <div>
             <ul class="nav navbar-nav">
                 <!--                <li class="active"><a href="index.jsp">Home</a></li>-->
-                <% if (userName != null) {
-                        if (userName.equals("admin")) {%>
+                <% if (userName != null && userName.equals("admin")) {%>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="pieces.jsp">Catalogue</a></li>
@@ -41,8 +40,7 @@
 
                     </ul>
                 </li>
-                <% }
-                }else {%>
+                <% } else {%>
                 <li><a href="pieces.jsp">Catalogue</a></li>
                 <li>
                     <a href="javascript:document.inputForm1.submit();">Réserver une place</a>
