@@ -61,7 +61,8 @@
                 <li><a href="#" data-reveal-id="myModal"><span class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>
                 <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     <% } else {%>
-                <li ondrop="drop(event)" ondragover="allowDrop(event)"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Mon Panier</a></li>
+                <!--<li ondrop="drop(event)" ondragover="allowDrop(event)"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Mon Panier</a></li>
+                -->
                 <li>
                     <form action="<%=request.getContextPath()%>/controleur" method="get">
                         <a href="monCompte.jsp"><span class="glyphicon glyphicon-user"></span> Mon Compte</a>
@@ -70,7 +71,7 @@
                     </form>
                 </li>
                 <li><a href="/Project_Web_Application/logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-                <font size="3" color="white" style="padding-top: 15px; padding-bottom: 15px; padding-right: 15px;"> Bienvenue <%= userName%></font>
+                <li><font size="5" color="white" style="padding-right: 15px;"> <b>Bienvenue</b> <%= userName%></font></li>
                 <% }%>
             </ul>
         </div>
