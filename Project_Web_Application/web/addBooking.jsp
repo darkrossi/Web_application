@@ -9,6 +9,10 @@
 <%@page import="java.util.Hashtable"%>
 <%@page import="modele.Representation"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<% HttpSession session2 = request.getSession(false);
+    String userName = (String) session2.getAttribute("utilisateur");%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -55,6 +59,7 @@
 
                 <button type="submit" >Réserver</button>
                 <input hidden="true" name="action" value="addBooking"/>
+                <input name="login" value="<%= userName%>" hidden="true">
 
 
                 <%-- <select id="selectSalle" onchange="

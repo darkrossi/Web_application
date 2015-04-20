@@ -48,7 +48,7 @@ public class Controleur extends HttpServlet {
         RepresentationDAO represDAO = new RepresentationDAO(ds);
         SalleDAO salleDAO = new SalleDAO(ds);
         DossierDAO dossierDAO = new DossierDAO(ds);
-        BookingDAO bookingDAO = new BookingDAO(ds);
+        AchatDAO bookingDAO = new AchatDAO(ds);
 
         try {
             if (action == null) {
@@ -194,15 +194,15 @@ public class Controleur extends HttpServlet {
                 .forward(request, response);
     }
 
-    private void actionAddBooking(HttpServletRequest request, HttpServletResponse response, BookingDAO bookingDAO) 
+    private void actionAddBooking(HttpServletRequest request, HttpServletResponse response, AchatDAO bookingDAO)
             throws ServletException, IOException, DAOException {
-        if (bookingDAO.ajouterReservation(request.getParameter("login"), (String[])request.getParameterValues("cbNR"))) {
+        if (bookingDAO.ajouterReservation(request.getParameter("login"), (String[]) request.getParameterValues("cbNR"))) {
             request.setAttribute("bool", 1);
         } else {
             request.setAttribute("bool", 0);
         }
         getServletContext()
-                .getRequestDispatcher("/LogAddReserv.jsp")
+                .getRequestDispatcher("/LogAddAchat.jsp")
                 .forward(request, response);
     }
 }

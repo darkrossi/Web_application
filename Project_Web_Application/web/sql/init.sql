@@ -67,22 +67,16 @@ CREATE TABLE Ticket (
 
 CREATE TABLE Dossier (
     ND int,
-    NbP int,
+    NR int,
     LoginU varchar(30),
     NT int,
-    NSP int,
-    NSA int,
-    NR int,
+    NbP int,
     constraint pk_dossier primary key (ND),
     constraint fk_dossier_loginu_users foreign key (LoginU) references Users(LoginU),
     constraint fk_dossier_nt_ticket foreign key (NT) references Ticket(NT),
-    constraint fk_dossier_nsp_spectacle foreign key (NSP) references Spectacle(NSP),
-    constraint fk_dossier_nsa_salle foreign key (NSA) references Salle(NSA),
     constraint fk_dossier_nr_repr foreign key (NR) references Representation(NR),
     constraint nn_dossier_loginu check (LoginU is not null),
     constraint nn_dossier_nt check (NT is not null),
-    constraint nn_dossier_nsa check (NSA is not null),
-    constraint nn_dossier_nsp check (NSP is not null),
     constraint nn_dossier_nr check (NR is not null),
     CONSTRAINT NbP CHECK(NbP >= 1)
 );
