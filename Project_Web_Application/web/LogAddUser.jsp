@@ -15,9 +15,9 @@
     </head>
     <body>
         <% if ((int) request.getAttribute("bool") == 1) { %>
-        Compte créé avec succès
+        <h1>Compte créé avec succès</h1>
         <% } else { %>
-        Erreur lors de la création du compte
+        <h1>Erreur lors de la création du compte</h1>
         <%}%>    
     </body>
 
