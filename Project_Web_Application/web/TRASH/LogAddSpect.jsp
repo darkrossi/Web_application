@@ -14,6 +14,7 @@
 
     </head>
     <body>
+        <jsp:include page="jsp/navbar.jsp"/>
         <% if ((int) request.getAttribute("bool") == 1) { %>
         <h1>GOOD</h1>
         <% } else { %>

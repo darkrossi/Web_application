@@ -92,6 +92,7 @@ public class Controleur extends HttpServlet {
             HttpServletResponse response,
             SpectacleDAO spectacleDAO)
             throws DAOException, ServletException, IOException {
+        request.setAttribute("logBool", 0);
         request.setAttribute("spectacles", spectacleDAO.getListeSpectacles());
         getServletContext()
                 .getRequestDispatcher("/WEB-INF/afficheAffiches.jsp")
@@ -100,17 +101,18 @@ public class Controleur extends HttpServlet {
 
     private void actionAddSpectacle(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO)
             throws ServletException, IOException, DAOException {
+        request.setAttribute("logBool", 1);
         if (spectacleDAO.ajouterSpectacle(request.getParameter("nomS"),
                 request.getParameter("auteurS"),
                 request.getParameter("mesS"),
                 request.getParameter("dureeS"),
                 request.getParameter("fileS"))) {
-            request.setAttribute("bool", 1);
+            request.setAttribute("logText", "Spectacle créé avec succès !");
         } else {
-            request.setAttribute("bool", 0);
+            request.setAttribute("logText", "Erreur lors de la création du spectacle..");
         }
         getServletContext()
-                .getRequestDispatcher("/LogAddSpect.jsp")
+                .getRequestDispatcher("/addSpectacle.jsp")
                 .forward(request, response);
     }
 
@@ -118,6 +120,7 @@ public class Controleur extends HttpServlet {
             HttpServletResponse response,
             UtilisateurDAO utilisateurDAO)
             throws DAOException, ServletException, IOException {
+        request.setAttribute("logBool", 0);
         String sortie = utilisateurDAO.verifUser(request.getParameter("loginU"), request.getParameter("mdpU"));
         if (sortie.equals("")) {
             getServletContext()
@@ -134,51 +137,55 @@ public class Controleur extends HttpServlet {
 
     private void actionAddUser(HttpServletRequest request, HttpServletResponse response, UtilisateurDAO utilisateurDAO)
             throws ServletException, IOException, DAOException {
+        request.setAttribute("logBool", 1);
         if (utilisateurDAO.ajouterUser(request.getParameter("login"),
                 request.getParameter("password"),
                 request.getParameter("nom"),
                 request.getParameter("prenom"),
-                request.getParameter("email"))) {
-            request.setAttribute("bool", 1);
+                request.getParameter("mail"))) {
+            request.setAttribute("logText", "Compte utilisateur créé avec succès !");
         } else {
-            request.setAttribute("bool", 0);
+            request.setAttribute("logText", "Erreur lors de la création du compte utilisateur..");
         }
         getServletContext()
-                .getRequestDispatcher("/LogAddUser.jsp")
+                .getRequestDispatcher("/index.jsp")
                 .forward(request, response);
     }
 
     private void actionAddRepres(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO)
             throws DAOException, IOException, ServletException {
+        request.setAttribute("logBool", 1);
         if (represDAO.ajouterRepresentation(request.getParameter("date"),
                 request.getParameter("valueHeure"),
                 request.getParameter("valueSpect"),
                 request.getParameter("valueSalle"))) {
-            request.setAttribute("bool", 1);
+            request.setAttribute("logText", "Représentation ajoutée avec succès !");
         } else {
-            request.setAttribute("bool", 0);
+            request.setAttribute("logText", "Erreur lors de la création de la représentation..");
         }
         getServletContext()
-                .getRequestDispatcher("/LogAddRepresent.jsp")
+                .getRequestDispatcher("/addRepresent.jsp")
                 .forward(request, response);
     }
 
     private void actionAddSalle(HttpServletRequest request, HttpServletResponse response, SalleDAO salleDAO)
             throws DAOException, ServletException, IOException {
+        request.setAttribute("logBool", 1);
         if (salleDAO.ajouterSalle(Integer.parseInt(request.getParameter("nbRa")),
                 Integer.parseInt(request.getParameter("nbP")),
                 Integer.parseInt(request.getParameter("catTarif")))) {
-            request.setAttribute("bool", 1);
+            request.setAttribute("logText", "Salle ajoutée avec succès !");
         } else {
-            request.setAttribute("bool", 0);
+            request.setAttribute("logText", "Erreur lors de la création de la salle..");
         }
         getServletContext()
-                .getRequestDispatcher("/LogAddSalle.jsp")
+                .getRequestDispatcher("/addSalle.jsp")
                 .forward(request, response);
     }
 
     private void actionDisplayAddRepres(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, SalleDAO salleDAO)
             throws DAOException, ClassNotFoundException, IOException, ServletException {
+        request.setAttribute("logBool", 0);
         request.setAttribute("spectacles", spectacleDAO.getListeSpectacles());
         request.setAttribute("salles", salleDAO.getListeSalles());
         getServletContext()
@@ -187,6 +194,7 @@ public class Controleur extends HttpServlet {
     }
 
     private void actionDisplayAccount(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO) throws DAOException, ServletException, IOException {
+        request.setAttribute("logBool", 0);
         request.setAttribute("dossiers", dossierDAO.getFolders(request.getParameter("login")));
         getServletContext()
                 .getRequestDispatcher("/monCompte.jsp")
@@ -194,6 +202,7 @@ public class Controleur extends HttpServlet {
     }
 
     private void actionDisplayAddBooking(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO) throws ServletException, IOException, DAOException {
+        request.setAttribute("logBool", 0);
         request.setAttribute("repres", represDAO.getRepresFromSp());
         getServletContext()
                 .getRequestDispatcher("/addBooking.jsp")
@@ -202,19 +211,25 @@ public class Controleur extends HttpServlet {
 
     private void actionAddBooking(HttpServletRequest request, HttpServletResponse response, AchatDAO bookingDAO)
             throws ServletException, IOException, DAOException {
-        if (bookingDAO.ajouterReservation(request.getParameter("login"),
-                (String[]) request.getParameterValues("cbNR"),
-                (String[]) request.getParameterValues("nbP"))) {
-            request.setAttribute("bool", 1);
+        request.setAttribute("logBool", 1);
+        if ("null".equals(request.getParameter("login"))) {
+            request.setAttribute("logText", "Vous devez créer un compte utilisateur pour pouvoir acheter des places !");
         } else {
-            request.setAttribute("bool", 0);
+            if (bookingDAO.ajouterReservation(request.getParameter("login"),
+                    (String[]) request.getParameterValues("cbNR"),
+                    (String[]) request.getParameterValues("nbP"))) {
+                request.setAttribute("logText", "Achat effectué avec succès !");
+            } else {
+                request.setAttribute("logText", "Erreur lors de l'achat..");
+            }
         }
         getServletContext()
-                .getRequestDispatcher("/LogAddAchat.jsp")
+                .getRequestDispatcher("/addBooking.jsp")
                 .forward(request, response);
     }
 
     private void actionDisplayAddSalle(HttpServletRequest request, HttpServletResponse response, SalleDAO salleDAO) throws DAOException, ServletException, IOException {
+        request.setAttribute("logBool", 0);
         request.setAttribute("salles", salleDAO.getListeSalles());
         getServletContext()
                 .getRequestDispatcher("/addSalle.jsp")

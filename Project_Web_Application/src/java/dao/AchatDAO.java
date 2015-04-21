@@ -22,7 +22,7 @@ public class AchatDAO extends AbstractDataBaseDAO {
     }
 
     public boolean ajouterReservation(String loginU, String[] listRepr, String[] listNbP) throws DAOException {
-        if (listRepr.length == 0) {
+        if (listRepr == null) {
             return true;
         } else {
             ResultSet rs = null;

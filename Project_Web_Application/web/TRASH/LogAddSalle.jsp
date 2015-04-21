@@ -1,6 +1,6 @@
 <%-- 
-    Document   : logAddAchat
-    Created on : 20 avr. 2015, 12:24:26
+    Document   : LogAddSalle
+    Created on : 13 avr. 2015, 17:32:53
     Author     : oswald
 --%>
 
@@ -9,11 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta http-equiv="refresh" content="3; url=addBooking.jsp" />
+        <meta http-equiv="refresh" content="3; url=addSalle.jsp" />
         <title>JSP Page</title>
-    </head>
 
+    </head>
     <body>
+        <jsp:include page="jsp/navbar.jsp"/>
         <% if ((int) request.getAttribute("bool") == 1) { %>
         <h1>GOOD</h1>
         <% } else { %>
