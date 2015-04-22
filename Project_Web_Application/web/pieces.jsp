@@ -21,8 +21,8 @@
             <div class="row">
                 <div class="col-md-3">
                     <h2>Date</h2>
-                    <form>Du</form>
-                    <form>Au</form>  
+                    <input type="text" name="datepicker_input1" class="datepicker" value placeholder="Du">
+                    <input type="text" name="datepicker_input2" class="datepicker" value placeholder="Au"> 
                     <h2>Prix</h2>
                     <h2>Genre</h2>
                     <h2>Note</h2>
@@ -151,6 +151,11 @@
                 </div>
             </div>
     </body>
+    <script>
+        $(function() {
+            $( ".datepicker" ).datepicker();
+        });
+    </script>
     <jsp:include page="jsp/footer.jsp"/>
 
     <jsp:include page="jsp/head.jsp"/>
