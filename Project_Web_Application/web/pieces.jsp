@@ -16,6 +16,16 @@
                 $(".datepicker").datepicker();
             });
         </script>
+        <script>
+            $(function(){
+                $("select").multiselect();
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+                $("#genre").multiselect();
+            });
+        </script>
         <jsp:include page="jsp/head.jsp"/>
 
         <script src="js/place.js" type="text/javascript"></script>
@@ -32,9 +42,16 @@
                 <div class="col-md-3">
                     <h2>Date</h2>
                     <input type="text" name="datepicker_input1" class="datepicker" value placeholder="Du">
-                    <input type="text" name="datepicker_input2" class="datepicker" value placeholder="Au"> 
+                    <input type="text" name="datepicker_input2" class="datepicker" value placeholder="Au">
                     <h2>Prix</h2>
-                    <h2>Genre</h2>
+                    <form method="post">
+                        <label for="genre">Genre</label>
+                        <select name="genre" id="genre" multiple value placeholder="Genre">
+                            <option selected name="Peu importe" id="Peu importe" value="ToutGenre">Tous les genres</option>
+                            <option name="Concert" id="Concert" value="C">Concert</option>
+                            <option value="Spectacle">Spectacle</option>
+                        </select>
+                    </form>
                     <h2>Note</h2>
                     <h2>Ventes</h2>
 
