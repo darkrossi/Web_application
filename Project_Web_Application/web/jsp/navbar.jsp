@@ -31,6 +31,12 @@
     });
 </script>
 
+<script>
+    $("#idButton").click(function () {
+        $("#myModalLogin").reveal($(this).data()).trigger('reveal:close');
+    });
+</script>
+
 <!-- NAVBAR -->
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
