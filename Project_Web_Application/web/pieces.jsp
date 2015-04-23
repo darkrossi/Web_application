@@ -151,13 +151,12 @@
                 </div>
             </div>
     </body>
+    <jsp:include page="jsp/footer.jsp"/>
     <script>
         $(function() {
             $( ".datepicker" ).datepicker();
         });
     </script>
-    <jsp:include page="jsp/footer.jsp"/>
-
     <jsp:include page="jsp/head.jsp"/>
 
     <script src="js/place.js" type="text/javascript"></script>
