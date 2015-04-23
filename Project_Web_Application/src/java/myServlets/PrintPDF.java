@@ -18,10 +18,12 @@ import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.Element;
 import com.lowagie.text.Font;
+import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
 import java.awt.Color;
+import java.net.MalformedURLException;
 import javax.servlet.ServletOutputStream;
 
 /**
@@ -55,25 +57,46 @@ public class PrintPDF extends HttpServlet {
       PdfWriter.getInstance(document, baos);
       document.open();
       
-      Chunk chunk = new Chunk("Votre ticket");
-      Font font = new Font(Font.COURIER);
-      font.setStyle(Font.UNDERLINE);
-      font.setStyle(Font.ITALIC);
-      chunk.setFont(font);
-      chunk.setBackground(Color.CYAN);
-      document.add(chunk);
-                        
+      //définition des polices
+      Font font0 = new Font(Font.COURIER);
+      font0.setStyle(Font.UNDERLINE);
+      font0.setStyle(Font.ITALIC);
+      
+      Font font1 = new Font(Font.COURIER);
+      font1.setStyle(Font.BOLD);
+                    
+      //titre centré
       Paragraph paragraph = new Paragraph();
-      paragraph.add("Hello World");
+      paragraph.setFont(font0);
+      paragraph.add("Votre ticket");
       paragraph.setAlignment(Element.ALIGN_CENTER);
       document.add(paragraph);
+      document.add(Chunk.NEWLINE);
+      document.add(Chunk.NEWLINE);
       
+      //paragraphe 1
+      Paragraph paragraphND = new Paragraph();
+      paragraphND.setFont(font1);
+      paragraphND.add("N° de dossier : " + ND);
+      //paragraphND.setAlignment(Element.ALIGN_CENTER);
+      document.add(paragraphND);    
       document.add(Chunk.NEWLINE);
-      document.add(new Paragraph("N° de dossier : " + ND));
+      
+      //paragraphe 2
+      Paragraph paragraphNR = new Paragraph();
+      paragraphNR.setFont(font1);
+      paragraphNR.add("N° de réservation : " + NR);
+      //paragraphND.setAlignment(Element.ALIGN_CENTER);
+      document.add(paragraphNR);    
       document.add(Chunk.NEWLINE);
-      document.add(new Paragraph("N° de réservation : " + NR));
-      document.add(Chunk.NEWLINE);
-      document.add(new Paragraph("Login : " + login));
+      
+      //paragraphe 3
+      Paragraph paragraphLogin = new Paragraph();
+      paragraphLogin.setFont(font1);
+      paragraphLogin.add("Votre login : " + login);
+      //paragraphND.setAlignment(Element.ALIGN_CENTER);
+      document.add(paragraphLogin);    
+      document.add(Chunk.NEWLINE);    
       document.close();
 
       response.setHeader("Expires", "0");
