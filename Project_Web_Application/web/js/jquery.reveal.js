@@ -22,6 +22,7 @@
         var modalLocation = $(this).attr('data-reveal-id');
         $('#' + modalLocation).reveal($(this).data());
         $("#prenom").focus();
+        $("#loginU").focus();
     });
 
     /*---------------------------
