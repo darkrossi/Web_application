@@ -120,6 +120,7 @@ public class Controleur extends HttpServlet {
         request.setAttribute("logBool", 0);
         String sortie = utilisateurDAO.verifUser(request.getParameter("loginU"), request.getParameter("mdpU"));
         if (sortie.equals("")) {
+            request.setAttribute("errorLogin", 1);
             getServletContext()
                     .getRequestDispatcher("/login.jsp")
                     .forward(request, response);

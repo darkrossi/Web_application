@@ -12,10 +12,10 @@ form{
     vertical-align: top;
 }*/
 
-li{
+/*li{
     display: inline;
     text-align: justify;
-}
+}*/
 /* Partie Réservation */
 
 .affiche{
@@ -82,8 +82,8 @@ li{
     height: 100px;
 }
 
-nav{
+/*nav{
     position: fixed;
     top : 0px;
     color : grey;
-}
+}*/

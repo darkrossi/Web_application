@@ -32,6 +32,10 @@
                     <div class="row">
                         <label class="col-md-3"> Indiquez votre mot de passe : </label><input class="col-md-2" name="mdpU" type="PASSWORD"><br>
                     </div>
+                    <% if ((int) request.getAttribute("errorLogin") == 1) {%>
+                    <font size="5px" color="red"><span class="glyphicon glyphicon-alert"></span> Le login ou le mot de passe saisi est incorrect</font><br>
+                    <!--<div> <span class="glyphicon glyphicon-alert"></span> <p style="color: red;">Le login ou le mot de passe saisi est incorrect</p> </div>-->
+                    <%}%>
                     <input type="SUBMIT">
                     <input hidden="true" name="action" value="verifUser">
 
