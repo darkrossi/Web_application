@@ -56,6 +56,7 @@ public class AfficheDAO {
         } finally {
             closeConnection(Connexion);
         }
+        
         if (affiches.isEmpty()) {
             affiches.add(new Affiche("empty.png"));
         }

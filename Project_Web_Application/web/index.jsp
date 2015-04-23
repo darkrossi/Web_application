@@ -4,6 +4,7 @@
     Author     : oswald
 --%>
 
+<%@page import="dao.DAOException"%>
 <%@page import="dao.AfficheDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="modele.Affiche"%>
@@ -41,11 +42,15 @@ and open the template in the editor.
                     <div class="es-carousel">
                         <ul>
                             <% AfficheDAO affiche = new AfficheDAO();
-                                List<Affiche> affiches = affiche.getListeAffiches();%>
-                            <% if (!affiches.isEmpty()) {
+                                try {
+                                    List<Affiche> affiches = affiche.getListeAffiches();
+                            if (!affiches.isEmpty()) {
                                     for (int i = 0; i < affiches.size(); i++) {%>
                             <li><a href="#"><img src="img/<%=affiches.get(i).toString()%>" data-large="img/<%=affiches.get(i).toString()%>" alt="image01" data-description="" /></a></li>
                                     <%}
+                                            }
+                                        } catch (DAOException e) {
+
                                         }%>
                         </ul>
                     </div>
