@@ -50,6 +50,7 @@ CREATE TABLE Place (
     NP int,
     NRa int,
     isTaken int,
+    ND int, -- Pour savoir pour quel dossier cette place est reservée
     constraint pk_table primary key (NP),
     constraint fk_place_nra_rang foreign key (NRa) references Rang(NRa),
     constraint nn_place_nra check (NRa is not null),
@@ -110,5 +111,5 @@ CREATE TABLE Booking (
     CONSTRAINT NbPB CHECK(NbP >= 1)
 );
 
--- INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)
---     VALUES (0, 'init', 'init', 'init', 1, 'init');
+INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)
+    VALUES (0, 'init', 'init', 'init', 1, 'init');

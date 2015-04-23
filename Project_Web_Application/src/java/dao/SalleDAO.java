@@ -101,8 +101,8 @@ public class SalleDAO extends AbstractDataBaseDAO {
                         + indiceNSa_Max + ", " + nbP + ")";
                 st.executeQuery(requeteSQL);
                 for (int j = 1; j <= nbP; j++) {
-                    requeteSQL = "INSERT INTO Place (NP, NRa, isTaken) "
-                            + "VALUES (" + indiceNPl_Max++ + ", " + i + ", 0)";
+                    requeteSQL = "INSERT INTO Place (NP, NRa, isTaken, ND) "
+                            + "VALUES (" + indiceNPl_Max++ + ", " + i + ", 0, -1)";
                     st.executeQuery(requeteSQL);
                 }
             }

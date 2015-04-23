@@ -70,32 +70,31 @@ public class AchatDAO extends AbstractDataBaseDAO {
                     st.executeQuery(requeteSQL);
 
                     /* On marque les places réservées */
-                    requeteSQL = "select * "
+                    requeteSQL = "select r.NRa, p.NP "
                             + "from Rang r, Place p "
                             + "where r.NSA = " + dataRepr[2] + " and p.NRa = r.NRa and p.isTaken = 0";
                     rs = st.executeQuery(requeteSQL);
+
                     int NRaTemp = -1;
                     List<Integer> indicesPl = new ArrayList<>();
                     while (rs.next()) {
                         if (NRaTemp == -1) {
-                            NRaTemp = rs.getInt("r.NRa");
+                            NRaTemp = rs.getInt(1);
                         }
-                        if (rs.getInt("r.NRa") != NRaTemp) {
+                        if (rs.getInt(1) != NRaTemp) {
                             indicesPl = new ArrayList<>();
-                            NRaTemp = rs.getInt("r.NRa");
+                            NRaTemp = rs.getInt(1);
                         }
-                        indicesPl.add(rs.getInt("p.NP"));
-                        if (indicesPl.size() == 2) {
+                        indicesPl.add(rs.getInt(2));
+                        if (indicesPl.size() == Integer.parseInt(listNbP[i])) {
                             break;
                         }
                     }
-                    
-//                    Erreur BD Nom de colonne non valideselect * from Rang r, Place p where r.NSa = 1 and p.NRa = r.NRa and p.isTaken = 0 
 
-                    for (int j = 0; j < 2; j++) {
+                    for (Integer indicesPl1 : indicesPl) {
                         requeteSQL = "UPDATE Place "
-                                + "SET isTaken=1 "
-                                + "WHERE NP=" + currentNR;
+                                + "SET isTaken=1, ND=" + indiceND_Max + " "
+                                + "WHERE NP=" + indicesPl1;
                         st.executeQuery(requeteSQL);
                     }
 
@@ -112,7 +111,7 @@ public class AchatDAO extends AbstractDataBaseDAO {
                 }
                 return true;
             } catch (SQLException e) {
-                throw new DAOException("Erreur BD " + e.getMessage() + requeteSQL, e);
+                throw new DAOException("Erreur BD " + e.getMessage(), e);
             } finally {
                 closeConnection(conn);
             }
