@@ -78,7 +78,6 @@
                 </li>
                 <%}%>
 
-                <li><a href="#">Qui sommes-nous ?</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!--                        <li>
