@@ -24,10 +24,10 @@
 
     </head>
     <body>
+
+        <jsp:include page="jsp/navbar.jsp"/>
+
         <div class="container-fluid" >
-
-            <jsp:include page="jsp/navbar.jsp"/>
-
             <div class="row">
                 <div class="col-md-3">
                     <h2>Date</h2>
@@ -160,6 +160,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </body>
     <jsp:include page="jsp/footer.jsp"/>
 
