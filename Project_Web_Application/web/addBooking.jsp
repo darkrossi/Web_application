@@ -92,7 +92,7 @@
                         }
                     }%>
 
-                <button type="submit" >Réserver</button>
+                <button type="submit" >Réserver <span class="glyphicon glyphicon-arrow-down"></span></button>
                 <input hidden="true" name="action" value="addBooking"/>
                 <input name="login" value="<%= userName%>" hidden="true">
             </form>
