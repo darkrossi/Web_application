@@ -7,6 +7,10 @@ CREATE TABLE Spectacle (
     Affiche varchar(30),
     constraint pk_spectacle primary key (NSP)
 );
+INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)
+SELECT NSP, NomS, AuteurS, MESS, DureeS, Affiche
+FROM Spectacle2;
+
 
 CREATE TABLE Salle (
     NSA int,
@@ -44,15 +48,12 @@ CREATE TABLE Rang (
 
 CREATE TABLE Place (
     NP int,
-    NumPl int,
     NRa int,
-    NSA int,
+    isTaken int,
     constraint pk_table primary key (NP),
     constraint fk_place_nra_rang foreign key (NRa) references Rang(NRa),
-    constraint fk_place_nr_salle foreign key (NSA) references Salle(NSA),
     constraint nn_place_nra check (NRa is not null),
-    constraint nn_place_nsa check (NSA is not null),
-    constraint NumPl CHECK(NumPl >= 1)
+    CONSTRAINT bin_istaken CHECK(isTaken in (0, 1))
 );
 
 CREATE TABLE Users (
@@ -65,6 +66,9 @@ CREATE TABLE Users (
     constraint pk_users primary key (LoginU),
     CONSTRAINT bin_roleu CHECK(RoleU in (0, 1))
 );
+INSERT INTO Users (LoginU, NomU, PrenomU, MailU, MdpU, RoleU)
+SELECT LoginU, NomU, PrenomU, MailU, MdpU, RoleU
+FROM Users2;
 
 CREATE TABLE Ticket (
     NT int,
@@ -106,5 +110,5 @@ CREATE TABLE Booking (
     CONSTRAINT NbPB CHECK(NbP >= 1)
 );
 
-INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)
-    VALUES (0, 'init', 'init', 'init', 1, 'init');
+-- INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)
+--     VALUES (0, 'init', 'init', 'init', 1, 'init');

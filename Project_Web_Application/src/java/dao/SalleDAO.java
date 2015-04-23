@@ -48,18 +48,6 @@ public class SalleDAO extends AbstractDataBaseDAO {
                         rs.getInt("NbP"));
                 System.err.println(salle);
                 result.add(salle);
-                
-                
-//                CREATE TABLE Rang (
-//    NRa int,
-//    CatTarif int,
-//    NSA int,
-//    NbP int,
-//    
-//    CREATE TABLE Salle (
-//    NSA int,
-//    NbRa int,
-                
             }
         } catch (SQLException e) {
             throw new DAOException("Erreur BD " + e.getMessage(), e);
@@ -98,7 +86,7 @@ public class SalleDAO extends AbstractDataBaseDAO {
                 indiceNSa_Max = rs.getInt(1);
                 indiceNSa_Max++;
             }
-            
+
             requeteSQL = "select max(NP) from Place";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
@@ -113,8 +101,8 @@ public class SalleDAO extends AbstractDataBaseDAO {
                         + indiceNSa_Max + ", " + nbP + ")";
                 st.executeQuery(requeteSQL);
                 for (int j = 1; j <= nbP; j++) {
-                    requeteSQL = "INSERT INTO Place (NP, NumPl, NRa, NSA) "
-                            + "VALUES (" + indiceNPl_Max++ + ", " + j + ", " + i + ", " + indiceNSa_Max + ")";
+                    requeteSQL = "INSERT INTO Place (NP, NRa, isTaken) "
+                            + "VALUES (" + indiceNPl_Max++ + ", " + i + ", 0)";
                     st.executeQuery(requeteSQL);
                 }
             }

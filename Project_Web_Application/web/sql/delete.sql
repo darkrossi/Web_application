@@ -1,12 +1,3 @@
-DROP TABLE Dossier;
-DROP TABLE Representation;
-DROP TABLE Place;
-DROP TABLE Rang;
-DROP TABLE Ticket;
-DROP TABLE Spectacle;
-DROP TABLE Salle;
-DROP TABLE Users;
-
 -- DELETE FROM Dossier;
 -- DELETE FROM Representation;
 -- DELETE FROM Place;
@@ -15,3 +6,12 @@ DROP TABLE Users;
 -- DELETE FROM Spectacle;
 -- DELETE FROM Salle;
 -- DELETE FROM Users;
+
+DROP TABLE Dossier cascade constraint;
+DROP TABLE Representation cascade constraint;
+DROP TABLE Place cascade constraint;
+DROP TABLE Rang cascade constraint;
+DROP TABLE Ticket cascade constraint;
+DROP TABLE Spectacle cascade constraint;
+DROP TABLE Salle cascade constraint;
+DROP TABLE Users cascade constraint;

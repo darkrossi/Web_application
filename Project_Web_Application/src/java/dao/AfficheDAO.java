@@ -37,11 +37,12 @@ public class AfficheDAO {
             }
         }
     }
-    
+
     public List<Affiche> getListeAffiches() throws DAOException, ClassNotFoundException, IOException, Exception {
         Class.forName("oracle.jdbc.OracleDriver");
         List<Affiche> affiches = new ArrayList<>();
-        try (Connection Connexion = DriverManager.getConnection(url, login, login)) {
+        Connection Connexion = DriverManager.getConnection(url, login, login);
+        try {
             Statement State = Connexion.createStatement();
             ResultSet resultat = State.executeQuery("SELECT NSP, Affiche FROM Spectacle");
             while (resultat.next()) {
@@ -51,6 +52,9 @@ public class AfficheDAO {
                 }
             }
         } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(Connexion);
         }
         if (affiches.isEmpty()) {
             affiches.add(new Affiche("empty.png"));

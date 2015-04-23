@@ -49,6 +49,7 @@ public class Controleur extends HttpServlet {
         SalleDAO salleDAO = new SalleDAO(ds);
         DossierDAO dossierDAO = new DossierDAO(ds);
         AchatDAO bookingDAO = new AchatDAO(ds);
+        RangDAO rangDAO = new RangDAO(ds);
 
         try {
             if (action == null) {
@@ -235,4 +236,13 @@ public class Controleur extends HttpServlet {
                 .getRequestDispatcher("/addSalle.jsp")
                 .forward(request, response);
     }
+
+//    private void actionAddBookingFinal(HttpServletRequest request, HttpServletResponse response, RangDAO rangDAO) {
+//        request.setAttribute("logBool", 0);
+//        request.setAttribute("repres", rangDAO.getRangs(request.getParameter)));
+//        getServletContext()
+//                .getRequestDispatcher("/addBooking.jsp")
+//                .forward(request, response);
+//    }
+
 }
