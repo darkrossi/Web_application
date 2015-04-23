@@ -61,7 +61,7 @@ public class Controleur extends HttpServlet {
             } else if (action.equals("addUser")) {
                 actionAddUser(request, response, userDAO);
             } else if (action.equals("addRepres")) {
-                actionAddRepres(request, response, represDAO);
+                actionAddRepres(request, response, represDAO, spectacleDAO, salleDAO);
             } else if (action.equals("displayAddSalle")) {
                 actionDisplayAddSalle(request, response, salleDAO);
             } else if (action.equals("addSalle")) {
@@ -71,9 +71,9 @@ public class Controleur extends HttpServlet {
             } else if (action.equals("displayAccount")) {
                 actionDisplayAccount(request, response, dossierDAO);
             } else if (action.equals("displayAddBooking")) {
-                actionDisplayAddBooking(request, response, represDAO);
+                actionDisplayAddBooking(request, response, represDAO, 0);
             } else if (action.equals("addBooking")) {
-                actionAddBooking(request, response, bookingDAO, dossierDAO);
+                actionAddBooking(request, response, bookingDAO, dossierDAO, represDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -84,8 +84,6 @@ public class Controleur extends HttpServlet {
             getServletContext()
                     .getRequestDispatcher("/ErrorBdd.jsp")
                     .forward(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -155,8 +153,12 @@ public class Controleur extends HttpServlet {
                 .forward(request, response);
     }
 
-    private void actionAddRepres(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO)
+    private void actionAddRepres(HttpServletRequest request, HttpServletResponse response,
+            RepresentationDAO represDAO,
+            SpectacleDAO spectDAO,
+            SalleDAO salleDAO)
             throws DAOException, IOException, ServletException {
+
         request.setAttribute("logBool", 1);
         if (represDAO.ajouterRepresentation(request.getParameter("date"),
                 request.getParameter("valueHeure"),
@@ -166,9 +168,7 @@ public class Controleur extends HttpServlet {
         } else {
             request.setAttribute("logText", "Erreur lors de la création de la représentation..");
         }
-        getServletContext()
-                .getRequestDispatcher("/addRepresent.jsp")
-                .forward(request, response);
+        actionDisplayAddRepres(request, response, spectDAO, salleDAO);
     }
 
     private void actionAddSalle(HttpServletRequest request, HttpServletResponse response, SalleDAO salleDAO)
@@ -181,13 +181,12 @@ public class Controleur extends HttpServlet {
         } else {
             request.setAttribute("logText", "Erreur lors de la création de la salle..");
         }
-        getServletContext()
-                .getRequestDispatcher("/addSalle.jsp")
-                .forward(request, response);
+        actionDisplayAddSalle(request, response, salleDAO);
+
     }
 
     private void actionDisplayAddRepres(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, SalleDAO salleDAO)
-            throws DAOException, ClassNotFoundException, IOException, ServletException {
+            throws DAOException, IOException, ServletException {
         request.setAttribute("logBool", 0);
         request.setAttribute("spectacles", spectacleDAO.getListeSpectacles());
         request.setAttribute("salles", salleDAO.getListeSalles());
@@ -204,29 +203,37 @@ public class Controleur extends HttpServlet {
                 .forward(request, response);
     }
 
-    private void actionDisplayAddBooking(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO) throws ServletException, IOException, DAOException {
-        request.setAttribute("logBool", 0);
+    private void actionDisplayAddBooking(HttpServletRequest request, HttpServletResponse response,
+            RepresentationDAO represDAO,
+            int logBool)
+            throws ServletException, IOException, DAOException {
+        request.setAttribute("logBool", logBool);
         request.setAttribute("repres", represDAO.getRepresFromSp());
         getServletContext()
                 .getRequestDispatcher("/addBooking.jsp")
                 .forward(request, response);
     }
 
-    private void actionAddBooking(HttpServletRequest request, HttpServletResponse response, AchatDAO bookingDAO, DossierDAO dossierDAO)
+    private void actionAddBooking(HttpServletRequest request, HttpServletResponse response,
+            AchatDAO bookingDAO,
+            DossierDAO dossierDAO,
+            RepresentationDAO represDAO)
             throws ServletException, IOException, DAOException {
         request.setAttribute("logBool", 1);
         if ("null".equals(request.getParameter("login"))) {
             request.setAttribute("logText", "Vous devez créer un compte utilisateur pour pouvoir acheter des places !");
+            actionDisplayAddBooking(request, response, represDAO, 1);
         } else {
             if (bookingDAO.ajouterReservation(request.getParameter("login"),
                     (String[]) request.getParameterValues("cbNR"),
                     (String[]) request.getParameterValues("nbP"))) {
                 request.setAttribute("logText", "Achat effectué avec succès !");
             } else {
-                request.setAttribute("logText", "Erreur lors de l'achat..");
+                request.setAttribute("logText", "Erreur lors de l'achat...");
             }
+            actionDisplayAccount(request, response, dossierDAO);
         }
-        actionDisplayAccount(request, response, dossierDAO);
+
     }
 
     private void actionDisplayAddSalle(HttpServletRequest request, HttpServletResponse response, SalleDAO salleDAO) throws DAOException, ServletException, IOException {
@@ -244,5 +251,4 @@ public class Controleur extends HttpServlet {
 //                .getRequestDispatcher("/addBooking.jsp")
 //                .forward(request, response);
 //    }
-
 }
