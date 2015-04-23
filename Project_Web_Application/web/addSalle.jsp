@@ -11,7 +11,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ajout Salle</title>
+
+        <jsp:include page="jsp/head.jsp"/>
+
+        <link rel="stylesheet" type="text/css" href="css/style.css"> 
     </head>
     <body>
         <jsp:include page="jsp/navbar.jsp"/>
@@ -63,9 +66,5 @@
     </body>
 
     <jsp:include page="jsp/footer.jsp"/>
-
-    <jsp:include page="jsp/head.jsp"/>
-
-    <link rel="stylesheet" type="text/css" href="css/style.css"> 
 
 </html>

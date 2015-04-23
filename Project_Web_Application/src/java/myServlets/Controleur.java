@@ -8,8 +8,6 @@ package myServlets;
 import dao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sql.DataSource;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;

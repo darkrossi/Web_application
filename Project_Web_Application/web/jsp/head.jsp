@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<title>Site du théâtre COMED'IMAG</title>
+
 <!-- JQuery -->
 <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>

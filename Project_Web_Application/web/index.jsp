@@ -16,7 +16,6 @@ and open the template in the editor.
 -->
 <html lang="en">
     <head>
-        <title>Site du théâtre ***</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

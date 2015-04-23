@@ -8,9 +8,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Site du théâtre *** - Login page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <jsp:include page="jsp/head.jsp"/>
+
+        <link rel="stylesheet" type="text/css" href="css/style.css"> 
 
     </head>
     <body>
@@ -33,21 +36,10 @@
                     <input hidden="true" name="action" value="verifUser">
 
                 </FORM>
-                <br>
-                <a href="index.jsp">Retour à l'accueil</a>   
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary">Apple</button>
-                <button type="button" class="btn btn-primary">Samsung</button>
-                <button type="button" class="btn btn-primary">Sony</button>
             </div>
         </div>
     </body>
 
     <jsp:include page="jsp/footer.jsp"/>
-
-    <jsp:include page="jsp/head.jsp"/>
-
-    <link rel="stylesheet" type="text/css" href="css/style.css"> 
 
 </html>
