@@ -24,7 +24,7 @@
                 <h1>Connectez-vous à votre compte</h1>    
                 <FORM ACTION="<%=request.getContextPath()%>/controleur" METHOD="get">
                     <div class="row">
-                        <label class="col-md-3"> Indiquez votre login : </label><input class="col-md-2" name="loginU"><br>
+                        <label class="col-md-3"> Indiquez votre login : </label><input class="col-md-2" name="loginU" autofocus="autofocus"><br>
                     </div>
                     <div class="row">
                         <label class="col-md-3"> Indiquez votre mot de passe : </label><input class="col-md-2" name="mdpU" type="PASSWORD"><br>

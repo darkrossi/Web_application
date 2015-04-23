@@ -73,7 +73,7 @@ public class Controleur extends HttpServlet {
             } else if (action.equals("displayAddBooking")) {
                 actionDisplayAddBooking(request, response, represDAO);
             } else if (action.equals("addBooking")) {
-                actionAddBooking(request, response, bookingDAO);
+                actionAddBooking(request, response, bookingDAO, dossierDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -145,6 +145,8 @@ public class Controleur extends HttpServlet {
                 request.getParameter("prenom"),
                 request.getParameter("mail"))) {
             request.setAttribute("logText", "Compte utilisateur créé avec succès !");
+            HttpSession session = request.getSession(true);
+            session.setAttribute("utilisateur", request.getParameter("login"));
         } else {
             request.setAttribute("logText", "Erreur lors de la création du compte utilisateur..");
         }
@@ -210,7 +212,7 @@ public class Controleur extends HttpServlet {
                 .forward(request, response);
     }
 
-    private void actionAddBooking(HttpServletRequest request, HttpServletResponse response, AchatDAO bookingDAO)
+    private void actionAddBooking(HttpServletRequest request, HttpServletResponse response, AchatDAO bookingDAO, DossierDAO dossierDAO)
             throws ServletException, IOException, DAOException {
         request.setAttribute("logBool", 1);
         if ("null".equals(request.getParameter("login"))) {
@@ -224,9 +226,7 @@ public class Controleur extends HttpServlet {
                 request.setAttribute("logText", "Erreur lors de l'achat..");
             }
         }
-        getServletContext()
-                .getRequestDispatcher("/addBooking.jsp")
-                .forward(request, response);
+        actionDisplayAccount(request, response, dossierDAO);
     }
 
     private void actionDisplayAddSalle(HttpServletRequest request, HttpServletResponse response, SalleDAO salleDAO) throws DAOException, ServletException, IOException {
