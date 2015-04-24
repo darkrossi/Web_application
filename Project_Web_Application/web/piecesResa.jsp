@@ -124,7 +124,7 @@
                     <dl class="dropdown">
                         <dt>
                         <a href="#">
-                            <span><h2>Notes</h2></span>   
+                            <span><h2>Popularité</h2></span>   
                             <p class="multiSel"></p> 
                         </a>
                         </dt>
@@ -133,31 +133,14 @@
                             <div class="mutliSelect">
                                 <ul>
                                     <li>
-                                        <p> </p>
-                                    </li>
+                                        <input type="checkbox" value="MeilleureNote" />Les mieux notés</li>
+                                    <li>
+                                        <input type="checkbox" value="GrandSpectacle" />Les plus vendues</li>
                                 </ul>
                             </div>
                         </dd>
                     </dl>
                     
-                    <dl class="dropdown">
-                        <dt>
-                        <a href="#">
-                            <span><h2>Ventes</h2></span>   
-                            <p class="multiSel"></p> 
-                        </a>
-                        </dt>
-
-                        <dd>
-                            <div class="mutliSelect">
-                                <ul>
-                                    <li>
-                                        <p> </p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </dd>
-                    </dl>
                     <button>Filtrer</button>
                 </div>         
                 <div class="col-md-5">
