@@ -42,15 +42,11 @@ and open the template in the editor.
                     <div class="es-carousel">
                         <ul>
                             <% AfficheDAO affiche = new AfficheDAO();
-                                try {
-                                    List<Affiche> affiches = affiche.getListeAffiches();
-                            if (!affiches.isEmpty()) {
+                                List<Affiche> affiches = affiche.getListeAffiches();
+                                if (!affiches.isEmpty()) {
                                     for (int i = 0; i < affiches.size(); i++) {%>
                             <li><a href="#"><img src="img/<%=affiches.get(i).toString()%>" data-large="img/<%=affiches.get(i).toString()%>" alt="image01" data-description="" /></a></li>
                                     <%}
-                                            }
-                                        } catch (DAOException e) {
-
                                         }%>
                         </ul>
                     </div>

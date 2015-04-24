@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modele.Affiche;
 
 /**
@@ -38,11 +40,17 @@ public class AfficheDAO {
         }
     }
 
-    public List<Affiche> getListeAffiches() throws DAOException, ClassNotFoundException, IOException, Exception {
-        Class.forName("oracle.jdbc.OracleDriver");
-        List<Affiche> affiches = new ArrayList<>();
-        Connection Connexion = DriverManager.getConnection(url, login, login);
+    public List<Affiche> getListeAffiches() {
         try {
+            Class.forName("oracle.jdbc.OracleDriver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AfficheDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        List<Affiche> affiches = new ArrayList<>();
+        Connection Connexion = null;
+        try {
+            Connexion = DriverManager.getConnection(url, login, login);
             Statement State = Connexion.createStatement();
             ResultSet resultat = State.executeQuery("SELECT NSP, Affiche FROM Spectacle");
             while (resultat.next()) {
@@ -52,11 +60,15 @@ public class AfficheDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Erreur BD " + e.getMessage(), e);
+
         } finally {
-            closeConnection(Connexion);
+            try {
+                closeConnection(Connexion);
+            } catch (DAOException ex) {
+                Logger.getLogger(AfficheDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
+
         if (affiches.isEmpty()) {
             affiches.add(new Affiche("empty.png"));
         }
