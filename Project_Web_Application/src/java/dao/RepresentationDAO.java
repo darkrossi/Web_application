@@ -57,10 +57,10 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
 
             requeteSQL = "select s.NbRa, r.NbP "
                     + "from Salle s, Rang r "
-                    + "where s.NSA = "+Integer.parseInt(NSa);
+                    + "where s.NSA = " + Integer.parseInt(NSa);
             rs = st.executeQuery(requeteSQL);
             rs.next();
-            nbPlaceSalle = rs.getInt("NbRa")*rs.getInt("NbP");
+            nbPlaceSalle = rs.getInt("NbRa") * rs.getInt("NbP");
 
             requeteSQL = "select * from Representation "
                     + "where NSp = " + Integer.parseInt(NSp) + " and DateR = '" + date + "'";
@@ -113,6 +113,35 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
                     //result.put(rs.getString("NomS"), new ArrayList<>());
                 }
                 result.get(rs.getString("NomS")).add(representation);
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(conn);
+        }
+        return result;
+    }
+
+    public Representation getRepres(int NSp) throws DAOException {
+        Representation result = new Representation();
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            Statement st = conn.createStatement();
+            requeteSQL = "select * "
+                    + "from Representation r, Spectacle s "
+                    + "where r.NSP = s.NSP and r.NSP = " + NSp;
+            rs = st.executeQuery(requeteSQL);
+            while (rs.next()) {
+                result = new Representation(rs.getInt("NR"),
+                        rs.getString("DateR"),
+                        rs.getString("HeureR"),
+                        rs.getInt("NSP"),
+                        rs.getInt("NSA"),
+                        rs.getInt("NbP"),
+                        rs.getString("Affiche"));
             }
         } catch (SQLException e) {
             throw new DAOException("Erreur BD " + e.getMessage(), e);

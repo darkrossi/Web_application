@@ -83,7 +83,7 @@
                 <li>
                     <a href="javascript:document.inputForm5.submit();">Catalogue</a>
                     <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm5">
-                        <input name="action" value="displayPieces" hidden="true">
+                        <input name="action" value="displayPiecesResa" hidden="true">
                     </form>
                 </li>
                 <li>

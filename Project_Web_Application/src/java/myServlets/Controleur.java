@@ -72,8 +72,10 @@ public class Controleur extends HttpServlet {
                 actionDisplayAddBooking(request, response, represDAO, 0);
             } else if (action.equals("addBooking")) {
                 actionAddBooking(request, response, achatDAO, dossierDAO, represDAO);
+            } else if (action.equals("displayPiecesResa")) {
+                actionDisplayPiecesResa(request, response, spectacleDAO, 0);
             } else if (action.equals("displayPieces")) {
-                actionDisplayPieces(request, response, spectacleDAO, 0);
+                actionDisplayPieces(request, response, spectacleDAO, represDAO, rangDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -252,12 +254,22 @@ public class Controleur extends HttpServlet {
                 .forward(request, response);
     }
 
-    private void actionDisplayPieces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, int logBool)
+    private void actionDisplayPiecesResa(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, int logBool)
             throws ServletException, IOException, DAOException {
         request.setAttribute("logBool", logBool);
         request.setAttribute("spectacles", spectacleDAO.getListeSpectacles());
         getServletContext()
                 .getRequestDispatcher("/piecesResa.jsp")
+                .forward(request, response);
+    }
+
+    private void actionDisplayPieces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, RepresentationDAO represDAO, RangDAO rangDAO)
+            throws ServletException, DAOException, IOException {
+        request.setAttribute("logBool", 0);
+        request.setAttribute("repres", represDAO.getRepresFromSp());
+        request.setAttribute("spectacle", spectacleDAO.getSpectacle(Integer.parseInt(request.getParameter(""))));
+        getServletContext()
+                .getRequestDispatcher("/pieces.jsp")
                 .forward(request, response);
     }
 }

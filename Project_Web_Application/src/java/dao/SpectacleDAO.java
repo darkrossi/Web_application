@@ -117,8 +117,32 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
      * @throws dao.DAOException
      */
     public Spectacle getSpectacle(int id) throws DAOException {
-        // ...
-        return null;
+        Spectacle result = new Spectacle();
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            Statement st = conn.createStatement();
+            requeteSQL = "select * from Spectacle where NSp = " + id;
+            rs = st.executeQuery(requeteSQL);
+            while (rs.next()) {
+                if (rs.getInt("NSP") != 0) {
+
+                    result = new Spectacle(rs.getInt("NSP"),
+                            rs.getString("NomS"),
+                            rs.getString("AuteurS"),
+                            rs.getString("MESS"),
+                            rs.getInt("DureeS"),
+                            rs.getString("Affiche"));
+                }
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(conn);
+        }
+        return result;
     }
 
     /**

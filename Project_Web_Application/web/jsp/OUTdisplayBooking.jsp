@@ -35,7 +35,8 @@
         <div class="col-md-6"> 
             <h1> <%= nomS%> </h1>
             <ul>
-                Quelques infos sur le spectacle
+                <li>Quelques infos sur le spectacle</li>
+                <li><button type="submit" >Réserver <span class="glyphicon glyphicon-arrow-down"></span></button></li>
             </ul>
         </div>
     </div>
@@ -55,6 +56,8 @@
                         <li>Auteur : <%=spectacles.get(i).getAuteur()%></li>
                         <li>Metteur en scéne : <%=spectacles.get(i).getMetteurEnScene()%></li>
                         <li>Durée : <%=spectacles.get(i).getDuree()%></li>
+                        <li>Durée : <%=spectacles.get(i).getDuree()%></li>
+                        <li><button type="submit" >Réserver <span class="glyphicon glyphicon-arrow-down"></span></button></li>
                         <!--Quelques infos sur le spectacle-->
                     </ul>
                 </div>
@@ -65,8 +68,8 @@
             }
         }%>
 
-    <button type="submit" >Réserver <span class="glyphicon glyphicon-arrow-down"></span></button>
-    <input hidden="true" name="action" value="addBooking"/>
+    <input hidden="true" name="action" value="displayPieces"/>
+    <input name="NSp" value="<%= userName%>" hidden="true">
     <input name="login" value="<%= userName%>" hidden="true">
 </form>
 
