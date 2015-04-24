@@ -46,7 +46,7 @@ public class AfficheDAO {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AfficheDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         List<Affiche> affiches = new ArrayList<>();
         Connection Connexion = null;
         try {
@@ -59,8 +59,8 @@ public class AfficheDAO {
                     affiches.add(new Affiche(url));
                 }
             }
-        } catch (SQLException e) {
-
+        } catch (SQLException ex) {
+            Logger.getLogger(AfficheDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 closeConnection(Connexion);

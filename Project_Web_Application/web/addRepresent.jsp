@@ -21,7 +21,9 @@
 
         <script>
             $(function () {
-                $("#datepicker").datepicker();
+                $("#datepicker").datepicker({
+                    dateFormat: "dd-mm-yy"
+                });
             });
         </script>
     </head>
@@ -64,7 +66,7 @@
                             <% if (!salles.isEmpty()) {
                                     for (int i = 0; i < salles.size(); i++) {%>
                             <option value="<%=salles.get(i).getNSa()%>"><%=salles.get(i).getNSa()%></option>
-                            <%} %>
+                            <%}%>
                         </select> 
                         <input id="valueSalle" name="valueSalle" value="<%=salles.get(0).getNSa()%>" hidden="true">
                         <%

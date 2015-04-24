@@ -49,7 +49,12 @@
                 <% if (userName != null && userName.equals("admin")) {%>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="pieces.jsp">Catalogue</a></li>
+                        <li>
+                            <a href="javascript:document.inputForm5.submit();">Catalogue</a>
+                            <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm5">
+                                <input name="action" value="displayPieces" hidden="true">
+                            </form>
+                        </li>
                         <li>
                             <a href="javascript:document.inputForm1.submit();">Réserver une place</a>
                             <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm1">
@@ -75,7 +80,12 @@
                     </ul>
                 </li>
                 <% } else {%>
-                <li><a href="pieces.jsp">Catalogue</a></li>
+                <li>
+                    <a href="javascript:document.inputForm5.submit();">Catalogue</a>
+                    <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm5">
+                        <input name="action" value="displayPieces" hidden="true">
+                    </form>
+                </li>
                 <li>
                     <a href="javascript:document.inputForm1.submit();">Réserver une place</a>
                     <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm1">

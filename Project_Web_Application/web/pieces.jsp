@@ -11,26 +11,27 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <jsp:include page="jsp/head.jsp"/>
+
+        <script src="js/place.js" type="text/javascript"></script>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/stylePieces.css" />
+
         <script>
             $("document").ready(function () {
                 $(".datepicker").datepicker();
             });
         </script>
         <script>
-            $(function(){
+            $(function () {
                 $("select").multiselect();
             });
         </script>
         <script>
-            $(document).ready(function(){
+            $(document).ready(function () {
                 $("#genre").multiselect();
             });
         </script>
-        <jsp:include page="jsp/head.jsp"/>
-
-        <script src="js/place.js" type="text/javascript"></script>
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="css/stylePieces.css" />
 
     </head>
     <body>
@@ -56,26 +57,11 @@
                     <h2>Ventes</h2>
 
                 </div>
-                <div class="col-md-6">
-                    <div class="fondBlock">
-                        <div id="DescriptionColonne1">
-                            <img src="img/affiche1.jpg" alt="Affiche1" class="affiche"  />
-                        </div>
-                        <div id="DescriptionColonne2">
-                            <ul>
-                                <li><h4>Nom</h4></li>
-                                <li><h4>Genre</h4></li>
-                                <li><h4>Date</h4></li>
-                                <li><h4>Notes</h4></li>
-                                <li><h4>J'aime</h4></li>
-                            </ul>
-                        </div>
-                        <div id="DescriptionColonne3">                 
-                            <input type="button" style="margin: 0px auto 0px auto;" class="boutton" value="Passer à la commande" >
 
-                        </div>
-                    </div>
+                <div class="col-md-6">
+                    <jsp:include page="jsp/OUTaddBooking.jsp"/>
                 </div>
+
                 <div class="col-md-3"> 
                     <h2 align="center"> Mes Réservations </h2>
                     <div id="colonneDate">
