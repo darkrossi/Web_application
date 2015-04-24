@@ -15,51 +15,48 @@
 <% HttpSession session2 = request.getSession(false);
     String userName = (String) session2.getAttribute("utilisateur");%>
 
-<form action="<%=request.getContextPath()%>/controleur" method="get">
-    <% if (request.getAttribute("spectacle") != null) {
-            Spectacle spect = (Spectacle) request.getAttribute("spectacle");
-            String nomS = spect.getTitre();
-    %>
-    <div class="row" style="margin-top: 10px;">
-        <div class="col-md-3">
-            <img src="img/<%=spect.getUrl()%>" data-large="img/<%=spect.getUrl()%>" alt=""
-                 style="width:150px;"/>
-        </div>
-        <div class="col-md-6"> 
-            <h1> <%= nomS%> </h1>
-            <!--Mettre les infos détaillées du spectacle-->
-            <ul>
-                <li>Auteur : <%=spect.getAuteur()%></li>
-                <li>Metteur en scéne : <%=spect.getMetteurEnScene()%></li>
-                <li>Durée : <%=spect.getDuree()%></li>
-                <li>Durée : <%=spect.getDuree()%></li>
-                <li><button type="submit" >Réserver <span class="glyphicon glyphicon-arrow-down"></span></button></li>
-                <!--Quelques infos sur le spectacle-->
-            </ul>
-            <ul>
-                <% if (request.getAttribute("repres") != null) {
-                        List<Representation> repres = (List<Representation>) request.getAttribute("repres");
-                        if (!repres.isEmpty()) {
-                            for (int i = 0; i < repres.size(); i++) {%>                                       
-                <li>
-                    <%= repres.get(i).getDate()%> - <%= repres.get(i).getHeure()%>
-                    <input type="number" name="nbP<%=repres.get(i).getNR()%>" value="0">
-                    <input type="checkbox" name="cbNR" value="<%=repres.get(i).getNR()%>">
-                </li>
-                <%}
-                        }
-                    }%>
-            </ul>
-
-
-        </div>
+<% if (request.getAttribute("spectacle") != null) {
+        Spectacle spect = (Spectacle) request.getAttribute("spectacle");
+        String nomS = spect.getTitre();
+%>
+<div class="row" style="margin-top: 10px;">
+    <div class="col-md-4">
+        <img src="img/<%=spect.getUrl()%>" data-large="img/<%=spect.getUrl()%>" alt=""
+             style="width:150px;"/>
     </div>
+    <div class="col-md-6"> 
+        <h1> <%= nomS%> </h1>
+        <!--Mettre les infos détaillées du spectacle-->
+        <ul>
+            <li>Auteur : <%=spect.getAuteur()%></li>
+            <li>Metteur en scéne : <%=spect.getMetteurEnScene()%></li>
+            <li>Durée : <%=spect.getDuree()%></li>
+            <li><button type="submit" >Réserver <span class="glyphicon glyphicon-arrow-down"></span></button></li>
+            <!--Quelques infos sur le spectacle-->
+        </ul>
+        <ul>
+            <% if (request.getAttribute("repres") != null) {
+                    List<Representation> repres = (List<Representation>) request.getAttribute("repres");
+                    if (!repres.isEmpty()) {
+                        for (int i = 0; i < repres.size(); i++) {%>                                       
+            <li>
+                <%= repres.get(i).getDate()%> - <%= repres.get(i).getHeure()%>
+                <input type="checkbox" name="cbNR" value="<%=repres.get(i).getNR()%>" onclick="document.inputForm6<%=repres.get(i).getNR()%>.submit();">
+                <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm6<%=repres.get(i).getNR()%>">
+                    <input name="action" value="displayPiecesPlaces" hidden="true">
+                </form>
+            </li>
+            <%}
+                    }
+                }%>
+        </ul>
+    </div>
+</div>
 
-    <button type="submit" >Réserver <span class="glyphicon glyphicon-arrow-down"></span></button>
-    <input hidden="true" name="action" value="addBooking"/>
-    <input name="login" value="<%= userName%>" hidden="true">
-    <% }%>
-</form>
+<button type="submit" >Réserver <span class="glyphicon glyphicon-arrow-down"></span></button>
+<input hidden="true" name="action" value="addBooking">
+<input name="login" value="<%= userName%>" hidden="true">
+<% }%>
 
 <%-- <% if (request.getAttribute("rangs") != null) {%>
                     Rang : <select id="selectRang" onchange="

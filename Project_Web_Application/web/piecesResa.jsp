@@ -1,9 +1,3 @@
-/* global dateFormat */
-
-/* global dateFormat */
-
-/* global dateFormat */
-
 <%-- 
     Document   : pieces
     Created on : 8 avr. 2015, 10:39:44
@@ -81,9 +75,8 @@
                     <h2>Note</h2>
                     <h2>Ventes</h2>
                     <button>Filtrer</button>
-                </div>
-
-                <div class="col-md-5">              
+                </div>         
+                <div class="col-md-5">
                     <jsp:include page="jsp/OUTdisplayBooking.jsp"/>
                 </div>
                 <div class="texte">

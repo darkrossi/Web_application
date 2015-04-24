@@ -8,6 +8,8 @@ package myServlets;
 import dao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sql.DataSource;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -32,24 +34,19 @@ public class Controleur extends HttpServlet {
      *
      * @param request
      * @param response
-     * @throws java.io.IOException
-     * @throws javax.servlet.ServletException
      */
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
-        PrintWriter out = response.getWriter();
-        String action = request.getParameter("action");
-
-        SpectacleDAO spectacleDAO = new SpectacleDAO(ds);
-        UtilisateurDAO userDAO = new UtilisateurDAO(ds);
-        RepresentationDAO represDAO = new RepresentationDAO(ds);
-        SalleDAO salleDAO = new SalleDAO(ds);
-        DossierDAO dossierDAO = new DossierDAO(ds);
-        AchatDAO achatDAO = new AchatDAO(ds);
-        RangDAO rangDAO = new RangDAO(ds);
-
+    public void doGet(HttpServletRequest request, HttpServletResponse response) {
         try {
+            PrintWriter out = response.getWriter();
+            String action = request.getParameter("action");
+            SpectacleDAO spectacleDAO = new SpectacleDAO(ds);
+            UtilisateurDAO userDAO = new UtilisateurDAO(ds);
+            RepresentationDAO represDAO = new RepresentationDAO(ds);
+            SalleDAO salleDAO = new SalleDAO(ds);
+            DossierDAO dossierDAO = new DossierDAO(ds);
+            AchatDAO achatDAO = new AchatDAO(ds);
+            RangDAO rangDAO = new RangDAO(ds);
             if (action == null) {
                 actionAfficher(request, response, spectacleDAO);
             } else if (action.equals("addS")) {
@@ -81,11 +78,16 @@ public class Controleur extends HttpServlet {
                         .getRequestDispatcher("/ErrorRequest.jsp")
                         .forward(request, response);
             }
-        } catch (DAOException e) {
-            request.setAttribute("log", e.toString());
-            getServletContext()
-                    .getRequestDispatcher("/ErrorBdd.jsp")
-                    .forward(request, response);
+        } catch (ServletException | IOException | DAOException ex) {
+            request.setAttribute("log", ex.toString());
+            try {
+                getServletContext()
+                        .getRequestDispatcher("/ErrorBdd.jsp")
+                        .forward(request, response);
+            } catch (IOException | ServletException ex1) {
+                Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+
         }
     }
 
@@ -266,8 +268,8 @@ public class Controleur extends HttpServlet {
     private void actionDisplayPieces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, RepresentationDAO represDAO, RangDAO rangDAO)
             throws ServletException, DAOException, IOException {
         request.setAttribute("logBool", 0);
-        request.setAttribute("repres", represDAO.getRepresFromSp());
-        request.setAttribute("spectacle", spectacleDAO.getSpectacle(Integer.parseInt(request.getParameter(""))));
+        request.setAttribute("repres", represDAO.getRepres(Integer.parseInt(request.getParameter("NSp"))));
+        request.setAttribute("spectacle", spectacleDAO.getSpectacle(Integer.parseInt(request.getParameter("NSp"))));
         getServletContext()
                 .getRequestDispatcher("/pieces.jsp")
                 .forward(request, response);
