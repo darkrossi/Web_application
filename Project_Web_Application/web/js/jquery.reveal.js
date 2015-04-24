@@ -23,7 +23,15 @@
         $('#' + modalLocation).reveal($(this).data());
         $("#prenom").focus();
         $("#loginU").focus();
+    });    
+    
+    $('img[data-reveal-id]').live('click', function (e) {
+        e.preventDefault();
+        var modalLocation = $(this).attr('data-reveal-id');
+        $('#' + modalLocation).reveal($(this).data());
     });
+    
+    
 
     /*---------------------------
      Extend and Execute

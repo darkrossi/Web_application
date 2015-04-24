@@ -4,6 +4,8 @@
     Author     : oswald
 --%>
 
+<%@page import="modele.Representation"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,6 +22,7 @@
         <script>
             $("document").ready(function () {
                 $(".datepicker").datepicker();
+                dateFormat: "dd-mm-yy";
             });
         </script>
         <script>
@@ -35,7 +38,9 @@
 
     </head>
     <body>
-
+        <?php
+            include("php/panier.php");
+        ?>
         <jsp:include page="jsp/navbar.jsp"/>
 
         <div class="container-fluid" >
@@ -65,16 +70,18 @@
                 <div class="col-md-3"> 
                     <h2 align="center"> Mes Réservations </h2>
                     <div id="colonneDate">
-                        <h3 align="center">Date</h3>
-                    </div>
-                    <div id="colonneHeure">
-                        <h3 align="center">Heure</h3>
+                        <% if (request.getAttribute("representation") != null) {
+                                    List<Representation> representation = (List<Representation>) request.getAttribute("representation");
+                                    if (!representation.isEmpty()) {
+                                        for (int i = 0; i < representation.size(); i++) {%>
+                                            <option value="<%=representation.get(i).getDate()%>"><%=representation.get(i).getHeure()%></option>
+                            <%}%>
                     </div>
 
                     <div class="large-2 columns">
 
                         <!-- Proposition : Faire un menu déroulant pour catégorie et un autre pour les types (orchestre, corbeille..) -->
-
+                        <%--
                         <h3 align="center"> Choisissez vos places </h3>
                         <h4 class= "ligne"> Choix automatique </h4><form method="post" action="traitement.php">
                             <h4> Choix sur plan </h4>
@@ -158,7 +165,13 @@
                                     </h5></li>
                             </ul>
                             <h4> Total </h4>
-                            <input  type="submit" class="Réserver ma place" />
+                            --%>
+                            <%--<input  type="submit" class="Réserver mes places" /> --%>
+                                <a href="php/panier.php?action=ajout&amp;l=LIBELLEPRODUIT&amp;q=QUANTITEPRODUIT&amp;
+                                   p=PRIXPRODUIT" onclick="window.open(this.href, '', 'toolbar=no, location=no, \n\
+                                   directories=no, status=yes, scrollbars=yes, resizable=yes, copyhistory=no, width=600,\n\
+                                     height=350'); return false;">Ajouter au panier
+                                </a>
                             <div class="clearfix visible-lg"></div>
                     </div>
                 </div>

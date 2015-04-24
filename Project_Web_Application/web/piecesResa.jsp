@@ -36,6 +36,7 @@
 
                 </div>
                 <div class="col-md-6">
+<<<<<<< HEAD
                     <div class="fondBlock">
                         <div id="DescriptionColonne1">
                             <img src="img/affiche1.jpg" alt="Affiche1" class="affiche"  />
@@ -53,6 +54,9 @@
                             <input type="button" style="margin: 0px auto 0px auto;" onclick="display_hid('texte')" class="boutton" value="Passer à la commande" >
                         </div>
                     </div>
+=======
+                    <jsp:include page="jsp/OUTdisplayBooking.jsp"/>
+>>>>>>> 13ddf45f0331a5cea7b9f4a2ecceb2e94d4f6f8b
                 </div>
                 <div class="texte">
                     <div class="col-md-3"> 

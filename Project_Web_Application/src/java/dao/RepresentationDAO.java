@@ -110,7 +110,7 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
                         rs.getString("Affiche"));
                 System.err.println(representation);
                 if (!result.containsKey(rs.getString("NomS"))) {
-                    result.put(rs.getString("NomS"), new ArrayList<>());
+                    //result.put(rs.getString("NomS"), new ArrayList<>());
                 }
                 result.get(rs.getString("NomS")).add(representation);
             }
