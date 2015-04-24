@@ -46,7 +46,7 @@
         <jsp:include page="jsp/navbar.jsp"/>
 
         <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h2>Recherche</h2>
                     <form>
                     <input type="text" name="BarreRecherche" value placeholder="Mots clés">
@@ -86,7 +86,7 @@
                 </div>
 
 
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <jsp:include page="jsp/OUTaddBooking.jsp"/>
                 </div>
 

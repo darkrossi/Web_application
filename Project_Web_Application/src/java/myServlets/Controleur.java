@@ -268,7 +268,7 @@ public class Controleur extends HttpServlet {
     private void actionDisplayPieces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, RepresentationDAO represDAO, RangDAO rangDAO)
             throws ServletException, DAOException, IOException {
         request.setAttribute("logBool", 0);
-        request.setAttribute("repres", represDAO.getRepresFromSp());
+        request.setAttribute("repres", represDAO.getRepres(Integer.parseInt(request.getParameter("NSp"))));
         request.setAttribute("spectacle", spectacleDAO.getSpectacle(Integer.parseInt(request.getParameter("NSp"))));
         getServletContext()
                 .getRequestDispatcher("/pieces.jsp")

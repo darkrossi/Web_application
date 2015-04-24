@@ -21,14 +21,14 @@
     });
 </script>
 
-<form action="<%=request.getContextPath()%>/controleur" method="get">
+<form name="form" action="<%=request.getContextPath()%>/controleur" method="get">
     <% if (request.getAttribute("spectacles") != null) {
             List<Spectacle> spectacles = (List<Spectacle>) request.getAttribute("spectacles");
             if (!spectacles.isEmpty()) {
                 for (int i = 0; i < spectacles.size(); i++) {
                     String nomS = spectacles.get(i).getTitre();%>
     <div class="row" style="margin-top: 10px;">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <img data-reveal-id="myModal<%=spectacles.get(i).getId()%>" src="img/<%=spectacles.get(i).getUrl()%>" data-large="img/<%=spectacles.get(i).getUrl()%>" alt=""
                  style="width:150px;"/>
         </div>
@@ -36,7 +36,8 @@
             <h1> <%= nomS%> </h1>
             <ul>
                 <li>Quelques infos sur le spectacle</li>
-                <li><button type="submit" >Réserver <span class="glyphicon glyphicon-arrow-down"></span></button></li>
+                <li><button onclick="$('#NSp').attr('value', '<%=spectacles.get(i).getId()%>');
+                        document.form.submit();"> Réserver <span class="glyphicon glyphicon-arrow-down"></span></button></li>
             </ul>
         </div>
     </div>
@@ -56,11 +57,11 @@
                         <li>Auteur : <%=spectacles.get(i).getAuteur()%></li>
                         <li>Metteur en scéne : <%=spectacles.get(i).getMetteurEnScene()%></li>
                         <li>Durée : <%=spectacles.get(i).getDuree()%></li>
-                        <li>Durée : <%=spectacles.get(i).getDuree()%></li>
-                        <li><button type="submit" onsubmit="
-                                $('NSp').attr('value', <%=spectacles.get(i).getId()%>);
-                                ">
-                                Réserver <span class="glyphicon glyphicon-arrow-down"></span></button></li>
+                        <li><button onclick="$('#NSp').attr('value', '<%=spectacles.get(i).getId()%>');
+                                document.form.submit();">
+                                Réserver <span class="glyphicon glyphicon-arrow-down"></span>
+                            </button>
+                        </li>
                         <!--Quelques infos sur le spectacle-->
                     </ul>
                 </div>
@@ -71,7 +72,7 @@
             }
         }%>
 
-    <input hidden="true" name="action" value="displayPieces"/>
+    <input hidden="true" name="action" value="displayPieces">
     <input id="NSp" name="NSp" value="0" hidden="true">
     <input name="login" value="<%= userName%>" hidden="true">
 </form>

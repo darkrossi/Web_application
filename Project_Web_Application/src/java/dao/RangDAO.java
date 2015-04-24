@@ -50,7 +50,7 @@ public class RangDAO extends AbstractDataBaseDAO {
             Place place;
             while (rs.next()) {
                 if (rangs.get(rs.getInt("NRA")) == null) {
-                    //rangs.put(rs.getInt("NRa"), new ArrayList<>());
+                    rangs.put(rs.getInt("NRa"), new ArrayList<>());
                 }
                 place = new Place(rs.getInt("NP"));
                 System.err.println(place);
