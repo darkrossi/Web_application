@@ -15,10 +15,6 @@ import org.jdom2.*;
  */
 public class Spectacle {
 
-    static org.jdom2.Document document;
-    static Element racine;
-    static String login;
-
     private int id;
     private String titre;
     private String auteur;
@@ -28,6 +24,16 @@ public class Spectacle {
     private String url;
 
     public Spectacle() {
+    }
+
+    public Spectacle(int id, String titre, String auteur, String metteurEnScene, int duree, String url) {
+        this.id = id;
+        this.titre = titre;
+        this.auteur = auteur;
+        this.metteurEnScene = metteurEnScene;
+        this.comediens = new ArrayList<>();
+        this.duree = duree;
+        this.url = url;
     }
 
     public Spectacle(int id, String titre, String auteur, String metteurEnScene, ArrayList<String> comediens, int duree) {
@@ -44,7 +50,7 @@ public class Spectacle {
         this.titre = titre;
         this.auteur = auteur;
         this.metteurEnScene = metteurEnScene;
-        this.comediens = new ArrayList<String>();
+        this.comediens = new ArrayList<>();
         this.duree = duree;
     }
 
@@ -140,5 +146,19 @@ public class Spectacle {
         } else {
             return false;
         }
+    }
+
+    /**
+     * @return the url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * @param url the url to set
+     */
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

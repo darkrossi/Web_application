@@ -73,7 +73,7 @@ public class Controleur extends HttpServlet {
             } else if (action.equals("addBooking")) {
                 actionAddBooking(request, response, achatDAO, dossierDAO, represDAO);
             } else if (action.equals("displayPieces")) {
-                actionDisplayPieces(request, response, represDAO, 0);
+                actionDisplayPieces(request, response, spectacleDAO, 0);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -252,19 +252,12 @@ public class Controleur extends HttpServlet {
                 .forward(request, response);
     }
 
-//    private void actionAddBookingFinal(HttpServletRequest request, HttpServletResponse response, RangDAO rangDAO) {
-//        request.setAttribute("logBool", 0);
-//        request.setAttribute("repres", rangDAO.getRangs(request.getParameter)));
-//        getServletContext()
-//                .getRequestDispatcher("/addBooking.jsp")
-//                .forward(request, response);
-//    }
-    private void actionDisplayPieces(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO, int logBool)
+    private void actionDisplayPieces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, int logBool)
             throws ServletException, IOException, DAOException {
         request.setAttribute("logBool", logBool);
-        request.setAttribute("repres", represDAO.getRepresFromSp());
+        request.setAttribute("spectacles", spectacleDAO.getListeSpectacles());
         getServletContext()
-                .getRequestDispatcher("/pieces.jsp")
+                .getRequestDispatcher("/piecesResa.jsp")
                 .forward(request, response);
     }
 }

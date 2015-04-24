@@ -47,11 +47,13 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
                 if (rs.getInt("NSP") != 0) {
+
                     Spectacle spectacle = new Spectacle(rs.getInt("NSP"),
                             rs.getString("NomS"),
                             rs.getString("AuteurS"),
                             rs.getString("MESS"),
-                            rs.getInt("DureeS"));
+                            rs.getInt("DureeS"),
+                            rs.getString("Affiche"));
                     System.err.println(spectacle);
                     result.add(spectacle);
                 }

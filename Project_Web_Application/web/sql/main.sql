@@ -5,9 +5,9 @@
 -- SELECT * from Representation;
 -- SELECT * from Salle;
 -- SELECT * from Rang;
-SELECT * from Place;
+-- SELECT * from Place;
 -- SELECT * from Users;
-SELECT * from Dossier;
+-- SELECT * from Dossier;
 -- SELECT * from Ticket;
 
 -- DROP TABLE Dossier;
@@ -24,3 +24,5 @@ SELECT * from Dossier;
 -- FROM Representation2;
 
 -- select * from Rang r, Place p where r.NSa = 1 and p.NRa = r.NRa and p.isTaken = 0;
+
+DELETE FROM Dossier;

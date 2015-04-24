@@ -35,23 +35,7 @@
 
                 </div>
                 <div class="col-md-6">
-                    <div class="fondBlock">
-                        <div id="DescriptionColonne1">
-                            <img src="img/affiche1.jpg" alt="Affiche1" class="affiche"  />
-                        </div>
-                        <div id="DescriptionColonne2">
-                            <ul>
-                                <li><h4>Nom</h4></li>
-                                <li><h4>Genre</h4></li>
-                                <li><h4>Date</h4></li>
-                                <li><h4>Notes</h4></li>
-                                <li><h4>J'aime</h4></li>
-                            </ul>
-                        </div>
-                        <div id="DescriptionColonne3">                 
-                            <input type="button" style="margin: 0px auto 0px auto;" class="boutton" value="Passer à la commande" >
-                        </div>
-                    </div>
+                    <jsp:include page="jsp/OUTdisplayBooking.jsp"/>
                 </div>
                 <div class="col-md-3"> 
                     <h2 align="center"> Mes Réservations </h2>
