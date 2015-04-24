@@ -41,7 +41,7 @@
                     <%-- <input type="text" name="PrixMax" value placeholder="à"> --%>
                     <span> à </span>
                     <script type="text/javascript">prix();</script>
-
+                    <p> </p>
                     <dl class="dropdown">
                         <dt>
                             <a href="#">
