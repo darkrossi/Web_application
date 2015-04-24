@@ -43,8 +43,12 @@
                             for (int i = 0; i < repres.size(); i++) {%>                                       
                 <li>
                     <%= repres.get(i).getDate()%> - <%= repres.get(i).getHeure()%>
-                    <input type="number" name="nbP<%=repres.get(i).getNR()%>" value="0">
-                    <input type="checkbox" name="cbNR" value="<%=repres.get(i).getNR()%>">
+                    <input type="checkbox" name="cbNR" value="<%=repres.get(i).getNR()%>" onclick="
+                            javascript:document.inputForm6<%=repres.get(i).getNR()%>.submit();
+                           ">
+                    <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm6<%=repres.get(i).getNR()%>">
+                        <input name="action" value="displayPiecesPlaces" hidden="true">
+                    </form>
                 </li>
                 <%}
                         }

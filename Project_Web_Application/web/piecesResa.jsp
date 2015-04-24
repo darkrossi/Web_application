@@ -22,8 +22,8 @@
     <body>
         <div class="container-fluid" >
 
-         <jsp:include page="jsp/navbar.jsp"/>
-            
+            <jsp:include page="jsp/navbar.jsp"/>
+
             <div class="row">
                 <div class="col-md-3">
                     <h2>Date</h2>
@@ -36,27 +36,7 @@
 
                 </div>
                 <div class="col-md-6">
-<<<<<<< HEAD
-                    <div class="fondBlock">
-                        <div id="DescriptionColonne1">
-                            <img src="img/affiche1.jpg" alt="Affiche1" class="affiche"  />
-                        </div>
-                        <div id="DescriptionColonne2">
-                            <ul>
-                                <li><h4>Nom</h4></li>
-                                <li><h4>Genre</h4></li>
-                                <li><h4>Date</h4></li>
-                                <li><h4>Notes</h4></li>
-                                <li><h4>J'aime</h4></li>
-                            </ul>
-                        </div>
-                        <div id="DescriptionColonne3">                 
-                            <input type="button" style="margin: 0px auto 0px auto;" onclick="display_hid('texte')" class="boutton" value="Passer à la commande" >
-                        </div>
-                    </div>
-=======
                     <jsp:include page="jsp/OUTdisplayBooking.jsp"/>
->>>>>>> 13ddf45f0331a5cea7b9f4a2ecceb2e94d4f6f8b
                 </div>
                 <div class="texte">
                     <div class="col-md-3"> 

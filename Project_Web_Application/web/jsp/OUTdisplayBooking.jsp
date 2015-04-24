@@ -57,7 +57,10 @@
                         <li>Metteur en scéne : <%=spectacles.get(i).getMetteurEnScene()%></li>
                         <li>Durée : <%=spectacles.get(i).getDuree()%></li>
                         <li>Durée : <%=spectacles.get(i).getDuree()%></li>
-                        <li><button type="submit" >Réserver <span class="glyphicon glyphicon-arrow-down"></span></button></li>
+                        <li><button type="submit" onsubmit="
+                                $('NSp').attr('value', <%=spectacles.get(i).getId()%>);
+                                ">
+                                Réserver <span class="glyphicon glyphicon-arrow-down"></span></button></li>
                         <!--Quelques infos sur le spectacle-->
                     </ul>
                 </div>
@@ -69,7 +72,7 @@
         }%>
 
     <input hidden="true" name="action" value="displayPieces"/>
-    <input name="NSp" value="<%= userName%>" hidden="true">
+    <input id="NSp" name="NSp" value="0" hidden="true">
     <input name="login" value="<%= userName%>" hidden="true">
 </form>
 
