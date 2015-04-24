@@ -29,6 +29,10 @@ form{
     background-color : green;
 }
 
+.hida{
+    text-align: center;
+    
+}
 #BlockResa{
      display:block;
      margin:auto;
