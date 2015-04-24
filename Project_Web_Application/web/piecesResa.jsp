@@ -14,6 +14,7 @@
         <jsp:include page="jsp/head.jsp"/>
 
         <script src="js/place.js" type="text/javascript"></script>
+        <script src="js/display_hid.js" type="text/javascript"></script>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/stylePieces.css" />
 
@@ -21,8 +22,8 @@
     <body>
         <div class="container-fluid" >
 
-            <jsp:include page="jsp/navbar.jsp"/>
-
+         <jsp:include page="jsp/navbar.jsp"/>
+            
             <div class="row">
                 <div class="col-md-3">
                     <h2>Date</h2>
@@ -49,20 +50,22 @@
                             </ul>
                         </div>
                         <div id="DescriptionColonne3">                 
-                            <input type="button" style="margin: 0px auto 0px auto;" class="boutton" value="Passer à la commande" >
+                            <input type="button" style="margin: 0px auto 0px auto;" onclick="display_hid('texte')" class="boutton" value="Passer à la commande" >
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3"> 
-                    <h2 align="center"> Mes Réservations </h2>
-                    <p>
-                        <input type="text" name="datepicker_input3" class="datepicker"  style="display:block; margin:auto;" value placeholder ="Choisissez votre date">              
-                    </p>
-                    <p>
-                        <input type="button" class="boutton1" value="Réserver ma place" >
-                    </p>
+                <div class="texte">
+                    <div class="col-md-3"> 
+                        <h2 align="center"> Mes Réservations </h2>
+                        <p>
+                            <input type="text" name="datepicker_input3" class="datepicker"  style="display:block; margin:auto;" value placeholder ="Choisissez votre date">              
+                        </p>
+                        <p>
+                            <%-- <input type="button" class="boutton1" value="Réserver ma place" > --%>
+                            <a href="pieces.jsp"> Reserver
+                        </p>
+                    </div>
                 </div>
-
             </div>
         </div>
     </body>
