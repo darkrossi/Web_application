@@ -31,6 +31,16 @@ public class Representation {
         this.NbP = NbP;
         this.urlImg = urlImg;
     }
+    
+    public Representation(int NR, String date, String heure, int NSp, int NSa, int NbP) {
+        this.NR = NR;
+        this.date = date;
+        this.heure = heure;
+        this.NSp = NSp;
+        this.NSa = NSa;
+        this.NbP = NbP;
+        this.urlImg = "";
+    }
 
     /**
      * @return the NR

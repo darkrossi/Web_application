@@ -72,7 +72,9 @@ public class Controleur extends HttpServlet {
             } else if (action.equals("displayPiecesResa")) {
                 actionDisplayPiecesResa(request, response, spectacleDAO, 0);
             } else if (action.equals("displayPieces")) {
-                actionDisplayPieces(request, response, spectacleDAO, represDAO, rangDAO);
+                actionDisplayPieces(request, response, spectacleDAO, represDAO);
+            } else if (action.equals("displayPiecesPlaces")) {
+                actionDisplayPiecesPlaces(request, response, spectacleDAO, represDAO, rangDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -265,13 +267,20 @@ public class Controleur extends HttpServlet {
                 .forward(request, response);
     }
 
-    private void actionDisplayPieces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, RepresentationDAO represDAO, RangDAO rangDAO)
+    private void actionDisplayPieces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, RepresentationDAO represDAO)
             throws ServletException, DAOException, IOException {
         request.setAttribute("logBool", 0);
-        request.setAttribute("repres", represDAO.getRepres(Integer.parseInt(request.getParameter("NSp"))));
+        request.setAttribute("repres", represDAO.getRepresList(Integer.parseInt(request.getParameter("NSp"))));
         request.setAttribute("spectacle", spectacleDAO.getSpectacle(Integer.parseInt(request.getParameter("NSp"))));
         getServletContext()
                 .getRequestDispatcher("/pieces.jsp")
                 .forward(request, response);
+    }
+
+    private void actionDisplayPiecesPlaces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectDAO, RepresentationDAO represDAO, RangDAO rangDAO)
+            throws DAOException, ServletException, IOException {
+        request.setAttribute("represPicked", represDAO.getRepres(Integer.parseInt(request.getParameter("NR"))));
+        request.setAttribute("rangs", rangDAO.getRangs(Integer.parseInt(request.getParameter("NSa"))));
+        actionDisplayPieces(request, response, spectDAO, represDAO);
     }
 }

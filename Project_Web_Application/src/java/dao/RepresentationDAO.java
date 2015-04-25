@@ -122,7 +122,7 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
         return result;
     }
 
-    public List<Representation> getRepres(int NSp) throws DAOException {
+    public List<Representation> getRepresList(int NSp) throws DAOException {
         List<Representation> result = new ArrayList<>();
         ResultSet rs = null;
         String requeteSQL = "";
@@ -143,6 +143,34 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
                         rs.getInt("NbP"),
                         rs.getString("Affiche"));
                 result.add(repres);
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(conn);
+        }
+        return result;
+    }
+
+    public Representation getRepres(int NR) throws DAOException {
+        Representation result = new Representation();
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            Statement st = conn.createStatement();
+            requeteSQL = "select * "
+                    + "from Representation "
+                    + "where NR = " + NR;
+            rs = st.executeQuery(requeteSQL);
+            while (rs.next()) {
+                result = new Representation(rs.getInt("NR"),
+                        rs.getString("DateR"),
+                        rs.getString("HeureR"),
+                        rs.getInt("NSP"),
+                        rs.getInt("NSA"),
+                        rs.getInt("NbP"));
             }
         } catch (SQLException e) {
             throw new DAOException("Erreur BD " + e.getMessage(), e);

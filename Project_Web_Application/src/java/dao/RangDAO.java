@@ -42,22 +42,22 @@ public class RangDAO extends AbstractDataBaseDAO {
             rs.next();
             int nbRg = rs.getInt("NbRa");
 
-            requeteSQL = "select NRa, NP "
+            requeteSQL = "select r.NRa, p.NP "
                     + "from Rang r, Place p "
                     + "where r.NSA = " + NSa + " and r.NRa = p.NRa";
             rs = st.executeQuery(requeteSQL);
 
             Place place;
             while (rs.next()) {
-                if (rangs.get(rs.getInt("NRA")) == null) {
-                    rangs.put(rs.getInt("NRa"), new ArrayList<>());
+                if (rangs.get(rs.getInt(1)) == null) {
+                    rangs.put(rs.getInt(1), new ArrayList<>());
                 }
-                place = new Place(rs.getInt("NP"));
+                place = new Place(rs.getInt(2));
                 System.err.println(place);
-                rangs.get(rs.getInt("NRA")).add(place);
+                rangs.get(rs.getInt(1)).add(place);
             }
         } catch (SQLException e) {
-            throw new DAOException("Erreur BD " + e.getMessage(), e);
+            throw new DAOException("Erreur BD " + e.getMessage() + " " + requeteSQL, e);
         } finally {
             closeConnection(conn);
         }

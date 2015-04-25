@@ -46,7 +46,7 @@
         <jsp:include page="jsp/navbar.jsp"/>
 
         <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <h2>Recherche</h2>
                     <form>
                     <input type="text" name="BarreRecherche" value placeholder="Mots clés">
@@ -93,13 +93,13 @@
                 <div class="col-md-3"> 
                     <h2 align="center"> Mes Réservations </h2>
                     <div class="row">
-                        <div class="col-md-1" id="colonneDate">
+                        <div class="col-md-3">
                             <% if (request.getAttribute("represPicked") != null) {
                                     Representation representation = (Representation) request.getAttribute("represPicked"); %>
                             <p><%= representation.getDate()%></p>
                             <% }%>
                         </div>
-                        <div class="col-md-1" id="colonneHeure">
+                        <div class="col-md-3">
                             <% if (request.getAttribute("represPicked") != null) {
                                     Representation representation = (Representation) request.getAttribute("represPicked");%>
                             <p><%=representation.getHeure()%></p>

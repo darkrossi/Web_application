@@ -21,8 +21,7 @@
 %>
 <div class="row" style="margin-top: 10px;">
     <div class="col-md-4">
-        <img src="img/<%=spect.getUrl()%>" data-large="img/<%=spect.getUrl()%>" alt=""
-             style="width:150px;"/>
+        <img src="img/<%=spect.getUrl()%>" data-large="img/<%=spect.getUrl()%>" alt="" style="width:150px;"/>
     </div>
     <div class="col-md-6"> 
         <h1> <%= nomS%> </h1>
@@ -31,7 +30,6 @@
             <li>Auteur : <%=spect.getAuteur()%></li>
             <li>Metteur en scéne : <%=spect.getMetteurEnScene()%></li>
             <li>Durée : <%=spect.getDuree()%></li>
-            <li><button type="submit" >Réserver <span class="glyphicon glyphicon-arrow-down"></span></button></li>
             <!--Quelques infos sur le spectacle-->
         </ul>
         <ul>
@@ -41,9 +39,12 @@
                         for (int i = 0; i < repres.size(); i++) {%>                                       
             <li>
                 <%= repres.get(i).getDate()%> - <%= repres.get(i).getHeure()%>
-                <input type="checkbox" name="cbNR" value="<%=repres.get(i).getNR()%>" onclick="document.inputForm6<%=repres.get(i).getNR()%>.submit();">
+                <input type="checkbox" onclick="document.inputForm6<%=repres.get(i).getNR()%>.submit();">
                 <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm6<%=repres.get(i).getNR()%>">
                     <input name="action" value="displayPiecesPlaces" hidden="true">
+                    <input name="NR" value="<%= repres.get(i).getNR() %>" hidden="true">
+                    <input name="NSa" value="<%= repres.get(i).getNSa() %>" hidden="true">
+                    <input name="NSp" value="<%= repres.get(i).getNSp() %>" hidden="true">
                 </form>
             </li>
             <%}
