@@ -26,28 +26,76 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    <h2>Recherche</h2>
-                    <form>
-                        <input type="text" name="BarreRecherche" value placeholder="Mots clés">
-                        <input type="submit" value="Rechercher">
-                    </form>
-                    <h2>Date</h2>
-                    <input type="text" name="datepicker_input1" class="datepicker" value placeholder="Du">
-                    <input type="text" name="datepicker_input2" class="datepicker" value placeholder="Au">
-                    <h2>Prix</h2>
-                    <%--<input type="text" name="PrixMin" value placeholder="De"> --%>
-                    <span> De </span>
-                    <script type="text/javascript">prix();</script>
-                    <%-- <input type="text" name="PrixMax" value placeholder="à"> --%>
-                    <span> à </span>
-                    <script type="text/javascript">prix();</script>
-                    <p> </p>
                     <dl class="dropdown">
                         <dt>
-                            <a href="#">
-                                <span class="hida" ><h4>Genre</h4></span>   
-                                <p class="multiSel"></p> 
-                            </a>
+                        <a href="#">
+                            <span><h2>Recherche</h2></span>   
+                            <p class="multiSel"></p> 
+                        </a>
+                        </dt>
+
+                        <dd>
+                            <div class="mutliSelect">
+                                <ul>
+                                    <li>
+                                        <form>
+                                            <input type="text" name="BarreRecherche" value placeholder="Mots clés">
+                                            <input type="submit" value="Rechercher">
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </dd>
+                    </dl>
+                    
+                    <dl class="dropdown">
+                        <dt>
+                        <a href="#">
+                            <span><h2>Date</h2></span>   
+                            <p class="multiSel"></p> 
+                        </a>
+                        </dt>
+
+                        <dd>
+                            <div class="mutliSelect">
+                                <ul>
+                                    <li>
+                                        <input type="text" name="datepicker_input1" class="datepicker" value placeholder="Du">
+                                        <input type="text" name="datepicker_input2" class="datepicker" value placeholder="Au">
+                                    </li>
+                                </ul>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="dropdown">
+                        <dt>
+                        <a href="#">
+                            <span><h2>Prix</h2></span>   
+                            <p class="multiSel"></p> 
+                        </a>
+                        </dt>
+
+                        <dd>
+                            <div class="mutliSelect">
+                                <ul>
+                                    <li>
+                                        <span> De </span>
+                                        <script type="text/javascript">prix();</script>
+                                        <span> à </span>
+                                        <script type="text/javascript">prix();</script>
+                                        <p> </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </dd>
+                    </dl>
+                  
+                    <dl class="dropdown">
+                        <dt>
+                        <a href="#">
+                            <span><h2>Genre</h2></span>   
+                            <p class="multiSel"></p> 
+                        </a>
                         </dt>
 
                         <dd>
@@ -72,8 +120,27 @@
                             </div>
                         </dd>
                     </dl>
-                    <h2>Note</h2>
-                    <h2>Ventes</h2>
+                    
+                    <dl class="dropdown">
+                        <dt>
+                        <a href="#">
+                            <span><h2>Popularité</h2></span>   
+                            <p class="multiSel"></p> 
+                        </a>
+                        </dt>
+
+                        <dd>
+                            <div class="mutliSelect">
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" value="MeilleureNote" />Les mieux notés</li>
+                                    <li>
+                                        <input type="checkbox" value="GrandSpectacle" />Les plus vendues</li>
+                                </ul>
+                            </div>
+                        </dd>
+                    </dl>
+                    
                     <button>Filtrer</button>
                 </div>         
                 <div class="col-md-5">
