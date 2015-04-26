@@ -46,19 +46,19 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <p><b>Nombre de rang</b></p>
                         <p><b>Tarif du rang</b></p>
                         <p><b>Nombre de places par rang</b></p>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <form action="<%=request.getContextPath()%>/controleur" method="get">
                             <input type="number" name="nbRa" value="1"><br>
                             <input type="number" name="catTarif" value="1"><br>
                             <input type="number" name="nbP" value="1"><br>
                             <button type="submit "> Ajouter salle </button><br>
                             <input hidden="true" name="action" value="addSalle"><br>
-                        </form>
+                        </form>s
                     </div>
                 </div>
             </div>
