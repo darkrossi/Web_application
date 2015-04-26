@@ -20,9 +20,6 @@
         String nomS = spect.getTitre();
 %>
 
-<script type="text/javascript" src="js/etoile.js"></script>
-<link rel="stylesheet" type="text/css" href="css/etoile.css">
-
 <div class="row" style="margin-top: 10px;">
     <div class="col-md-4">
         <img src="img/<%=spect.getUrl()%>" data-large="img/<%=spect.getUrl()%>" alt="" style="width:150px;"/>
@@ -38,11 +35,6 @@
             <li>Metteur en scène : <%=spect.getMetteurEnScene()%></li>
             <li>Durée : <%=spect.getDuree()%> mins</li>
             <li>Comédiens : <%=spect.getComediens()%> </li>
-            <div id="etoile">
-                <script type="text/javascript">
-                    CreateListeEtoile('etoile', 5);
-                </script>
-            </div> 
             <!--Quelques infos sur le spectacle-->
         </ul>
         <ul>
