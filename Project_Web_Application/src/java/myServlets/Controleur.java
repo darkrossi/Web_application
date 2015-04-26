@@ -46,7 +46,9 @@ public class Controleur extends HttpServlet {
             AchatDAO achatDAO = new AchatDAO(ds);
             RangDAO rangDAO = new RangDAO(ds);
             if (action == null) {
-                actionAfficher(request, response, spectacleDAO);
+                getServletContext()
+                        .getRequestDispatcher("/ErrorRequest.jsp")
+                        .forward(request, response);
             } else if (action.equals("addS")) {
                 actionAddSpectacle(request, response, spectacleDAO);
             } else if (action.equals("addUser")) {
@@ -103,7 +105,9 @@ public class Controleur extends HttpServlet {
 //            RangDAO rangDAO = new RangDAO(ds);
 
             if (action == null) {
-                actionAfficher(request, response, spectacleDAO);
+                getServletContext()
+                        .getRequestDispatcher("/ErrorRequest.jsp")
+                        .forward(request, response);
             } else if (action.equals("verifUser")) {
                 actionVerifUser(request, response, userDAO);
             } else if (action.equals("filtrerCatalogue")) {
@@ -116,17 +120,6 @@ public class Controleur extends HttpServlet {
         } catch (DAOException | ServletException | IOException ex) {
             Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    private void actionAfficher(HttpServletRequest request,
-            HttpServletResponse response,
-            SpectacleDAO spectacleDAO)
-            throws DAOException, ServletException, IOException {
-        request.setAttribute("logBool", 0);
-        request.setAttribute("spectacles", spectacleDAO.getListeSpectacles());
-        getServletContext()
-                .getRequestDispatcher("/WEB-INF/afficheAffiches.jsp")
-                .forward(request, response);
     }
 
     private void actionAddSpectacle(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO)
@@ -315,7 +308,7 @@ public class Controleur extends HttpServlet {
     }
 
     private void actionFiltrerCatalogue(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, int logBool)
-            throws ServletException, IOException {
+            throws ServletException, IOException, DAOException {
         request.setAttribute("logBool", logBool);
         request.setAttribute("spectacles", spectacleDAO.getListeSpectaclesTri(
                 request.getParameter("motscles"),

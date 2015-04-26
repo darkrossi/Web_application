@@ -187,8 +187,42 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
 //        
 //        return spectacles;
 //    }
+    public List<Spectacle> getListeSpectaclesTri(String motscles,
+            String date1,
+            String date2,
+            String prixDe,
+            String prixA,
+            String[] checkGenre,
+            String[] checkPop) throws DAOException {
 
-    public Object getListeSpectaclesTri(String parameter, String parameter0, String parameter1, String parameter2, String parameter3, String[] parameterValues, String[] parameterValues0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Spectacle> result = new ArrayList<>();
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            Statement st = conn.createStatement();
+            requeteSQL = "select * from Spectacle "
+                    + "where * like '%" + motscles + "%'";
+            rs = st.executeQuery(requeteSQL);
+            while (rs.next()) {
+                if (rs.getInt("NSP") != 0) {
+
+                    Spectacle spectacle = new Spectacle(rs.getInt("NSP"),
+                            rs.getString("NomS"),
+                            rs.getString("AuteurS"),
+                            rs.getString("MESS"),
+                            rs.getInt("DureeS"),
+                            rs.getString("Affiche"));
+                    System.err.println(spectacle);
+                    result.add(spectacle);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(conn);
+        }
+        return result;
     }
 }

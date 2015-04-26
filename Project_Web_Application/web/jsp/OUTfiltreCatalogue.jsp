@@ -22,9 +22,9 @@
             <div class="mutliSelect">
                 <ul>
                     <li>
-                        <form>
-                            <input type="text" name="motscles" placeholder="Mots clés" value="">
-                        </form>
+
+                        <input type="text" name="motscles" placeholder="Mots clés" value="">
+
                     </li>
                 </ul>
             </div>
