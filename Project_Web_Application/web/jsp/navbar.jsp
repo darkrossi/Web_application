@@ -52,7 +52,7 @@
                         <li>
                             <a href="javascript:document.inputForm5.submit();">Catalogue</a>
                             <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm5">
-                                <input name="action" value="displayPiecesResa" hidden="true">
+                                <input name="action" value="displayCatalogue" hidden="true">
                             </form>
                         </li>
 <!--                        <li>
@@ -83,7 +83,7 @@
                 <li>
                     <a href="javascript:document.inputForm5.submit();">Catalogue</a>
                     <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm5">
-                        <input name="action" value="displayPiecesResa" hidden="true">
+                        <input name="action" value="displayCatalogue" hidden="true">
                     </form>
                 </li>
 <!--                <li>

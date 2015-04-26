@@ -6,11 +6,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<form name="form" action="<%=request.getContextPath()%>/controleur" method="get">
+
+<form name="form" action="<%=request.getContextPath()%>/controleur" method="post">
+
+    <!-- RECHERCHE PAR MOTS CLES -->
     <dl class="dropdown">
         <dt>
         <a href="#">
-            <span><h2>Recherche</h2></span>   
+            <span><h2>Recherche par mots clés</h2></span>   
             <p class="multiSel"></p> 
         </a>
         </dt>
@@ -20,8 +23,7 @@
                 <ul>
                     <li>
                         <form>
-                            <input type="text" name="BarreRecherche" value placeholder="Mots clés">
-                            <input type="submit" value="Rechercher">
+                            <input type="text" name="motscles" placeholder="Mots clés" value="">
                         </form>
                     </li>
                 </ul>
@@ -29,6 +31,7 @@
         </dd>
     </dl>
 
+    <!-- RECHERCHE PAR DATE -->
     <dl class="dropdown">
         <dt>
         <a href="#">
@@ -41,13 +44,15 @@
             <div class="mutliSelect">
                 <ul>
                     <li>
-                        <input type="text" name="datepicker_input1" class="datepicker" value placeholder="Du">
-                        <input type="text" name="datepicker_input2" class="datepicker" value placeholder="Au">
+                        <input type="text" name="datepicker1" class="datepicker" value="" placeholder="Du">
+                        <input type="text" name="datepicker2" class="datepicker" value="" placeholder="Au">
                     </li>
                 </ul>
             </div>
         </dd>
     </dl>
+
+    <!-- RECHERCHE PAR PRIX -->
     <dl class="dropdown">
         <dt>
         <a href="#">
@@ -55,15 +60,14 @@
             <p class="multiSel"></p> 
         </a>
         </dt>
-
         <dd>
             <div class="mutliSelect">
                 <ul>
                     <li>
                         <span> De </span>
-                        <script type="text/javascript">prix();</script>
+                        <input type="text" name="prixDe" value="">
                         <span> à </span>
-                        <script type="text/javascript">prix();</script>
+                        <input type="text" name="prixA" value="">
                         <p> </p>
                     </li>
                 </ul>
@@ -71,6 +75,7 @@
         </dd>
     </dl>
 
+    <!-- RECHERCHE PAR GENRE -->
     <dl class="dropdown">
         <dt>
         <a href="#">
@@ -78,30 +83,30 @@
             <p class="multiSel"></p> 
         </a>
         </dt>
-
         <dd>
             <div class="mutliSelect">
                 <ul>
                     <li>
-                        <input type="checkbox" value="GrandSpectacle" />Grand spectacle</li>
+                        <input name="checkGenre" type="checkbox" value="GrandSpectacle" />Grand spectacle</li>
                     <li>
-                        <input type="checkbox" value="ComedieMusicale" />Comédie musicale</li>
+                        <input name="checkGenre" type="checkbox" value="ComedieMusicale" />Comédie musicale</li>
                     <li>
-                        <input type="checkbox" value="SpectacleMagie" />Spectacle de magie</li>
+                        <input name="checkGenre" type="checkbox" value="SpectacleMagie" />Spectacle de magie</li>
                     <li>
-                        <input type="checkbox" value="TheatreContemporain" />Théâtre contemporain</li>
+                        <input name="checkGenre" type="checkbox" value="TheatreContemporain" />Théâtre contemporain</li>
                     <li>
-                        <input type="checkbox" value="TheatreEnfant" />Théâtre pour enfants</li>
+                        <input name="checkGenre" type="checkbox" value="TheatreEnfant" />Théâtre pour enfants</li>
                     <li>
-                        <input type="checkbox" value="TheatreEquestre" />Théâtre équestre</li>
+                        <input name="checkGenre" type="checkbox" value="TheatreEquestre" />Théâtre équestre</li>
                     <li>
-                        <input type="checkbox" value="SeulEnScene" />Seul en scène</li>
+                        <input name="checkGenre" type="checkbox" value="SeulEnScene" />Seul en scène</li>
 
                 </ul>
             </div>
         </dd>
     </dl>
 
+    <!-- RECHERCHE PAR POPULARITÉ -->
     <dl class="dropdown">
         <dt>
         <a href="#">
@@ -109,14 +114,13 @@
             <p class="multiSel"></p> 
         </a>
         </dt>
-
         <dd>
             <div class="mutliSelect">
                 <ul>
                     <li>
-                        <input type="checkbox" value="MeilleureNote" />Les mieux notés</li>
+                        <input name="checkPop" type="checkbox" value="MeilleureNote" />Les mieux notés</li>
                     <li>
-                        <input type="checkbox" value="GrandSpectacle" />Les plus vendues</li>
+                        <input name="checkPop" type="checkbox" value="GrandSpectacle" />Les plus vendues</li>
                 </ul>
             </div>
         </dd>

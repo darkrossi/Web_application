@@ -73,7 +73,7 @@
             }
         }%>
 
-    <input hidden="true" name="action" value="displayPieces">
+    <input hidden="true" name="action" value="displayResa">
     <input id="NSp" name="NSp" value="0" hidden="true">
     <input name="login" value="<%= userName%>" hidden="true">
 </form>

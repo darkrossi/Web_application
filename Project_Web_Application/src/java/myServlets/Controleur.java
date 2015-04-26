@@ -7,7 +7,6 @@ package myServlets;
 
 import dao.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
@@ -38,7 +37,6 @@ public class Controleur extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         try {
-            PrintWriter out = response.getWriter();
             String action = request.getParameter("action");
             SpectacleDAO spectacleDAO = new SpectacleDAO(ds);
             UtilisateurDAO userDAO = new UtilisateurDAO(ds);
@@ -67,12 +65,12 @@ public class Controleur extends HttpServlet {
                 actionDisplayAddBooking(request, response, represDAO, 0);
             } else if (action.equals("addBooking")) {
                 actionAddBooking(request, response, achatDAO, dossierDAO, represDAO);
-            } else if (action.equals("displayPiecesResa")) {
-                actionDisplayPiecesResa(request, response, spectacleDAO, 0);
-            } else if (action.equals("displayPieces")) {
-                actionDisplayPieces(request, response, spectacleDAO, represDAO);
-            } else if (action.equals("displayPiecesPlaces")) {
-                actionDisplayPiecesPlaces(request, response, spectacleDAO, represDAO, rangDAO);
+            } else if (action.equals("displayCatalogue")) {
+                actionDisplayCatalogue(request, response, spectacleDAO, 0);
+            } else if (action.equals("displayResa")) {
+                actionDisplayResa(request, response, spectacleDAO, represDAO);
+            } else if (action.equals("displayResaPlaces")) {
+                actionDisplayResaPlaces(request, response, spectacleDAO, represDAO, rangDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -94,7 +92,6 @@ public class Controleur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
-            PrintWriter out = response.getWriter();
             String action = request.getParameter("action");
 
             SpectacleDAO spectacleDAO = new SpectacleDAO(ds);
@@ -109,6 +106,8 @@ public class Controleur extends HttpServlet {
                 actionAfficher(request, response, spectacleDAO);
             } else if (action.equals("verifUser")) {
                 actionVerifUser(request, response, userDAO);
+            } else if (action.equals("filtrerCatalogue")) {
+                actionFiltrerCatalogue(request, response, spectacleDAO, 1);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -284,7 +283,7 @@ public class Controleur extends HttpServlet {
                 .forward(request, response);
     }
 
-    private void actionDisplayPiecesResa(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, int logBool)
+    private void actionDisplayCatalogue(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, int logBool)
             throws ServletException, IOException, DAOException {
         request.setAttribute("logBool", logBool);
         request.setAttribute("spectacles", spectacleDAO.getListeSpectacles());
@@ -293,11 +292,11 @@ public class Controleur extends HttpServlet {
                 .forward(request, response);
     }
 
-    private void actionDisplayPieces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, RepresentationDAO represDAO)
+    private void actionDisplayResa(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, RepresentationDAO represDAO)
             throws ServletException, DAOException, IOException {
         if ("null".equals(request.getParameter("login"))) {
             request.setAttribute("logText", "Vous devez créer un compte utilisateur pour pouvoir acheter des places !");
-            actionDisplayPiecesResa(request, response, spectacleDAO, 1);
+            actionDisplayCatalogue(request, response, spectacleDAO, 1);
         } else {
             request.setAttribute("logBool", 0);
             request.setAttribute("repres", represDAO.getRepresList(Integer.parseInt(request.getParameter("NSp"))));
@@ -308,10 +307,27 @@ public class Controleur extends HttpServlet {
         }
     }
 
-    private void actionDisplayPiecesPlaces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectDAO, RepresentationDAO represDAO, RangDAO rangDAO)
+    private void actionDisplayResaPlaces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectDAO, RepresentationDAO represDAO, RangDAO rangDAO)
             throws DAOException, ServletException, IOException {
         request.setAttribute("represPicked", represDAO.getRepres(Integer.parseInt(request.getParameter("NR"))));
         request.setAttribute("rangs", rangDAO.getRangs(Integer.parseInt(request.getParameter("NSa")), true));
-        actionDisplayPieces(request, response, spectDAO, represDAO);
+        actionDisplayResa(request, response, spectDAO, represDAO);
+    }
+
+    private void actionFiltrerCatalogue(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, int logBool)
+            throws ServletException, IOException {
+        request.setAttribute("logBool", logBool);
+        request.setAttribute("spectacles", spectacleDAO.getListeSpectaclesTri(
+                request.getParameter("motscles"),
+                request.getParameter("datepicker1"),
+                request.getParameter("datepicker2"),
+                request.getParameter("prixDe"),
+                request.getParameter("prixA"),
+                request.getParameterValues("checkGenre"),
+                request.getParameterValues("checkPop"))
+        );
+        getServletContext()
+                .getRequestDispatcher("/catalogue.jsp")
+                .forward(request, response);
     }
 }

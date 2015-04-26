@@ -6,7 +6,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -188,4 +187,8 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
 //        
 //        return spectacles;
 //    }
+
+    public Object getListeSpectaclesTri(String parameter, String parameter0, String parameter1, String parameter2, String parameter3, String[] parameterValues, String[] parameterValues0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
