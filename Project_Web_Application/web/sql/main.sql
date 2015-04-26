@@ -27,9 +27,10 @@
 
 -- DELETE FROM Dossier;
 
-select * from Spectacle s, Representation rep, Salle sa, Rang rg where rep.NSp = s.NSp and rep.NSa = sa.NSa and sa.NSa = rg.NSa and (s.NomS like '%ro%' or s.AuteurS like '%ro%' or s.MESS like '%ro%' or s.InfoS like '%ro%');
+-- select * from Spectacle s, Representation rep, Salle sa, Rang rg where rep.NSp = s.NSp and rep.NSa = sa.NSa and sa.NSa = rg.NSa and (s.NomS like '%ro%' or s.AuteurS like '%ro%' or s.MESS like '%ro%' or s.InfoS like '%ro%');
 
-
+UPDATE Spectacle
+SET NoteS = 4;
 
 
 

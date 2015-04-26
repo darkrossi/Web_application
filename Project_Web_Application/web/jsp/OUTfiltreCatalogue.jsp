@@ -13,7 +13,7 @@
     <dl class="dropdown">
         <dt>
         <a href="#">
-            <span><h2>Recherche par mots clés</h2></span>   
+            <span><h3>Recherche par mots clés</h3></span>   
             <p class="multiSel"></p> 
         </a>
         </dt>
@@ -35,7 +35,7 @@
     <dl class="dropdown">
         <dt>
         <a href="#">
-            <span><h2>Date</h2></span>   
+            <span><h3>Date</h3></span>   
             <p class="multiSel"></p> 
         </a>
         </dt>
@@ -56,7 +56,7 @@
     <dl class="dropdown">
         <dt>
         <a href="#">
-            <span><h2>Prix</h2></span>   
+            <span><h3>Prix</h3></span>   
             <p class="multiSel"></p> 
         </a>
         </dt>
@@ -79,7 +79,7 @@
     <dl class="dropdown">
         <dt>
         <a href="#">
-            <span><h2>Genre</h2></span>   
+            <span><h3>Genre</h3></span>   
             <p class="multiSel"></p> 
         </a>
         </dt>
@@ -110,7 +110,7 @@
     <dl class="dropdown">
         <dt>
         <a href="#">
-            <span><h2>Popularité</h2></span>   
+            <span><h3>Popularité</h3></span>   
             <p class="multiSel"></p> 
         </a>
         </dt>

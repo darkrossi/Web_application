@@ -53,8 +53,9 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                             rs.getString("AuteurS"),
                             rs.getString("MESS"),
                             rs.getInt("DureeS"),
+                            rs.getString("Affiche"),
                             rs.getString("InfoS"),
-                            rs.getString("Affiche"));
+                            rs.getInt("NoteS"));
                     System.err.println(spectacle);
                     result.add(spectacle);
                 }
@@ -138,8 +139,9 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                             rs.getString("AuteurS"),
                             rs.getString("MESS"),
                             rs.getInt("DureeS"),
+                            rs.getString("Affiche"),
                             rs.getString("InfoS"),
-                            rs.getString("Affiche"));
+                            rs.getInt("NoteS"));
                 }
             }
         } catch (SQLException e) {
@@ -209,11 +211,12 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
         try {
             conn = getConnection();
             Statement st = conn.createStatement();
+
             String whereMotsCles = " and (s.NomS like '%" + motscles + "%'"
                     + " or s.AuteurS like '%" + motscles + "%'"
                     + " or s.MESS like '%" + motscles + "%'"
                     + " or s.InfoS like '%" + motscles + "%')";
-            
+
             String wherePrix = "";
             if (!"".equals(prixDe) && !"".equals(prixA)) {
                 wherePrix = " and rg.CatTarif  between " + prixDe + " and " + prixA;
@@ -238,7 +241,9 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                             rs.getString("AuteurS"),
                             rs.getString("MESS"),
                             rs.getInt("DureeS"),
-                            rs.getString("Affiche"));
+                            rs.getString("Affiche"),
+                            rs.getString("InfoS"),
+                            rs.getInt("NoteS"));
                     System.err.println(spectacle);
                     result.add(spectacle);
                 }

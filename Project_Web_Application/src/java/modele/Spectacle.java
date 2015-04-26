@@ -7,7 +7,6 @@ package modele;
 
 import java.util.ArrayList;
 
-
 /**
  *
  * @author oswald
@@ -27,7 +26,7 @@ public class Spectacle {
     public Spectacle() {
     }
 
-    public Spectacle(int id, String titre, String auteur, String metteurEnScene, int duree, String url) {
+    public Spectacle(int id, String titre, String auteur, String metteurEnScene, int duree, String url, String infos, int note) {
         this.id = id;
         this.titre = titre;
         this.auteur = auteur;
@@ -35,53 +34,8 @@ public class Spectacle {
         this.comediens = new ArrayList<>();
         this.duree = duree;
         this.url = url;
-    }
-
-    public Spectacle(int id, String titre, String auteur, String metteurEnScene, ArrayList<String> comediens, int duree) {
-        this.id = id;
-        this.titre = titre;
-        this.auteur = auteur;
-        this.metteurEnScene = metteurEnScene;
-        this.comediens = comediens;
-        this.duree = duree;
-    }
-   
-    public Spectacle(int id, String titre, String auteur, String metteurEnScene, int duree, String infos, String url) {
-        this.id = id;
-        this.titre = titre;
-        this.auteur = auteur;
-        this.metteurEnScene = metteurEnScene;
-        this.comediens = new ArrayList<>();
-        this.duree = duree;
         this.infos = infos;
-        this.url= url;
-    }
-    
-    public Spectacle(int id, String titre, String auteur, String metteurEnScene, int duree) {
-        this.id = id;
-        this.titre = titre;
-        this.auteur = auteur;
-        this.metteurEnScene = metteurEnScene;
-        this.comediens = new ArrayList<>();
-        this.duree = duree;
-    }
-
-    public Spectacle(int id, String titre, String auteur) {
-        this.id = id;
-        this.titre = titre;
-        this.auteur = "";
-        this.metteurEnScene = "";
-        this.comediens = new ArrayList<String>();
-        this.duree = 0;
-    }
-
-    public Spectacle(int id, String titre) {
-        this.id = id;
-        this.titre = titre;
-        this.auteur = auteur;
-        this.metteurEnScene = "";
-        this.comediens = new ArrayList<String>();
-        this.duree = 0;
+        this.note = note;
     }
 
     public String getAuteur() {
@@ -107,14 +61,15 @@ public class Spectacle {
     public String getTitre() {
         return titre;
     }
-    
-    public String getInfos(){
+
+    public String getInfos() {
         return infos;
     }
 
-    public int getNote(){
+    public int getNote() {
         return note;
     }
+
     public void setAuteur(String auteur) {
         this.auteur = auteur;
     }
@@ -127,9 +82,10 @@ public class Spectacle {
         this.duree = duree;
     }
 
-    public void setInfos(String infos){
+    public void setInfos(String infos) {
         this.infos = infos;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -141,7 +97,7 @@ public class Spectacle {
     public void setTitre(String titre) {
         this.titre = titre;
     }
-    
+
     public void setNote(int note) {
         this.note = note;
     }
