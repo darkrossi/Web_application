@@ -5,12 +5,12 @@ CREATE TABLE Spectacle (
     MESS varchar(30),
     DureeS int,
     Affiche varchar(30),
-    InfoS varchar(120),
+    InfoS varchar(240),
     NoteS int,
     constraint pk_spectacle primary key (NSP)
 );
-INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche, InfoS, NoteS)
-SELECT NSP, NomS, AuteurS, MESS, DureeS, Affiche, InfoS, NoteS
+INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)
+SELECT NSP, NomS, AuteurS, MESS, DureeS, Affiche
 FROM Spectacle2;
 
 

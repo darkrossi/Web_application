@@ -7,7 +7,6 @@ package modele;
 
 import java.util.ArrayList;
 
-import org.jdom2.*;
 
 /**
  *
@@ -52,6 +51,7 @@ public class Spectacle {
         this.titre = titre;
         this.auteur = auteur;
         this.metteurEnScene = metteurEnScene;
+        this.comediens = new ArrayList<>();
         this.duree = duree;
         this.infos = infos;
         this.url= url;
