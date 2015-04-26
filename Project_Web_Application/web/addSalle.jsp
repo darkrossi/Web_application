@@ -58,7 +58,7 @@
                             <input type="number" name="nbP" value="1"><br>
                             <button type="submit "> Ajouter salle </button><br>
                             <input hidden="true" name="action" value="addSalle"><br>
-                        </form>s
+                        </form>
                     </div>
                 </div>
             </div>
