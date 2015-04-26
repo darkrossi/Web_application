@@ -289,7 +289,7 @@ public class Controleur extends HttpServlet {
         request.setAttribute("logBool", logBool);
         request.setAttribute("spectacles", spectacleDAO.getListeSpectacles());
         getServletContext()
-                .getRequestDispatcher("/piecesResa.jsp")
+                .getRequestDispatcher("/catalogue.jsp")
                 .forward(request, response);
     }
 
@@ -303,7 +303,7 @@ public class Controleur extends HttpServlet {
             request.setAttribute("repres", represDAO.getRepresList(Integer.parseInt(request.getParameter("NSp"))));
             request.setAttribute("spectacle", spectacleDAO.getSpectacle(Integer.parseInt(request.getParameter("NSp"))));
             getServletContext()
-                    .getRequestDispatcher("/pieces.jsp")
+                    .getRequestDispatcher("/reservation.jsp")
                     .forward(request, response);
         }
     }

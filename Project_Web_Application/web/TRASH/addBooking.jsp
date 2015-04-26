@@ -28,7 +28,7 @@
         <jsp:include page="jsp/navbar.jsp"/>
 
         <div class="container" >
-            <jsp:include page="jsp/OUTaddBooking.jsp" />
+            <jsp:include page="jsp/OUTdisplayResa.jsp" />
         </div>
     </body>
 

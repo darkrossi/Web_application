@@ -35,14 +35,14 @@ public class RangDAO extends AbstractDataBaseDAO {
             conn = getConnection();
             Statement st = conn.createStatement();
 
-            if (!dispo) {
-                requeteSQL = "select r.NRa, p.NP "
-                        + "from Rang r, Place p "
-                        + "where r.NSA = " + NSa + " and r.NRa = p.NRa";
-            } else {
+            if (dispo) {
                 requeteSQL = "select r.NRa, p.NP "
                         + "from Rang r, Place p "
                         + "where r.NSA = " + NSa + " and r.NRa = p.NRa and p.isTaken = 0";
+            } else {
+                requeteSQL = "select r.NRa, p.NP "
+                        + "from Rang r, Place p "
+                        + "where r.NSA = " + NSa + " and r.NRa = p.NRa";
             }
             rs = st.executeQuery(requeteSQL);
 
