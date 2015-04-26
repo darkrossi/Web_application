@@ -52,15 +52,15 @@
                         <li>
                             <a href="javascript:document.inputForm5.submit();">Catalogue</a>
                             <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm5">
-                                <input name="action" value="displayPieces" hidden="true">
+                                <input name="action" value="displayPiecesResa" hidden="true">
                             </form>
                         </li>
-                        <li>
+<!--                        <li>
                             <a href="javascript:document.inputForm1.submit();">Réserver une place</a>
                             <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm1">
                                 <input name="action" value="displayAddBooking" hidden="true">
                             </form>
-                        </li>
+                        </li>-->
 
                         <li><a href="addSpectacle.jsp">Ajouter un spectacle</a></li>
                         <li>
@@ -86,12 +86,12 @@
                         <input name="action" value="displayPiecesResa" hidden="true">
                     </form>
                 </li>
-                <li>
+<!--                <li>
                     <a href="javascript:document.inputForm1.submit();">Réserver une place</a>
                     <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm1">
                         <input name="action" value="displayAddBooking" hidden="true">
                     </form>
-                </li>
+                </li>-->
                 <%}%>
 
             </ul>
@@ -204,7 +204,7 @@
     <div class="container" >
         <li><a href="#" data-hide-id="myModalLogin" id="idButton"><span class="glyphicon glyphicon-remove"></span> QUITTER CETTE PAGE</a></li>
         <h1>Connectez-vous à votre compte</h1>    
-        <FORM ACTION="<%=request.getContextPath()%>/controleur" METHOD="get">
+        <FORM ACTION="<%=request.getContextPath()%>/controleur" METHOD="post">
             <div class="row">
                 <label class="col-md-3"> Indiquez votre login : </label><input class="col-md-2" name="loginU" id="loginU" autofocus="autofocus"><br>
             </div>

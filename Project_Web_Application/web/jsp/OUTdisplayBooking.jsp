@@ -41,6 +41,7 @@
             </ul>
         </div>
     </div>
+                        
     <!-- POPUP INFOS SPECTACLE -->
     <div id="myModal<%=spectacles.get(i).getId()%>" class="reveal-modal">
         <div class="container" >
@@ -50,7 +51,7 @@
                          style="width:150px;"/>
                 </div>
                 <div class="col-md-6"> 
-                    <a href="#" data-hide-id="myModal<%=spectacles.get(i).getId()%>" class="idButton"><span class="glyphicon glyphicon-remove"></span> QUITTER CETTE PAGE</a>
+<!--                    <a href="#" data-hide-id="myModal<%=spectacles.get(i).getId()%>" class="idButton"><span class="glyphicon glyphicon-remove"></span> QUITTER CETTE PAGE</a>-->
                     <h1> <%= nomS%> </h1>
                     <!--Mettre les infos détaillées du spectacle-->
                     <ul>

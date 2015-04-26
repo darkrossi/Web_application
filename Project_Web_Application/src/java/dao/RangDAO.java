@@ -25,7 +25,7 @@ public class RangDAO extends AbstractDataBaseDAO {
         super(ds);
     }
 
-    public Hashtable<Integer, List<Place>> getRangs(int NSa) throws DAOException {
+    public Hashtable<Integer, List<Place>> getRangs(int NSa, boolean dispo) throws DAOException {
         Hashtable<Integer, List<Place>> rangs = new Hashtable<>();
 
         ResultSet rs = null;
@@ -35,27 +35,27 @@ public class RangDAO extends AbstractDataBaseDAO {
             conn = getConnection();
             Statement st = conn.createStatement();
 
-            requeteSQL = "select NbRa "
-                    + "from Salle "
-                    + "where NSA = " + NSa;
-            rs = st.executeQuery(requeteSQL);
-            rs.next();
-            int nbRg = rs.getInt("NbRa");
-
-            requeteSQL = "select r.NRa, p.NP "
-                    + "from Rang r, Place p "
-                    + "where r.NSA = " + NSa + " and r.NRa = p.NRa";
+            if (!dispo) {
+                requeteSQL = "select r.NRa, p.NP "
+                        + "from Rang r, Place p "
+                        + "where r.NSA = " + NSa + " and r.NRa = p.NRa";
+            } else {
+                requeteSQL = "select r.NRa, p.NP "
+                        + "from Rang r, Place p "
+                        + "where r.NSA = " + NSa + " and r.NRa = p.NRa and p.isTaken = 0";
+            }
             rs = st.executeQuery(requeteSQL);
 
             Place place;
             while (rs.next()) {
-                if (rangs.get(rs.getInt(1)) == null) {
+                if (!rangs.containsKey(rs.getInt(1))) {
                     rangs.put(rs.getInt(1), new ArrayList<>());
                 }
                 place = new Place(rs.getInt(2));
                 System.err.println(place);
                 rangs.get(rs.getInt(1)).add(place);
             }
+
         } catch (SQLException e) {
             throw new DAOException("Erreur BD " + e.getMessage() + " " + requeteSQL, e);
         } finally {
