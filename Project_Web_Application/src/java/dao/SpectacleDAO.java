@@ -52,6 +52,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                             rs.getString("AuteurS"),
                             rs.getString("MESS"),
                             rs.getInt("DureeS"),
+                            rs.getString("InfoS"),
                             rs.getString("Affiche"));
                     System.err.println(spectacle);
                     result.add(spectacle);
@@ -72,9 +73,12 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
      * @param titre
      * @param mes
      * @param duree
+     * @param infos
+     * @param url
+     * @param note
      * @throws dao.DAOException
      */
-    public boolean ajouterSpectacle(String titre, String auteur, String mes, String duree, String url)
+    public boolean ajouterSpectacle(String titre, String auteur, String mes, String duree, String infos, String url)
             throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
@@ -90,9 +94,9 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                 indiceNSP_Max++;
             }
 
-            requeteSQL = "INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)"
+            requeteSQL = "INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, InfoS, Affiche)"
                     + "VALUES (" + indiceNSP_Max + ", '" + titre + "', '" + auteur + "', '" + mes
-                    + "', " + Integer.parseInt(duree) + ", '" + url + "')";
+                    + "', " + Integer.parseInt(duree) + ", '" + infos + ", '"+ url + "')";
             st.executeQuery(requeteSQL);
             return true;
         } catch (SQLException e) {
@@ -133,6 +137,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                             rs.getString("AuteurS"),
                             rs.getString("MESS"),
                             rs.getInt("DureeS"),
+                            rs.getString("InfoS"),
                             rs.getString("Affiche"));
                 }
             }
@@ -225,4 +230,5 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
         }
         return result;
     }
+
 }

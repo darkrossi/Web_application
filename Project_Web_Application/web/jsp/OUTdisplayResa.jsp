@@ -25,11 +25,15 @@
     </div>
     <div class="col-md-6"> 
         <h1> <%= nomS%> </h1>
+        <h2>  <%= spect.getInfos()%> </h2>
+        <h2>  <%= spect.getNote()%> </h2>
+        
         <!--Mettre les infos détaillées du spectacle-->
         <ul>
             <li>Auteur : <%=spect.getAuteur()%></li>
             <li>Metteur en scéne : <%=spect.getMetteurEnScene()%></li>
-            <li>Durée : <%=spect.getDuree()%></li>
+            <li>Durée : <%=spect.getDuree()%> mins</li>
+            <li>Comédiens : <%=spect.getComediens()%> </li>
             <!--Quelques infos sur le spectacle-->
         </ul>
         <ul>

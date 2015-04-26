@@ -129,6 +129,7 @@ public class Controleur extends HttpServlet {
                 request.getParameter("auteurS"),
                 request.getParameter("mesS"),
                 request.getParameter("dureeS"),
+                request.getParameter("infos"),
                 request.getParameter("fileS"))) {
             request.setAttribute("logText", "Spectacle créé avec succès !");
         } else {

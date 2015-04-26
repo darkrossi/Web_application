@@ -5,10 +5,12 @@ CREATE TABLE Spectacle (
     MESS varchar(30),
     DureeS int,
     Affiche varchar(30),
+    InfoS varchar(120),
+    NoteS int,
     constraint pk_spectacle primary key (NSP)
 );
-INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)
-SELECT NSP, NomS, AuteurS, MESS, DureeS, Affiche
+INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche, InfoS, NoteS)
+SELECT NSP, NomS, AuteurS, MESS, DureeS, Affiche, InfoS, NoteS
 FROM Spectacle2;
 
 
@@ -111,5 +113,5 @@ CREATE TABLE Booking (
     CONSTRAINT NbPB CHECK(NbP >= 1)
 );
 
-INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)
-    VALUES (0, 'init', 'init', 'init', 1, 'init');
+INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche, InfoS, NoteS)
+    VALUES (0, 'init', 'init', 'init', 1, 'init', 'init', 0);
