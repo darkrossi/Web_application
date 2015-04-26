@@ -19,21 +19,30 @@
         Spectacle spect = (Spectacle) request.getAttribute("spectacle");
         String nomS = spect.getTitre();
 %>
+
+<script type="text/javascript" src="js/etoile.js"></script>
+<link rel="stylesheet" type="text/css" href="css/etoile.css">
+
 <div class="row" style="margin-top: 10px;">
     <div class="col-md-4">
         <img src="img/<%=spect.getUrl()%>" data-large="img/<%=spect.getUrl()%>" alt="" style="width:150px;"/>
     </div>
     <div class="col-md-6"> 
         <h1> <%= nomS%> </h1>
-        <h2>  <%= spect.getInfos()%> </h2>
-        <h2>  <%= spect.getNote()%> </h2>
-        
+        <p>  <%= spect.getInfos()%> </p>
+        <p>  <%= spect.getNote()%> </p>
+
         <!--Mettre les infos détaillées du spectacle-->
         <ul>
             <li>Auteur : <%=spect.getAuteur()%></li>
-            <li>Metteur en scéne : <%=spect.getMetteurEnScene()%></li>
+            <li>Metteur en scène : <%=spect.getMetteurEnScene()%></li>
             <li>Durée : <%=spect.getDuree()%> mins</li>
             <li>Comédiens : <%=spect.getComediens()%> </li>
+            <div id="etoile">
+                <script type="text/javascript">
+                    CreateListeEtoile('etoile', 5);
+                </script>
+            </div> 
             <!--Quelques infos sur le spectacle-->
         </ul>
         <ul>
@@ -46,9 +55,9 @@
                 <input type="checkbox" onclick="document.inputForm6<%=repres.get(i).getNR()%>.submit();">
                 <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm6<%=repres.get(i).getNR()%>">
                     <input name="action" value="displayResaPlaces" hidden="true">
-                    <input name="NR" value="<%= repres.get(i).getNR() %>" hidden="true">
-                    <input name="NSa" value="<%= repres.get(i).getNSa() %>" hidden="true">
-                    <input name="NSp" value="<%= repres.get(i).getNSp() %>" hidden="true">
+                    <input name="NR" value="<%= repres.get(i).getNR()%>" hidden="true">
+                    <input name="NSa" value="<%= repres.get(i).getNSa()%>" hidden="true">
+                    <input name="NSp" value="<%= repres.get(i).getNSp()%>" hidden="true">
                 </form>
             </li>
             <%}

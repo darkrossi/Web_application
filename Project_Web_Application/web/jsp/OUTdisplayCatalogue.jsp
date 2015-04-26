@@ -11,7 +11,7 @@
 <%@page import="java.util.Hashtable"%>
 <%@page import="modele.Representation"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+ 
 <% HttpSession session2 = request.getSession(false);
     String userName = (String) session2.getAttribute("utilisateur");%>
 
@@ -37,14 +37,15 @@
             <ul>
                 <li>Quelques infos sur le spectacle</li>
                 <li>
-                    <button onclick="$('#NSp').attr('value', '<%=spectacles.get(i).getId()%>'); document.form.submit();"> 
+                    <button onclick="$('#NSp').attr('value', '<%=spectacles.get(i).getId()%>');
+                            document.form.submit();"> 
                         Réserver <span class="glyphicon glyphicon-arrow-down"></span>
                     </button>
                 </li>
             </ul>
         </div>
     </div>
-                        
+
     <!-- POPUP INFOS SPECTACLE -->
     <div id="myModal<%=spectacles.get(i).getId()%>" class="reveal-modal">
         <div class="container" >
@@ -75,7 +76,6 @@
     <% }
             }
         }%>
-
     <input hidden="true" name="action" value="displayResa">
     <input id="NSp" name="NSp" value="0" hidden="true">
     <input name="login" value="<%= userName%>" hidden="true">
