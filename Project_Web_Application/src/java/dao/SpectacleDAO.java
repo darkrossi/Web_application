@@ -96,7 +96,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
 
             requeteSQL = "INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, InfoS, Affiche)"
                     + "VALUES (" + indiceNSP_Max + ", '" + titre + "', '" + auteur + "', '" + mes
-                    + "', " + Integer.parseInt(duree) + ", '" + infos + ", '"+ url + "')";
+                    + "', " + Integer.parseInt(duree) + ", '" + infos + ", '" + url + "')";
             st.executeQuery(requeteSQL);
             return true;
         } catch (SQLException e) {
@@ -208,11 +208,13 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
             conn = getConnection();
             Statement st = conn.createStatement();
             requeteSQL = "select * from Spectacle "
-                    + "where * like '%" + motscles + "%'";
+                    + "where NomS like '%" + motscles + "%'"
+                    + " or AuteurS like '%" + motscles + "%'"
+                    + " or MESS like '%" + motscles + "%'"
+                    + " or InfoS like '%" + motscles + "%'";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
                 if (rs.getInt("NSP") != 0) {
-
                     Spectacle spectacle = new Spectacle(rs.getInt("NSP"),
                             rs.getString("NomS"),
                             rs.getString("AuteurS"),
@@ -224,7 +226,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Erreur BD " + e.getMessage(), e);
+            throw new DAOException("Erreur BD " + e.getMessage() + " " + requeteSQL, e);
         } finally {
             closeConnection(conn);
         }

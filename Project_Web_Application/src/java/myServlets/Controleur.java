@@ -111,14 +111,21 @@ public class Controleur extends HttpServlet {
             } else if (action.equals("verifUser")) {
                 actionVerifUser(request, response, userDAO);
             } else if (action.equals("filtrerCatalogue")) {
-                actionFiltrerCatalogue(request, response, spectacleDAO, 1);
+                actionFiltrerCatalogue(request, response, spectacleDAO, 0);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
                         .forward(request, response);
             }
         } catch (DAOException | ServletException | IOException ex) {
-            Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("log", ex.toString());
+            try {
+                getServletContext()
+                        .getRequestDispatcher("/ErrorBdd.jsp")
+                        .forward(request, response);
+            } catch (ServletException | IOException ex1) {
+                Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
     }
 
@@ -318,8 +325,7 @@ public class Controleur extends HttpServlet {
                 request.getParameter("prixDe"),
                 request.getParameter("prixA"),
                 request.getParameterValues("checkGenre"),
-                request.getParameterValues("checkPop"))
-        );
+                request.getParameterValues("checkPop")));
         getServletContext()
                 .getRequestDispatcher("/catalogue.jsp")
                 .forward(request, response);
