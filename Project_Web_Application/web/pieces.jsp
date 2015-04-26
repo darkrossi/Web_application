@@ -4,6 +4,9 @@
     Author     : oswald
 --%>
 
+<%@page import="modele.Place"%>
+<%@page import="java.util.Hashtable"%>
+<%@page import="java.util.Hashtable"%>
 <%@page import="modele.Representation"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -92,18 +95,12 @@
                 <div class="row">
                     <div class="col-md-3">
                         <% if (request.getAttribute("represPicked") != null) {
-                                    Representation representation = (Representation) request.getAttribute("represPicked");%>
-                        <p><%= representation.getDate()%></p>
-                        <% }%>
-                    </div>
-                    <div class="col-md-3">
-                        <% if (request.getAttribute("represPicked") != null) {
 
                                 Representation representation = (Representation) request.getAttribute("represPicked");%>
                         <p><%= representation.getDate()%></p>
                         <% }%>
                     </div>
-                    <div class="col-md-1" id="colonneHeure">
+                    <div class="col-md-3">
                         <% if (request.getAttribute("represPicked") != null) {
                                 Representation representation = (Representation) request.getAttribute("represPicked");%>
                         <p><%=representation.getHeure()%></p>
@@ -115,10 +112,12 @@
                     <h3 align="center"> Choisissez vos places </h3>
                     <ul>
                         <li><h5>Offre Adhérent
-                                <script type="text/javascript">place();</script>
+                                <% if(request.getAttribute("rangs") != null ){
+                                    Hashtable<Integer, List<Place>> rangs = (Hashtable<Integer, List<Place>>) request.getAttribute("rangs");
+                                } %>
                             </h5></li>
                         <li><h5>Offre Normal
-                                <script type="text/javascript">place();</script>
+                                
                             </h5></li>
                     </ul>
                     <a href="php/panier.php?action=ajout&amp;l=LIBELLEPRODUIT&amp;q=QUANTITEPRODUIT&amp;
@@ -126,7 +125,7 @@
                                    directories=no, status=yes, scrollbars=yes, resizable=yes, copyhistory=no, width=600,\n\
                                      height=350');
                                return false;">Ajouter au panier
-                    </a>        
+                    </a>
 
                     <!-- Proposition : Faire un menu déroulant pour catégorie et un autre pour les types (orchestre, corbeille..) -->
                     <%--
