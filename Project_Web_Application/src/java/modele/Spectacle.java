@@ -22,6 +22,8 @@ public class Spectacle {
     private ArrayList<String> comediens;
     private int duree; // En minutes
     private String url;
+    private String infos;
+    private int note;
 
     public Spectacle() {
     }
@@ -44,7 +46,17 @@ public class Spectacle {
         this.comediens = comediens;
         this.duree = duree;
     }
-
+   
+    public Spectacle(int id, String titre, String auteur, String metteurEnScene, int duree, String infos, String url) {
+        this.id = id;
+        this.titre = titre;
+        this.auteur = auteur;
+        this.metteurEnScene = metteurEnScene;
+        this.duree = duree;
+        this.infos = infos;
+        this.url= url;
+    }
+    
     public Spectacle(int id, String titre, String auteur, String metteurEnScene, int duree) {
         this.id = id;
         this.titre = titre;
@@ -95,7 +107,14 @@ public class Spectacle {
     public String getTitre() {
         return titre;
     }
+    
+    public String getInfos(){
+        return infos;
+    }
 
+    public int getNote(){
+        return note;
+    }
     public void setAuteur(String auteur) {
         this.auteur = auteur;
     }
@@ -108,6 +127,9 @@ public class Spectacle {
         this.duree = duree;
     }
 
+    public void setInfos(String infos){
+        this.infos = infos;
+    }
     public void setId(int id) {
         this.id = id;
     }
@@ -118,6 +140,10 @@ public class Spectacle {
 
     public void setTitre(String titre) {
         this.titre = titre;
+    }
+    
+    public void setNote(int note) {
+        this.note = note;
     }
 
     public String afficheComediens() {
@@ -134,7 +160,7 @@ public class Spectacle {
 
     @Override
     public String toString() {
-        return "La piéce " + this.getTitre() + " de " + this.getAuteur() + " et mise en scéne par " + this.getMetteurEnScene()
+        return "La pièce " + this.getTitre() + " de " + this.getAuteur() + " et mise en scène par " + this.getMetteurEnScene()
                 + " regroupe les comédiens " + this.afficheComediens() + "."; //To change body of generated methods, choose Tools | Templates.
     }
 

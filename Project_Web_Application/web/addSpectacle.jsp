@@ -19,8 +19,10 @@
                 if (document.getElementById("nomS").value !== "" &&
                         document.getElementById("auteurS").value !== "" &&
                         document.getElementById("mesS").value !== "" &&
-                        document.getElementById("dureeS").value !== "") {
-
+                        document.getElementById("dureeS").value !== "" &&
+                        document.getElementById("infoS").value !== "")
+                        {
+                        
                     return true; // Si on ne veut pas lancer la servlet
                 }
                 return false;
@@ -38,14 +40,17 @@
                         <p><b>Nom</b></p>
                         <p><b>Auteur</b></p>
                         <p><b>Metteur en scéne</b></p> 
+                        <p><b>Informations</b></p>
                         <p><b>Durée</b></p>
                         <p><b>Image </b></p>
+                        
                     </div>
                     <div class="col-md-2"> 
                         <input type="text" id="nomS" name="nomS"> 
                         <input type="text" id="auteurS" name="auteurS"> 
                         <input type="text" id="mesS" name="mesS"> 
-                        <input type="number" id="dureeS" name="dureeS"> 
+                        <input type="text" id="infoS" name="infoS"> 
+                        <input type="number" id="dureeS" name="dureeS">
                         <input type="file" id="fileS" name="fileS">
                     </div>
                 </div>
