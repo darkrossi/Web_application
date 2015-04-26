@@ -25,4 +25,32 @@
 
 -- select * from Rang r, Place p where r.NSa = 1 and p.NRa = r.NRa and p.isTaken = 0;
 
-DELETE FROM Dossier;
+-- DELETE FROM Dossier;
+
+select * from Spectacle s, Representation rep, Salle sa, Rang rg where rep.NSp = s.NSp and rep.NSa = sa.NSa and sa.NSa = rg.NSa and (s.NomS like '%ro%' or s.AuteurS like '%ro%' or s.MESS like '%ro%' or s.InfoS like '%ro%');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

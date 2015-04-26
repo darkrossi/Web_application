@@ -7,6 +7,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -204,16 +205,33 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
+        String s = "debut ";
         try {
             conn = getConnection();
             Statement st = conn.createStatement();
-            requeteSQL = "select * from Spectacle "
-                    + "where NomS like '%" + motscles + "%'"
-                    + " or AuteurS like '%" + motscles + "%'"
-                    + " or MESS like '%" + motscles + "%'"
-                    + " or InfoS like '%" + motscles + "%'";
+            String whereMotsCles = " and (s.NomS like '%" + motscles + "%'"
+                    + " or s.AuteurS like '%" + motscles + "%'"
+                    + " or s.MESS like '%" + motscles + "%'"
+                    + " or s.InfoS like '%" + motscles + "%')";
+            
+            String wherePrix = "";
+            if (!"".equals(prixDe) && !"".equals(prixA)) {
+                wherePrix = " and rg.CatTarif  between " + prixDe + " and " + prixA;
+            }
+
+            requeteSQL = "select * from Spectacle s, Representation rep, Salle sa, Rang rg "
+                    + "where rep.NSp = s.NSp and rep.NSa = sa.NSa and sa.NSa = rg.NSa"
+                    + whereMotsCles + wherePrix;
             rs = st.executeQuery(requeteSQL);
-            while (rs.next()) {
+//            ResultSetMetaData rsmd = rs.getMetaData();
+//            int columnCount = rsmd.getColumnCount();
+//
+//            // The column count starts from 1
+//            for (int i = 1; i < columnCount + 1; i++) {
+//                String name = rsmd.getColumnName(i);
+//                s += name + " ";
+//            }
+            if (rs.next()) {
                 if (rs.getInt("NSP") != 0) {
                     Spectacle spectacle = new Spectacle(rs.getInt("NSP"),
                             rs.getString("NomS"),
@@ -226,7 +244,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Erreur BD " + e.getMessage() + " " + requeteSQL, e);
+            throw new DAOException("Erreur BD " + e.getMessage() + " " + s, e);
         } finally {
             closeConnection(conn);
         }
@@ -234,3 +252,4 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
     }
 
 }
+// NSP NOMS AUTEURS MESS DUREES AFFICHE INFOS NOTES NR DATER HEURER NSP NSA NBP NSA NBRA NRA CATTARIF NSA NBP 
