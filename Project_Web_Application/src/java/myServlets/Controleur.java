@@ -98,7 +98,7 @@ public class Controleur extends HttpServlet {
             UtilisateurDAO userDAO = new UtilisateurDAO(ds);
             RepresentationDAO represDAO = new RepresentationDAO(ds);
 //            SalleDAO salleDAO = new SalleDAO(ds);
-//            DossierDAO dossierDAO = new DossierDAO(ds);
+            DossierDAO dossierDAO = new DossierDAO(ds);
             AchatDAO achatDAO = new AchatDAO(ds);
 //            RangDAO rangDAO = new RangDAO(ds);
 
@@ -112,6 +112,8 @@ public class Controleur extends HttpServlet {
                 actionFiltrerCatalogue(request, response, spectacleDAO, 0);
             } else if (action.equals("addAchat")) {
                 actionAddAchat(request, response, achatDAO, spectacleDAO, represDAO);
+            } else if (action.equals("confirmResa")) {
+                actionConfirmResa(request, response, dossierDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -325,5 +327,19 @@ public class Controleur extends HttpServlet {
 
     private void actionDisplayResaNbPlaces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, RepresentationDAO represDAO, RangDAO rangDAO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void actionConfirmResa(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO) throws DAOException, ServletException, IOException {
+        request.setAttribute("logBool", 1);
+        if(dossierDAO.swapResa(Integer.parseInt(request.getParameter("ND")))){
+            request.setAttribute("logText", "Achat effectué avec succès !");
+        } else {
+            request.setAttribute("logText", "Pitit ploblém");
+        }
+        request.setAttribute("dossiers", dossierDAO.getFolders(request.getParameter("login"), 0));
+        request.setAttribute("resas", dossierDAO.getFolders(request.getParameter("login"), 1));
+        getServletContext()
+                .getRequestDispatcher("/monCompte.jsp")
+                .forward(request, response);
     }
 }

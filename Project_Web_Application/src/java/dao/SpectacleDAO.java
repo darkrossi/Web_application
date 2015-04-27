@@ -218,6 +218,12 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
             if (!"".equals(prixDe) && !"".equals(prixA)) {
                 wherePrix = " and rg.CatTarif  between " + prixDe + " and " + prixA;
             }
+            
+            // A compléter
+            String whereDate = "";
+            if (!"".equals(date1) && !"".equals(date2)) {
+                whereDate = " and rg.CatTarif  between " + prixDe + " and " + prixA;
+            }
 
             requeteSQL = "select distinct s.NSp, s.NomS, s.AuteurS, s.MESS, s.DureeS, s.Affiche, s.infos "
                     + "from Spectacle s, Representation rep, Salle sa, Rang rg "

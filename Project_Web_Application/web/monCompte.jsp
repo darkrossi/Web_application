@@ -86,9 +86,11 @@
                                         <p><%=resas.get(i).getDate()%></p>
                                         <p><%=resas.get(i).getHeure()%></p>
                                         <p><%=resas.get(i).getNbP()%></p>
-                                        <form method="post" action="<%=request.getContextPath()%>/confirmResa">
+                                        <form method="post" action="<%=request.getContextPath()%>/controleur">
                                             <button type="submit">Confirmer la réservation</button>
-                                            <%request.setAttribute("dossier", resas.get(i));%>
+                                            <input name="action" value="confirmResa" hidden="true">
+                                            <input name="login" value="<%=userName%>" hidden="true">
+                                            <input name="ND" value="<%=resas.get(i).getND() %>" hidden="true">
                                         </form>
                                     </div>
                                 <%

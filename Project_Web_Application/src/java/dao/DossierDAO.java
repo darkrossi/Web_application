@@ -56,4 +56,37 @@ public class DossierDAO extends AbstractDataBaseDAO {
         return result;
     }
 
+    public boolean swapResa(int ND) throws DAOException {
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            Statement st = conn.createStatement();
+
+            /* On récupère l'indice max de NT */
+            int indiceNT_Max = 0;
+            requeteSQL = "select max(NT) from Ticket";
+            rs = st.executeQuery(requeteSQL);
+            while (rs.next()) {
+                indiceNT_Max = rs.getInt(1);
+            }
+
+            /* On ajoute un nouveau ticket */
+            indiceNT_Max++;
+            requeteSQL = "INSERT INTO Ticket (NT)"
+                    + "VALUES (" + indiceNT_Max + ")";
+            st.executeQuery(requeteSQL);
+
+            requeteSQL = "Update Dossier set boolResa = 0, NT = " + indiceNT_Max + " where ND = " + ND;
+            rs = st.executeQuery(requeteSQL);
+            
+            return true;
+        } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(conn);
+        }
+    }
+
 }
