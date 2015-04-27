@@ -5,12 +5,12 @@ CREATE TABLE Spectacle (
     MESS varchar(30),
     DureeS int,
     Affiche varchar(30),
-    InfoS varchar(240),
+    InfoS varchar(500),
     constraint pk_spectacle primary key (NSP)
 );
-INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)
-SELECT NSP, NomS, AuteurS, MESS, DureeS, Affiche
-FROM Spectacle2;
+INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche, InfoS)
+SELECT NSP, NomS, AuteurS, MESS, DureeS, Affiche, Infos
+FROM Spectacle3;
 
 
 CREATE TABLE Salle (
@@ -70,7 +70,7 @@ CREATE TABLE Users (
 );
 INSERT INTO Users (LoginU, NomU, PrenomU, MailU, MdpU, RoleU)
 SELECT LoginU, NomU, PrenomU, MailU, MdpU, RoleU
-FROM Users2;
+FROM Users3;
 
 CREATE TABLE Ticket (
     NT int,

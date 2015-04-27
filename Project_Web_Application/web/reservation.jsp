@@ -25,18 +25,17 @@
         <link rel="stylesheet" href="css/stylePieces.css" />
 
         <script>
-            $("document").ready(function () {
+            function init() {
                 $(".datepicker").datepicker({
                     dateFormat: "dd-mm-yy"
                 });
                 $("#genre").multiselect();
                 $("select").multiselect();
-            });
-
+            }
         </script>
 
     </head>
-    <body>
+    <body onload="init()">
         <?php
         include("php/panier.php");
         ?>
@@ -158,18 +157,18 @@
                                 function onclickFinalize(bool) {
                                 <% Representation representation = (Representation) request.getAttribute("represPicked");%>
                                     NR = <%=representation.getNR()%>;
-                                    $('#NR'+bool).attr("value", NR);
+                                    $('#NR' + bool).attr("value", NR);
 
                                     NSP = <%=representation.getNSp()%>;
-                                    $('#NSp'+bool).attr("value", NSP);
+                                    $('#NSp' + bool).attr("value", NSP);
 
                                     selectRang = document.getElementById('selectRang');
                                     selectRangValue = selectRang.options[selectRang.selectedIndex].value;
-                                    $('#NRa'+bool).attr("value", selectRangValue);
+                                    $('#NRa' + bool).attr("value", selectRangValue);
 
                                     selectPlace = document.getElementById('selectPlace' + selectRangValue);
                                     selectPlaceValue = selectPlace.options[selectPlace.selectedIndex].value;
-                                    $('#NP'+bool).attr("value", selectPlaceValue);
+                                    $('#NP' + bool).attr("value", selectPlaceValue);
                                 }
                             </script>
 
@@ -207,6 +206,7 @@
                     <%}%>
                 </div>
             </div>
+        </div>
     </body>
     <jsp:include page="jsp/footer.jsp"/>
 

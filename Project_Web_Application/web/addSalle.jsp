@@ -28,22 +28,26 @@
                     <p><b>Prix du rang</b></p>
                     <p><b>Nombre de places par rang</b></p> 
                 </div>
+                <% if (request.getAttribute("salles") != null) {
+                        List<Salle> salles = (List<Salle>) request.getAttribute("salles");
+                        if (!salles.isEmpty()) {
+                            for (int i = 0; i < salles.size(); i++) {%>
                 <div class="col-md-2">
-                    <% if (request.getAttribute("salles") != null) {
-                            List<Salle> salles = (List<Salle>) request.getAttribute("salles");
-                            if (!salles.isEmpty()) {
-                                for (int i = 0; i < salles.size(); i++) {%>
+
                     <p><%=salles.get(i).getNSa()%></p>
                     <p><%=salles.get(i).getNbRa()%></p>
                     <p><%=salles.get(i).getCatTarif()%></p>
                     <p><%=salles.get(i).getNbP()%></p>
-                    <%}
-                            }
-                        }%>
-                </div>
 
-                <div class="col-md-2">
                 </div>
+                <%}
+                        }
+                    }%>
+
+
+            </div>
+
+            <div class="row">
 
                 <div class="col-md-6">
                     <div class="col-md-4">

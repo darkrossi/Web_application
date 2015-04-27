@@ -11,6 +11,7 @@
 
 <script>
     $('document').ready(function () {
+
         if (<%= request.getAttribute("logBool")%>) {
             $("#myModalLog div p").html("<%=request.getAttribute("logText")%>");
 
@@ -49,12 +50,12 @@
                                 <input name="action" value="displayCatalogue" hidden="true">
                             </form>
                         </li>
-<!--                        <li>
-                            <a href="javascript:document.inputForm1.submit();">Réserver une place</a>
-                            <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm1">
-                                <input name="action" value="displayAddBooking" hidden="true">
-                            </form>
-                        </li>-->
+                        <!--                        <li>
+                                                    <a href="javascript:document.inputForm1.submit();">Réserver une place</a>
+                                                    <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm1">
+                                                        <input name="action" value="displayAddBooking" hidden="true">
+                                                    </form>
+                                                </li>-->
 
                         <li><a href="addSpectacle.jsp">Ajouter un spectacle</a></li>
                         <li>
@@ -80,12 +81,12 @@
                         <input name="action" value="displayCatalogue" hidden="true">
                     </form>
                 </li>
-<!--                <li>
-                    <a href="javascript:document.inputForm1.submit();">Réserver une place</a>
-                    <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm1">
-                        <input name="action" value="displayAddBooking" hidden="true">
-                    </form>
-                </li>-->
+                <!--                <li>
+                                    <a href="javascript:document.inputForm1.submit();">Réserver une place</a>
+                                    <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm1">
+                                        <input name="action" value="displayAddBooking" hidden="true">
+                                    </form>
+                                </li>-->
                 <%}%>
 
             </ul>

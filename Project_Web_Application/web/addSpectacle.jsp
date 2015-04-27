@@ -49,7 +49,7 @@
                         <input type="text" id="nomS" name="nomS"> 
                         <input type="text" id="auteurS" name="auteurS"> 
                         <input type="text" id="mesS" name="mesS"> 
-                        <input type="text" id="infoS" name="infoS"> 
+                        <textarea id="infoS" name="infoS"></textarea>
                         <input type="number" id="dureeS" name="dureeS">
                         <input type="file" id="fileS" name="fileS">
                     </div>

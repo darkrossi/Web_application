@@ -214,7 +214,10 @@ public class Controleur extends HttpServlet {
         } else {
             request.setAttribute("logText", "Erreur lors de la création de la salle..");
         }
-        actionDisplayAddSalle(request, response, salleDAO);
+        request.setAttribute("salles", salleDAO.getListeSalles());
+        getServletContext()
+                .getRequestDispatcher("/addSalle.jsp")
+                .forward(request, response);
 
     }
 

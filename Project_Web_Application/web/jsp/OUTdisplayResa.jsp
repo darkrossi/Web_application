@@ -12,9 +12,6 @@
 <%@page import="modele.Representation"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<% HttpSession session2 = request.getSession(false);
-    String userName = (String) session2.getAttribute("utilisateur");%>
-
 <% if (request.getAttribute("spectacle") != null) {
         Spectacle spect = (Spectacle) request.getAttribute("spectacle");
         String nomS = spect.getTitre();

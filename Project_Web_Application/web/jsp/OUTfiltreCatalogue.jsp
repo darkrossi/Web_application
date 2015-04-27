@@ -31,7 +31,7 @@
         </dd>
     </dl>
 
-    <!-- RECHERCHE PAR DATE -->
+<!--     RECHERCHE PAR DATE 
     <dl class="dropdown">
         <dt>
         <a href="#">
@@ -50,7 +50,7 @@
                 </ul>
             </div>
         </dd>
-    </dl>
+    </dl>-->
 
     <!-- RECHERCHE PAR PRIX -->
     <dl class="dropdown">
@@ -75,7 +75,7 @@
         </dd>
     </dl>
 
-    <!-- RECHERCHE PAR GENRE -->
+<!--     RECHERCHE PAR GENRE 
     <dl class="dropdown">
         <dt>
         <a href="#">
@@ -106,7 +106,7 @@
         </dd>
     </dl>
 
-    <!-- RECHERCHE PAR POPULARITÉ -->
+     RECHERCHE PAR POPULARITÉ 
     <dl class="dropdown">
         <dt>
         <a href="#">
@@ -124,7 +124,7 @@
                 </ul>
             </div>
         </dd>
-    </dl>
+    </dl>-->
 
     <input type="submit" value="Filtrer">
     <input name="action" value="filtrerCatalogue" hidden="true">

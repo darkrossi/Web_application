@@ -7,7 +7,7 @@
 -- SELECT * from Rang;
 -- SELECT * from Place;
 -- SELECT * from Users;
-SELECT * from Dossier;
+-- SELECT * from Dossier;
 -- SELECT * from Ticket;
 
 -- DROP TABLE Dossier;
@@ -15,9 +15,13 @@ SELECT * from Dossier;
 
 -- DELETE FROM Salle;
 
--- create table Spectacle as select * from Spectacle2;
--- create table Users as select * from Users2;
--- create table Representation as select * from Representation2;
+DELETE FROM Spectacle3;
+DELETE FROM Users3;
+DROP TABLE Spectacle3 cascade constraint;
+DROP TABLE Users3 cascade constraint;
+
+create table Spectacle3 as select * from Spectacle;
+create table Users3 as select * from Users;
 
 -- INSERT INTO Representation (NR, DateR, HeureR, NSP, NSA, NbP)
 -- SELECT NR, DateR, HeureR, NSP, NSA, NbP
@@ -28,11 +32,17 @@ SELECT * from Dossier;
 -- DELETE FROM Dossier;
 
 -- select * from Spectacle s, Representation rep, Salle sa, Rang rg where rep.NSp = s.NSp and rep.NSa = sa.NSa and sa.NSa = rg.NSa and (s.NomS like '%ro%' or s.AuteurS like '%ro%' or s.MESS like '%ro%' or s.InfoS like '%ro%');
+-- 
+-- update Spectacle 
+-- set Infos = 'Le RIdeau Rouge propose un spectacle interactif, pour les 4-12 ans, à l’opposé des
+-- spectacles classiques pour enfants sages. Avec lui, ce sont les enfants
+-- qui font le show. Ils participent, chantent, dansent, s’ouvrent les uns
+-- aux autres au travers de différents défis qui font aussi découvrir
+-- l’esprit d’équipe. ' 
+-- where NSP = 1;
 
 
-
-
-
+-- select distinct * from Salle s, Rang r where r.NSA = s.NSA;
 
 
 

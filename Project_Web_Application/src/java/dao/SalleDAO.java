@@ -45,7 +45,7 @@ public class SalleDAO extends AbstractDataBaseDAO {
                 Salle salle = new Salle(rs.getInt("NSA"),
                         rs.getInt("CatTarif"),
                         rs.getInt("NbRa"),
-                        rs.getInt("NbP"));
+                        rs.getInt("NbP") * rs.getInt("NbRa"));
                 System.err.println(salle);
                 result.add(salle);
             }
@@ -77,6 +77,7 @@ public class SalleDAO extends AbstractDataBaseDAO {
         Connection conn = null;
         int indiceNSa_Max = 0;
         int indiceNPl_Max = 0;
+        int indiceNRa_Max = 0;
         try {
             conn = getConnection();
             Statement st = conn.createStatement();
@@ -84,7 +85,6 @@ public class SalleDAO extends AbstractDataBaseDAO {
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
                 indiceNSa_Max = rs.getInt(1);
-                indiceNSa_Max++;
             }
 
             requeteSQL = "select max(NP) from Place";
@@ -93,30 +93,32 @@ public class SalleDAO extends AbstractDataBaseDAO {
                 indiceNPl_Max = rs.getInt(1);
             }
 
+            requeteSQL = "select max(NRa) from Rang";
+            rs = st.executeQuery(requeteSQL);
+            while (rs.next()) {
+                indiceNRa_Max = rs.getInt(1);
+            }
+
+            indiceNSa_Max++;
             requeteSQL = "INSERT INTO Salle (NSA, NbRa) VALUES (" + indiceNSa_Max + ", " + nbRa + ")";
             st.executeQuery(requeteSQL);
 
             for (int i = 1; i <= nbRa; i++) {
-                requeteSQL = "INSERT INTO Rang (NRA, CatTarif, NSA, NbP) VALUES (" + i + ", " + catTarif + ", "
+                indiceNRa_Max++;
+                requeteSQL = "INSERT INTO Rang (NRA, CatTarif, NSA, NbP) VALUES (" + indiceNRa_Max + ", " + catTarif + ", "
                         + indiceNSa_Max + ", " + nbP + ")";
                 st.executeQuery(requeteSQL);
                 for (int j = 1; j <= nbP; j++) {
+                    indiceNPl_Max++;
                     requeteSQL = "INSERT INTO Place (NP, NRa, isTaken, ND) "
-                            + "VALUES (" + indiceNPl_Max++ + ", " + i + ", 0, -1)";
+                            + "VALUES (" + indiceNPl_Max + ", " + i + ", 0, -1)";
                     st.executeQuery(requeteSQL);
                 }
             }
 
             return true;
         } catch (SQLException e) {
-            // si l'exception concerne l'unicité de chaque login dans la table
-            if (e.getErrorCode() == 1) {
-                // alors on redirige vers une page vers une page qui indique que ce login est déjà enregistré dans la bdd
-                return false;
-            } else {
-                // sinon lancer l'exception
-                throw new DAOException("Erreur BD " + e.getMessage(), e);
-            }
+            throw new DAOException("Erreur BD " + e.getMessage() + " " + requeteSQL, e);
         } finally {
             closeConnection(conn);
         }
