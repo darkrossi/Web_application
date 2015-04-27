@@ -4,6 +4,7 @@
     Author     : oswald
 --%>
 
+<%@page import="modele.Spectacle"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="modele.Place"%>
 <%@page import="java.util.Hashtable"%>
@@ -45,7 +46,16 @@
             <div class="row">
                 <!-- FILTRES -->
                 <div class="col-md-4">
-                    <jsp:include page="jsp/OUTfiltreResa.jsp"/>
+                    <form name="form" action="<%=request.getContextPath()%>/controleur" method="post">
+                        <% Spectacle spectacle = (Spectacle) request.getAttribute("spectacle");%>
+
+                        <jsp:include page="jsp/OUTfiltreResa.jsp"/>
+                        <input type="submit" value="Filtrer">
+                        <input name="action" value="filtrerResa" hidden="true">
+                        <input name="NSp" value="<%=spectacle.getId()%>" hidden="true">
+
+                    </form>
+
                 </div>
 
                 <!-- SPECTACLE AVEC LISTE REPRESENTATIONS -->
@@ -63,14 +73,14 @@
                             <% if (request.getAttribute("represPicked") != null) {
 
                                     Representation representation = (Representation) request.getAttribute("represPicked");%>
-                                    <p><font color="black"><%= representation.getDate()%></font></p>
-                            <% }%>
+                            <p><font color="black"><%= representation.getDate()%></font></p>
+                                <% }%>
                         </div>
                         <div class="col-md-3">
                             <% if (request.getAttribute("represPicked") != null) {
                                     Representation representation = (Representation) request.getAttribute("represPicked");%>
-                                    <p><font color="black"><%=representation.getHeure()%></font></p>
-                            <% }%>
+                            <p><font color="black"><%=representation.getHeure()%></font></p>
+                                <% }%>
                         </div>
                     </div>
 

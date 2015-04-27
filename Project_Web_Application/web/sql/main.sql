@@ -27,6 +27,7 @@
 -- create table Users3 as select * from Users;
 -- create table CatTarifs3 as select * from CatTarifs;
 -- create table Salle3 as select * from Salle;
+-- create table Representation3 as select * from Representation;
 
 
 

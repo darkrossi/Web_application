@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -250,23 +251,23 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
         int[] dateDeT = new int[3];
         int[] dateAT = new int[3];
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
             dateT[i] = Integer.parseInt(date.substring(3 * i, 3 * i + 2));
             dateDeT[i] = Integer.parseInt(dateDe.substring(3 * i, 3 * i + 2));
             dateAT[i] = Integer.parseInt(dateA.substring(3 * i, 3 * i + 2));
         }
+        dateT[2] = Integer.parseInt(date.substring(6, 10));
+        dateDeT[2] = Integer.parseInt(dateDe.substring(6, 10));
+        dateAT[2] = Integer.parseInt(dateA.substring(6, 10));
 
-        if (dateT[2] >= dateDeT[2] && dateT[2] <= dateAT[2]) {
-            if (dateT[1] >= dateDeT[1] && dateT[1] <= dateAT[1]) {
-                return dateT[0] >= dateDeT[0] && dateT[0] <= dateAT[0];//                    throw new DAOException("HERE " + dateDeT[0] + " " + dateT[0] + " " + dateAT[0] + " END"+
-//                            "HERE " + dateDeT[1] + " " + dateT[1] + " " + dateAT[1] + " END"+
-//                            "HERE " + dateDeT[2] + " " + dateT[2] + " " + dateAT[2] + " END", null);
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
+        Date dateFinale = new Date(dateT[2] - 1900, dateT[1] - 1, dateT[0]);
+        Date dateFinaleDe = new Date(dateDeT[2] - 1900, dateDeT[1] - 1, dateDeT[0]);
+        Date dateFinaleA = new Date(dateAT[2] - 1900, dateAT[1] - 1, dateAT[0]);
+
+        double diffDe = dateFinale.getTime() - dateFinaleDe.getTime();
+        double diffA = dateFinaleA.getTime() - dateFinale.getTime();
+
+        return diffDe >= 0 && diffA >= 0;
     }
 
 }

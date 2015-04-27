@@ -67,8 +67,6 @@ public class Controleur extends HttpServlet {
                 actionDisplayResa(request, response, spectacleDAO, represDAO, 0);
             } else if (action.equals("displayResaPlaces")) {
                 actionDisplayResaPlaces(request, response, spectacleDAO, represDAO, rangDAO);
-            } else if (action.equals("displayResaNbPlaces")) {
-                actionDisplayResaNbPlaces(request, response, spectacleDAO, represDAO, rangDAO);
             } else if (action.equals("addSalle")) {
                 actionAddSalle(request, response, salleDAO);
             } else {
@@ -110,6 +108,8 @@ public class Controleur extends HttpServlet {
                 actionVerifUser(request, response, userDAO);
             } else if (action.equals("filtrerCatalogue")) {
                 actionFiltrerCatalogue(request, response, spectacleDAO, 0);
+            } else if (action.equals("filtrerResa")) {
+                actionFiltrerResa(request, response, represDAO, spectacleDAO, 0);
             } else if (action.equals("addAchat")) {
                 actionAddAchat(request, response, achatDAO, spectacleDAO, represDAO);
             } else if (action.equals("confirmResa")) {
@@ -310,7 +310,7 @@ public class Controleur extends HttpServlet {
             throws DAOException, ServletException, IOException {
         request.setAttribute("represPicked", represDAO.getRepres(Integer.parseInt(request.getParameter("NR"))));
         request.setAttribute("rangs", rangDAO.getRangs(Integer.parseInt(request.getParameter("NSa")), true));
-        actionDisplayResa(request, response, spectDAO, represDAO, 0);
+        actionFiltrerResa(request, response, represDAO, spectDAO, 0);
     }
 
     private void actionFiltrerCatalogue(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, int logBool)
@@ -329,8 +329,19 @@ public class Controleur extends HttpServlet {
                 .forward(request, response);
     }
 
-    private void actionDisplayResaNbPlaces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, RepresentationDAO represDAO, RangDAO rangDAO) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void actionFiltrerResa(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO, SpectacleDAO spectacleDAO, int logBool)
+            throws DAOException, ServletException, IOException {
+        request.setAttribute("logBool", logBool);
+        request.setAttribute("repres", represDAO.getListeRepresTri(
+                Integer.parseInt(request.getParameter("NSp")),
+                request.getParameter("datepicker1"),
+                request.getParameter("datepicker2")));
+        request.setAttribute("spectacle", spectacleDAO.getSpectacle(Integer.parseInt(request.getParameter("NSp"))));
+        request.setAttribute("datepicker1", request.getParameter("datepicker1"));
+        request.setAttribute("datepicker2", request.getParameter("datepicker2"));
+        getServletContext()
+                .getRequestDispatcher("/reservation.jsp")
+                .forward(request, response);
     }
 
     private void actionConfirmResa(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO) throws DAOException, ServletException, IOException {

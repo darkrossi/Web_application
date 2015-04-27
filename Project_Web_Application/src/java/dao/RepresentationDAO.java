@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.Hashtable;
 import java.util.List;
 import javax.sql.DataSource;
@@ -180,26 +182,70 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
         return result;
     }
 
-//    private final String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
-//    private final String login = "fournimi";
-//
-//    public List<Representation> getListeRepres(int NSp) throws DAOException, ClassNotFoundException {
-//        Class.forName("oracle.jdbc.OracleDriver");
-//        List<Representation> representations = new ArrayList<>();
-//        try (Connection Connexion = DriverManager.getConnection(url, login, login)) {
-//            Statement State = Connexion.createStatement();
-//            ResultSet result = State.executeQuery("SELECT * FROM Representation WHEN NSP = " + NSp);
-//            while (result.next()) {
-//                representations.add(new Representation(result.getInt("NR"), 
-//                        result.getString("DateR"),
-//                        result.getString("HeureR"),
-//                        result.getInt("NSP"),
-//                        result.getInt("NSA"),
-//                        result.getInt("NbP")));
-//            }
-//        } catch (SQLException e) {
-//        }
-//
-//        return representations;
-//    }
+    public List<Representation> getListeRepresTri(int NSp, String dateDe, String dateA) throws DAOException, ParseException {
+        List<Representation> result = new ArrayList<>();
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            Statement st = conn.createStatement();
+
+            requeteSQL = "select * "
+                    + "from Representation r, Spectacle s "
+                    + "where r.NSP = s.NSP and r.NSP = " + NSp;
+            rs = st.executeQuery(requeteSQL);
+            while (rs.next()) {
+                Representation repres = new Representation(rs.getInt("NR"),
+                        rs.getString("DateR"),
+                        rs.getString("HeureR"),
+                        rs.getInt("NSP"),
+                        rs.getInt("NSA"),
+                        rs.getInt("NbP"),
+                        rs.getString("Affiche"));
+                result.add(repres);
+            }
+
+            if (dateDe != null && dateA != null && !"".equals(dateDe) && !"".equals(dateA)) {
+//                throw new DAOException("HERE '" + dateDe + "' et '" + dateA + "'", null);
+                for (int i = result.size() - 1; i >= 0; i--) {
+                    if (!between(result.get(i).getDate(), dateDe, dateA)) {
+                        result.remove(i);
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(conn);
+        }
+        return result;
+    }
+
+    public static boolean between(String date, String dateDe, String dateA) throws DAOException {
+        int[] dateT = new int[3];
+        int[] dateDeT = new int[3];
+        int[] dateAT = new int[3];
+
+        for (int i = 0; i < 2; i++) {
+            dateT[i] = Integer.parseInt(date.substring(3 * i, 3 * i + 2));
+            dateDeT[i] = Integer.parseInt(dateDe.substring(3 * i, 3 * i + 2));
+            dateAT[i] = Integer.parseInt(dateA.substring(3 * i, 3 * i + 2));
+        }
+        dateT[2] = Integer.parseInt(date.substring(6, 10));
+        dateDeT[2] = Integer.parseInt(dateDe.substring(6, 10));
+        dateAT[2] = Integer.parseInt(dateA.substring(6, 10));
+
+        Date dateFinale = new Date(dateT[2]-1900, dateT[1]-1, dateT[0]);
+        Date dateFinaleDe = new Date(dateDeT[2]-1900, dateDeT[1]-1, dateDeT[0]);
+        Date dateFinaleA = new Date(dateAT[2]-1900, dateAT[1]-1, dateAT[0]);
+
+        double diffDe = dateFinale.getTime() - dateFinaleDe.getTime();
+        double diffA = dateFinaleA.getTime() - dateFinale.getTime();
+
+        return diffDe >= 0 && diffA >= 0;
+
+    }
+
 }

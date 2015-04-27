@@ -75,57 +75,6 @@
         </dd>
     </dl>
 
-<!--     RECHERCHE PAR GENRE 
-    <dl class="dropdown">
-        <dt>
-        <a href="#">
-            <span><h3>Genre</h3></span>   
-            <p class="multiSel"></p> 
-        </a>
-        </dt>
-        <dd>
-            <div class="mutliSelect">
-                <ul>
-                    <li>
-                        <input name="checkGenre" type="checkbox" value="GrandSpectacle" />Grand spectacle</li>
-                    <li>
-                        <input name="checkGenre" type="checkbox" value="ComedieMusicale" />Comédie musicale</li>
-                    <li>
-                        <input name="checkGenre" type="checkbox" value="SpectacleMagie" />Spectacle de magie</li>
-                    <li>
-                        <input name="checkGenre" type="checkbox" value="TheatreContemporain" />Théâtre contemporain</li>
-                    <li>
-                        <input name="checkGenre" type="checkbox" value="TheatreEnfant" />Théâtre pour enfants</li>
-                    <li>
-                        <input name="checkGenre" type="checkbox" value="TheatreEquestre" />Théâtre équestre</li>
-                    <li>
-                        <input name="checkGenre" type="checkbox" value="SeulEnScene" />Seul en scène</li>
-
-                </ul>
-            </div>
-        </dd>
-    </dl>
-
-     RECHERCHE PAR POPULARITÉ 
-    <dl class="dropdown">
-        <dt>
-        <a href="#">
-            <span><h3>Popularité</h3></span>   
-            <p class="multiSel"></p> 
-        </a>
-        </dt>
-        <dd>
-            <div class="mutliSelect">
-                <ul>
-                    <li>
-                        <input name="checkPop" type="checkbox" value="MeilleureNote" />Les mieux notés</li>
-                    <li>
-                        <input name="checkPop" type="checkbox" value="GrandSpectacle" />Les plus vendues</li>
-                </ul>
-            </div>
-        </dd>
-    </dl>-->
-
     <input type="submit" value="Filtrer">
     <input name="action" value="filtrerCatalogue" hidden="true">
 </form>
