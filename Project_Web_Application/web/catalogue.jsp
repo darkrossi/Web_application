@@ -24,10 +24,15 @@
             function prix() {
 
             }
+            function init() {
+                $(".datepicker").datepicker({
+                    dateFormat: "dd-mm-yy"
+                });
+            }
         </script>
 
     </head>
-    <body>
+    <body onload="init()">
         <div class="container-fluid" >
 
             <jsp:include page="jsp/navbar.jsp"/>
@@ -56,11 +61,7 @@
             </div>
         </div>
     </body>
-    <script>
-        $(function () {
-            $(".datepicker").datepicker();
-        });
-    </script>
+
     <script src="js/multiple.js" type="text/javascript"></script>
     <jsp:include page="jsp/footer.jsp"/>
 

@@ -51,6 +51,27 @@
         </dd>
     </dl>
 
+    <!--RECHERCHE PAR DATE -->
+    <dl class="dropdown">
+        <dt>
+        <a href="#">
+            <span><h3>Date</h3></span>   
+            <p class="multiSel"></p> 
+        </a>
+        </dt>
+
+        <dd>
+            <div class="mutliSelect">
+                <ul>
+                    <li>
+                        <input type="text" name="datepicker1" class="datepicker" value="" placeholder="Du">
+                        <input type="text" name="datepicker2" class="datepicker" value="" placeholder="Au">
+                    </li>
+                </ul>
+            </div>
+        </dd>
+    </dl>
+
     <input type="submit" value="Filtrer">
     <input name="action" value="filtrerResa" hidden="true">
 </form>

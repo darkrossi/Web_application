@@ -31,7 +31,7 @@
         </dd>
     </dl>
 
-<!--     RECHERCHE PAR DATE 
+    <!--RECHERCHE PAR DATE -->
     <dl class="dropdown">
         <dt>
         <a href="#">
@@ -50,7 +50,7 @@
                 </ul>
             </div>
         </dd>
-    </dl>-->
+    </dl>
 
     <!-- RECHERCHE PAR PRIX -->
     <dl class="dropdown">

@@ -173,25 +173,6 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
         //...
     }
 
-//    private final String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
-//    private final String login = "fournimi";
-//    
-//    public List<Spectacle> getListeSpectaclesMenu() throws DAOException, ClassNotFoundException {
-//        Class.forName("oracle.jdbc.OracleDriver");
-//        List<Spectacle> spectacles = new ArrayList<>();
-//        try (Connection Connexion = DriverManager.getConnection(url, login, login)) {
-//            Statement State = Connexion.createStatement();
-//            ResultSet resultat = State.executeQuery("SELECT NSP, NomS FROM Spectacle");
-//            while (resultat.next()) {
-//                if (resultat.getInt("NSP") != 0) {
-//                    spectacles.add(new Spectacle(resultat.getInt("NSP"), resultat.getString("NomS")));
-//                }
-//            }
-//        } catch (SQLException e) {
-//        }
-//        
-//        return spectacles;
-//    }
     public List<Spectacle> getListeSpectaclesTri(String motscles,
             String date1,
             String date2,
@@ -201,6 +182,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
             String[] checkPop) throws DAOException {
 
         List<Spectacle> result = new ArrayList<>();
+        List<String> dates = new ArrayList<>();
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
@@ -218,14 +200,8 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
             if (!"".equals(prixDe) && !"".equals(prixA)) {
                 wherePrix = " and rg.CatTarif  between " + prixDe + " and " + prixA;
             }
-            
-            // A compléter
-            String whereDate = "";
-            if (!"".equals(date1) && !"".equals(date2)) {
-                whereDate = " and rg.CatTarif  between " + prixDe + " and " + prixA;
-            }
 
-            requeteSQL = "select distinct s.NSp, s.NomS, s.AuteurS, s.MESS, s.DureeS, s.Affiche, s.infos "
+            requeteSQL = "select distinct s.NSp, s.NomS, s.AuteurS, s.MESS, s.DureeS, s.Affiche, s.infos, rep.dateR "
                     + "from Spectacle s, Representation rep, Salle sa, Rang rg "
                     + "where rep.NSp = s.NSp and rep.NSa = sa.NSa and sa.NSa = rg.NSa"
                     + whereMotsCles + wherePrix;
@@ -249,8 +225,18 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                             rs.getString("InfoS"));
                     System.err.println(spectacle);
                     result.add(spectacle);
+                    dates.add(rs.getString("dateR"));
                 }
             }
+
+            if (!"".equals(date1) && !"".equals(date2)) {
+                for (int i = result.size() - 1; i >= 0; i--) {
+                    if (!between(dates.get(i), date1, date2)) {
+                        result.remove(i);
+                    }
+                }
+            }
+
         } catch (SQLException e) {
             throw new DAOException("Erreur BD " + e.getMessage() + " " + s, e);
         } finally {
@@ -259,5 +245,28 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
         return result;
     }
 
+    public static boolean between(String date, String dateDe, String dateA) throws DAOException {
+        int[] dateT = new int[3];
+        int[] dateDeT = new int[3];
+        int[] dateAT = new int[3];
+
+        for (int i = 0; i < 3; i++) {
+            dateT[i] = Integer.parseInt(date.substring(3 * i, 3 * i + 2));
+            dateDeT[i] = Integer.parseInt(dateDe.substring(3 * i, 3 * i + 2));
+            dateAT[i] = Integer.parseInt(dateA.substring(3 * i, 3 * i + 2));
+        }
+
+        if (dateT[2] >= dateDeT[2] && dateT[2] <= dateAT[2]) {
+            if (dateT[1] >= dateDeT[1] && dateT[1] <= dateAT[1]) {
+                return dateT[0] >= dateDeT[0] && dateT[0] <= dateAT[0];//                    throw new DAOException("HERE " + dateDeT[0] + " " + dateT[0] + " " + dateAT[0] + " END"+
+//                            "HERE " + dateDeT[1] + " " + dateT[1] + " " + dateAT[1] + " END"+
+//                            "HERE " + dateDeT[2] + " " + dateT[2] + " " + dateAT[2] + " END", null);
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
 }
-// NSP NOMS AUTEURS MESS DUREES AFFICHE INFOS NOTES NR DATER HEURER NSP NSA NBP NSA NBRA NRA CATTARIF NSA NBP 
