@@ -43,7 +43,8 @@ public class DossierDAO extends AbstractDataBaseDAO {
                         rs.getInt("NR"),
                         rs.getString("NomS"),
                         rs.getString("DateR"),
-                        rs.getString("HeureR"));
+                        rs.getString("HeureR"),
+                        rs.getInt("boolResa")); //
                 System.err.println(dossier);
                 result.add(dossier);
             }
