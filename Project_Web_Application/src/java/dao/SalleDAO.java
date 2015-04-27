@@ -78,49 +78,53 @@ public class SalleDAO extends AbstractDataBaseDAO {
         int indiceNSa_Max = 0;
         int indiceNPl_Max = 0;
         int indiceNRa_Max = 0;
-        try {
-            conn = getConnection();
-            Statement st = conn.createStatement();
-            requeteSQL = "select max(NSA) from Salle";
-            rs = st.executeQuery(requeteSQL);
-            while (rs.next()) {
-                indiceNSa_Max = rs.getInt(1);
-            }
-
-            requeteSQL = "select max(NP) from Place";
-            rs = st.executeQuery(requeteSQL);
-            while (rs.next()) {
-                indiceNPl_Max = rs.getInt(1);
-            }
-
-            requeteSQL = "select max(NRa) from Rang";
-            rs = st.executeQuery(requeteSQL);
-            while (rs.next()) {
-                indiceNRa_Max = rs.getInt(1);
-            }
-
-            indiceNSa_Max++;
-            requeteSQL = "INSERT INTO Salle (NSA, NbRa) VALUES (" + indiceNSa_Max + ", " + nbRa + ")";
-            st.executeQuery(requeteSQL);
-
-            for (int i = 1; i <= nbRa; i++) {
-                indiceNRa_Max++;
-                requeteSQL = "INSERT INTO Rang (NRA, CatTarif, NSA, NbP) VALUES (" + indiceNRa_Max + ", " + catTarif + ", "
-                        + indiceNSa_Max + ", " + nbP + ")";
-                st.executeQuery(requeteSQL);
-                for (int j = 1; j <= nbP; j++) {
-                    indiceNPl_Max++;
-                    requeteSQL = "INSERT INTO Place (NP, NRa, isTaken, ND) "
-                            + "VALUES (" + indiceNPl_Max + ", " + i + ", 0, -1)";
-                    st.executeQuery(requeteSQL);
+        if (nbRa * nbP < 70) {
+            try {
+                conn = getConnection();
+                Statement st = conn.createStatement();
+                requeteSQL = "select max(NSA) from Salle";
+                rs = st.executeQuery(requeteSQL);
+                while (rs.next()) {
+                    indiceNSa_Max = rs.getInt(1);
                 }
-            }
 
-            return true;
-        } catch (SQLException e) {
-            throw new DAOException("Erreur BD " + e.getMessage() + " " + requeteSQL, e);
-        } finally {
-            closeConnection(conn);
+                requeteSQL = "select max(NP) from Place";
+                rs = st.executeQuery(requeteSQL);
+                while (rs.next()) {
+                    indiceNPl_Max = rs.getInt(1);
+                }
+
+                requeteSQL = "select max(NRa) from Rang";
+                rs = st.executeQuery(requeteSQL);
+                while (rs.next()) {
+                    indiceNRa_Max = rs.getInt(1);
+                }
+
+                indiceNSa_Max++;
+                requeteSQL = "INSERT INTO Salle (NSA, NbRa) VALUES (" + indiceNSa_Max + ", " + nbRa + ")";
+                st.executeQuery(requeteSQL);
+
+                for (int i = 1; i <= nbRa; i++) {
+                    indiceNRa_Max++;
+                    requeteSQL = "INSERT INTO Rang (NRA, CatTarif, NSA, NbP) VALUES (" + indiceNRa_Max + ", " + catTarif + ", "
+                            + indiceNSa_Max + ", " + nbP + ")";
+                    st.executeQuery(requeteSQL);
+                    for (int j = 1; j <= nbP; j++) {
+                        indiceNPl_Max++;
+                        requeteSQL = "INSERT INTO Place (NP, NRa, isTaken, ND) "
+                                + "VALUES (" + indiceNPl_Max + ", " + i + ", 0, -1)";
+                        st.executeQuery(requeteSQL);
+                    }
+                }
+
+                return true;
+            } catch (SQLException e) {
+                throw new DAOException("Erreur BD " + e.getMessage() + " " + requeteSQL, e);
+            } finally {
+                closeConnection(conn);
+            }
+        } else {
+            return false;
         }
     }
 }

@@ -209,17 +209,18 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
             conn = getConnection();
             Statement st = conn.createStatement();
 
-            String whereMotsCles = " and (s.NomS like '%" + motscles + "%'"
-                    + " or s.AuteurS like '%" + motscles + "%'"
-                    + " or s.MESS like '%" + motscles + "%'"
-                    + " or s.InfoS like '%" + motscles + "%')";
+            String whereMotsCles = " and (LOWER(s.NomS) like '%" + motscles + "%'"
+                    + " or LOWER(s.AuteurS) like '%" + motscles + "%'"
+                    + " or LOWER(s.MESS) like '%" + motscles + "%'"
+                    + " or LOWER(s.InfoS) like '%" + motscles + "%')";
 
             String wherePrix = "";
             if (!"".equals(prixDe) && !"".equals(prixA)) {
                 wherePrix = " and rg.CatTarif  between " + prixDe + " and " + prixA;
             }
 
-            requeteSQL = "select * from Spectacle s, Representation rep, Salle sa, Rang rg "
+            requeteSQL = "select distinct s.NSp, s.NomS, s.AuteurS, s.MESS, s.DureeS, s.Affiche, s.infos "
+                    + "from Spectacle s, Representation rep, Salle sa, Rang rg "
                     + "where rep.NSp = s.NSp and rep.NSa = sa.NSa and sa.NSa = rg.NSa"
                     + whereMotsCles + wherePrix;
             rs = st.executeQuery(requeteSQL);
@@ -231,7 +232,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
 //                String name = rsmd.getColumnName(i);
 //                s += name + " ";
 //            }
-            if (rs.next()) {
+            while (rs.next()) {
                 if (rs.getInt("NSP") != 0) {
                     Spectacle spectacle = new Spectacle(rs.getInt("NSP"),
                             rs.getString("NomS"),

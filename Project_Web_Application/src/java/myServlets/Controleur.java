@@ -311,7 +311,7 @@ public class Controleur extends HttpServlet {
             throws ServletException, IOException, DAOException {
         request.setAttribute("logBool", logBool);
         request.setAttribute("spectacles", spectacleDAO.getListeSpectaclesTri(
-                request.getParameter("motscles"),
+                request.getParameter("motscles").toLowerCase(),
                 request.getParameter("datepicker1"),
                 request.getParameter("datepicker2"),
                 request.getParameter("prixDe"),
