@@ -9,7 +9,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <% HttpSession session2 = request.getSession(false);
-    String userName = (String) session2.getAttribute("utilisateur");%>
+    String userName = (String) session2.getAttribute("utilisateur");
+    if (userName == null){
+        String site = new String("./index.jsp");
+        response.setStatus(response.SC_MOVED_TEMPORARILY);
+        response.setHeader("Location", site); 
+    }
+%>
 
 <!DOCTYPE html>
 <html>
@@ -44,8 +50,8 @@
                     <p><%=dossiers.get(i).getDate()%></p>
                     <p><%=dossiers.get(i).getHeure()%></p>
                     <p><%=dossiers.get(i).getNbP()%></p>
+                    request.setAttribute("login2") = <%=dossiers.get(i).getLoginU()%>;
                     <form method="post" action="<%=request.getContextPath()%>/printPDF">
-                        <input name="login" value=<%=dossiers.get(i).getLoginU()%> hidden="true">
                         <input name="ND" value=<%=dossiers.get(i).getND()%> hidden="true">
                         <input name="NR" value=<%=dossiers.get(i).getNR()%> hidden="true">
                         <button type="submit">Imprimer en PDF</button>
