@@ -197,7 +197,6 @@
 <!-- POPUP LOGIN -->
 <div id="myModalLogin" class="reveal-modal">
     <div class="container" >
-        <li><a href="#" data-hide-id="myModalLogin" id="idButton"><span class="glyphicon glyphicon-remove"></span> QUITTER CETTE PAGE</a></li>
         <h1>Connectez-vous à votre compte</h1>    
         <FORM ACTION="<%=request.getContextPath()%>/controleur" METHOD="post">
             <div class="row">

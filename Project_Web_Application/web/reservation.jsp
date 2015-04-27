@@ -55,7 +55,7 @@
 
                 <!-- LISTE PLACES DISPONIBLES POUR UNE REPRESENTATION -->
                 <div class="col-md-3"> 
-                    <h2 align="center"> Mes Réservations </h2>
+                    <h2 align="center"> Date choisie </h2>
 
                     <!-- DATE/HEURE -->
                     <div class="row">
@@ -63,13 +63,13 @@
                             <% if (request.getAttribute("represPicked") != null) {
 
                                     Representation representation = (Representation) request.getAttribute("represPicked");%>
-                            <p><%= representation.getDate()%></p>
+                                    <p><font color="black"><%= representation.getDate()%></font></p>
                             <% }%>
                         </div>
                         <div class="col-md-3">
                             <% if (request.getAttribute("represPicked") != null) {
                                     Representation representation = (Representation) request.getAttribute("represPicked");%>
-                            <p><%=representation.getHeure()%></p>
+                                    <p><font color="black"><%=representation.getHeure()%></font></p>
                             <% }%>
                         </div>
                     </div>
@@ -189,7 +189,7 @@
                             <form action="<%=request.getContextPath()%>/controleur" onsubmit="onclickFinalize(0);
                                     return true;" method="post">
                                 <button type="submit">
-                                    Finaliser la commande <span class="glyphicon glyphicon-arrow-down"></span>
+                                    Finaliser la commande <span class="glyphicon glyphicon-euro"></span>
                                 </button>
                                 <input id="NR0" name="NR" value="0" hidden="true">
                                 <input id="NRa0" name="NRa" value="0" hidden="true">
