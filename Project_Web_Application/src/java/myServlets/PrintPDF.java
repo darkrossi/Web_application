@@ -47,9 +47,11 @@ public class PrintPDF extends HttpServlet {
         
         try {
 
-      String login = (String) request.getAttribute("login2");
+      String login = request.getParameter("login");
       String ND = request.getParameter("ND");
       String NR = request.getParameter("NR");
+      String NT = request.getParameter("NT");
+      String NbP = request.getParameter("NbP");
       
 
       Document document = new Document(PageSize.A7);
@@ -72,7 +74,6 @@ public class PrintPDF extends HttpServlet {
       paragraph.setAlignment(Element.ALIGN_CENTER);
       document.add(paragraph);
       document.add(Chunk.NEWLINE);
-      document.add(Chunk.NEWLINE);
       
       //paragraphe 1
       Paragraph paragraphND = new Paragraph();
@@ -86,17 +87,31 @@ public class PrintPDF extends HttpServlet {
       Paragraph paragraphNR = new Paragraph();
       paragraphNR.setFont(font1);
       paragraphNR.add("Réservation n°" + NR);
-      //paragraphND.setAlignment(Element.ALIGN_CENTER);
       document.add(paragraphNR);    
       document.add(Chunk.NEWLINE);
       
       //paragraphe 3
       Paragraph paragraphLogin = new Paragraph();
       paragraphLogin.setFont(font1);
-      paragraphLogin.add("Votre login : " + login);
-      //paragraphND.setAlignment(Element.ALIGN_CENTER);
+      paragraphLogin.add("Votre login : " + login);      
       document.add(paragraphLogin);    
-      document.add(Chunk.NEWLINE);    
+      document.add(Chunk.NEWLINE);
+      
+      //paragraphe 4
+      Paragraph paragraphNT = new Paragraph();
+      paragraphNT.setFont(font1);
+      paragraphNT.add("Ticket n°" + NT);
+      document.add(paragraphNT);    
+      document.add(Chunk.NEWLINE);
+      
+      //paragraphe 5
+      Paragraph paragraphNbP = new Paragraph();
+      paragraphNbP.setFont(font1);
+      paragraphNbP.add("Nombre de places : " + NbP);
+      document.add(paragraphNbP);    
+      document.add(Chunk.NEWLINE);
+      
+      
       document.close();
 
       response.setHeader("Expires", "0");

@@ -19,11 +19,12 @@ public class Dossier {
     private String nomSpectacle;
     private String date;
     private String heure;
+    private int boolResa;
 
     public Dossier() {
     }
 
-    public Dossier(int ND, int NbP, String LoginU, int NT, int NR, String nomSpectacle, String date, String heure) {
+    public Dossier(int ND, int NbP, String LoginU, int NT, int NR, String nomSpectacle, String date, String heure, int boolResa) {
         this.ND = ND;
         this.NbP = NbP;
         this.LoginU = LoginU;
@@ -32,6 +33,7 @@ public class Dossier {
         this.nomSpectacle = nomSpectacle;
         this.date = date;
         this.heure = heure;
+        this.boolResa = boolResa;
     }
 
     /**
@@ -144,6 +146,20 @@ public class Dossier {
      */
     public void setHeure(String heure) {
         this.heure = heure;
+    }
+
+    /**
+     * @return the boolResa
+     */
+    public int getBoolResa() {
+        return boolResa;
+    }
+
+    /**
+     * @param boolResa the boolResa to set
+     */
+    public void setBoolResa(int boolResa) {
+        this.boolResa = boolResa;
     }
 
 }
