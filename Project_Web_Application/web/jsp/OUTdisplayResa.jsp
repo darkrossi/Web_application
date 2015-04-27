@@ -23,7 +23,7 @@
     </div>
     <div class="col-md-6"> 
         <h1> <%= nomS%> </h1>
-        <p>  <%= spect.getInfos()%> </p>
+        <p>  <i> <font color=#787878><%= spect.getInfos()%></font></i> </p>
 
         <!--Mettre les infos détaillées du spectacle-->
         <ul>

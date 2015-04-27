@@ -35,11 +35,11 @@
         <div class="col-md-6"> 
             <h1> <%= nomS%> </h1>
             <ul>
-                <li><%= spectacles.get(i).getInfos()%></li>
+                <li> <i> <font color=#787878> <%= spectacles.get(i).getInfos()%> </font></i></li>
                 <li>
                     <button onclick="$('#NSp').attr('value', '<%=spectacles.get(i).getId()%>');
                             document.form.submit();"> 
-                        Voir les représentations <span class="glyphicon glyphicon-arrow-down"></span>
+                        Voir les représentations <span class="glyphicon glyphicon-list-alt"></span>
                     </button>
                 </li>
             </ul>
