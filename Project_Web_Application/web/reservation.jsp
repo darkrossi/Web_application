@@ -25,11 +25,6 @@
         <link rel="stylesheet" href="css/stylePieces.css" />
 
         <script>
-            function place()
-            {
-                document.write('<form method="post" action="traitement.php"><select name="NombreDePlace" id="NombreDePlace"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option></select> </form>');
-            }
-
             $("document").ready(function () {
                 $(".datepicker").datepicker({
                     dateFormat: "dd-mm-yy"
@@ -106,13 +101,12 @@
                     </script>
 
                     <!-- LISTE PLACES -->
+                    <% if (request.getAttribute("rangs") != null) { %>
                     <div class="row">
                         <div class="large-2 columns">
                             <h3 align="center"> Choisissez vos places </h3>
                             <ul>
-                                <li>
-                                    <h5>Offre Adhérent</h5>
-                                    <% if (request.getAttribute("rangs") != null) { %>
+                                <li>                                    
                                     Rang : <select id="selectRang" onchange="onChangeRang()" >
                                         <% Hashtable<Integer, List<Place>> hashRangs = (Hashtable<Integer, List<Place>>) request.getAttribute("rangs");
                                             if (!hashRangs.isEmpty()) { // Si il y a des rangs
@@ -142,120 +136,78 @@
                                         </select>
                                         <input id="valuePlace<%=NRa%>" name="valuePlace<%=NRa%>" value="<%=places.get(0).getNP()%>" hidden="true">
                                         <%
-                                                    }
                                                 }
                                             }%>
+
                                         </li>
-
-
 
                                         <li>
-                                            <h5>Offre Normal
-
-                                            </h5>
                                         </li>
                             </ul>
-                            <a href="php/panier.php?action=ajout&amp;l=LIBELLEPRODUIT&amp;q=QUANTITEPRODUIT&amp;
-                               p=PRIXPRODUIT" onclick="window.open(this.href, '', 'toolbar=no, location=no, \n\
-                                   directories=no, status=yes, scrollbars=yes, resizable=yes, copyhistory=no, width=600,\n\
-                                     height=350');
-                                       return false;">Ajouter au panier
-                            </a>
+                            <!--                            <a href="php/panier.php?action=ajout&amp;l=LIBELLEPRODUIT&amp;q=QUANTITEPRODUIT&amp;
+                                                           p=PRIXPRODUIT" onclick="window.open(this.href, '', 'toolbar=no, location=no, \n\
+                                                               directories=no, status=yes, scrollbars=yes, resizable=yes, copyhistory=no, width=600,\n\
+                                                                 height=350');
+                                                                   return false;">Ajouter au panier
+                                                        </a>-->
+
+                            <% HttpSession session2 = request.getSession(false);
+                                String userName = (String) session2.getAttribute("utilisateur");%>
+
+                            <script>
+                                function onclickFinalize(bool) {
+                                <% Representation representation = (Representation) request.getAttribute("represPicked");%>
+                                    NR = <%=representation.getNR()%>;
+                                    $('#NR'+bool).attr("value", NR);
+
+                                    NSP = <%=representation.getNSp()%>;
+                                    $('#NSp'+bool).attr("value", NSP);
+
+                                    selectRang = document.getElementById('selectRang');
+                                    selectRangValue = selectRang.options[selectRang.selectedIndex].value;
+                                    $('#NRa'+bool).attr("value", selectRangValue);
+
+                                    selectPlace = document.getElementById('selectPlace' + selectRangValue);
+                                    selectPlaceValue = selectPlace.options[selectPlace.selectedIndex].value;
+                                    $('#NP'+bool).attr("value", selectPlaceValue);
+                                }
+                            </script>
+
+                            <form action="<%=request.getContextPath()%>/controleur" onsubmit="onclickFinalize(1);
+                                    return true;" method="post">
+                                <button type="submit">
+                                    Réserver <span class="glyphicon glyphicon-arrow-down"></span>
+                                </button>
+                                <input id="NR1" name="NR" value="0" hidden="true">
+                                <input id="NRa1" name="NRa" value="0" hidden="true">
+                                <input id="NP1" name="NP" value="0" hidden="true">
+                                <input id="NSp1" name="NSp" value="0" hidden="true">
+                                <input name="login" value="<%=userName%>" hidden="true">
+                                <input name="boolResa" value="1" hidden="true">
+                                <input name="action" value="addAchat" hidden="true">
+                            </form>
+
+                            <form action="<%=request.getContextPath()%>/controleur" onsubmit="onclickFinalize(0);
+                                    return true;" method="post">
+                                <button type="submit">
+                                    Finaliser la commande <span class="glyphicon glyphicon-arrow-down"></span>
+                                </button>
+                                <input id="NR0" name="NR" value="0" hidden="true">
+                                <input id="NRa0" name="NRa" value="0" hidden="true">
+                                <input id="NP0" name="NP" value="0" hidden="true">
+                                <input id="NSp0" name="NSp" value="0" hidden="true">
+                                <input name="login" value="<%=userName%>" hidden="true">
+                                <input name="boolResa" value="0" hidden="true">
+                                <input name="action" value="addAchat" hidden="true">
+                            </form>
 
                             <div class="clearfix visible-lg"></div>
                         </div>
                     </div>
+                    <%}%>
                 </div>
             </div>
     </body>
     <jsp:include page="jsp/footer.jsp"/>
 
 </html>
-
-<!-- Proposition : Faire un menu déroulant pour catégorie et un autre pour les types (orchestre, corbeille..) -->
-<%--
-<h3 align="center"> Choisissez vos places </h3>
-<h4 class= "ligne"> Choix automatique </h4><form method="post" action="traitement.php">
-    <h4> Choix sur plan </h4>
-    <h3> Carré VIP </h3>
-    <h4> CORBEILLE </h4>
-    <ul>
-        <li><h5>Offre Adhérent
-                <script type="text/javascript">place();</script>
-            </h5></li>
-        <li><h5>Offre Normal
-                <script type="text/javascript">place();</script>
-            </h5></li>
-    </ul>
-    <h4> ORCHESTRE </h4>
-    <ul>
-        <li><h5> Offre Adhérent 
-                <script type="text/javascript">place();</script>
-            </h5></li>
-        <li><h5> Offre Normal
-                <script type="text/javascript">place();</script>
-            </h5></li>
-    </ul>
-    <h3 > Catégorie 1 </h3>
-    <h4> CORBEILLE </h4>
-    <ul>
-        <li><h5> Offre Adhérent 
-                <script type="text/javascript">place();</script>
-            </h5></li>
-        <li><h5> Offre Normal
-                <script type="text/javascript">place();</script>
-            </h5></li>
-    </ul>
-    <h4> ORCHESTRE</h4>
-    <ul>
-        <li><h5> Offre Adhérent 
-                <script type="text/javascript">place();</script>
-            </h5></li>
-        <li><h5> Offre Normal
-                <script type="text/javascript">place();</script>
-            </h5></li>
-    </ul>
-    <h4> ORCHESTRE COTE </h4>
-    <ul>
-        <li><h5> Offre Adhérent 
-                <script type="text/javascript">place();</script>
-            </h5></li>
-        <li><h5> Offre Normal
-                <script type="text/javascript">place();</script>
-            </h5></li>
-    </ul>
-
-
-                            <h3 > Catégorie 2 </h3>
-                            <h4> CORBEILLE </h4>
-                            <ul>
-                                <li><h5> Offre Adhérent 
-                                        <script type="text/javascript">place();</script>
-                                    </h5></li>
-                                <li><h5> Offre Normal
-                                        <script type="text/javascript">place();</script>
-                                    </h5></li>
-                            </ul>
-                            <h4> BALCON </h4>
-                            <ul>
-                                <li><h5> Offre Adhérent 
-                                        <script type="text/javascript">place();</script>
-                                    </h5></li>
-                                <li><h5> Offre Normal
-                                        <script type="text/javascript">place();</script>
-                                    </h5></li>
-                            </ul>
-
-                            <h3 > Catégorie 3 </h3>
-                            <h4> BALCON </h4>
-                            <ul>
-                                <li><h5> Offre Adhérent 
-                                        <script type="text/javascript">place();</script>
-                                    </h5></li>
-                                <li><h5> Offre Normal
-                                        <script type="text/javascript">place();</script>
-                                    </h5></li>
-                            </ul>
-                            <h4> Total </h4>
---%>
-<%--<input  type="submit" class="Réserver mes places" /> --%>

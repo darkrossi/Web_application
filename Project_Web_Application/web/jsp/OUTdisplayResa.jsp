@@ -27,7 +27,6 @@
     <div class="col-md-6"> 
         <h1> <%= nomS%> </h1>
         <p>  <%= spect.getInfos()%> </p>
-        <p>  <%= spect.getNote()%> </p>
 
         <!--Mettre les infos détaillées du spectacle-->
         <ul>
@@ -58,43 +57,4 @@
         </ul>
     </div>
 </div>
-
-<button type="submit" >Réserver <span class="glyphicon glyphicon-arrow-down"></span></button>
-<input hidden="true" name="action" value="addBooking">
-<input name="login" value="<%= userName%>" hidden="true">
 <% }%>
-
-<%-- <% if (request.getAttribute("rangs") != null) {%>
-                    Rang : <select id="selectRang" onchange="
-                            select_menu = document.getElementById('selectRang');
-                            select_menu_value = select_menu.options[select_menu.selectedIndex].value;
-                            document.getElementById('valueRang').value = select_menu_value;
-                            $('#place' + select_menu_value).show();" >
-                        <% Hashtable<Integer, Place> hashRangs = (Hashtable<Integer, Place>) request.getAttribute("repres");
-                            if (!hashRangs.isEmpty()) { // Si il y a des rangs
-                                Enumeration keys2 = hashRangs.keys();
-                                int counter = 1;
-                                while (keys2.hasMoreElements()) { // On affiche le menu déroulant avec les rangs
-                                    Integer NRa = (Integer) keys2.nextElement();%>
-                        <option value="<%=NRa%>"><%=counter++%></option>
-                        <%}%>
-                    </select><br>
-                    <input id="valueRang" name="valueRang" value="1" hidden="true">
-
-
-                    <% keys2 = hashRangs.keys();
-                        while (keys2.hasMoreElements()) {
-                            Integer NRa = (Integer) keys2.nextElement();
-                            List<Place> places = (List<Place>) hashRangs.get(NRa);%>
-                    Place : <select id="selectPlace<%=NRa%>" onchange="
-                            select_menu = document.getElementById('selectPlace<%=NRa%>');
-                            document.getElementById('valuePlace<%=NRa%>').value = select_menu.options[select_menu.selectedIndex].value;" >
-                        <% for (int j = 0; j < places.size(); j++) {%>
-                        <option value="<%=places.get(j).getNP()%>"<%=j + 1%></option>
-                        <%}%>
-                    </select><br>
-                    <input id="valuePlace<%=NRa%>" name="valuePlace<%=NRa%>" value="<%=places.get(0).getNP()%>" hidden="true">
-                    <%
-                                }
-                            }
-                        }%> --%>

@@ -24,7 +24,7 @@ public class DossierDAO extends AbstractDataBaseDAO {
         super(ds);
     }
 
-    public List<Dossier> getFolders(String loginU) throws DAOException {
+    public List<Dossier> getFolders(String loginU, int boolResa) throws DAOException {
         List<Dossier> result = new ArrayList<>();
         ResultSet rs = null;
         String requeteSQL = "";
@@ -33,7 +33,7 @@ public class DossierDAO extends AbstractDataBaseDAO {
             conn = getConnection();
             Statement st = conn.createStatement();
             requeteSQL = "select * from Dossier d, Spectacle s, Representation r "
-                    + "WHERE d.LoginU ='" + loginU + "' and d.NR = r.NR and r.NSP = s.NSP";
+                    + "WHERE d.LoginU ='" + loginU + "' and d.NR = r.NR and r.NSP = s.NSP and d.boolResa = " + boolResa;
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
                 Dossier dossier = new Dossier(rs.getInt("ND"),

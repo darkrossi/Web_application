@@ -21,12 +21,11 @@ public class Spectacle {
     private int duree; // En minutes
     private String url;
     private String infos;
-    private int note;
 
     public Spectacle() {
     }
 
-    public Spectacle(int id, String titre, String auteur, String metteurEnScene, int duree, String url, String infos, int note) {
+    public Spectacle(int id, String titre, String auteur, String metteurEnScene, int duree, String url, String infos) {
         this.id = id;
         this.titre = titre;
         this.auteur = auteur;
@@ -35,7 +34,6 @@ public class Spectacle {
         this.duree = duree;
         this.url = url;
         this.infos = infos;
-        this.note = note;
     }
 
     public String getAuteur() {
@@ -66,10 +64,6 @@ public class Spectacle {
         return infos;
     }
 
-    public int getNote() {
-        return note;
-    }
-
     public void setAuteur(String auteur) {
         this.auteur = auteur;
     }
@@ -96,10 +90,6 @@ public class Spectacle {
 
     public void setTitre(String titre) {
         this.titre = titre;
-    }
-
-    public void setNote(int note) {
-        this.note = note;
     }
 
     public String afficheComediens() {

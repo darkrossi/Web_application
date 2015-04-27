@@ -63,16 +63,14 @@ public class Controleur extends HttpServlet {
                 actionDisplayAddRepres(request, response, spectacleDAO, salleDAO, 0);
             } else if (action.equals("displayAccount")) {
                 actionDisplayAccount(request, response, dossierDAO);
-            } else if (action.equals("displayAddBooking")) {
-                actionDisplayAddBooking(request, response, represDAO, 0);
-            } else if (action.equals("addBooking")) {
-                actionAddBooking(request, response, achatDAO, dossierDAO, represDAO);
             } else if (action.equals("displayCatalogue")) {
                 actionDisplayCatalogue(request, response, spectacleDAO, 0);
             } else if (action.equals("displayResa")) {
-                actionDisplayResa(request, response, spectacleDAO, represDAO);
+                actionDisplayResa(request, response, spectacleDAO, represDAO, 0);
             } else if (action.equals("displayResaPlaces")) {
                 actionDisplayResaPlaces(request, response, spectacleDAO, represDAO, rangDAO);
+            } else if (action.equals("displayResaNbPlaces")) {
+                actionDisplayResaNbPlaces(request, response, spectacleDAO, represDAO, rangDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -98,10 +96,10 @@ public class Controleur extends HttpServlet {
 
             SpectacleDAO spectacleDAO = new SpectacleDAO(ds);
             UtilisateurDAO userDAO = new UtilisateurDAO(ds);
-//            RepresentationDAO represDAO = new RepresentationDAO(ds);
+            RepresentationDAO represDAO = new RepresentationDAO(ds);
 //            SalleDAO salleDAO = new SalleDAO(ds);
 //            DossierDAO dossierDAO = new DossierDAO(ds);
-//            AchatDAO achatDAO = new AchatDAO(ds);
+            AchatDAO achatDAO = new AchatDAO(ds);
 //            RangDAO rangDAO = new RangDAO(ds);
 
             if (action == null) {
@@ -112,6 +110,8 @@ public class Controleur extends HttpServlet {
                 actionVerifUser(request, response, userDAO);
             } else if (action.equals("filtrerCatalogue")) {
                 actionFiltrerCatalogue(request, response, spectacleDAO, 0);
+            } else if (action.equals("addAchat")) {
+                actionAddAchat(request, response, achatDAO, spectacleDAO, represDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -234,45 +234,34 @@ public class Controleur extends HttpServlet {
 
     private void actionDisplayAccount(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO) throws DAOException, ServletException, IOException {
         request.setAttribute("logBool", 0);
-        request.setAttribute("dossiers", dossierDAO.getFolders(request.getParameter("login")));
+        request.setAttribute("dossiers", dossierDAO.getFolders(request.getParameter("login"), 0));
+        request.setAttribute("resas", dossierDAO.getFolders(request.getParameter("login"), 1));
         getServletContext()
                 .getRequestDispatcher("/monCompte.jsp")
                 .forward(request, response);
     }
 
-    private void actionDisplayAddBooking(HttpServletRequest request, HttpServletResponse response,
-            RepresentationDAO represDAO,
-            int logBool)
-            throws ServletException, IOException, DAOException {
-        request.setAttribute("logBool", logBool);
-        request.setAttribute("repres", represDAO.getRepresFromSp());
-        getServletContext()
-                .getRequestDispatcher("/addBooking.jsp")
-                .forward(request, response);
-    }
-
-    private void actionAddBooking(HttpServletRequest request, HttpServletResponse response,
+    private void actionAddAchat(HttpServletRequest request, HttpServletResponse response,
             AchatDAO achatDAO,
-            DossierDAO dossierDAO,
+            SpectacleDAO spectDAO,
             RepresentationDAO represDAO)
             throws ServletException, IOException, DAOException {
         request.setAttribute("logBool", 1);
-        if ("null".equals(request.getParameter("login"))) {
-            request.setAttribute("logText", "Vous devez créer un compte utilisateur pour pouvoir acheter des places !");
-            actionDisplayAddBooking(request, response, represDAO, 1);
+        if (achatDAO.ajouterAchat(request.getParameter("login"),
+                Integer.parseInt(request.getParameter("NR")),
+                Integer.parseInt(request.getParameter("NRa")),
+                Integer.parseInt(request.getParameter("NP")),
+                1,
+                Integer.parseInt(request.getParameter("boolResa")))) {
+            request.setAttribute("logText", "Achat effectué avec succès !");
         } else {
-            String[] tabCbNR = (String[]) request.getParameterValues("cbNR");
-            String[] tabNbP = new String[tabCbNR.length];
-            for (int i = 0; i < tabCbNR.length; i++) {
-                tabNbP[i] = request.getParameter("nbP" + tabCbNR[i]);
-            }
-            if (achatDAO.ajouterReservation(request.getParameter("login"), tabCbNR, tabNbP)) {
-                request.setAttribute("logText", "Achat effectué avec succès !");
-            } else {
-                request.setAttribute("logText", "Erreur lors de l'achat...");
-            }
-            actionDisplayAccount(request, response, dossierDAO);
+            request.setAttribute("logText", "Erreur lors de l'achat...");
         }
+        request.setAttribute("repres", represDAO.getRepresList(Integer.parseInt(request.getParameter("NSp"))));
+        request.setAttribute("spectacle", spectDAO.getSpectacle(Integer.parseInt(request.getParameter("NSp"))));
+        getServletContext()
+                .getRequestDispatcher("/reservation.jsp")
+                .forward(request, response);
 
     }
 
@@ -293,13 +282,13 @@ public class Controleur extends HttpServlet {
                 .forward(request, response);
     }
 
-    private void actionDisplayResa(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, RepresentationDAO represDAO)
+    private void actionDisplayResa(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, RepresentationDAO represDAO, int logBool)
             throws ServletException, DAOException, IOException {
         if ("null".equals(request.getParameter("login"))) {
             request.setAttribute("logText", "Vous devez créer un compte utilisateur pour pouvoir acheter des places !");
             actionDisplayCatalogue(request, response, spectacleDAO, 1);
         } else {
-            request.setAttribute("logBool", 0);
+            request.setAttribute("logBool", logBool);
             request.setAttribute("repres", represDAO.getRepresList(Integer.parseInt(request.getParameter("NSp"))));
             request.setAttribute("spectacle", spectacleDAO.getSpectacle(Integer.parseInt(request.getParameter("NSp"))));
             getServletContext()
@@ -312,7 +301,7 @@ public class Controleur extends HttpServlet {
             throws DAOException, ServletException, IOException {
         request.setAttribute("represPicked", represDAO.getRepres(Integer.parseInt(request.getParameter("NR"))));
         request.setAttribute("rangs", rangDAO.getRangs(Integer.parseInt(request.getParameter("NSa")), true));
-        actionDisplayResa(request, response, spectDAO, represDAO);
+        actionDisplayResa(request, response, spectDAO, represDAO, 0);
     }
 
     private void actionFiltrerCatalogue(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, int logBool)
@@ -329,5 +318,9 @@ public class Controleur extends HttpServlet {
         getServletContext()
                 .getRequestDispatcher("/catalogue.jsp")
                 .forward(request, response);
+    }
+
+    private void actionDisplayResaNbPlaces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO, RepresentationDAO represDAO, RangDAO rangDAO) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

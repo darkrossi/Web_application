@@ -10,7 +10,7 @@
     String userName = (String) session2.getAttribute("utilisateur");%>
 
 <script>
-    $(document).ready(function () {
+    $('document').ready(function () {
         if (<%= request.getAttribute("logBool")%>) {
             $("#myModalLog div p").html("<%=request.getAttribute("logText")%>");
 
@@ -28,12 +28,6 @@
 
             myModalLog.dequeue('queue');
         }
-    });
-</script>
-
-<script>
-    $("#idButton").click(function () {
-        $("#myModalLogin").reveal($(this).data()).trigger('reveal:close');
     });
 </script>
 

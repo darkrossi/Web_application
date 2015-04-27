@@ -25,7 +25,7 @@
 
             <div class="jumbotron">
                 <h1>Connectez-vous à votre compte</h1>    
-                <FORM ACTION="<%=request.getContextPath()%>/controleur" METHOD="get">
+                <FORM ACTION="<%=request.getContextPath()%>/controleur" METHOD="post">
                     <div class="row">
                         <label class="col-md-3"> Indiquez votre login : </label><input class="col-md-2" name="loginU" autofocus="autofocus"><br>
                     </div>

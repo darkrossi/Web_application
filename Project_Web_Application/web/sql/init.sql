@@ -6,7 +6,6 @@ CREATE TABLE Spectacle (
     DureeS int,
     Affiche varchar(30),
     InfoS varchar(240),
-    NoteS int,
     constraint pk_spectacle primary key (NSP)
 );
 INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche)
@@ -84,33 +83,13 @@ CREATE TABLE Dossier (
     LoginU varchar(30), -- login
     NT int, -- numéro ticket
     NbP int, -- nombre de place
+    boolResa int, -- 0 si resa, 1 si achat
     constraint pk_dossier primary key (ND),
     constraint fk_dossier_loginu_users foreign key (LoginU) references Users(LoginU),
-    constraint fk_dossier_nt_ticket foreign key (NT) references Ticket(NT),
     constraint fk_dossier_nr_repr foreign key (NR) references Representation(NR),
     constraint nn_dossier_loginu check (LoginU is not null),
-    constraint nn_dossier_nt check (NT is not null),
     constraint nn_dossier_nr check (NR is not null),
     CONSTRAINT NbPD CHECK(NbP >= 1)
-);
-
-CREATE TABLE Booking (
-    NB int,
-    LoginU varchar(30),
-    NbP int,
-    NSP int,
-    NR int,
-    NSA int,
-    constraint pk_booking primary key (NB),
-    constraint fk_booking_loginu_users foreign key (LoginU) references Users(LoginU),
-    constraint fk_booking_nsp_spectacle foreign key (NSP) references Spectacle(NSP),
-    constraint fk_booking_nsa_salle foreign key (NSA) references Salle(NSA),
-    constraint fk_booking_nr_repr foreign key (NR) references Representation(NR),
-    constraint nn_booking_loginu check (LoginU is not null),
-    constraint nn_booking_nsa check (NSA is not null),
-    constraint nn_booking_nsp check (NSP is not null),
-    constraint nn_booking_nr check (NR is not null),
-    CONSTRAINT NbPB CHECK(NbP >= 1)
 );
 
 INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche, InfoS, NoteS)

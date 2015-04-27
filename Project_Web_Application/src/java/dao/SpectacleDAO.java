@@ -7,7 +7,6 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -54,8 +53,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                             rs.getString("MESS"),
                             rs.getInt("DureeS"),
                             rs.getString("Affiche"),
-                            rs.getString("InfoS"),
-                            rs.getInt("NoteS"));
+                            rs.getString("InfoS"));
                     System.err.println(spectacle);
                     result.add(spectacle);
                 }
@@ -140,8 +138,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                             rs.getString("MESS"),
                             rs.getInt("DureeS"),
                             rs.getString("Affiche"),
-                            rs.getString("InfoS"),
-                            rs.getInt("NoteS"));
+                            rs.getString("InfoS"));
                 }
             }
         } catch (SQLException e) {
@@ -242,8 +239,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                             rs.getString("MESS"),
                             rs.getInt("DureeS"),
                             rs.getString("Affiche"),
-                            rs.getString("InfoS"),
-                            rs.getInt("NoteS"));
+                            rs.getString("InfoS"));
                     System.err.println(spectacle);
                     result.add(spectacle);
                 }
