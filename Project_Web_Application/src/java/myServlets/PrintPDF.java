@@ -47,12 +47,12 @@ public class PrintPDF extends HttpServlet {
         
         try {
 
-      String login = request.getParameter("login");
+      String login = (String) request.getAttribute("login2");
       String ND = request.getParameter("ND");
       String NR = request.getParameter("NR");
       
 
-      Document document = new Document(PageSize.A6);
+      Document document = new Document(PageSize.A7);
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
       PdfWriter.getInstance(document, baos);
       document.open();
@@ -77,7 +77,7 @@ public class PrintPDF extends HttpServlet {
       //paragraphe 1
       Paragraph paragraphND = new Paragraph();
       paragraphND.setFont(font1);
-      paragraphND.add("N° de dossier : " + ND);
+      paragraphND.add("Dossier n°" + ND);
       //paragraphND.setAlignment(Element.ALIGN_CENTER);
       document.add(paragraphND);    
       document.add(Chunk.NEWLINE);
@@ -85,7 +85,7 @@ public class PrintPDF extends HttpServlet {
       //paragraphe 2
       Paragraph paragraphNR = new Paragraph();
       paragraphNR.setFont(font1);
-      paragraphNR.add("N° de réservation : " + NR);
+      paragraphNR.add("Réservation n°" + NR);
       //paragraphND.setAlignment(Element.ALIGN_CENTER);
       document.add(paragraphNR);    
       document.add(Chunk.NEWLINE);
