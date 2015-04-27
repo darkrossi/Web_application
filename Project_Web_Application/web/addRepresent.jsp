@@ -75,7 +75,7 @@
                             %>
                             <% if (!salles.isEmpty()) {
                                     for (int i = 0; i < salles.size(); i++) {%>
-                            <option value="<%=salles.get(i).getNSa()%>"><%=salles.get(i).getNSa()%></option>
+                            <option value="<%=salles.get(i).getNSa()%>"><%=salles.get(i).getNomSa() %></option>
                             <%}%>
                         </select> 
                         <input id="valueSalle" name="valueSalle" value="<%=salles.get(0).getNSa()%>" hidden="true">

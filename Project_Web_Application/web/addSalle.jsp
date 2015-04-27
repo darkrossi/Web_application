@@ -10,10 +10,10 @@
 
 <% HttpSession session2 = request.getSession(false);
     String userName = (String) session2.getAttribute("utilisateur");
-    if (userName == null){
+    if (userName == null) {
         String site = new String("./index.jsp");
         response.setStatus(response.SC_MOVED_TEMPORARILY);
-        response.setHeader("Location", site); 
+        response.setHeader("Location", site);
     }
 %>
 
@@ -33,9 +33,8 @@
         <div class="container" >
             <div class="row">
                 <div class="col-md-3">
-                    <p><b>N° salle</b></p>
+                    <p><b>Nom de la salle</b></p>
                     <p><b>Nombre de rang</b></p>
-                    <p><b>Prix du rang</b></p>
                     <p><b>Nombre de places par rang</b></p> 
                 </div>
                 <% if (request.getAttribute("salles") != null) {
@@ -44,9 +43,8 @@
                             for (int i = 0; i < salles.size(); i++) {%>
                 <div class="col-md-2">
 
-                    <p><%=salles.get(i).getNSa()%></p>
+                    <p><%=salles.get(i).getNomSa() %></p>
                     <p><%=salles.get(i).getNbRa()%></p>
-                    <p><%=salles.get(i).getCatTarif()%></p>
                     <p><%=salles.get(i).getNbP()%></p>
 
                 </div>
@@ -57,23 +55,26 @@
 
             </div>
 
-            <div class="row">
+            <hr>
 
-                <div class="col-md-6">
-                    <div class="col-md-4">
-                        <p><b>Nombre de rang</b></p>
-                        <p><b>Tarif du rang</b></p>
-                        <p><b>Nombre de places par rang</b></p>
-                    </div>
-                    <div class="col-md-2">
-                        <form action="<%=request.getContextPath()%>/controleur" method="get">
-                            <input type="number" name="nbRa" value="1"><br>
-                            <input type="number" name="catTarif" value="1"><br>
-                            <input type="number" name="nbP" value="1"><br>
-                            <button type="submit "> Ajouter salle </button><br>
-                            <input hidden="true" name="action" value="addSalle"><br>
-                        </form>
-                    </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <p><b>Nom de la salle </b></p>
+                    <p><b>Nombre de rang Poulailler </b></p>
+                    <p><b>Nombre de rang Balcon </b></p>
+                    <p><b>Nombre de rang Orchestre </b></p>
+                    <p><b>Nombre de places par rang </b></p>
+                </div>
+                <div class="col-md-4">
+                    <form action="<%=request.getContextPath()%>/controleur" method="get">
+                        <input type="text" name="nomSalle" value=""><br>
+                        <input type="number" name="nbRaP" value="0"><br>
+                        <input  type="number" name="nbRaB" value="0"><br>
+                        <input type="number" name="nbRaO" value="0"><br>
+                        <input type="number" name="nbP" value="1"><br>
+                        <button type="submit "> Ajouter salle </button><br>
+                        <input hidden="true" name="action" value="addSalle"><br>
+                    </form>
                 </div>
             </div>
         </div>

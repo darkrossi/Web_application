@@ -6,6 +6,7 @@ DELETE FROM Ticket;
 DELETE FROM Spectacle;
 DELETE FROM Salle;
 DELETE FROM Users;
+DELETE FROM CatTarifs;
 
 DROP TABLE Dossier cascade constraint;
 DROP TABLE Representation cascade constraint;
@@ -15,3 +16,4 @@ DROP TABLE Ticket cascade constraint;
 DROP TABLE Spectacle cascade constraint;
 DROP TABLE Salle cascade constraint;
 DROP TABLE Users cascade constraint;
+DROP TABLE CatTarifs cascade constraint;

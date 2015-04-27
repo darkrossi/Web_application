@@ -15,13 +15,20 @@
 
 -- DELETE FROM Salle;
 
-DELETE FROM Spectacle3;
-DELETE FROM Users3;
-DROP TABLE Spectacle3 cascade constraint;
-DROP TABLE Users3 cascade constraint;
+-- DELETE FROM Spectacle3;
+-- DELETE FROM Users3;
+-- DELETE FROM CatTarifs3;
 
-create table Spectacle3 as select * from Spectacle;
-create table Users3 as select * from Users;
+-- DROP TABLE Spectacle3 cascade constraint;
+-- DROP TABLE Users3 cascade constraint;
+-- DROP TABLE CatTarifs3 cascade constraint;
+
+-- create table Spectacle3 as select * from Spectacle;
+-- create table Users3 as select * from Users;
+-- create table CatTarifs3 as select * from CatTarifs;
+-- create table Salle3 as select * from Salle;
+
+
 
 -- INSERT INTO Representation (NR, DateR, HeureR, NSP, NSA, NbP)
 -- SELECT NR, DateR, HeureR, NSP, NSA, NbP
@@ -43,6 +50,8 @@ create table Users3 as select * from Users;
 
 
 -- select distinct * from Salle s, Rang r where r.NSA = s.NSA;
+
+-- INSERT INTO CatTarifs (NCT, NomCT, PrixCT) VALUES (2, 'Orchestre', 60);
 
 
 

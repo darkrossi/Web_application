@@ -37,15 +37,15 @@ public class SalleDAO extends AbstractDataBaseDAO {
         try {
             conn = getConnection();
             Statement st = conn.createStatement();
-            requeteSQL = "select distinct s.NSA, r.CatTarif, r.NbP, s.NbRa "
+            requeteSQL = "select distinct s.NSA, r.NbP, s.NbRa, s.NomSa "
                     + "from Salle s, Rang r "
                     + "where r.NSA = s.NSA";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
                 Salle salle = new Salle(rs.getInt("NSA"),
-                        rs.getInt("CatTarif"),
                         rs.getInt("NbRa"),
-                        rs.getInt("NbP") * rs.getInt("NbRa"));
+                        rs.getInt("NbP") * rs.getInt("NbRa"),
+                        rs.getString("NomSa"));
                 System.err.println(salle);
                 result.add(salle);
             }
@@ -71,14 +71,16 @@ public class SalleDAO extends AbstractDataBaseDAO {
 //        }
 //        return salles;
 //    }
-    public boolean ajouterSalle(int nbRa, int nbP, int catTarif) throws DAOException {
+    public boolean ajouterSalle(String nomSalle, int nbRaP, int nbRaB, int nbRaO, int nbP) throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
         int indiceNSa_Max = 0;
         int indiceNPl_Max = 0;
         int indiceNRa_Max = 0;
-        if (nbRa * nbP < 70) {
+        if ((nbRaP + nbRaB + nbRaO) * nbP < 70) {
+            return false;
+        } else {
             try {
                 conn = getConnection();
                 Statement st = conn.createStatement();
@@ -100,19 +102,61 @@ public class SalleDAO extends AbstractDataBaseDAO {
                     indiceNRa_Max = rs.getInt(1);
                 }
 
+                int NCTP = 0, NCTB = 0, NCTO = 0;
+                requeteSQL = "select NCT, NomCT from CatTarifs";
+                rs = st.executeQuery(requeteSQL);
+                while (rs.next()) {
+                    if (rs.getString("NomCT").equals("Poulailler")) {
+                        NCTP = rs.getInt("NCT");
+                    }
+                    if (rs.getString("NomCT").equals("Balcon")) {
+                        NCTB = rs.getInt("NCT");
+                    }
+                    if (rs.getString("NomCT").equals("Orchestre")) {
+                        NCTO = rs.getInt("NCT");
+                    }
+                }
+
                 indiceNSa_Max++;
-                requeteSQL = "INSERT INTO Salle (NSA, NbRa) VALUES (" + indiceNSa_Max + ", " + nbRa + ")";
+                requeteSQL = "INSERT INTO Salle (NSA, NbRa, NomSa) "
+                        + "VALUES (" + indiceNSa_Max + ", " + (nbRaP + nbRaB + nbRaO) + ", '" + nomSalle + "')";
                 st.executeQuery(requeteSQL);
 
-                for (int i = 1; i <= nbRa; i++) {
+                for (int i = 1; i <= nbRaP; i++) {
                     indiceNRa_Max++;
-                    requeteSQL = "INSERT INTO Rang (NRA, CatTarif, NSA, NbP) VALUES (" + indiceNRa_Max + ", " + catTarif + ", "
+                    requeteSQL = "INSERT INTO Rang (NRA, NCT, NSA, NbP) VALUES (" + indiceNRa_Max + ", " + NCTP + ", "
                             + indiceNSa_Max + ", " + nbP + ")";
                     st.executeQuery(requeteSQL);
                     for (int j = 1; j <= nbP; j++) {
                         indiceNPl_Max++;
                         requeteSQL = "INSERT INTO Place (NP, NRa, isTaken, ND) "
-                                + "VALUES (" + indiceNPl_Max + ", " + i + ", 0, -1)";
+                                + "VALUES (" + indiceNPl_Max + ", " + indiceNRa_Max + ", 0, -1)";
+                        st.executeQuery(requeteSQL);
+                    }
+                }
+
+                for (int i = 1; i <= nbRaB; i++) {
+                    indiceNRa_Max++;
+                    requeteSQL = "INSERT INTO Rang (NRA, NCT, NSA, NbP) VALUES (" + indiceNRa_Max + ", " + NCTB + ", "
+                            + indiceNSa_Max + ", " + nbP + ")";
+                    st.executeQuery(requeteSQL);
+                    for (int j = 1; j <= nbP; j++) {
+                        indiceNPl_Max++;
+                        requeteSQL = "INSERT INTO Place (NP, NRa, isTaken, ND) "
+                                + "VALUES (" + indiceNPl_Max + ", " + indiceNRa_Max + ", 0, -1)";
+                        st.executeQuery(requeteSQL);
+                    }
+                }
+
+                for (int i = 1; i <= nbRaO; i++) {
+                    indiceNRa_Max++;
+                    requeteSQL = "INSERT INTO Rang (NRA, NCT, NSA, NbP) VALUES (" + indiceNRa_Max + ", " + NCTO + ", "
+                            + indiceNSa_Max + ", " + nbP + ")";
+                    st.executeQuery(requeteSQL);
+                    for (int j = 1; j <= nbP; j++) {
+                        indiceNPl_Max++;
+                        requeteSQL = "INSERT INTO Place (NP, NRa, isTaken, ND) "
+                                + "VALUES (" + indiceNPl_Max + ", " + indiceNRa_Max + ", 0, -1)";
                         st.executeQuery(requeteSQL);
                     }
                 }
@@ -123,8 +167,6 @@ public class SalleDAO extends AbstractDataBaseDAO {
             } finally {
                 closeConnection(conn);
             }
-        } else {
-            return false;
         }
     }
 }

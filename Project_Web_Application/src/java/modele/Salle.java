@@ -12,18 +12,18 @@ package modele;
 public class Salle {
 
     private int NSa;
-    private int CatTarif;
     private int NbRa;
     private int NbP;
+    private String NomSa;
 
     public Salle() {
     }
 
-    public Salle(int NSa, int CatTarif, int NbRa, int NbP) {
+    public Salle(int NSa, int NbRa, int NbP, String NomSa) {
         this.NSa = NSa;
-        this.CatTarif = CatTarif;
         this.NbRa = NbRa;
         this.NbP = NbP;
+        this.NomSa = NomSa;
     }
 
     /**
@@ -38,20 +38,6 @@ public class Salle {
      */
     public void setNSa(int NSa) {
         this.NSa = NSa;
-    }
-
-    /**
-     * @return the CatTarif
-     */
-    public int getCatTarif() {
-        return CatTarif;
-    }
-
-    /**
-     * @param CatTarif the CatTarif to set
-     */
-    public void setCatTarif(int CatTarif) {
-        this.CatTarif = CatTarif;
     }
 
     /**
@@ -80,6 +66,20 @@ public class Salle {
      */
     public void setNbP(int NbP) {
         this.NbP = NbP;
+    }
+
+    /**
+     * @return the NomSa
+     */
+    public String getNomSa() {
+        return NomSa;
+    }
+
+    /**
+     * @param NomSa the NomSa to set
+     */
+    public void setNomSa(String NomSa) {
+        this.NomSa = NomSa;
     }
 
 }

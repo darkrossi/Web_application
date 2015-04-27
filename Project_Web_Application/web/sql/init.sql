@@ -15,10 +15,14 @@ FROM Spectacle3;
 
 CREATE TABLE Salle (
     NSA int,
+    NomSa varchar(30),
     NbRa int,
     constraint pk_salle primary key (NSA),
     constraint NbRa CHECK(NbRa >= 1)
 );
+INSERT INTO Salle (NSA, NomSa, NbRa)
+SELECT NSA, NomSa, NbRa
+FROM Salle3;
 
 CREATE TABLE Representation (
     NR int,
@@ -37,13 +41,13 @@ CREATE TABLE Representation (
 
 CREATE TABLE Rang (
     NRa int,
-    CatTarif int,
+    NCT int,
     NSA int,
     NbP int,
     constraint pk_rang primary key (NRa),
     constraint fk_rang_nr_salle foreign key (NSA) references Salle(NSA),
+    constraint fk_rang_nr_cattarifs foreign key (NCT) references CatTarifs(NCT),
     constraint nn_rang_nsa check (NSA is not null), 
-    constraint CatTarif CHECK(CatTarif >= 0),
     constraint NbP CHECK(NbP >= 1)
 );
 
@@ -92,5 +96,15 @@ CREATE TABLE Dossier (
     CONSTRAINT NbPD CHECK(NbP >= 1)
 );
 
-INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche, InfoS, NoteS)
-    VALUES (0, 'init', 'init', 'init', 1, 'init', 'init', 0);
+CREATE TABLE CatTarifs (
+    NCT int,
+    NomCT varchar(30),
+    PrixCT int,
+    constraint pk_cattarifs primary key (NCT)
+);
+INSERT INTO CatTarifs (NCT, NomCT, PrixCT)
+SELECT NCT, NomCT, PrixCT
+FROM CatTarifs3;
+
+INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, Affiche, InfoS)
+    VALUES (0, 'init', 'init', 'init', 1, 'init', 'init');

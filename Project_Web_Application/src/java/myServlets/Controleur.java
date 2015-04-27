@@ -57,8 +57,6 @@ public class Controleur extends HttpServlet {
                 actionAddRepres(request, response, represDAO, spectacleDAO, salleDAO);
             } else if (action.equals("displayAddSalle")) {
                 actionDisplayAddSalle(request, response, salleDAO);
-            } else if (action.equals("addSalle")) {
-                actionAddSalle(request, response, salleDAO);
             } else if (action.equals("displayAddRepres")) {
                 actionDisplayAddRepres(request, response, spectacleDAO, salleDAO, 0);
             } else if (action.equals("displayAccount")) {
@@ -71,6 +69,8 @@ public class Controleur extends HttpServlet {
                 actionDisplayResaPlaces(request, response, spectacleDAO, represDAO, rangDAO);
             } else if (action.equals("displayResaNbPlaces")) {
                 actionDisplayResaNbPlaces(request, response, spectacleDAO, represDAO, rangDAO);
+            } else if (action.equals("addSalle")) {
+                actionAddSalle(request, response, salleDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -97,7 +97,7 @@ public class Controleur extends HttpServlet {
             SpectacleDAO spectacleDAO = new SpectacleDAO(ds);
             UtilisateurDAO userDAO = new UtilisateurDAO(ds);
             RepresentationDAO represDAO = new RepresentationDAO(ds);
-//            SalleDAO salleDAO = new SalleDAO(ds);
+            SalleDAO salleDAO = new SalleDAO(ds);
             DossierDAO dossierDAO = new DossierDAO(ds);
             AchatDAO achatDAO = new AchatDAO(ds);
 //            RangDAO rangDAO = new RangDAO(ds);
@@ -114,6 +114,8 @@ public class Controleur extends HttpServlet {
                 actionAddAchat(request, response, achatDAO, spectacleDAO, represDAO);
             } else if (action.equals("confirmResa")) {
                 actionConfirmResa(request, response, dossierDAO);
+            } else if (action.equals("addSalle")) {
+                actionAddSalle(request, response, salleDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -209,9 +211,11 @@ public class Controleur extends HttpServlet {
     private void actionAddSalle(HttpServletRequest request, HttpServletResponse response, SalleDAO salleDAO)
             throws DAOException, ServletException, IOException {
         request.setAttribute("logBool", 1);
-        if (salleDAO.ajouterSalle(Integer.parseInt(request.getParameter("nbRa")),
-                Integer.parseInt(request.getParameter("nbP")),
-                Integer.parseInt(request.getParameter("catTarif")))) {
+        if (salleDAO.ajouterSalle(request.getParameter("nomSalle"),
+                Integer.parseInt(request.getParameter("nbRaP")),
+                Integer.parseInt(request.getParameter("nbRaB")),
+                Integer.parseInt(request.getParameter("nbRaO")),
+                Integer.parseInt(request.getParameter("nbP")))) {
             request.setAttribute("logText", "Salle ajoutée avec succès !");
         } else {
             request.setAttribute("logText", "Erreur lors de la création de la salle..");
@@ -331,7 +335,7 @@ public class Controleur extends HttpServlet {
 
     private void actionConfirmResa(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO) throws DAOException, ServletException, IOException {
         request.setAttribute("logBool", 1);
-        if(dossierDAO.swapResa(Integer.parseInt(request.getParameter("ND")))){
+        if (dossierDAO.swapResa(Integer.parseInt(request.getParameter("ND")))) {
             request.setAttribute("logText", "Achat effectué avec succès !");
         } else {
             request.setAttribute("logText", "Pitit ploblém");
