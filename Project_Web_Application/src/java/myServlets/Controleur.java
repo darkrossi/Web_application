@@ -39,6 +39,7 @@ public class Controleur extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         try {
             String action = request.getParameter("action");
+            AfficheDAO afficheDAO = new AfficheDAO(ds);
             SpectacleDAO spectacleDAO = new SpectacleDAO(ds);
             UtilisateurDAO userDAO = new UtilisateurDAO(ds);
             RepresentationDAO represDAO = new RepresentationDAO(ds);
@@ -50,6 +51,8 @@ public class Controleur extends HttpServlet {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
                         .forward(request, response);
+            } else if (action.equals("loadingIndex")) {
+                actionLoadingIndex(request, response, afficheDAO);
             } else if (action.equals("addS")) {
                 actionAddSpectacle(request, response, spectacleDAO);
             } else if (action.equals("addUser")) {
@@ -138,6 +141,13 @@ public class Controleur extends HttpServlet {
                 Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }
+    }
+
+    private void actionLoadingIndex(HttpServletRequest request, HttpServletResponse response, AfficheDAO afficheDAO) throws ServletException, IOException, DAOException {
+        request.setAttribute("affiches", afficheDAO.getListeAffiches());
+        getServletContext()
+                .getRequestDispatcher("/index.jsp")
+                .forward(request, response);
     }
 
     private void actionAddSpectacle(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectacleDAO)
@@ -416,4 +426,5 @@ public class Controleur extends HttpServlet {
                 .getRequestDispatcher("/managerResas.jsp")
                 .forward(request, response);
     }
+
 }

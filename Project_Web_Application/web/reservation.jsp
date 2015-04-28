@@ -58,14 +58,11 @@
                 <div class="col-md-3">
                     <form name="form" action="<%=request.getContextPath()%>/controleur" method="post">
                         <% Spectacle spectacle = (Spectacle) request.getAttribute("spectacle");%>
-
                         <jsp:include page="jsp/OUTfiltreResa.jsp"/>
                         <input type="submit" value="Filtrer">
                         <input name="action" value="filtrerResa" hidden="true">
                         <input name="NSp" value="<%=spectacle.getId()%>" hidden="true">
-
                     </form>
-
                 </div>
 
                 <!-- SPECTACLE AVEC LISTE REPRESENTATIONS -->
@@ -103,7 +100,7 @@
                                     <% if (request.getAttribute("nbPl") != null) {%>
                                     <input type="number" name="nbPl" value="<%=request.getAttribute("nbPl")%>">
                                     <% } else { %>
-                                    <input type="number" name="nbPl" value="0">
+                                    <input type="number" name="nbPl" value="1" min="1">
                                     <%}%>
                                 </p>
                                 <p>(Nombre de places restantes : <%=(Integer) request.getAttribute("nbPlRest") - 70%>)</p>    

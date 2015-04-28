@@ -10,7 +10,7 @@
 <form name="form" action="<%=request.getContextPath()%>/controleur" method="post">
 
     <!-- RECHERCHE PAR MOTS CLES -->
-    <dl class="dropdown">
+    <dl class="">
         <dt>
         <a href="#">
             <span><h3>Recherche par mots clés</h3></span>   
@@ -32,7 +32,7 @@
     </dl>
 
     <!--RECHERCHE PAR DATE -->
-    <dl class="dropdown">
+    <dl class="">
         <dt>
         <a href="#">
             <span><h3>Date</h3></span>   
@@ -53,7 +53,7 @@
     </dl>
 
     <!-- RECHERCHE PAR PRIX -->
-    <dl class="dropdown">
+    <dl class="">
         <dt>
         <a href="#">
             <span><h3>Prix</h3></span>   

@@ -13,10 +13,10 @@
 
 <% HttpSession session2 = request.getSession(false);
     String userName = (String) session2.getAttribute("utilisateur");
-    if (userName == null){
+    if (userName == null) {
         String site = new String("./index.jsp");
         response.setStatus(response.SC_MOVED_TEMPORARILY);
-        response.setHeader("Location", site); 
+        response.setHeader("Location", site);
     }
 %>
 
@@ -31,8 +31,10 @@
 
         <script>
             $(function () {
+                dateToday = new Date();
                 $("#datepicker").datepicker({
-                    dateFormat: "dd-mm-yy"
+                    dateFormat: "dd-mm-yy",
+                    minDate: dateToday
                 });
             });
         </script>
@@ -75,7 +77,7 @@
                             %>
                             <% if (!salles.isEmpty()) {
                                     for (int i = 0; i < salles.size(); i++) {%>
-                            <option value="<%=salles.get(i).getNSa()%>"><%=salles.get(i).getNomSa() %></option>
+                            <option value="<%=salles.get(i).getNSa()%>"><%=salles.get(i).getNomSa()%></option>
                             <%}%>
                         </select> 
                         <input id="valueSalle" name="valueSalle" value="<%=salles.get(0).getNSa()%>" hidden="true">

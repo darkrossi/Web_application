@@ -5,9 +5,7 @@
  */
 package dao;
 
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,58 +13,42 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sql.DataSource;
 import modele.Affiche;
 
 /**
  *
  * @author oswald
  */
-public class AfficheDAO {
+public class AfficheDAO extends AbstractDataBaseDAO {
 
-    private final String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
-    private final String login = "fournimi";
-
-    /* fermeture d'une connexion
-     * @param c la connexion à fermer
-     * @throws DAOException si problème lors de la fermeture de la connexion
-     */
-    protected void closeConnection(Connection c) throws DAOException {
-        if (c != null) {
-            try {
-                c.close();
-            } catch (SQLException sqle) {
-                throw new DAOException("Problème fermeture de connexion avec la BD ", sqle);
-            }
-        }
+    public AfficheDAO() {
     }
 
-    public List<Affiche> getListeAffiches() {
-        try {
-            Class.forName("oracle.jdbc.OracleDriver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AfficheDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public AfficheDAO(DataSource ds) {
+        super(ds);
+    }
 
+    public List<Affiche> getListeAffiches() throws DAOException {
         List<Affiche> affiches = new ArrayList<>();
-        Connection Connexion = null;
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
         try {
-            Connexion = DriverManager.getConnection(url, login, login);
-            Statement State = Connexion.createStatement();
-            ResultSet resultat = State.executeQuery("SELECT NSP, Affiche FROM Spectacle");
-            while (resultat.next()) {
-                if (resultat.getInt("NSP") != 0) {
-                    String url = resultat.getString("Affiche");
+            conn = getConnection();
+            Statement st = conn.createStatement();
+            requeteSQL = "SELECT NSP, Affiche FROM Spectacle";
+            rs = st.executeQuery(requeteSQL);
+            while (rs.next()) {
+                if (rs.getInt("NSP") != 0) {
+                    String url = rs.getString("Affiche");
                     affiches.add(new Affiche(url));
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(AfficheDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                closeConnection(Connexion);
-            } catch (DAOException ex) {
-                Logger.getLogger(AfficheDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            closeConnection(conn);
         }
 
         if (affiches.isEmpty()) {
