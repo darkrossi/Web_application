@@ -65,33 +65,10 @@ public class AchatDAO extends AbstractDataBaseDAO {
             st.executeQuery(requeteSQL);
 
             /* On marque les places réservées */
-            requeteSQL = "select r.NRa, p.NP "
-                    + "from Rang r, Place p "
-                    + "where r.NSA = " + dataRepr[2] + " and p.NRa = r.NRa and p.isTaken = 0";
-            rs = st.executeQuery(requeteSQL);
-
-            int NRaTemp = -1;
-            List<Integer> indicesPl = new ArrayList<>();
-            while (rs.next()) {
-                if (NRaTemp == -1) {
-                    NRaTemp = rs.getInt(1);
-                }
-                if (rs.getInt(1) != NRaTemp) {
-                    indicesPl = new ArrayList<>();
-                    NRaTemp = rs.getInt(1);
-                }
-                indicesPl.add(rs.getInt(2));
-                if (indicesPl.size() == nbP) {
-                    break;
-                }
-            }
-
-            for (Integer indicesPl1 : indicesPl) {
-                requeteSQL = "UPDATE Place "
-                        + "SET isTaken=1, ND=" + indiceND_Max + " "
-                        + "WHERE NP=" + indicesPl1;
-                st.executeQuery(requeteSQL);
-            }
+            requeteSQL = "UPDATE Place "
+                    + "SET isTaken=1, ND=" + indiceND_Max + " "
+                    + "WHERE NP=" + NP;
+            st.executeQuery(requeteSQL);
 
             if (boolResa == 0) {
                 /* On ajoute un nouveau ticket */

@@ -12,9 +12,14 @@ package modele;
 public class Place {
 
     private int NP;
+    private int isTaken;
 
-    public Place(int NP) {
+    public Place() {
+    }
+
+    public Place(int NP, int isTaken) {
         this.NP = NP;
+        this.isTaken = isTaken;
     }
 
     /**
@@ -29,5 +34,19 @@ public class Place {
      */
     public void setNP(int NP) {
         this.NP = NP;
+    }
+
+    /**
+     * @return the isTaken
+     */
+    public int getIsTaken() {
+        return isTaken;
+    }
+
+    /**
+     * @param isTaken the isTaken to set
+     */
+    public void setIsTaken(int isTaken) {
+        this.isTaken = isTaken;
     }
 }

@@ -4,6 +4,7 @@
     Author     : oswald
 --%>
 
+<%@page import="modele.Rang"%>
 <%@page import="modele.Spectacle"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="modele.Place"%>
@@ -117,13 +118,13 @@
                             <ul>
                                 <li>                                    
                                     Rang : <select id="selectRang" onchange="onChangeRang()" >
-                                        <% Hashtable<Integer, List<Place>> hashRangs = (Hashtable<Integer, List<Place>>) request.getAttribute("rangs");
+                                        <% Hashtable<Rang, List<Place>> hashRangs = (Hashtable<Rang, List<Place>>) request.getAttribute("rangs");
                                             if (!hashRangs.isEmpty()) { // Si il y a des rangs
                                                 Enumeration keys2 = hashRangs.keys();
                                                 int counter = 1;
                                                 while (keys2.hasMoreElements()) { // On affiche le menu déroulant avec les rangs
-                                                    Integer NRa = (Integer) keys2.nextElement();%>
-                                        <option value="<%=NRa%>"><%=counter++%></option>
+                                                    Rang rang = (Rang) keys2.nextElement();%>
+                                        <option value="<%=rang.getNRa()%>"><%=rang.getNomCT()%><%=counter++%></option>
                                         <%}%>
                                     </select><br>
                                     <input id="valueRang" name="valueRang" value="1" hidden="true">
@@ -131,17 +132,21 @@
                                     <% keys2 = hashRangs.keys();
                                         boolean isFirst = true;
                                         while (keys2.hasMoreElements()) {
-                                            Integer NRa = (Integer) keys2.nextElement();
-                                            List<Place> places = (List<Place>) hashRangs.get(NRa);
+                                            Rang rang = (Rang) keys2.nextElement();
+                                            Integer NRa = rang.getNRa();
+                                            List<Place> places = (List<Place>) hashRangs.get(rang);
                                             if (isFirst) {%>
                                     Place : <select id="selectPlace<%=NRa%>" class="selectP" onchange="onChangePlace('<%=NRa%>')" >
                                         <% isFirst = false;
                                         } else {%>
                                         <select hidden="true" id="selectPlace<%=NRa%>" class="selectP" onchange="onChangePlace('<%=NRa%>')" >
                                             <%}
-                                                for (int j = 0; j < places.size(); j++) {%>
+                                                for (int j = 0; j < places.size(); j++) {
+                                                    Place place = places.get(j);
+                                                    if (place.getIsTaken() == 0) {%>
                                             <option value="<%=places.get(j).getNP()%>"><%=j + 1%></option>
-                                            <%}%>
+                                            <%}
+                                                }%>
                                         </select>
                                         <input id="valuePlace<%=NRa%>" name="valuePlace<%=NRa%>" value="<%=places.get(0).getNP()%>" hidden="true">
                                         <%

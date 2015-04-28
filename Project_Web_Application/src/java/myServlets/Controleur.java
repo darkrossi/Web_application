@@ -7,6 +7,7 @@ package myServlets;
 
 import dao.*;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
@@ -74,7 +75,7 @@ public class Controleur extends HttpServlet {
                         .getRequestDispatcher("/ErrorRequest.jsp")
                         .forward(request, response);
             }
-        } catch (ServletException | IOException | DAOException ex) {
+        } catch (ServletException | IOException | DAOException | ParseException ex) {
             request.setAttribute("log", ex.toString());
             try {
                 getServletContext()
@@ -121,7 +122,7 @@ public class Controleur extends HttpServlet {
                         .getRequestDispatcher("/ErrorRequest.jsp")
                         .forward(request, response);
             }
-        } catch (DAOException | ServletException | IOException ex) {
+        } catch (DAOException | ServletException | IOException | ParseException ex) {
             request.setAttribute("log", ex.toString());
             try {
                 getServletContext()
@@ -307,7 +308,7 @@ public class Controleur extends HttpServlet {
     }
 
     private void actionDisplayResaPlaces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectDAO, RepresentationDAO represDAO, RangDAO rangDAO)
-            throws DAOException, ServletException, IOException {
+            throws DAOException, ServletException, IOException, ParseException {
         request.setAttribute("represPicked", represDAO.getRepres(Integer.parseInt(request.getParameter("NR"))));
         request.setAttribute("rangs", rangDAO.getRangs(Integer.parseInt(request.getParameter("NSa")), true));
         actionFiltrerResa(request, response, represDAO, spectDAO, 0);
@@ -330,7 +331,7 @@ public class Controleur extends HttpServlet {
     }
 
     private void actionFiltrerResa(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO, SpectacleDAO spectacleDAO, int logBool)
-            throws DAOException, ServletException, IOException {
+            throws DAOException, ServletException, IOException, ParseException {
         request.setAttribute("logBool", logBool);
         request.setAttribute("repres", represDAO.getListeRepresTri(
                 Integer.parseInt(request.getParameter("NSp")),

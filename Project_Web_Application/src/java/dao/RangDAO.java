@@ -14,6 +14,7 @@ import java.util.Hashtable;
 import java.util.List;
 import javax.sql.DataSource;
 import modele.Place;
+import modele.Rang;
 
 /**
  *
@@ -25,8 +26,8 @@ public class RangDAO extends AbstractDataBaseDAO {
         super(ds);
     }
 
-    public Hashtable<Integer, List<Place>> getRangs(int NSa, boolean dispo) throws DAOException {
-        Hashtable<Integer, List<Place>> rangs = new Hashtable<>();
+    public Hashtable<Rang, List<Place>> getRangs(int NSa, boolean dispo) throws DAOException {
+        Hashtable<Rang, List<Place>> rangs = new Hashtable<>();
 
         ResultSet rs = null;
         String requeteSQL = "";
@@ -35,25 +36,19 @@ public class RangDAO extends AbstractDataBaseDAO {
             conn = getConnection();
             Statement st = conn.createStatement();
 
-            if (dispo) {
-                requeteSQL = "select r.NRa, p.NP "
-                        + "from Rang r, Place p "
-                        + "where r.NSA = " + NSa + " and r.NRa = p.NRa and p.isTaken = 0";
-            } else {
-                requeteSQL = "select r.NRa, p.NP "
-                        + "from Rang r, Place p "
-                        + "where r.NSA = " + NSa + " and r.NRa = p.NRa";
-            }
+            requeteSQL = "select r.NRa, c.NomCT, c.PrixCT, p.NP, p.isTaken "
+                    + "from Rang r, Place p, CatTarifs c "
+                    + "where r.NSA = " + NSa + " and r.NRa = p.NRa and c.NCT = r.NCT";
             rs = st.executeQuery(requeteSQL);
 
             Place place;
             while (rs.next()) {
-                if (!rangs.containsKey(rs.getInt(1))) {
-                    rangs.put(rs.getInt(1), new ArrayList<>());
+                Rang rang = new Rang(rs.getInt("NRa"), rs.getString("NomCT"), rs.getInt("PrixCT"));
+                if (!rangs.containsKey(rang)) {
+                    rangs.put(rang, new ArrayList<>());
                 }
-                place = new Place(rs.getInt(2));
-                System.err.println(place);
-                rangs.get(rs.getInt(1)).add(place);
+                place = new Place(rs.getInt("NP"), rs.getInt("isTaken"));
+                rangs.get(rang).add(place);
             }
 
         } catch (SQLException e) {

@@ -10,6 +10,8 @@
 -- SELECT * from Dossier;
 -- SELECT * from Ticket;
 
+select * from place where nd <> -1;
+
 -- DROP TABLE Dossier;
 -- DROP TABLE Representation;
 
