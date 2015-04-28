@@ -103,8 +103,10 @@
                                 id = selects[i].id;
                                 if (id === idS) {
                                     $('#' + idS).show();
+                                    $('#' + idS + "p").show();
                                 } else {
                                     $('#' + id).hide();
+                                    $('#' + id + "p").hide();
                                 }
                             }
                         }
@@ -137,15 +139,21 @@
                                             List<Place> places = (List<Place>) hashRangs.get(rang);
                                             if (isFirst) {%>
                                     Place : <select id="selectPlace<%=NRa%>" class="selectP" onchange="onChangePlace('<%=NRa%>')" >
-                                        <% isFirst = false;
+                                        <%
                                         } else {%>
                                         <select hidden="true" id="selectPlace<%=NRa%>" class="selectP" onchange="onChangePlace('<%=NRa%>')" >
                                             <%}
                                                 for (int j = 0; j < places.size(); j++) {
                                                     Place place = places.get(j);%>
-                                            <option value="<%=place.getNP()%>"><%=place.getNumPl() %></option>
+                                            <option value="<%=place.getNP()%>"><%=place.getNumPl()%></option>
                                             <% }%>
-                                        </select>
+                                        </select> 
+                                        <%if (isFirst) {
+                                                isFirst = false;%>
+                                                <div id="selectPlace<%=NRa%>p">(Prix : <%=rang.getPrixCT() %>€) (Places restantes : <%=places.size()%>)</div>
+                                        <% } else {%>
+                                        <div hidden="true" id="selectPlace<%=NRa%>p">(Prix : <%=rang.getPrixCT() %>€) (Places restantes : <%=places.size()%>)</div>
+                                        <%}%>
                                         <input id="valuePlace<%=NRa%>" name="valuePlace<%=NRa%>" value="<%=places.get(0).getNP()%>" hidden="true">
                                         <%
                                                 }
