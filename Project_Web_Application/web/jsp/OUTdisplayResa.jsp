@@ -43,6 +43,8 @@
                 <input type="checkbox" onclick="document.inputForm6<%=repres.get(i).getNR()%>.submit();">
                 <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm6<%=repres.get(i).getNR()%>">
                     <input name="action" value="displayNbPlaces" hidden="true">
+                    <input name="datepicker1" value="<%= request.getAttribute("datepicker1")%>" hidden="true">
+                    <input name="datepicker2" value="<%= request.getAttribute("datepicker2")%>" hidden="true">
                     <input name="NR" value="<%= repres.get(i).getNR()%>" hidden="true">
                     <input name="NSa" value="<%= repres.get(i).getNSa()%>" hidden="true">
                     <input name="NSp" value="<%= repres.get(i).getNSp()%>" hidden="true">

@@ -18,7 +18,8 @@
     <dd>
         <div class="mutliSelect">
             <ul>
-                <li> <% if (request.getAttribute("datepicker1") != null && request.getAttribute("datepicker2") != null) {%>
+                <li> <% if (request.getAttribute("datepicker1") != null && request.getAttribute("datepicker2") != null 
+                        && !((String)request.getAttribute("datepicker1")).equals("null") && !((String)request.getAttribute("datepicker2")).equals("null")) {%>
                     <input type="text" name="datepicker1" class="datepicker" value="<%=request.getAttribute("datepicker1")%>" placeholder="Du">
                     <input type="text" name="datepicker2" class="datepicker" value="<%=request.getAttribute("datepicker2")%>" placeholder="Au">
                     <% } else {%>

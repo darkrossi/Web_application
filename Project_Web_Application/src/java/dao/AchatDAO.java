@@ -23,7 +23,7 @@ public class AchatDAO extends AbstractDataBaseDAO {
         super(ds);
     }
 
-    public boolean ajouterAchat(String loginU, int NR, int NRa, int NP, int nbP, int boolResa) throws DAOException {
+    public boolean ajouterAchat(String loginU, int NR, int[] NP, int nbP, int boolResa) throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
@@ -92,9 +92,12 @@ public class AchatDAO extends AbstractDataBaseDAO {
             }
 
             /* On marque les places réservées */
-            requeteSQL = "INSERT INTO PlacesRes (NPR, NP, ND) "
-                    + "VALUES (" + indiceNPR_Max + ", " + NP + ", " + indiceND_Max + ")";
-            st.executeQuery(requeteSQL);
+            for (int i = 0; i < nbP; i++) {
+                requeteSQL = "INSERT INTO PlacesRes (NPR, NP, ND) "
+                        + "VALUES (" + indiceNPR_Max + ", " + NP[i] + ", " + indiceND_Max + ")";
+                st.executeQuery(requeteSQL);
+                indiceNPR_Max++;
+            }
 
             return true;
         } catch (SQLException e) {

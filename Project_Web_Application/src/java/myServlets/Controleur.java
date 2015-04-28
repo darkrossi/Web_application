@@ -259,11 +259,15 @@ public class Controleur extends HttpServlet {
             RepresentationDAO represDAO)
             throws ServletException, IOException, DAOException {
         request.setAttribute("logBool", 1);
+        int nbPl = Integer.parseInt(request.getParameter("nbPl"));
+        int[] tabPl = new int[nbPl];
+        for (int i = 0; i < nbPl; i++) {
+            tabPl[i] = Integer.parseInt(request.getParameter("NP" + i));
+        }
         if (achatDAO.ajouterAchat(request.getParameter("login"),
                 Integer.parseInt(request.getParameter("NR")),
-                Integer.parseInt(request.getParameter("NRa")),
-                Integer.parseInt(request.getParameter("NP")),
-                1,
+                tabPl,
+                nbPl,
                 Integer.parseInt(request.getParameter("boolResa")))) {
             request.setAttribute("logText", "Achat effectué avec succès !");
         } else {
@@ -314,9 +318,13 @@ public class Controleur extends HttpServlet {
         request.setAttribute("represPicked", represDAO.getRepres(Integer.parseInt(request.getParameter("NR"))));
         request.setAttribute("rangs", rangDAO.getRangs(Integer.parseInt(request.getParameter("NSa")), Integer.parseInt(request.getParameter("NR"))));
         request.setAttribute("nbPlRest", Integer.parseInt(request.getParameter("NbPlRest")));
-        
+
         request.setAttribute("nbPl", Integer.parseInt(request.getParameter("nbPl")));
-        
+
+        request.setAttribute("NR", request.getParameter("NR"));
+        request.setAttribute("NSa", request.getParameter("NSa"));
+        request.setAttribute("NSp", request.getParameter("NSp"));
+
         actionFiltrerResa(request, response, represDAO, spectDAO, 0);
     }
 
@@ -371,6 +379,8 @@ public class Controleur extends HttpServlet {
         request.setAttribute("NSp", request.getParameter("NSp"));
 
         request.setAttribute("nbPlRest", represDAO.getNbPlRestRes(Integer.parseInt(request.getParameter("NR")), Integer.parseInt(request.getParameter("NSa"))));
+
+        request.setAttribute("represPicked", represDAO.getRepres(Integer.parseInt(request.getParameter("NR"))));
 
         actionFiltrerResa(request, response, represDAO, spectDAO, 0);
     }

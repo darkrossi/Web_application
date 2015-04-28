@@ -62,37 +62,6 @@
 
 -- INSERT INTO CatTarifs (NCT, NomCT, PrixCT) VALUES (2, 'Orchestre', 60);
 
-
--- select r.NRa, c.NomCT, c.PrixCT, p.NP 
---                     from Rang r, Place p, CatTarifs c 
---                     where r.NSA = 1 and r.NRa = p.NRa and c.NCT = r.NCT 
---                     and p.NP not in(Select p.NP 
---                     from Place p, PlacesRes plr, Dossier d, Rang r 
---                     where p.NP = plr.NP and r.NRA = p.NRA and r.NSA = 1 and plr.ND = d.ND and d.NR = 1);
-
--- select count(p.NP) 
---     from Representation rep, Salle s, Rang r, Place p 
---     where rep.NR = 1 and rep.NSa = s.NSa and r.NSa = s.NSa and r.NRa = p.NRa ;
---     and p.NP not in(
---         Select p.NP 
---         from Representation rep, Salle s, Rang r, Place p, PlacesRes plr, Dossier d 
---         where rep.NR = 1 and rep.NSa = s.NSa and r.NSa = s.NSa and r.NRa = p.NRa and plr.ND = d.ND and d.NR = 1);
-
-select count(p.NP) 
-    from Rang r, Place p, CatTarifs c
-    where r.NSA = 1  and r.NRa = p.NRa and c.NCT = r.NCT 
-    and p.NP not in(
-        Select p.NP 
-        from Place p, PlacesRes plr, Dossier d, Rang r 
-        where p.NP = plr.NP and r.NRA = p.NRA and r.NSA = 1 and plr.ND = d.ND and d.NR =1 );
-
-
-
-
-
-
-
-
-
-
-
+select * 
+    from Dossier d, Spectacle s, Representation r 
+    WHERE d.LoginU ='fournimi' and d.NR = r.NR and r.NSP = s.NSP and d.boolResa = 0;
