@@ -12,14 +12,14 @@ package modele;
 public class Place {
 
     private int NP;
-    private int isTaken;
+    private int NumPl;
 
     public Place() {
     }
 
-    public Place(int NP, int isTaken) {
+    public Place(int NP, int NumPl) {
         this.NP = NP;
-        this.isTaken = isTaken;
+        this.NumPl = NumPl;
     }
 
     /**
@@ -37,16 +37,17 @@ public class Place {
     }
 
     /**
-     * @return the isTaken
+     * @return the NumPl
      */
-    public int getIsTaken() {
-        return isTaken;
+    public int getNumPl() {
+        return NumPl;
     }
 
     /**
-     * @param isTaken the isTaken to set
+     * @param NumPl the NumPl to set
      */
-    public void setIsTaken(int isTaken) {
-        this.isTaken = isTaken;
+    public void setNumPl(int NumPl) {
+        this.NumPl = NumPl;
     }
+
 }

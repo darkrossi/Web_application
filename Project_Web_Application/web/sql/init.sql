@@ -38,6 +38,9 @@ CREATE TABLE Representation (
     constraint nn_repr_nsp check (NSP is not null),
     constraint nbp_total check (NbP >= 70)
 );
+INSERT INTO Representation (NR, DateR, HeureR, NSP, NSA, NbP)
+SELECT NR, DateR, HeureR, NSP, NSA, NbP
+FROM Representation3;
 
 CREATE TABLE Rang (
     NRa int,
@@ -50,17 +53,21 @@ CREATE TABLE Rang (
     constraint nn_rang_nsa check (NSA is not null), 
     constraint NbP CHECK(NbP >= 1)
 );
+INSERT INTO Rang (NRa, NCT, NSA, NbP)
+SELECT NRa, NCT, NSA, NbP
+FROM Rang3;
 
 CREATE TABLE Place (
     NP int,
     NRa int,
-    isTaken int,
-    ND int, -- Pour savoir pour quel dossier cette place est reservée
+    NumPl int,
     constraint pk_table primary key (NP),
     constraint fk_place_nra_rang foreign key (NRa) references Rang(NRa),
-    constraint nn_place_nra check (NRa is not null),
-    CONSTRAINT bin_istaken CHECK(isTaken in (0, 1))
+    constraint nn_place_nra check (NRa is not null)
 );
+INSERT INTO Place (NP, NRa, NumPl)
+SELECT NP, NRa, NumPl
+FROM Place3;
 
 CREATE TABLE Users (
     LoginU varchar(30),
@@ -94,6 +101,17 @@ CREATE TABLE Dossier (
     constraint nn_dossier_loginu check (LoginU is not null),
     constraint nn_dossier_nr check (NR is not null),
     CONSTRAINT NbPD CHECK(NbP >= 1)
+);
+
+CREATE TABLE PlacesRes (
+    NPR int,
+    NP int,
+    ND int,
+    constraint pk_placesRes primary key (NPR),
+    constraint fk_placesRes_np_place foreign key (NP) references Place(NP),
+    constraint fk_placesRes_nd_dossier foreign key (ND) references Dossier(ND),
+    constraint nn_placesRes_np check (NP is not null),
+    constraint nn_placesRes_nd check (ND is not null)
 );
 
 CREATE TABLE CatTarifs (

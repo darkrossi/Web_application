@@ -1,3 +1,4 @@
+DELETE FROM PlacesRes;
 DELETE FROM Dossier;
 DELETE FROM Representation;
 DELETE FROM Place;
@@ -8,6 +9,7 @@ DELETE FROM Salle;
 DELETE FROM Users;
 DELETE FROM CatTarifs;
 
+DROP TABLE PlacesRes cascade constraint;
 DROP TABLE Dossier cascade constraint;
 DROP TABLE Representation cascade constraint;
 DROP TABLE Place cascade constraint;

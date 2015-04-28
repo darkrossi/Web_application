@@ -142,11 +142,9 @@
                                         <select hidden="true" id="selectPlace<%=NRa%>" class="selectP" onchange="onChangePlace('<%=NRa%>')" >
                                             <%}
                                                 for (int j = 0; j < places.size(); j++) {
-                                                    Place place = places.get(j);
-                                                    if (place.getIsTaken() == 0) {%>
-                                            <option value="<%=places.get(j).getNP()%>"><%=j + 1%></option>
-                                            <%}
-                                                }%>
+                                                    Place place = places.get(j);%>
+                                            <option value="<%=place.getNP()%>"><%=place.getNumPl() %></option>
+                                            <% }%>
                                         </select>
                                         <input id="valuePlace<%=NRa%>" name="valuePlace<%=NRa%>" value="<%=places.get(0).getNP()%>" hidden="true">
                                         <%

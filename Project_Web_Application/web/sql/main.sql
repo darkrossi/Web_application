@@ -2,7 +2,7 @@
 -- INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS) VALUES (2, 'Babar', 'Aristide Euphrate', 'Cageot Miranda', 540);
 
 -- SELECT * from Spectacle;
--- SELECT * from Representation;
+-- SELECT * from Representation3;
 -- SELECT * from Salle;
 -- SELECT * from Rang;
 -- SELECT * from Place;
@@ -10,18 +10,22 @@
 -- SELECT * from Dossier;
 -- SELECT * from Ticket;
 
-select * from place where nd <> -1;
+-- INSERT INTO Representation (NR, DateR, HeureR, NSP, NSA, NbP)
+-- SELECT NR, DateR, HeureR, NSP, NSA, NbP
+-- FROM Representation3;
+
+-- select * from place where nd <> -1;
 
 -- DROP TABLE Dossier;
--- DROP TABLE Representation;
 
--- DELETE FROM Salle;
+-- DELETE FROM Salle ;
+-- DROP TABLE Salle cascade constraint;
 
 -- DELETE FROM Spectacle3;
 -- DELETE FROM Users3;
--- DELETE FROM CatTarifs3;
+-- DELETE FROM Salle3;
 
--- DROP TABLE Spectacle3 cascade constraint;
+-- DROP TABLE Salle3 cascade constraint;
 -- DROP TABLE Users3 cascade constraint;
 -- DROP TABLE CatTarifs3 cascade constraint;
 
@@ -29,6 +33,8 @@ select * from place where nd <> -1;
 -- create table Users3 as select * from Users;
 -- create table CatTarifs3 as select * from CatTarifs;
 -- create table Salle3 as select * from Salle;
+-- create table Place3 as select * from Place;
+-- create table Rang3 as select * from Rang;
 -- create table Representation3 as select * from Representation;
 
 
@@ -57,10 +63,12 @@ select * from place where nd <> -1;
 -- INSERT INTO CatTarifs (NCT, NomCT, PrixCT) VALUES (2, 'Orchestre', 60);
 
 
-
-
-
-
+-- select r.NRa, c.NomCT, c.PrixCT, p.NP 
+--                     from Rang r, Place p, CatTarifs c 
+--                     where r.NSA = 1 and r.NRa = p.NRa and c.NCT = r.NCT 
+--                     and p.NP not in(Select p.NP 
+--                     from Place p, PlacesRes plr, Dossier d, Rang r 
+--                     where p.NP = plr.NP and r.NRA = p.NRA and r.NSA = 1 and plr.ND = d.ND and d.NR = 1);
 
 
 

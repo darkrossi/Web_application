@@ -310,7 +310,7 @@ public class Controleur extends HttpServlet {
     private void actionDisplayResaPlaces(HttpServletRequest request, HttpServletResponse response, SpectacleDAO spectDAO, RepresentationDAO represDAO, RangDAO rangDAO)
             throws DAOException, ServletException, IOException, ParseException {
         request.setAttribute("represPicked", represDAO.getRepres(Integer.parseInt(request.getParameter("NR"))));
-        request.setAttribute("rangs", rangDAO.getRangs(Integer.parseInt(request.getParameter("NSa")), true));
+        request.setAttribute("rangs", rangDAO.getRangs(Integer.parseInt(request.getParameter("NSa")), Integer.parseInt(request.getParameter("NR"))));
         actionFiltrerResa(request, response, represDAO, spectDAO, 0);
     }
 

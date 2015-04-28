@@ -129,8 +129,8 @@ public class SalleDAO extends AbstractDataBaseDAO {
                     st.executeQuery(requeteSQL);
                     for (int j = 1; j <= nbP; j++) {
                         indiceNPl_Max++;
-                        requeteSQL = "INSERT INTO Place (NP, NRa, isTaken, ND) "
-                                + "VALUES (" + indiceNPl_Max + ", " + indiceNRa_Max + ", 0, -1)";
+                        requeteSQL = "INSERT INTO Place (NP, NRa, NumPl) "
+                                + "VALUES (" + indiceNPl_Max + ", " + indiceNRa_Max + ", " + j + ")";
                         st.executeQuery(requeteSQL);
                     }
                 }
@@ -142,8 +142,8 @@ public class SalleDAO extends AbstractDataBaseDAO {
                     st.executeQuery(requeteSQL);
                     for (int j = 1; j <= nbP; j++) {
                         indiceNPl_Max++;
-                        requeteSQL = "INSERT INTO Place (NP, NRa, isTaken, ND) "
-                                + "VALUES (" + indiceNPl_Max + ", " + indiceNRa_Max + ", 0, -1)";
+                        requeteSQL = "INSERT INTO Place (NP, NRa, NumPl) "
+                                + "VALUES (" + indiceNPl_Max + ", " + indiceNRa_Max + ", " + j + ")";
                         st.executeQuery(requeteSQL);
                     }
                 }
@@ -155,8 +155,8 @@ public class SalleDAO extends AbstractDataBaseDAO {
                     st.executeQuery(requeteSQL);
                     for (int j = 1; j <= nbP; j++) {
                         indiceNPl_Max++;
-                        requeteSQL = "INSERT INTO Place (NP, NRa, isTaken, ND) "
-                                + "VALUES (" + indiceNPl_Max + ", " + indiceNRa_Max + ", 0, -1)";
+                        requeteSQL = "INSERT INTO Place (NP, NRa, NumPl) "
+                                + "VALUES (" + indiceNPl_Max + ", " + indiceNRa_Max + ", " + j + ")";
                         st.executeQuery(requeteSQL);
                     }
                 }
