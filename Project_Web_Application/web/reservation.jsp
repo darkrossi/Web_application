@@ -28,8 +28,17 @@
 
         <script>
             function init() {
-                $(".datepicker").datepicker({
-                    dateFormat: "dd-mm-yy"
+                dateToday = new Date();
+                $("#datepicker1").datepicker({
+                    dateFormat: "dd-mm-yy",
+                    minDate: dateToday,
+                    onSelect: function (dateValue, inst) {
+                        $("#datepicker2").datepicker("option", "minDate", dateValue)
+                    }
+                });
+                $("#datepicker2").datepicker({
+                    dateFormat: "dd-mm-yy",
+                    minDate: dateToday,
                 });
 //                $("#genre").multiselect();
 //                $("select").multiselect();
@@ -111,7 +120,13 @@
                     </div>
                     <%}%>
 
-
+                    <!-- LISTE PLACES -->
+                    <% if (request.getAttribute("rangs") != null) {
+                            HttpSession session2 = request.getSession(false);
+                            String userName = (String) session2.getAttribute("utilisateur");
+                            int nbPlTemp = (Integer) request.getAttribute("nbPl");
+                            int prixTotalPanier = 0;
+                            int prixRangTemp = 0;%>
                     <script>
                         function onChangeRang(k) {
                             select_menu = document.getElementById('selectRang' + k);
@@ -132,24 +147,23 @@
                                 }
                             }
                         }
-                    </script>
-
-                    <!-- LISTE PLACES -->
-                    <% if (request.getAttribute("rangs") != null) {
-                            HttpSession session2 = request.getSession(false);
-                            String userName = (String) session2.getAttribute("utilisateur");
-                            int nbPlTemp = (Integer) request.getAttribute("nbPl"); %>
-                    <script>
                         function afficheNext(nbPlTotal, nbPlTemp) {
-                            $('#li' + (nbPlTotal - nbPlTemp)).hide();
-                            $('#li' + (nbPlTotal - nbPlTemp + 1)).show();
-                        <% nbPlTemp--; %>
+                            i = nbPlTotal - nbPlTemp;
+                            $('#li' + i).hide();
+                            $('#li' + (i + 1)).show();
+                            selectRang = document.getElementById('selectRang' + i);
+                            selectRangValue = selectRang.options[selectRang.selectedIndex].value;
+                            selectPlace = document.getElementById('selectPlace' + selectRangValue + i);
+                            selectPlaceValue = selectPlace.options[selectPlace.selectedIndex].value;
+                        <% nbPlTemp--;
+                            prixTotalPanier += prixRangTemp; %>
                         }
 
                         function afficheBefore(nbPlTotal, nbPlTemp) {
                             $('#li' + (nbPlTotal - nbPlTemp)).hide();
                             $('#li' + (nbPlTotal - nbPlTemp - 1)).show();
-                        <% nbPlTemp++; %>
+                        <% nbPlTemp++;
+                            prixTotalPanier -= prixRangTemp;%>
                         }
 
                         function onclickFinalize(bool, nbPl) {
@@ -180,7 +194,7 @@
                                 <li hidden="true" id="li<%=k%>">  
                                     <%}%>
                                     <p> Place n° <%=k + 1%> sur <%=request.getAttribute("nbPl")%></p>
-                                    N° de Rang : <select id="selectRang<%=k%>" onchange="onChangeRang(<%=k%>)" >
+                                    N° de Rang : <select id="selectRang<%=k%>" onchange="onChangeRang(<%=k%>);" >
                                         <% Hashtable<Rang, List<Place>> hashRangs = (Hashtable<Rang, List<Place>>) request.getAttribute("rangs");
                                             if (!hashRangs.isEmpty()) { // Si il y a des rangs
                                                 Enumeration keys2 = hashRangs.keys();
@@ -198,10 +212,10 @@
                                             Integer NRa = rang.getNRa();
                                             List<Place> places = (List<Place>) hashRangs.get(rang);
                                             if (isFirst) {%>
-                                    N° de Place : <select id="selectPlace<%=NRa%><%=k%>" class="selectP<%=k%>">
+                                    N° de Place : <select id="selectPlace<%=NRa%><%=k%>" class="selectP<%=k%>" onchange="<% prixRangTemp = rang.getPrixCT(); %>">
                                         <%
                                         } else {%>
-                                        <select hidden="true" id="selectPlace<%=NRa%><%=k%>" class="selectP<%=k%>">
+                                        <select hidden="true" id="selectPlace<%=NRa%><%=k%>" class="selectP<%=k%>" onchange="<% prixRangTemp = rang.getPrixCT(); %>">
                                             <%}
                                                 for (int j = 0; j < places.size(); j++) {
                                                     Place place = places.get(j);%>
@@ -210,9 +224,9 @@
                                         </select> 
                                         <%if (isFirst) {
                                                 isFirst = false;%>
-                                        <div id="selectPlace<%=NRa%><%=k%>p">(Prix : <%=rang.getPrixCT()%>€) (Places restantes : <%=places.size()%>)</div>
+                                        <div id="selectPlace<%=NRa%><%=k%>p">(Prix : <%=rang.getPrixCT()%>€) (Places restantes dans le rang : <%=places.size()%>) (Prix total : <%=prixTotalPanier + rang.getPrixCT()%>)</div>
                                         <% } else {%>
-                                        <div hidden="true" id="selectPlace<%=NRa%><%=k%>p">(Prix : <%=rang.getPrixCT()%>€) (Places restantes : <%=places.size()%>)</div>
+                                        <div hidden="true" id="selectPlace<%=NRa%><%=k%>p">(Prix : <%=rang.getPrixCT()%>€) (Places restantes dans le rang : <%=places.size()%>) (Prix total : <%=prixTotalPanier + rang.getPrixCT()%>)</div>
                                         <%}%>
                                         <%
                                                 }
@@ -222,7 +236,7 @@
                                         <% if (k == (Integer) request.getAttribute("nbPl") - 1) {%>
 
                                         <form action="<%=request.getContextPath()%>/controleur" onsubmit="onclickFinalize(1, <%=(Integer) request.getAttribute("nbPl")%>);
-                                                return true;" method="post">
+                                            return true;" method="post">
                                             <button type="submit">
                                                 Réserver <span class="glyphicon glyphicon-arrow-down"></span>
                                             </button>

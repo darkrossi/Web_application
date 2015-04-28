@@ -44,8 +44,8 @@
             <div class="mutliSelect">
                 <ul>
                     <li>
-                        <input type="text" name="datepicker1" class="datepicker" value="" placeholder="Du">
-                        <input type="text" name="datepicker2" class="datepicker" value="" placeholder="Au">
+                        <input type="text" id="datepicker1" name="datepicker1" class="datepicker" value="" placeholder="Du">
+                        <input type="text" id="datepicker2" name="datepicker2" class="datepicker" value="" placeholder="Au">
                     </li>
                 </ul>
             </div>

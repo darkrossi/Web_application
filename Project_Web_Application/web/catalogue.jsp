@@ -25,8 +25,17 @@
 
             }
             function init() {
-                $(".datepicker").datepicker({
-                    dateFormat: "dd-mm-yy"
+                dateToday = new Date();
+                $("#datepicker1").datepicker({
+                    dateFormat: "dd-mm-yy",
+                    minDate: dateToday,
+                    onSelect: function (dateValue, inst) {
+                        $("#datepicker2").datepicker("option", "minDate", dateValue)
+                    }
+                });
+                $("#datepicker2").datepicker({
+                    dateFormat: "dd-mm-yy",
+                    minDate: dateToday,
                 });
             }
         </script>
