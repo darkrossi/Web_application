@@ -94,6 +94,7 @@
                                         </form>
                                         <form method="post" action="<%=request.getContextPath()%>/controleur">
                                             <button type="submit">Annuler la réservation</button>
+                                            <input name="admin" value="false" hidden="true">
                                             <input name="action" value="annuleResa" hidden="true">
                                             <input name="login" value="<%=userName%>" hidden="true">
                                             <input name="ND" value="<%=resas.get(i).getND() %>" hidden="true">

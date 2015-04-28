@@ -44,12 +44,6 @@
                 <% if (userName != null && userName.equals("admin")) {%>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li>
-                            <a href="javascript:document.inputForm5.submit();">Catalogue</a>
-                            <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm5">
-                                <input name="action" value="displayCatalogue" hidden="true">
-                            </form>
-                        </li>
                         <!--                        <li>
                                                     <a href="javascript:document.inputForm1.submit();">Réserver une place</a>
                                                     <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm1">
@@ -64,6 +58,7 @@
                                 <input name="action" value="displayAddRepres" hidden="true">
                             </form>
                         </li>
+
                         <li>
                             <a href="javascript:document.inputForm4.submit();">Ajouter une salle</a>
                             <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm4">
@@ -71,10 +66,17 @@
                             </form>
                         </li>
 
+                        <li>
+                            <a href="javascript:document.inputForm6.submit();">Gérer les réservations</a>
+                            <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm6">
+                                <input name="action" value="displayManageResas" hidden="true">
+                            </form>
+                        </li>
+
 
                     </ul>
                 </li>
-                <% } else {%>
+                <% }%>
                 <li>
                     <a href="javascript:document.inputForm5.submit();">Catalogue</a>
                     <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm5">
@@ -87,7 +89,6 @@
                                         <input name="action" value="displayAddBooking" hidden="true">
                                     </form>
                                 </li>-->
-                <%}%>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">

@@ -72,6 +72,8 @@ public class Controleur extends HttpServlet {
                 actionDisplayNbPlaces(request, response, represDAO, spectacleDAO);
             } else if (action.equals("addSalle")) {
                 actionAddSalle(request, response, salleDAO);
+            } else if (action.equals("displayManageResas")) {
+                actionDisplayManageResas(request, response, dossierDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -384,9 +386,15 @@ public class Controleur extends HttpServlet {
         }
         request.setAttribute("dossiers", dossierDAO.getFolders(request.getParameter("login"), 0));
         request.setAttribute("resas", dossierDAO.getFolders(request.getParameter("login"), 1));
-        getServletContext()
-                .getRequestDispatcher("/monCompte.jsp")
-                .forward(request, response);
+        if (((String) request.getParameter("admin")).equals("false")) {
+            getServletContext()
+                    .getRequestDispatcher("/monCompte.jsp")
+                    .forward(request, response);
+        } else {
+            getServletContext()
+                    .getRequestDispatcher("/managerResas.jsp")
+                    .forward(request, response);
+        }
     }
 
     private void actionDisplayNbPlaces(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO, SpectacleDAO spectDAO) throws DAOException, ServletException, IOException, ParseException {
@@ -399,5 +407,13 @@ public class Controleur extends HttpServlet {
         request.setAttribute("represPicked", represDAO.getRepres(Integer.parseInt(request.getParameter("NR"))));
 
         actionFiltrerResa(request, response, represDAO, spectDAO, 0);
+    }
+
+    private void actionDisplayManageResas(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO) throws DAOException, ServletException, IOException {
+        request.setAttribute("logBool", 0);
+        request.setAttribute("resas", dossierDAO.getAllResas());
+        getServletContext()
+                .getRequestDispatcher("/managerResas.jsp")
+                .forward(request, response);
     }
 }
