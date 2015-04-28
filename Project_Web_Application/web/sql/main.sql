@@ -70,7 +70,21 @@
 --                     from Place p, PlacesRes plr, Dossier d, Rang r 
 --                     where p.NP = plr.NP and r.NRA = p.NRA and r.NSA = 1 and plr.ND = d.ND and d.NR = 1);
 
+-- select count(p.NP) 
+--     from Representation rep, Salle s, Rang r, Place p 
+--     where rep.NR = 1 and rep.NSa = s.NSa and r.NSa = s.NSa and r.NRa = p.NRa ;
+--     and p.NP not in(
+--         Select p.NP 
+--         from Representation rep, Salle s, Rang r, Place p, PlacesRes plr, Dossier d 
+--         where rep.NR = 1 and rep.NSa = s.NSa and r.NSa = s.NSa and r.NRa = p.NRa and plr.ND = d.ND and d.NR = 1);
 
+select count(p.NP) 
+    from Rang r, Place p, CatTarifs c
+    where r.NSA = 1  and r.NRa = p.NRa and c.NCT = r.NCT 
+    and p.NP not in(
+        Select p.NP 
+        from Place p, PlacesRes plr, Dossier d, Rang r 
+        where p.NP = plr.NP and r.NRA = p.NRA and r.NSA = 1 and plr.ND = d.ND and d.NR =1 );
 
 
 

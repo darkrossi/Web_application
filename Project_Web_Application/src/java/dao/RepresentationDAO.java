@@ -237,15 +237,39 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
         dateDeT[2] = Integer.parseInt(dateDe.substring(6, 10));
         dateAT[2] = Integer.parseInt(dateA.substring(6, 10));
 
-        Date dateFinale = new Date(dateT[2]-1900, dateT[1]-1, dateT[0]);
-        Date dateFinaleDe = new Date(dateDeT[2]-1900, dateDeT[1]-1, dateDeT[0]);
-        Date dateFinaleA = new Date(dateAT[2]-1900, dateAT[1]-1, dateAT[0]);
+        Date dateFinale = new Date(dateT[2] - 1900, dateT[1] - 1, dateT[0]);
+        Date dateFinaleDe = new Date(dateDeT[2] - 1900, dateDeT[1] - 1, dateDeT[0]);
+        Date dateFinaleA = new Date(dateAT[2] - 1900, dateAT[1] - 1, dateAT[0]);
 
         double diffDe = dateFinale.getTime() - dateFinaleDe.getTime();
         double diffA = dateFinaleA.getTime() - dateFinale.getTime();
 
         return diffDe >= 0 && diffA >= 0;
 
+    }
+
+    public int getNbPlRestRes(int NR, int NSA) throws DAOException {
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            Statement st = conn.createStatement();
+            requeteSQL = "select count(p.NP) "
+                    + "from Rang r, Place p, CatTarifs c "
+                    + "where r.NSA = " + NSA + "  and r.NRa = p.NRa and c.NCT = r.NCT "
+                    + "and p.NP not in( "
+                    + "Select p.NP "
+                    + "from Place p, PlacesRes plr, Dossier d, Rang r "
+                    + "where p.NP = plr.NP and r.NRA = p.NRA and r.NSA = " + NSA + " and plr.ND = d.ND and d.NR =" + NR + " )";
+            rs = st.executeQuery(requeteSQL);
+            rs.next();
+            return rs.getInt(1);
+        } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(conn);
+        }
     }
 
 }

@@ -42,7 +42,7 @@
                 <%= repres.get(i).getDate()%> - <%= repres.get(i).getHeure()%>
                 <input type="checkbox" onclick="document.inputForm6<%=repres.get(i).getNR()%>.submit();">
                 <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm6<%=repres.get(i).getNR()%>">
-                    <input name="action" value="displayResaPlaces" hidden="true">
+                    <input name="action" value="displayNbPlaces" hidden="true">
                     <input name="NR" value="<%= repres.get(i).getNR()%>" hidden="true">
                     <input name="NSa" value="<%= repres.get(i).getNSa()%>" hidden="true">
                     <input name="NSp" value="<%= repres.get(i).getNSp()%>" hidden="true">

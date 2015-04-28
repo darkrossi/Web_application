@@ -68,6 +68,8 @@ public class Controleur extends HttpServlet {
                 actionDisplayResa(request, response, spectacleDAO, represDAO, 0);
             } else if (action.equals("displayResaPlaces")) {
                 actionDisplayResaPlaces(request, response, spectacleDAO, represDAO, rangDAO);
+            } else if (action.equals("displayNbPlaces")) {
+                actionDisplayNbPlaces(request, response, represDAO, spectacleDAO);
             } else if (action.equals("addSalle")) {
                 actionAddSalle(request, response, salleDAO);
             } else {
@@ -311,6 +313,10 @@ public class Controleur extends HttpServlet {
             throws DAOException, ServletException, IOException, ParseException {
         request.setAttribute("represPicked", represDAO.getRepres(Integer.parseInt(request.getParameter("NR"))));
         request.setAttribute("rangs", rangDAO.getRangs(Integer.parseInt(request.getParameter("NSa")), Integer.parseInt(request.getParameter("NR"))));
+        request.setAttribute("nbPlRest", Integer.parseInt(request.getParameter("NbPlRest")));
+        
+        request.setAttribute("nbPl", Integer.parseInt(request.getParameter("nbPl")));
+        
         actionFiltrerResa(request, response, represDAO, spectDAO, 0);
     }
 
@@ -357,5 +363,15 @@ public class Controleur extends HttpServlet {
         getServletContext()
                 .getRequestDispatcher("/monCompte.jsp")
                 .forward(request, response);
+    }
+
+    private void actionDisplayNbPlaces(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO, SpectacleDAO spectDAO) throws DAOException, ServletException, IOException, ParseException {
+        request.setAttribute("NR", request.getParameter("NR"));
+        request.setAttribute("NSa", request.getParameter("NSa"));
+        request.setAttribute("NSp", request.getParameter("NSp"));
+
+        request.setAttribute("nbPlRest", represDAO.getNbPlRestRes(Integer.parseInt(request.getParameter("NR")), Integer.parseInt(request.getParameter("NSa"))));
+
+        actionFiltrerResa(request, response, represDAO, spectDAO, 0);
     }
 }

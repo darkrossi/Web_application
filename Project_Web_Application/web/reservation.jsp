@@ -46,7 +46,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- FILTRES -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <form name="form" action="<%=request.getContextPath()%>/controleur" method="post">
                         <% Spectacle spectacle = (Spectacle) request.getAttribute("spectacle");%>
 
@@ -65,7 +65,7 @@
                 </div>                
 
                 <!-- LISTE PLACES DISPONIBLES POUR UNE REPRESENTATION -->
-                <div class="col-md-3"> 
+                <div class="col-md-4"> 
                     <h2 align="center"> Date choisie </h2>
 
                     <!-- DATE/HEURE -->
@@ -84,6 +84,24 @@
                                 <% }%>
                         </div>
                     </div>
+
+                    <!-- NB PLACES -->
+                    <% if (request.getAttribute("nbPlRest") != null) {%>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <form action="<%=request.getContextPath()%>/controleur" method="get">
+                                <p>Nombre de places : <input type="number" name="nbPl" value="0"> </p>
+                                <p>(Nombre de places restantes : <%=request.getAttribute("nbPlRest")%>)</p>    
+                                <input name="action" value="displayResaPlaces" hidden="true">
+                                <input name="NR" value="<%= request.getAttribute("NR")%>" hidden="true">
+                                <input name="NSa" value="<%= request.getAttribute("NSa")%>" hidden="true">
+                                <input name="NSp" value="<%= request.getAttribute("NSp")%>" hidden="true">
+                                <input name="NbPlRest" value="<%= request.getAttribute("nbPlRest")%>" hidden="true">
+                                <button type="submit">Valider</button>
+                            </form>
+                        </div>
+                    </div>
+                    <%}%>
 
 
                     <script>
@@ -150,9 +168,9 @@
                                         </select> 
                                         <%if (isFirst) {
                                                 isFirst = false;%>
-                                                <div id="selectPlace<%=NRa%>p">(Prix : <%=rang.getPrixCT() %>€) (Places restantes : <%=places.size()%>)</div>
+                                        <div id="selectPlace<%=NRa%>p">(Prix : <%=rang.getPrixCT()%>€) (Places restantes : <%=places.size()%>)</div>
                                         <% } else {%>
-                                        <div hidden="true" id="selectPlace<%=NRa%>p">(Prix : <%=rang.getPrixCT() %>€) (Places restantes : <%=places.size()%>)</div>
+                                        <div hidden="true" id="selectPlace<%=NRa%>p">(Prix : <%=rang.getPrixCT()%>€) (Places restantes : <%=places.size()%>)</div>
                                         <%}%>
                                         <input id="valuePlace<%=NRa%>" name="valuePlace<%=NRa%>" value="<%=places.get(0).getNP()%>" hidden="true">
                                         <%
