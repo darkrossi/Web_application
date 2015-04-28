@@ -131,12 +131,40 @@
                     </script>
 
                     <!-- LISTE PLACES -->
-                    <% if (request.getAttribute("rangs") != null) { %>
+                    <% if (request.getAttribute("rangs") != null) {
+                            HttpSession session2 = request.getSession(false);
+                            String userName = (String) session2.getAttribute("utilisateur");
+                            int nbPlTemp = (Integer) request.getAttribute("nbPl");%>
+                    <script>
+                        function afficheNext(nbPlTotal, nbPlTemp) {
+                            $('#li' + (nbPlTotal - nbPlTemp)).hide();
+                            $('#li' + (nbPlTotal - nbPlTemp + 1)).show();
+                        <% nbPlTemp--; %>
+                        }
+                        function onclickFinalize(bool) {
+                        <% Representation representation = (Representation) request.getAttribute("represPicked");%>
+                            NR = <%=representation.getNR()%>;
+                            $('#NR' + bool).attr("value", NR);
+                            NSP = <%=representation.getNSp()%>;
+                            $('#NSp' + bool).attr("value", NSP);
+                            selectRang = document.getElementById('selectRang');
+                            selectRangValue = selectRang.options[selectRang.selectedIndex].value;
+                            $('#NRa' + bool).attr("value", selectRangValue);
+                            selectPlace = document.getElementById('selectPlace' + selectRangValue);
+                            selectPlaceValue = selectPlace.options[selectPlace.selectedIndex].value;
+                            $('#NP' + bool).attr("value", selectPlaceValue);
+                        }
+                    </script>
                     <div class="row">
                         <div class="large-2 columns">
                             <h3 align="center"> Choisissez vos places </h3>
                             <ul>
-                                <li>                                    
+                                <% for (int k = 0; k < (Integer) request.getAttribute("nbPl"); k++) {
+                                        if (k == 0) {%>
+                                <li id="li<%=k%>">  
+                                    <%} else {%>
+                                <li hidden="true" id="li<%=k%>">  
+                                    <%}%>
                                     Rang : <select id="selectRang" onchange="onChangeRang()" >
                                         <% Hashtable<Rang, List<Place>> hashRangs = (Hashtable<Rang, List<Place>>) request.getAttribute("rangs");
                                             if (!hashRangs.isEmpty()) { // Si il y a des rangs
@@ -177,10 +205,47 @@
                                                 }
                                             }%>
 
-                                        </li>
+                                        <% if (k == (Integer) request.getAttribute("nbPl") - 1) {%>
 
-                                        <li>
-                                        </li>
+                                        <form action="<%=request.getContextPath()%>/controleur" onsubmit="onclickFinalize(1);
+                                                return true;" method="post">
+                                            <button type="submit">
+                                                Réserver <span class="glyphicon glyphicon-arrow-down"></span>
+                                            </button>
+                                            <input id="NR1" name="NR" value="0" hidden="true">
+                                            <input id="NRa1" name="NRa" value="0" hidden="true">
+                                            <input id="NP1" name="NP" value="0" hidden="true">
+                                            <input id="NSp1" name="NSp" value="0" hidden="true">
+                                            <input name="login" value="<%=userName%>" hidden="true">
+                                            <input name="boolResa" value="1" hidden="true">
+                                            <input name="action" value="addAchat" hidden="true">
+                                        </form>
+
+                                        <form action="<%=request.getContextPath()%>/controleur" onsubmit="onclickFinalize(0);
+                                                return true;" method="post">
+                                            <button type="submit">
+                                                Finaliser la commande <span class="glyphicon glyphicon-euro"></span>
+                                            </button>
+                                            <input id="NR0" name="NR" value="0" hidden="true">
+                                            <input id="NRa0" name="NRa" value="0" hidden="true">
+                                            <input id="NP0" name="NP" value="0" hidden="true">
+                                            <input id="NSp0" name="NSp" value="0" hidden="true">
+                                            <input name="login" value="<%=userName%>" hidden="true">
+                                            <input name="boolResa" value="0" hidden="true">
+                                            <input name="action" value="addAchat" hidden="true">
+                                        </form>
+
+                                        <% } else {%>
+                                        <button onclick="afficheNext(<%=(Integer) request.getAttribute("nbPl")%>, <%=nbPlTemp+1%>)">Autre place </button>
+
+                                        <% }%>
+                                        <%}%>
+                                </li>
+
+
+                                <li>
+
+                                </li>
                             </ul>
                             <!--                            <a href="php/panier.php?action=ajout&amp;l=LIBELLEPRODUIT&amp;q=QUANTITEPRODUIT&amp;
                                                            p=PRIXPRODUIT" onclick="window.open(this.href, '', 'toolbar=no, location=no, \n\
@@ -188,56 +253,6 @@
                                                                  height=350');
                                                                    return false;">Ajouter au panier
                                                         </a>-->
-
-                            <% HttpSession session2 = request.getSession(false);
-                                String userName = (String) session2.getAttribute("utilisateur");%>
-
-                            <script>
-                                function onclickFinalize(bool) {
-                                <% Representation representation = (Representation) request.getAttribute("represPicked");%>
-                                    NR = <%=representation.getNR()%>;
-                                    $('#NR' + bool).attr("value", NR);
-
-                                    NSP = <%=representation.getNSp()%>;
-                                    $('#NSp' + bool).attr("value", NSP);
-
-                                    selectRang = document.getElementById('selectRang');
-                                    selectRangValue = selectRang.options[selectRang.selectedIndex].value;
-                                    $('#NRa' + bool).attr("value", selectRangValue);
-
-                                    selectPlace = document.getElementById('selectPlace' + selectRangValue);
-                                    selectPlaceValue = selectPlace.options[selectPlace.selectedIndex].value;
-                                    $('#NP' + bool).attr("value", selectPlaceValue);
-                                }
-                            </script>
-
-                            <form action="<%=request.getContextPath()%>/controleur" onsubmit="onclickFinalize(1);
-                                    return true;" method="post">
-                                <button type="submit">
-                                    Réserver <span class="glyphicon glyphicon-arrow-down"></span>
-                                </button>
-                                <input id="NR1" name="NR" value="0" hidden="true">
-                                <input id="NRa1" name="NRa" value="0" hidden="true">
-                                <input id="NP1" name="NP" value="0" hidden="true">
-                                <input id="NSp1" name="NSp" value="0" hidden="true">
-                                <input name="login" value="<%=userName%>" hidden="true">
-                                <input name="boolResa" value="1" hidden="true">
-                                <input name="action" value="addAchat" hidden="true">
-                            </form>
-
-                            <form action="<%=request.getContextPath()%>/controleur" onsubmit="onclickFinalize(0);
-                                    return true;" method="post">
-                                <button type="submit">
-                                    Finaliser la commande <span class="glyphicon glyphicon-euro"></span>
-                                </button>
-                                <input id="NR0" name="NR" value="0" hidden="true">
-                                <input id="NRa0" name="NRa" value="0" hidden="true">
-                                <input id="NP0" name="NP" value="0" hidden="true">
-                                <input id="NSp0" name="NSp" value="0" hidden="true">
-                                <input name="login" value="<%=userName%>" hidden="true">
-                                <input name="boolResa" value="0" hidden="true">
-                                <input name="action" value="addAchat" hidden="true">
-                            </form>
 
                             <div class="clearfix visible-lg"></div>
                         </div>
