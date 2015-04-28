@@ -56,7 +56,7 @@ public class DossierDAO extends AbstractDataBaseDAO {
         return result;
     }
 
-    public boolean swapResa(int ND) throws DAOException {
+    public boolean confirmResa(int ND) throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
@@ -80,7 +80,41 @@ public class DossierDAO extends AbstractDataBaseDAO {
 
             requeteSQL = "Update Dossier set boolResa = 0, NT = " + indiceNT_Max + " where ND = " + ND;
             rs = st.executeQuery(requeteSQL);
-            
+
+            return true;
+        } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(conn);
+        }
+    }
+
+    public boolean annuleResa(int ND) throws DAOException {
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            Statement st = conn.createStatement();
+
+            /* On récupère les informations de la représentation */
+            requeteSQL = "select r.NbP, r.NR, d.NbP from Dossier d, Representation r "
+                    + "where d.NR = r.NR and d.ND = " + ND;
+            rs = st.executeQuery(requeteSQL);
+            rs.next();
+            int nbPlacesRepr = rs.getInt(1);
+            int NR = rs.getInt(2);
+            int nbPlacesResa = rs.getInt(3);
+
+            requeteSQL = "UPDATE Representation SET NbP=" + (nbPlacesRepr + nbPlacesResa) + " WHERE NR=" + NR;
+            st.executeQuery(requeteSQL);
+
+            requeteSQL = "delete from PlacesRes where ND =" + ND;
+            rs = st.executeQuery(requeteSQL);
+
+            requeteSQL = "Delete from Dossier where ND = " + ND;
+            rs = st.executeQuery(requeteSQL);
+
             return true;
         } catch (SQLException e) {
             throw new DAOException("Erreur BD " + e.getMessage(), e);

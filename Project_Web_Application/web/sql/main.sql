@@ -2,13 +2,14 @@
 -- INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS) VALUES (2, 'Babar', 'Aristide Euphrate', 'Cageot Miranda', 540);
 
 -- SELECT * from Spectacle;
--- SELECT * from Representation3;
+SELECT * from Representation;
 -- SELECT * from Salle;
 -- SELECT * from Rang;
 -- SELECT * from Place;
 -- SELECT * from Users;
--- SELECT * from Dossier;
+SELECT * from Dossier;
 -- SELECT * from Ticket;
+SELECT * from PlacesRes;
 
 -- INSERT INTO Representation (NR, DateR, HeureR, NSP, NSA, NbP)
 -- SELECT NR, DateR, HeureR, NSP, NSA, NbP
@@ -62,6 +63,6 @@
 
 -- INSERT INTO CatTarifs (NCT, NomCT, PrixCT) VALUES (2, 'Orchestre', 60);
 
-select * 
-    from Dossier d, Spectacle s, Representation r 
-    WHERE d.LoginU ='fournimi' and d.NR = r.NR and r.NSP = s.NSP and d.boolResa = 0;
+-- select * 
+--     from Dossier d, Spectacle s, Representation r 
+--     WHERE d.LoginU ='fournimi' and d.NR = r.NR and r.NSP = s.NSP and d.boolResa = 0;

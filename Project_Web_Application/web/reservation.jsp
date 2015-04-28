@@ -31,8 +31,8 @@
                 $(".datepicker").datepicker({
                     dateFormat: "dd-mm-yy"
                 });
-                $("#genre").multiselect();
-                $("select").multiselect();
+//                $("#genre").multiselect();
+//                $("select").multiselect();
             }
         </script>
 
@@ -113,18 +113,14 @@
 
 
                     <script>
-                        function onChangeRang() {
-                            select_menu = document.getElementById('selectRang');
+                        function onChangeRang(k) {
+                            select_menu = document.getElementById('selectRang' + k);
                             select_menu_value = select_menu.options[select_menu.selectedIndex].value;
-                            document.getElementById('valueRang').value = select_menu_value;
-                            changeHiddenSelectPlace('selectPlace' + select_menu_value);
+                            changeHiddenSelectPlace('selectPlace' + select_menu_value + "" + k, k);
                         }
-                        function onChangePlace(nra) {
-                            select_menu = document.getElementById('selectPlace' + nra);
-                            document.getElementById('valuePlace' + nra).value = select_menu.options[select_menu.selectedIndex].value;
-                        }
-                        function changeHiddenSelectPlace(idS) {
-                            selects = document.getElementsByClassName("selectP");
+
+                        function changeHiddenSelectPlace(idS, k) {
+                            selects = document.getElementsByClassName("selectP" + k);
                             for (i = 0; i < selects.length; i++) {
                                 id = selects[i].id;
                                 if (id === idS) {
@@ -183,8 +179,8 @@
                                     <%} else {%>
                                 <li hidden="true" id="li<%=k%>">  
                                     <%}%>
-                                    <p> Place n° <%=k + 1%></p>
-                                    N° de Rang : <select id="selectRang<%=k%>" onchange="onChangeRang()" >
+                                    <p> Place n° <%=k + 1%> sur <%=request.getAttribute("nbPl")%></p>
+                                    N° de Rang : <select id="selectRang<%=k%>" onchange="onChangeRang(<%=k%>)" >
                                         <% Hashtable<Rang, List<Place>> hashRangs = (Hashtable<Rang, List<Place>>) request.getAttribute("rangs");
                                             if (!hashRangs.isEmpty()) { // Si il y a des rangs
                                                 Enumeration keys2 = hashRangs.keys();
@@ -202,10 +198,10 @@
                                             Integer NRa = rang.getNRa();
                                             List<Place> places = (List<Place>) hashRangs.get(rang);
                                             if (isFirst) {%>
-                                    N° de Place : <select id="selectPlace<%=NRa%><%=k%>" class="selectP" onchange="onChangePlace('<%=NRa%>')" >
+                                    N° de Place : <select id="selectPlace<%=NRa%><%=k%>" class="selectP<%=k%>">
                                         <%
                                         } else {%>
-                                        <select hidden="true" id="selectPlace<%=NRa%><%=k%>" class="selectP" onchange="onChangePlace('<%=NRa%>')" >
+                                        <select hidden="true" id="selectPlace<%=NRa%><%=k%>" class="selectP<%=k%>">
                                             <%}
                                                 for (int j = 0; j < places.size(); j++) {
                                                     Place place = places.get(j);%>
@@ -214,9 +210,9 @@
                                         </select> 
                                         <%if (isFirst) {
                                                 isFirst = false;%>
-                                        <div id="selectPlace<%=NRa%>p">(Prix : <%=rang.getPrixCT()%>€) (Places restantes : <%=places.size()%>)</div>
+                                        <div id="selectPlace<%=NRa%><%=k%>p">(Prix : <%=rang.getPrixCT()%>€) (Places restantes : <%=places.size()%>)</div>
                                         <% } else {%>
-                                        <div hidden="true" id="selectPlace<%=NRa%>p">(Prix : <%=rang.getPrixCT()%>€) (Places restantes : <%=places.size()%>)</div>
+                                        <div hidden="true" id="selectPlace<%=NRa%><%=k%>p">(Prix : <%=rang.getPrixCT()%>€) (Places restantes : <%=places.size()%>)</div>
                                         <%}%>
                                         <%
                                                 }

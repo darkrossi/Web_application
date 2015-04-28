@@ -215,18 +215,22 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
 //                String name = rsmd.getColumnName(i);
 //                s += name + " ";
 //            }
+            List<Integer> listNSP = new ArrayList<>();
             while (rs.next()) {
                 if (rs.getInt("NSP") != 0) {
-                    Spectacle spectacle = new Spectacle(rs.getInt("NSP"),
-                            rs.getString("NomS"),
-                            rs.getString("AuteurS"),
-                            rs.getString("MESS"),
-                            rs.getInt("DureeS"),
-                            rs.getString("Affiche"),
-                            rs.getString("InfoS"));
-                    System.err.println(spectacle);
-                    result.add(spectacle);
-                    dates.add(rs.getString("dateR"));
+                    if (!listNSP.contains(rs.getInt("NSP"))) {
+                        listNSP.add(rs.getInt("NSP"));
+                        Spectacle spectacle = new Spectacle(rs.getInt("NSP"),
+                                rs.getString("NomS"),
+                                rs.getString("AuteurS"),
+                                rs.getString("MESS"),
+                                rs.getInt("DureeS"),
+                                rs.getString("Affiche"),
+                                rs.getString("InfoS"));
+                        System.err.println(spectacle);
+                        result.add(spectacle);
+                        dates.add(rs.getString("dateR"));
+                    }
                 }
             }
 

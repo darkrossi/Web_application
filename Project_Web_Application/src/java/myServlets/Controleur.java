@@ -117,6 +117,8 @@ public class Controleur extends HttpServlet {
                 actionAddAchat(request, response, achatDAO, spectacleDAO, represDAO);
             } else if (action.equals("confirmResa")) {
                 actionConfirmResa(request, response, dossierDAO);
+            } else if (action.equals("annuleResa")) {
+                actionAnnuleResa(request, response, dossierDAO);
             } else if (action.equals("addSalle")) {
                 actionAddSalle(request, response, salleDAO);
             } else {
@@ -361,8 +363,22 @@ public class Controleur extends HttpServlet {
 
     private void actionConfirmResa(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO) throws DAOException, ServletException, IOException {
         request.setAttribute("logBool", 1);
-        if (dossierDAO.swapResa(Integer.parseInt(request.getParameter("ND")))) {
+        if (dossierDAO.confirmResa(Integer.parseInt(request.getParameter("ND")))) {
             request.setAttribute("logText", "Achat effectué avec succès !");
+        } else {
+            request.setAttribute("logText", "Pitit ploblém");
+        }
+        request.setAttribute("dossiers", dossierDAO.getFolders(request.getParameter("login"), 0));
+        request.setAttribute("resas", dossierDAO.getFolders(request.getParameter("login"), 1));
+        getServletContext()
+                .getRequestDispatcher("/monCompte.jsp")
+                .forward(request, response);
+    }
+
+    private void actionAnnuleResa(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO) throws DAOException, ServletException, IOException {
+        request.setAttribute("logBool", 1);
+        if (dossierDAO.annuleResa(Integer.parseInt(request.getParameter("ND")))) {
+            request.setAttribute("logText", "Annulation effectué avec succès !");
         } else {
             request.setAttribute("logText", "Pitit ploblém");
         }
