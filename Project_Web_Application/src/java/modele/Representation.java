@@ -19,9 +19,22 @@ public class Representation {
     private int NbP;
     private String urlImg;
 
+    /**
+     *
+     */
     public Representation() {
     }
 
+    /**
+     *
+     * @param NR
+     * @param date
+     * @param heure
+     * @param NSp
+     * @param NSa
+     * @param NbP
+     * @param urlImg
+     */
     public Representation(int NR, String date, String heure, int NSp, int NSa, int NbP, String urlImg) {
         this.NR = NR;
         this.date = date;
@@ -32,6 +45,15 @@ public class Representation {
         this.urlImg = urlImg;
     }
     
+    /**
+     *
+     * @param NR
+     * @param date
+     * @param heure
+     * @param NSp
+     * @param NSa
+     * @param NbP
+     */
     public Representation(int NR, String date, String heure, int NSp, int NSa, int NbP) {
         this.NR = NR;
         this.date = date;

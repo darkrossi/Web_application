@@ -20,10 +20,21 @@ import modele.Dossier;
  */
 public class DossierDAO extends AbstractDataBaseDAO {
 
+    /**
+     *
+     * @param ds
+     */
     public DossierDAO(DataSource ds) {
         super(ds);
     }
 
+    /**
+     *
+     * @param loginU
+     * @param boolResa
+     * @return
+     * @throws DAOException
+     */
     public List<Dossier> getFolders(String loginU, int boolResa) throws DAOException {
         List<Dossier> result = new ArrayList<>();
         ResultSet rs = null;
@@ -56,6 +67,12 @@ public class DossierDAO extends AbstractDataBaseDAO {
         return result;
     }
 
+    /**
+     *
+     * @param ND
+     * @return
+     * @throws DAOException
+     */
     public boolean confirmResa(int ND) throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
@@ -89,6 +106,12 @@ public class DossierDAO extends AbstractDataBaseDAO {
         }
     }
 
+    /**
+     *
+     * @param ND
+     * @return
+     * @throws DAOException
+     */
     public boolean annuleResa(int ND) throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
@@ -123,6 +146,11 @@ public class DossierDAO extends AbstractDataBaseDAO {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws DAOException
+     */
     public List<Dossier> getAllResas() throws DAOException {
         List<Dossier> result = new ArrayList<>();
         ResultSet rs = null;

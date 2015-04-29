@@ -22,13 +22,25 @@ import modele.Affiche;
  */
 public class AfficheDAO extends AbstractDataBaseDAO {
 
+    /**
+     *
+     */
     public AfficheDAO() {
     }
 
+    /**
+     *
+     * @param ds
+     */
     public AfficheDAO(DataSource ds) {
         super(ds);
     }
 
+    /**
+     *
+     * @return
+     * @throws DAOException
+     */
     public List<Affiche> getListeAffiches() throws DAOException {
         List<Affiche> affiches = new ArrayList<>();
         ResultSet rs = null;

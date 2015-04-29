@@ -22,10 +22,21 @@ import modele.Rang;
  */
 public class RangDAO extends AbstractDataBaseDAO {
 
+    /**
+     *
+     * @param ds
+     */
     public RangDAO(DataSource ds) {
         super(ds);
     }
 
+    /**
+     *
+     * @param NSa
+     * @param NR
+     * @return
+     * @throws DAOException
+     */
     public Hashtable<Rang, List<Place>> getRangs(int NSa, int NR) throws DAOException {
         Hashtable<Rang, List<Place>> rangs = new Hashtable<>();
 

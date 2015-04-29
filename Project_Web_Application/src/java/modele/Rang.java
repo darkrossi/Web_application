@@ -15,9 +15,18 @@ public class Rang {
     private String NomCT;
     private int PrixCT;
 
+    /**
+     *
+     */
     public Rang() {
     }
 
+    /**
+     *
+     * @param NRa
+     * @param NomCT
+     * @param PrixCT
+     */
     public Rang(int NRa, String NomCT, int PrixCT) {
         this.NRa = NRa;
         this.NomCT = NomCT;

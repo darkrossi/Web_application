@@ -13,10 +13,17 @@ public class Affiche {
 
     private String url;
 
+    /**
+     *
+     */
     public Affiche() {
         this.url = "";
     }
 
+    /**
+     *
+     * @param url
+     */
     public Affiche(String url) {
         this.url = url;
     }

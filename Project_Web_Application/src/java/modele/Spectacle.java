@@ -22,9 +22,22 @@ public class Spectacle {
     private String url;
     private String infos;
 
+    /**
+     *
+     */
     public Spectacle() {
     }
 
+    /**
+     *
+     * @param id
+     * @param titre
+     * @param auteur
+     * @param metteurEnScene
+     * @param duree
+     * @param url
+     * @param infos
+     */
     public Spectacle(int id, String titre, String auteur, String metteurEnScene, int duree, String url, String infos) {
         this.id = id;
         this.titre = titre;
@@ -36,62 +49,122 @@ public class Spectacle {
         this.infos = infos;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAuteur() {
         return auteur;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<String> getComediens() {
         return comediens;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDuree() {
         return duree;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMetteurEnScene() {
         return metteurEnScene;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTitre() {
         return titre;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getInfos() {
         return infos;
     }
 
+    /**
+     *
+     * @param auteur
+     */
     public void setAuteur(String auteur) {
         this.auteur = auteur;
     }
 
+    /**
+     *
+     * @param comediens
+     */
     public void setComediens(ArrayList<String> comediens) {
         this.comediens = comediens;
     }
 
+    /**
+     *
+     * @param duree
+     */
     public void setDuree(int duree) {
         this.duree = duree;
     }
 
+    /**
+     *
+     * @param infos
+     */
     public void setInfos(String infos) {
         this.infos = infos;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param metteurEnScene
+     */
     public void setMetteurEnScene(String metteurEnScene) {
         this.metteurEnScene = metteurEnScene;
     }
 
+    /**
+     *
+     * @param titre
+     */
     public void setTitre(String titre) {
         this.titre = titre;
     }
 
+    /**
+     *
+     * @return
+     */
     public String afficheComediens() {
         String sortie = "";
         if (!this.getComediens().isEmpty()) {

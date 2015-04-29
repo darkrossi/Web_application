@@ -21,9 +21,24 @@ public class Dossier {
     private String heure;
     private int boolResa;
 
+    /**
+     *
+     */
     public Dossier() {
     }
 
+    /**
+     *
+     * @param ND
+     * @param NbP
+     * @param LoginU
+     * @param NT
+     * @param NR
+     * @param nomSpectacle
+     * @param date
+     * @param heure
+     * @param boolResa
+     */
     public Dossier(int ND, int NbP, String LoginU, int NT, int NR, String nomSpectacle, String date, String heure, int boolResa) {
         this.ND = ND;
         this.NbP = NbP;

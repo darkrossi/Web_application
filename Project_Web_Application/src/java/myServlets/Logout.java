@@ -70,7 +70,7 @@ public class Logout extends HttpServlet {
         out.println("<body>");
         out.println("<h1>Logout successfull.</h1>");
         out.println("</body></html>");
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("loading.jsp");
     }
 
     /**

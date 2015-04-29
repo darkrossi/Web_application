@@ -16,9 +16,19 @@ public class Utilisateur {
     private String nom;
     private String prenom;
 
+    /**
+     *
+     */
     public Utilisateur() {
     }
 
+    /**
+     *
+     * @param login
+     * @param mdp
+     * @param nom
+     * @param prenom
+     */
     public Utilisateur(String login, String mdp, String nom, String prenom) {
         this.login = login;
         this.mdp = mdp;

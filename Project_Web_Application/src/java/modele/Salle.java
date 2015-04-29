@@ -16,9 +16,19 @@ public class Salle {
     private int NbP;
     private String NomSa;
 
+    /**
+     *
+     */
     public Salle() {
     }
 
+    /**
+     *
+     * @param NSa
+     * @param NbRa
+     * @param NbP
+     * @param NomSa
+     */
     public Salle(int NSa, int NbRa, int NbP, String NomSa) {
         this.NSa = NSa;
         this.NbRa = NbRa;

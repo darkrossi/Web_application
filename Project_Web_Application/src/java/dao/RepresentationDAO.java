@@ -23,9 +23,16 @@ import modele.Representation;
  */
 public class RepresentationDAO extends AbstractDataBaseDAO {
 
+    /**
+     *
+     */
     public RepresentationDAO() {
     }
 
+    /**
+     *
+     * @param ds
+     */
     public RepresentationDAO(DataSource ds) {
         super(ds);
     }
@@ -33,10 +40,14 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
     /**
      * Ajoute l'ouvrage d'auteur et de titre spécifié dans la table bibli
      *
+     * @param date
      * @param auteur
+     * @param heure
      * @param titre
-     * @param mes
+     * @param NSp
+     * @param NSa
      * @param duree
+     * @return 
      * @throws dao.DAOException
      */
     public boolean ajouterRepresentation(String date, String heure, String NSp, String NSa)
@@ -90,6 +101,11 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws DAOException
+     */
     public Hashtable<String, List<Representation>> getRepresFromSp() throws DAOException {
         Hashtable<String, List<Representation>> result = new Hashtable<>();
         ResultSet rs = null;
@@ -124,6 +140,12 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
         return result;
     }
 
+    /**
+     *
+     * @param NSp
+     * @return
+     * @throws DAOException
+     */
     public List<Representation> getRepresList(int NSp) throws DAOException {
         List<Representation> result = new ArrayList<>();
         ResultSet rs = null;
@@ -154,6 +176,12 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
         return result;
     }
 
+    /**
+     *
+     * @param NR
+     * @return
+     * @throws DAOException
+     */
     public Representation getRepres(int NR) throws DAOException {
         Representation result = new Representation();
         ResultSet rs = null;
@@ -182,6 +210,15 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
         return result;
     }
 
+    /**
+     *
+     * @param NSp
+     * @param dateDe
+     * @param dateA
+     * @return
+     * @throws DAOException
+     * @throws ParseException
+     */
     public List<Representation> getListeRepresTri(int NSp, String dateDe, String dateA) throws DAOException, ParseException {
         List<Representation> result = new ArrayList<>();
         ResultSet rs = null;
@@ -223,6 +260,14 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
         return result;
     }
 
+    /**
+     *
+     * @param date
+     * @param dateDe
+     * @param dateA
+     * @return
+     * @throws DAOException
+     */
     public static boolean between(String date, String dateDe, String dateA) throws DAOException {
         int[] dateT = new int[3];
         int[] dateDeT = new int[3];
@@ -248,6 +293,13 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
 
     }
 
+    /**
+     *
+     * @param NR
+     * @param NSA
+     * @return
+     * @throws DAOException
+     */
     public int getNbPlRestRes(int NR, int NSA) throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";

@@ -198,7 +198,7 @@
                                                 int counter = 1;
                                                 while (keys2.hasMoreElements()) { // On affiche le menu déroulant avec les rangs
                                                     Rang rang = (Rang) keys2.nextElement();%>
-                                        <option value="<%=rang.getNRa()%>"><%=rang.getNomCT()%><%=counter++%></option>
+                                        <option value="<%=rang.getNRa()%>">(N° <%=counter++%>) <%=rang.getNomCT()%></option>
                                         <%}%>
                                     </select><br>
 

@@ -95,6 +95,11 @@ public class Controleur extends HttpServlet {
         }
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {

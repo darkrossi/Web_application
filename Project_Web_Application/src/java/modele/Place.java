@@ -14,9 +14,17 @@ public class Place {
     private int NP;
     private int NumPl;
 
+    /**
+     *
+     */
     public Place() {
     }
 
+    /**
+     *
+     * @param NP
+     * @param NumPl
+     */
     public Place(int NP, int NumPl) {
         this.NP = NP;
         this.NumPl = NumPl;

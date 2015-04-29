@@ -21,9 +21,16 @@ import modele.Spectacle;
  */
 public class SpectacleDAO extends AbstractDataBaseDAO {
 
+    /**
+     *
+     */
     public SpectacleDAO() {
     }
 
+    /**
+     *
+     * @param ds
+     */
     public SpectacleDAO(DataSource ds) {
         super(ds);
     }
@@ -77,6 +84,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
      * @param infos
      * @param url
      * @param note
+     * @return 
      * @throws dao.DAOException
      */
     public boolean ajouterSpectacle(String titre, String auteur, String mes, String duree, String infos, String url)
@@ -174,6 +182,18 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
         //...
     }
 
+    /**
+     *
+     * @param motscles
+     * @param date1
+     * @param date2
+     * @param prixDe
+     * @param prixA
+     * @param checkGenre
+     * @param checkPop
+     * @return
+     * @throws DAOException
+     */
     public List<Spectacle> getListeSpectaclesTri(String motscles,
             String date1,
             String date2,
@@ -250,6 +270,14 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
         return result;
     }
 
+    /**
+     *
+     * @param date
+     * @param dateDe
+     * @param dateA
+     * @return
+     * @throws DAOException
+     */
     public static boolean between(String date, String dateDe, String dateA) throws DAOException {
         int[] dateT = new int[3];
         int[] dateDeT = new int[3];

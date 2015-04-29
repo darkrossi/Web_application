@@ -25,10 +25,20 @@ public class SalleDAO extends AbstractDataBaseDAO {
 //
 //    public SalleDAO() {
 //    }
-    public SalleDAO(DataSource ds) {
+
+    /**
+     *
+     * @param ds
+     */
+        public SalleDAO(DataSource ds) {
         super(ds);
     }
 
+    /**
+     *
+     * @return
+     * @throws DAOException
+     */
     public List<Salle> getListeSalles() throws DAOException {
         List<Salle> result = new ArrayList<>();
         ResultSet rs = null;
@@ -71,7 +81,18 @@ public class SalleDAO extends AbstractDataBaseDAO {
 //        }
 //        return salles;
 //    }
-    public boolean ajouterSalle(String nomSalle, int nbRaP, int nbRaB, int nbRaO, int nbP) throws DAOException {
+
+    /**
+     *
+     * @param nomSalle
+     * @param nbRaP
+     * @param nbRaB
+     * @param nbRaO
+     * @param nbP
+     * @return
+     * @throws DAOException
+     */
+        public boolean ajouterSalle(String nomSalle, int nbRaP, int nbRaB, int nbRaO, int nbP) throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;

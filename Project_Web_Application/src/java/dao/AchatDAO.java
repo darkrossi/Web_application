@@ -19,10 +19,24 @@ import javax.sql.DataSource;
  */
 public class AchatDAO extends AbstractDataBaseDAO {
 
+    /**
+     *
+     * @param ds
+     */
     public AchatDAO(DataSource ds) {
         super(ds);
     }
 
+    /**
+     *
+     * @param loginU
+     * @param NR
+     * @param NP
+     * @param nbP
+     * @param boolResa
+     * @return
+     * @throws DAOException
+     */
     public boolean ajouterAchat(String loginU, int NR, int[] NP, int nbP, int boolResa) throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";

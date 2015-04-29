@@ -17,10 +17,21 @@ import javax.sql.DataSource;
  */
 public class UtilisateurDAO extends AbstractDataBaseDAO {
 
+    /**
+     *
+     * @param ds
+     */
     public UtilisateurDAO(DataSource ds) {
         super(ds);
     }
 
+    /**
+     *
+     * @param login
+     * @param mdp
+     * @return
+     * @throws DAOException
+     */
     public String verifUser(String login, String mdp) throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
@@ -46,6 +57,16 @@ public class UtilisateurDAO extends AbstractDataBaseDAO {
         return sortie;
     }
 
+    /**
+     *
+     * @param login
+     * @param mdp
+     * @param nom
+     * @param prenom
+     * @param mail
+     * @return
+     * @throws DAOException
+     */
     public boolean ajouterUser(String login, String mdp, String nom, String prenom, String mail) throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
