@@ -58,7 +58,9 @@
 <!--                    <a href="#" data-hide-id="myModal<%=spectacles.get(i).getId()%>" class="idButton"><span class="glyphicon glyphicon-remove"></span> QUITTER CETTE PAGE</a>-->
                     <h1> <%= nomS%> </h1>
                     <!--Mettre les infos détaillées du spectacle-->
+                    <div class="col-md-6"> 
                     <ul>
+                        <li> <i> <font color=#787878> <%= spectacles.get(i).getInfos()%> </font></i></li>
                         <li>Auteur : <%=spectacles.get(i).getAuteur()%></li>
                         <li>Metteur en scéne : <%=spectacles.get(i).getMetteurEnScene()%></li>
                         <li>Durée : <%=spectacles.get(i).getDuree()%></li>
@@ -70,6 +72,7 @@
                         </li>
                         <!--Quelques infos sur le spectacle-->
                     </ul>
+                    </div>
                 </div>
             </div>
         </div>
