@@ -72,4 +72,33 @@ public class RangDAO extends AbstractDataBaseDAO {
         }
         return rangs;
     }
+    
+    public List<Rang> getListRangs(List<Place> places) throws DAOException {
+        List<Rang> result = new ArrayList<>();
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            Statement st = conn.createStatement();
+            
+            for (int i = 0; i < places.size(); i++){
+                requeteSQL = "select * from Rang r, CatTarifs ct "
+                    + "WHERE r.NRa = " + places.get(i).getNRa() + " and r.NCT = ct.NCT";
+                rs = st.executeQuery(requeteSQL);
+                while (rs.next()) {
+                    Rang rang = new Rang(rs.getInt("NRa"),
+                            rs.getString("NomCT"),
+                            rs.getInt("PrixCT"));
+                    System.err.println(rang);
+                    result.add(rang);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(conn);
+        }
+        return result;
+    }
 }
