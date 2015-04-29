@@ -286,7 +286,12 @@ public class Controleur extends HttpServlet {
                 tabPl,
                 nbPl,
                 Integer.parseInt(request.getParameter("boolResa")))) {
-            request.setAttribute("logText", "Achat effectué avec succès !");
+            if(Integer.parseInt(request.getParameter("boolResa"))==1){
+                request.setAttribute("logText", "Réservation effectuée avec succès !");
+            }
+            else{
+                request.setAttribute("logText", "Achat effectué avec succès !");
+            }
         } else {
             request.setAttribute("logText", "Erreur lors de l'achat...");
         }

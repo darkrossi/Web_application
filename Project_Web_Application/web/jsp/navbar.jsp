@@ -20,7 +20,7 @@
             myModalLog.queue('queue', function () {
                 $(this).reveal($(this).data());
                 $(this).dequeue('queue');
-            }).delay(1500, 'queue');
+            }).delay(3500, 'queue');
 
             myModalLog.queue('queue', function () {
                 $(this).trigger('reveal:close');
@@ -146,19 +146,19 @@
         document.getElementById("login_error").innerHTML = "";
 
         if (prenom.length < 2 || prenom.length > 12) {
-            document.getElementById("prenom_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
+            document.getElementById("prenom_error").innerHTML = "Erreur - ce champ doit contenir entre 2 et 12 caractères";
             return false;
         }
         if (nom.length < 2 || nom.length > 12) {
-            document.getElementById("nom_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
+            document.getElementById("nom_error").innerHTML = "Erreur - ce champ doit contenir entre 2 et 12 caractères";
             return false;
         }
         if (login.length < 2 || login.length > 12) {
-            document.getElementById("login_error").innerHTML = "ERREUR - ce champ contient entre 2 et 12 caractères";
+            document.getElementById("login_error").innerHTML = "Erreur - ce champ doit contenir entre 2 et 12 caractères";
             return false;
         }
         if (password.length < 5 || password.length > 12) {
-            document.getElementById("password_error").innerHTML = "ERREUR - ce champ contient entre 5 et 12 caractères";
+            document.getElementById("password_error").innerHTML = "Erreur - ce champ doit contenir entre 5 et 12 caractères";
             return false;
         }
 
@@ -191,7 +191,7 @@
             <div class="row">
                 <label class="col-md-3"> E-mail</label><input class="col-md-2" id="email" name="mail"><br>
             </div>
-            <input type="SUBMIT">
+            <input type="SUBMIT" value="Envoyer">
             <input hidden="true" name="action" value="addUser">
 
         </FORM>
