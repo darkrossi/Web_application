@@ -73,7 +73,7 @@ public class PrintPDF extends HttpServlet {
             font0.setStyle(Font.ITALIC);
 
             Font font1 = new Font(Font.COURIER);
-      //font1.setStyle(Font.BOLD);
+            //font1.setStyle(Font.BOLD);
 
             Font font3 = new Font(Font.COURIER);
             font3.setStyle(Font.BOLD);
@@ -132,6 +132,7 @@ public class PrintPDF extends HttpServlet {
             document.add(Chunk.NEWLINE);
 
             Set hashNP = new HashSet();
+            int prixTotal = 0;
 
             //affichage des places
             if (!places.isEmpty()) {
@@ -145,11 +146,19 @@ public class PrintPDF extends HttpServlet {
                         paragraphPlaces.add("Place n°" + NumPl);
                         paragraphPlaces.add(" Rang n°" + NRa);
                         paragraphPlaces.add(" Prix de la place : " + PrixCT);
+                        prixTotal += Integer.parseInt(PrixCT);
                         hashNP.add(places.get(i).getNP());
                     }
                 }
                 document.add(paragraphPlaces);
+                document.add(Chunk.NEWLINE);
             }
+
+            //paragraphe
+            Paragraph paragraphPrixTotal = new Paragraph();
+            paragraphPrixTotal.setFont(font1);
+            paragraphPrixTotal.add("Prix total : " + prixTotal + " €");
+            document.add(paragraphPrixTotal);
 
             document.close();
 
