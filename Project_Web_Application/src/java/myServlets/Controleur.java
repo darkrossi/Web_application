@@ -115,6 +115,7 @@ public class Controleur extends HttpServlet {
             AchatDAO achatDAO = new AchatDAO(ds);
 //            RangDAO rangDAO = new RangDAO(ds);
             PlaceDAO placeDAO = new PlaceDAO(ds);
+            RangDAO rangDAO = new RangDAO(ds);
 
             if (action == null) {
                 getServletContext()
@@ -137,7 +138,7 @@ public class Controleur extends HttpServlet {
             } else if (action.equals("addSalle")) {
                 actionAddSalle(request, response, salleDAO);
             } else if (action.equals("printPDF")) {
-                actionPrintPDF(request, response, placeDAO);
+                actionPrintPDF(request, response, placeDAO, rangDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -456,8 +457,9 @@ public class Controleur extends HttpServlet {
     }
 
     
-    private void actionPrintPDF(HttpServletRequest request, HttpServletResponse response, PlaceDAO placeDAO) throws DAOException, ServletException, IOException{
+    private void actionPrintPDF(HttpServletRequest request, HttpServletResponse response, PlaceDAO placeDAO, RangDAO rangDAO) throws DAOException, ServletException, IOException{
         request.setAttribute("places", placeDAO.getPlaces(Integer.parseInt(request.getParameter("ND"))));
+        request.setAttribute("rangs", rangDAO.getListRangs(placeDAO.getPlaces(Integer.parseInt(request.getParameter("ND")))));
         getServletContext()
                 .getRequestDispatcher("/printPDF")
                 .forward(request, response);

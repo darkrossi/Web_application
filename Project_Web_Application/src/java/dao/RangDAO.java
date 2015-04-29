@@ -75,6 +75,35 @@ public class RangDAO extends AbstractDataBaseDAO {
         }
         return rangs;
     }
+    
+    public List<Rang> getListRangs(List<Place> places) throws DAOException {
+        List<Rang> result = new ArrayList<>();
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            Statement st = conn.createStatement();
+            
+            for (int i = 0; i < places.size(); i++){
+                requeteSQL = "select * from Rang r, CatTarifs ct "
+                    + "WHERE r.NRa = " + places.get(i).getNRa() + " and r.NCT = ct.NCT";
+                rs = st.executeQuery(requeteSQL);
+                while (rs.next()) {
+                    Rang rang = new Rang(rs.getInt("NRa"),
+                            rs.getString("NomCT"),
+                            rs.getInt("PrixCT"));
+                    System.err.println(rang);
+                    result.add(rang);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(conn);
+        }
+        return result;
+    }
 }
 
 //dao.DAOException: Erreur BD ORA-00904: "P"."ISTAKEN" : identificateur non valide select r.NRa, c.NomCT, c.PrixCT, p.NP, p.isTaken from Rang r, Place p, CatTarifs c, PlacesRes plr where r.NSA = 1 and r.NRa = p.NRa and c.NCT = r.NCT and p.NP not in(Select NP from Places p, PlacesRes plr, Dossier d, Rang r where p.NP = plr.NP and r.NRA = p.NRA and r.NSA = 1 and plr.ND = d.ND and d.NR =1) 

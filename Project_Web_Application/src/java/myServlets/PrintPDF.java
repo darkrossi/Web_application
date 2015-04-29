@@ -22,7 +22,10 @@ import com.lowagie.text.Font;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
+import java.util.List;
 import javax.servlet.ServletOutputStream;
+import modele.Place;
+import modele.Rang;
 
 /**
  *
@@ -54,7 +57,8 @@ public class PrintPDF extends HttpServlet {
       String Date = request.getParameter("Date");
       String Heure = request.getParameter("Heure");
       
-      // Ici avec un request.getAttribute("places") tu récupères ta liste de places et magiiiiiiie, t'en fais ce que tu veux
+      List<Place> places = (List<Place>) request.getAttribute("places");
+      List<Rang> rangs = (List<Rang>) request.getAttribute("rangs");
       
 
       Document document = new Document(PageSize.A6);
@@ -73,6 +77,9 @@ public class PrintPDF extends HttpServlet {
       Font font3 = new Font(Font.COURIER);
       font3.setStyle(Font.BOLD);
       font3.setStyle(Font.ITALIC);
+      
+      Font font4; 
+      font4 = new Font(Font.COURIER, 8, Font.BOLDITALIC);
                     
       //paragraphe
       Paragraph paragraphNT = new Paragraph();
@@ -122,6 +129,23 @@ public class PrintPDF extends HttpServlet {
       paragraphDate.add(" à " + Heure);
       document.add(paragraphDate);    
       document.add(Chunk.NEWLINE);
+      
+    //affichage des places
+    if (!places.isEmpty()) {
+        Paragraph paragraphPlaces = new Paragraph();
+        paragraphPlaces.setFont(font4);
+        for (int i = 0; i < places.size(); i++){
+            String NumPl = Integer.toString(places.get(i).getNumPl());
+            String NRa = Integer.toString(places.get(i).getNRa());
+            String PrixCT = Integer.toString(rangs.get(i).getPrixCT());
+            paragraphPlaces.add("Place n°" + NumPl);    
+            paragraphPlaces.add(" Rang n°" + NRa);
+            paragraphPlaces.add(" Prix de la place : " + PrixCT);
+        }
+        document.add(paragraphPlaces);
+    }
+      
+      
       
       document.close();
 
