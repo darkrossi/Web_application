@@ -20,24 +20,17 @@ import modele.Salle;
  */
 public class SalleDAO extends AbstractDataBaseDAO {
 
-//    private final String url = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
-//    private final String login = "fournimi";
-//
-//    public SalleDAO() {
-//    }
-
     /**
      *
      * @param ds
      */
-        public SalleDAO(DataSource ds) {
+    public SalleDAO(DataSource ds) {
         super(ds);
     }
 
     /**
      *
-     * @return
-     * @throws DAOException
+     * @return @throws DAOException
      */
     public List<Salle> getListeSalles() throws DAOException {
         List<Salle> result = new ArrayList<>();
@@ -67,21 +60,6 @@ public class SalleDAO extends AbstractDataBaseDAO {
         return result;
     }
 
-//    public List<Salle> getListeSallesBis() throws DAOException, ClassNotFoundException {
-//        Class.forName("oracle.jdbc.OracleDriver");
-//        List<Salle> salles = new ArrayList<>();
-//        try (Connection Connexion = DriverManager.getConnection(url, login, login)) {
-//            Statement State = Connexion.createStatement();
-//            ResultSet resultat = State.executeQuery("SELECT NSA FROM Salle");
-//            while (resultat.next()) {
-//                int id = resultat.getInt("NSA");
-//                salles.add(new Salle(id));
-//            }
-//        } catch (SQLException e) {
-//        }
-//        return salles;
-//    }
-
     /**
      *
      * @param nomSalle
@@ -92,7 +70,7 @@ public class SalleDAO extends AbstractDataBaseDAO {
      * @return
      * @throws DAOException
      */
-        public boolean ajouterSalle(String nomSalle, int nbRaP, int nbRaB, int nbRaO, int nbP) throws DAOException {
+    public boolean ajouterSalle(String nomSalle, int nbRaP, int nbRaB, int nbRaO, int nbP) throws DAOException {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;

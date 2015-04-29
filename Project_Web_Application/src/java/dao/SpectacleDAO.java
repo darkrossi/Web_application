@@ -211,7 +211,6 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
-        String s = "debut ";
         try {
             conn = getConnection();
             Statement st = conn.createStatement();
@@ -313,5 +312,4 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
 
         return diffDe >= 0 && diffA >= 0;
     }
-
 }
