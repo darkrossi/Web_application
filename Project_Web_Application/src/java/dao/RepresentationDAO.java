@@ -244,7 +244,6 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
             }
 
             if (dateDe != null && dateA != null && !"".equals(dateDe) && !"".equals(dateA) && !"null".equals(dateDe) && !"null".equals(dateA)) {
-//                throw new DAOException("HERE '" + dateDe + "' et '" + dateA + "'", null);
                 for (int i = result.size() - 1; i >= 0; i--) {
                     if (!between(result.get(i).getDate(), dateDe, dateA)) {
                         result.remove(i);

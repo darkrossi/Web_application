@@ -11,7 +11,7 @@
 <%@page import="java.util.Hashtable"%>
 <%@page import="modele.Representation"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- 
+
 <% HttpSession session2 = request.getSession(false);
     String userName = (String) session2.getAttribute("utilisateur");%>
 
@@ -62,9 +62,10 @@
                         <li>Auteur : <%=spectacles.get(i).getAuteur()%></li>
                         <li>Metteur en scéne : <%=spectacles.get(i).getMetteurEnScene()%></li>
                         <li>Durée : <%=spectacles.get(i).getDuree()%></li>
-                        <li><button onclick="$('#NSp').attr('value', '<%=spectacles.get(i).getId()%>');
-                                document.form.submit();">
-                                Réserver <span class="glyphicon glyphicon-arrow-down"></span>
+                        <li>
+                            <button onclick="$('#NSp').attr('value', '<%=spectacles.get(i).getId()%>');
+                                    document.form.submit();"> 
+                                Voir les représentations <span class="glyphicon glyphicon-list-alt"></span>
                             </button>
                         </li>
                         <!--Quelques infos sur le spectacle-->

@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.List;
 import javax.sql.DataSource;
 import modele.Spectacle;
@@ -84,7 +86,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
      * @param infos
      * @param url
      * @param note
-     * @return 
+     * @return
      * @throws dao.DAOException
      */
     public boolean ajouterSpectacle(String titre, String auteur, String mes, String duree, String infos, String url)
@@ -105,7 +107,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
 
             requeteSQL = "INSERT INTO Spectacle (NSP, NomS, AuteurS, MESS, DureeS, InfoS, Affiche)"
                     + "VALUES (" + indiceNSP_Max + ", '" + titre + "', '" + auteur + "', '" + mes
-                    + "', " + Integer.parseInt(duree) + ", '" + infos + ", '" + url + "')";
+                    + "', " + Integer.parseInt(duree) + ", '" + infos + "', '" + url + "')";
             st.executeQuery(requeteSQL);
             return true;
         } catch (SQLException e) {
@@ -198,12 +200,14 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
             String date1,
             String date2,
             String prixDe,
-            String prixA,
-            String[] checkGenre,
-            String[] checkPop) throws DAOException {
+            String prixA) throws DAOException {
+
+        Hashtable<Integer, Spectacle> hashSpect = new Hashtable<>();
+        Hashtable<Integer, List<String>> hashDate = new Hashtable<>();
 
         List<Spectacle> result = new ArrayList<>();
-        List<String> dates = new ArrayList<>();
+        List<Spectacle> resultFinal = new ArrayList<>();
+
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
@@ -227,39 +231,44 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                     + "where rep.NSp = s.NSp and rep.NSa = sa.NSa and sa.NSa = rg.NSa"
                     + whereMotsCles + wherePrix;
             rs = st.executeQuery(requeteSQL);
-//            ResultSetMetaData rsmd = rs.getMetaData();
-//            int columnCount = rsmd.getColumnCount();
-//
-//            // The column count starts from 1
-//            for (int i = 1; i < columnCount + 1; i++) {
-//                String name = rsmd.getColumnName(i);
-//                s += name + " ";
-//            }
-            List<Integer> listNSP = new ArrayList<>();
+
             while (rs.next()) {
                 if (rs.getInt("NSP") != 0) {
-                    if (!listNSP.contains(rs.getInt("NSP"))) {
-                        listNSP.add(rs.getInt("NSP"));
-                        Spectacle spectacle = new Spectacle(rs.getInt("NSP"),
-                                rs.getString("NomS"),
-                                rs.getString("AuteurS"),
-                                rs.getString("MESS"),
-                                rs.getInt("DureeS"),
-                                rs.getString("Affiche"),
-                                rs.getString("InfoS"));
-                        System.err.println(spectacle);
-                        result.add(spectacle);
-                        dates.add(rs.getString("dateR"));
+                    Spectacle spectacle = new Spectacle(rs.getInt("NSP"),
+                            rs.getString("NomS"),
+                            rs.getString("AuteurS"),
+                            rs.getString("MESS"),
+                            rs.getInt("DureeS"),
+                            rs.getString("Affiche"),
+                            rs.getString("InfoS"));
+                    if (!hashSpect.containsKey(rs.getInt("NSP"))) {
+                        hashSpect.put(rs.getInt("NSP"), spectacle);
                     }
+                    if (!hashDate.containsKey(rs.getInt("NSP"))) {
+                        hashDate.put(rs.getInt("NSP"), new ArrayList<>());
+                    }
+                    hashDate.get(rs.getInt("NSP")).add(rs.getString("dateR"));
                 }
             }
 
-            if (!"".equals(date1) && !"".equals(date2)) {
-                for (int i = result.size() - 1; i >= 0; i--) {
-                    if (!between(dates.get(i), date1, date2)) {
-                        result.remove(i);
+            Enumeration keys2 = hashDate.keys();
+            while (keys2.hasMoreElements()) { // On affiche le menu déroulant avec les rangs
+                Integer NS = (Integer) keys2.nextElement();
+                if (!"".equals(date1) && !"".equals(date2)) { // Si il y a un tri par date
+                    List<String> dates = hashDate.get(NS);
+                    for (int i = 0; i < dates.size(); i++) {
+                        if (between(dates.get(i), date1, date2)) {
+                            result.add(hashSpect.get(NS));
+                            break;
+                        }
                     }
+                } else { // Si il n'y pas de tri par date
+                    result.add(hashSpect.get(NS));
                 }
+            }
+            
+            for(int i = result.size()-1; i>=0; i--){
+                resultFinal.add(result.get(i));
             }
 
         } catch (SQLException e) {
@@ -267,7 +276,7 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
         } finally {
             closeConnection(conn);
         }
-        return result;
+        return resultFinal;
     }
 
     /**

@@ -353,9 +353,7 @@ public class Controleur extends HttpServlet {
                 request.getParameter("datepicker1"),
                 request.getParameter("datepicker2"),
                 request.getParameter("prixDe"),
-                request.getParameter("prixA"),
-                request.getParameterValues("checkGenre"),
-                request.getParameterValues("checkPop")));
+                request.getParameter("prixA")));
         getServletContext()
                 .getRequestDispatcher("/catalogue.jsp")
                 .forward(request, response);
