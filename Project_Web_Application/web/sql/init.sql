@@ -75,8 +75,7 @@ CREATE TABLE Users (
     PrenomU varchar(30),
     MailU varchar(30),
     MdpU varchar(30),
-    constraint pk_users primary key (LoginU),
-    CONSTRAINT bin_roleu CHECK(RoleU in (0, 1))
+    constraint pk_users primary key (LoginU)
 );
 INSERT INTO Users (LoginU, NomU, PrenomU, MailU, MdpU)
 SELECT LoginU, NomU, PrenomU, MailU, MdpU

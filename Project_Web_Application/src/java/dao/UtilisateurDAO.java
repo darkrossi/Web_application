@@ -86,11 +86,12 @@ public class UtilisateurDAO extends AbstractDataBaseDAO {
                     + "VALUES ('" + login + "', '" + nom + "', '" + prenom + "', '" + mail
                     + "', '" + mdp + "', 0)";
             st.executeQuery(requeteSQL);
+
             return true;
 
         } catch (SQLException e) {
             // si l'exception concerne l'unicité de chaque login dans la table
-            if(e.getErrorCode() == 1){
+            if (e.getErrorCode() == 1) {
                 // alors on redirige vers une page vers une page qui indique que ce login est déjà enregistré dans la bdd
                 return false;
             } else {

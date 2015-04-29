@@ -182,5 +182,4 @@ public class DossierDAO extends AbstractDataBaseDAO {
         }
         return result;
     }
-
 }

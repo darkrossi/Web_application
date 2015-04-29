@@ -215,11 +215,14 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
         try {
             conn = getConnection();
             Statement st = conn.createStatement();
-
-            String whereMotsCles = " and (LOWER(s.NomS) like '%" + motscles + "%'"
+            
+            String whereMotsCles = "";
+            if(!"".equals(motscles)){
+            whereMotsCles = " and (LOWER(s.NomS) like '%" + motscles + "%'"
                     + " or LOWER(s.AuteurS) like '%" + motscles + "%'"
                     + " or LOWER(s.MESS) like '%" + motscles + "%'"
                     + " or LOWER(s.InfoS) like '%" + motscles + "%') ";
+            }
 
             String wherePrix = "";
             if (!"".equals(prixDe) && !"".equals(prixA)) {
@@ -312,9 +315,3 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
     }
 
 }
-
-//select distinct s.NSp, s.NomS, s.AuteurS, s.MESS, s.DureeS, s.Affiche, s.infos, rep.dateR 
-//from Spectacle s, Representation rep, Salle sa, Rang rg, CatTarifs ct 
-//where rep.NSp = s.NSp and rep.NbP > 70 rep.NSa = sa.NSa and sa.NSa = rg.NSa 
-//and (LOWER(s.NomS) like '%%' or LOWER(s.AuteurS) like '%%' or LOWER(s.MESS) like '%%' or LOWER(s.InfoS) like '%%') 
-//and rg.NCT = ct.NCT and ct.PrixCT (between 0 and 30) 

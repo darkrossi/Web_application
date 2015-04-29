@@ -47,9 +47,6 @@ public class RangDAO extends AbstractDataBaseDAO {
             conn = getConnection();
             Statement st = conn.createStatement();
 
-//            requeteSQL = "select r.NRa, c.NomCT, c.PrixCT, p.NP, p.isTaken "
-//                    + "from Rang r, Place p, CatTarifs c "
-//                    + "where r.NSA = " + NSa + " and r.NRa = p.NRa and c.NCT = r.NCT";
             requeteSQL = "select r.NRa, c.NomCT, c.PrixCT, p.NP, p.NumPl "
                     + "from Rang r, Place p, CatTarifs c "
                     + "where r.NSA = " + NSa + " and r.NRa = p.NRa and c.NCT = r.NCT "
@@ -76,5 +73,3 @@ public class RangDAO extends AbstractDataBaseDAO {
         return rangs;
     }
 }
-
-//dao.DAOException: Erreur BD ORA-00904: "P"."ISTAKEN" : identificateur non valide select r.NRa, c.NomCT, c.PrixCT, p.NP, p.isTaken from Rang r, Place p, CatTarifs c, PlacesRes plr where r.NSA = 1 and r.NRa = p.NRa and c.NCT = r.NCT and p.NP not in(Select NP from Places p, PlacesRes plr, Dossier d, Rang r where p.NP = plr.NP and r.NRA = p.NRA and r.NSA = 1 and plr.ND = d.ND and d.NR =1) 
