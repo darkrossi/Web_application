@@ -219,16 +219,16 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
             String whereMotsCles = " and (LOWER(s.NomS) like '%" + motscles + "%'"
                     + " or LOWER(s.AuteurS) like '%" + motscles + "%'"
                     + " or LOWER(s.MESS) like '%" + motscles + "%'"
-                    + " or LOWER(s.InfoS) like '%" + motscles + "%')";
+                    + " or LOWER(s.InfoS) like '%" + motscles + "%') ";
 
             String wherePrix = "";
             if (!"".equals(prixDe) && !"".equals(prixA)) {
-                wherePrix = " and rg.CatTarif  between " + prixDe + " and " + prixA;
+                wherePrix = " and rg.NCT = ct.NCT and (ct.PrixCT between " + prixDe + " and " + prixA+")";
             }
 
             requeteSQL = "select distinct s.NSp, s.NomS, s.AuteurS, s.MESS, s.DureeS, s.Affiche, s.infos, rep.dateR "
-                    + "from Spectacle s, Representation rep, Salle sa, Rang rg "
-                    + "where rep.NSp = s.NSp and rep.NSa = sa.NSa and sa.NSa = rg.NSa"
+                    + "from Spectacle s, Representation rep, Salle sa, Rang rg, CatTarifs ct "
+                    + "where rep.NSp = s.NSp and rep.NbP > 70 and rep.NSa = sa.NSa and sa.NSa = rg.NSa"
                     + whereMotsCles + wherePrix;
             rs = st.executeQuery(requeteSQL);
 
@@ -266,13 +266,13 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
                     result.add(hashSpect.get(NS));
                 }
             }
-            
-            for(int i = result.size()-1; i>=0; i--){
+
+            for (int i = result.size() - 1; i >= 0; i--) {
                 resultFinal.add(result.get(i));
             }
 
         } catch (SQLException e) {
-            throw new DAOException("Erreur BD " + e.getMessage() + " " + s, e);
+            throw new DAOException("Erreur BD " + e.getMessage() + " " + requeteSQL, e);
         } finally {
             closeConnection(conn);
         }
@@ -312,3 +312,9 @@ public class SpectacleDAO extends AbstractDataBaseDAO {
     }
 
 }
+
+//select distinct s.NSp, s.NomS, s.AuteurS, s.MESS, s.DureeS, s.Affiche, s.infos, rep.dateR 
+//from Spectacle s, Representation rep, Salle sa, Rang rg, CatTarifs ct 
+//where rep.NSp = s.NSp and rep.NbP > 70 rep.NSa = sa.NSa and sa.NSa = rg.NSa 
+//and (LOWER(s.NomS) like '%%' or LOWER(s.AuteurS) like '%%' or LOWER(s.MESS) like '%%' or LOWER(s.InfoS) like '%%') 
+//and rg.NCT = ct.NCT and ct.PrixCT (between 0 and 30) 
