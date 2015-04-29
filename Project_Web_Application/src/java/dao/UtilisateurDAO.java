@@ -82,9 +82,9 @@ public class UtilisateurDAO extends AbstractDataBaseDAO {
 //                indiceNSP_Max++;
 //            }
 
-            requeteSQL = "INSERT INTO Users (LoginU, NomU, PrenomU, MailU, MdpU, RoleU)"
+            requeteSQL = "INSERT INTO Users (LoginU, NomU, PrenomU, MailU, MdpU)"
                     + "VALUES ('" + login + "', '" + nom + "', '" + prenom + "', '" + mail
-                    + "', '" + mdp + "', 0)";
+                    + "', '" + mdp + "')";
             st.executeQuery(requeteSQL);
 
             return true;
