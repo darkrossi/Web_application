@@ -137,7 +137,7 @@ public class Controleur extends HttpServlet {
             } else if (action.equals("addSalle")) {
                 actionAddSalle(request, response, salleDAO);
             } else if (action.equals("printPDF")) {
-                actionPrintPDF(request, response, dossierDAO, placeDAO);
+                actionPrintPDF(request, response, placeDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -456,10 +456,8 @@ public class Controleur extends HttpServlet {
     }
 
     
-    private void actionPrintPDF(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO, PlaceDAO placeDAO) throws DAOException, ServletException, IOException{
-        //request.setAttribute("places", dossierDAO.getPlaces(Integer.parseInt(request.getParameter("ND")))); // nom de colonne invalide
-        // ..
-        // récuperer les informations sur les places et les mettre en attributs
+    private void actionPrintPDF(HttpServletRequest request, HttpServletResponse response, PlaceDAO placeDAO) throws DAOException, ServletException, IOException{
+        request.setAttribute("places", placeDAO.getPlaces(Integer.parseInt(request.getParameter("ND"))));
         getServletContext()
                 .getRequestDispatcher("/printPDF")
                 .forward(request, response);

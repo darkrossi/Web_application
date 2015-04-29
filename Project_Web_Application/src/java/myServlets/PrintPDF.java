@@ -16,14 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
 import com.lowagie.text.Font;
-import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
-import java.awt.Color;
-import java.net.MalformedURLException;
 import javax.servlet.ServletOutputStream;
 
 /**
@@ -55,6 +53,8 @@ public class PrintPDF extends HttpServlet {
       String NomSpectacle = request.getParameter("NomSpectacle");
       String Date = request.getParameter("Date");
       String Heure = request.getParameter("Heure");
+      
+      // Ici avec un request.getAttribute("places") tu récupères ta liste de places et magiiiiiiie, t'en fais ce que tu veux
       
 
       Document document = new Document(PageSize.A6);
@@ -137,7 +137,7 @@ public class PrintPDF extends HttpServlet {
       baos.writeTo(out);
       out.flush();
 
-    } catch (Exception e2) {
+    } catch (DocumentException | IOException e2) {
       System.out.println("Error in " + getClass().getName() + "\n" + e2);
     }
     }
