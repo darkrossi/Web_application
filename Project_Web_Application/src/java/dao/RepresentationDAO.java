@@ -12,8 +12,11 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import javax.sql.DataSource;
 import modele.Representation;
 
@@ -47,7 +50,7 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
      * @param NSp
      * @param NSa
      * @param duree
-     * @return 
+     * @return
      * @throws dao.DAOException
      */
     public boolean ajouterRepresentation(String date, String heure, String NSp, String NSa)
@@ -103,8 +106,7 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
 
     /**
      *
-     * @return
-     * @throws DAOException
+     * @return @throws DAOException
      */
     public Hashtable<String, List<Representation>> getRepresFromSp() throws DAOException {
         Hashtable<String, List<Representation>> result = new Hashtable<>();
@@ -125,7 +127,8 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
                         rs.getInt("NSP"),
                         rs.getInt("NSA"),
                         rs.getInt("NbP"),
-                        rs.getString("Affiche"));
+                        rs.getString("Affiche"),
+                        rs.getString("NomS"));
                 System.err.println(representation);
                 if (!result.containsKey(rs.getString("NomS"))) {
                     result.put(rs.getString("NomS"), new ArrayList<>());
@@ -165,7 +168,8 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
                         rs.getInt("NSP"),
                         rs.getInt("NSA"),
                         rs.getInt("NbP"),
-                        rs.getString("Affiche"));
+                        rs.getString("Affiche"),
+                        rs.getString("NomS"));
                 result.add(repres);
             }
         } catch (SQLException e) {
@@ -191,8 +195,8 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
             conn = getConnection();
             Statement st = conn.createStatement();
             requeteSQL = "select * "
-                    + "from Representation "
-                    + "where NR = " + NR;
+                    + "from Representation r, Spectacle s "
+                    + "where s.NSP = r.NSP and r.NR = " + NR;
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
                 result = new Representation(rs.getInt("NR"),
@@ -200,7 +204,8 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
                         rs.getString("HeureR"),
                         rs.getInt("NSP"),
                         rs.getInt("NSA"),
-                        rs.getInt("NbP"));
+                        rs.getInt("NbP"),
+                        rs.getString("NomS"));
             }
         } catch (SQLException e) {
             throw new DAOException("Erreur BD " + e.getMessage(), e);
@@ -239,7 +244,8 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
                         rs.getInt("NSP"),
                         rs.getInt("NSA"),
                         rs.getInt("NbP"),
-                        rs.getString("Affiche"));
+                        rs.getString("Affiche"),
+                        rs.getString("NomS"));
                 result.add(repres);
             }
 
@@ -316,6 +322,61 @@ public class RepresentationDAO extends AbstractDataBaseDAO {
             rs = st.executeQuery(requeteSQL);
             rs.next();
             return rs.getInt(1);
+        } catch (SQLException e) {
+            throw new DAOException("Erreur BD " + e.getMessage(), e);
+        } finally {
+            closeConnection(conn);
+        }
+    }
+
+    public boolean annuleResa(int NR) throws DAOException {
+        ResultSet rs = null;
+        String requeteSQL = "";
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            Statement st = conn.createStatement();
+
+            Set hashND = new HashSet();
+            Set hashNT = new HashSet();
+            Set hashNPR = new HashSet();
+
+            /* On récupère les informations de la représentation */
+            requeteSQL = "select d.ND, t.NT, pr.NPR "
+                    + "from Dossier d, PlacesRes pr, Ticket t "
+                    + "where d.NR = " + NR + " and d.ND = pr.ND and (d.NT = t.NT or d.NT = -1)";
+            rs = st.executeQuery(requeteSQL);
+            while (rs.next()) {
+                hashND.add(rs.getInt("ND"));
+                hashNT.add(rs.getInt("NT"));
+                hashNPR.add(rs.getInt("NPR"));
+            }
+
+            Iterator iter = hashNPR.iterator(); // on crée un Iterator pour parcourir notre HashSet
+            while (iter.hasNext()) {
+                requeteSQL = "delete from PlacesRes where NPR =" + iter.next();
+                rs = st.executeQuery(requeteSQL);
+            }
+
+            iter = hashND.iterator();
+            while (iter.hasNext()) {
+                requeteSQL = "delete from Dossier where ND =" + iter.next();
+                rs = st.executeQuery(requeteSQL);
+            }
+
+            iter = hashNT.iterator();
+            while (iter.hasNext()) {
+                Integer NT = (Integer) iter.next();
+                if (NT != -1) {
+                    requeteSQL = "delete from Ticket where NT =" + NT;
+                    rs = st.executeQuery(requeteSQL);
+                }
+            }
+
+            requeteSQL = "delete from Representation where NR =" + NR;
+            rs = st.executeQuery(requeteSQL);
+
+            return true;
         } catch (SQLException e) {
             throw new DAOException("Erreur BD " + e.getMessage(), e);
         } finally {

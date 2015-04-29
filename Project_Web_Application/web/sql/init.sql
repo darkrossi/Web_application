@@ -90,7 +90,7 @@ CREATE TABLE Ticket (
 
 CREATE TABLE Dossier (
     ND int, -- numéro dossier
-    NR int, -- numéro reservation
+    NR int, -- numéro representation
     LoginU varchar(30), -- login
     NT int, -- numéro ticket
     NbP int, -- nombre de place

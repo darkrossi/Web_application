@@ -6,7 +6,7 @@
 -- SELECT * from Salle;
 -- SELECT * from Rang;
 -- SELECT * from Place;
-SELECT * from Users;
+-- SELECT * from Users;
 -- SELECT * from Dossier;
 -- SELECT * from Ticket;
 -- SELECT * from PlacesRes;
@@ -66,3 +66,5 @@ SELECT * from Users;
 -- select * 
 --     from Dossier d, Spectacle s, Representation r 
 --     WHERE d.LoginU ='fournimi' and d.NR = r.NR and r.NSP = s.NSP and d.boolResa = 0;
+
+select d.ND, t.NT, pr.NPR from Dossier d, PlacesRes pr, Ticket t where d.NR = 1 and d.ND = pr.ND and (d.NT = t.NT or d.NT =-1);

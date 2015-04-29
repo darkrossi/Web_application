@@ -232,8 +232,11 @@
                                         <br>
                                         <% if (k == (Integer) request.getAttribute("nbPl") - 1) {%>
 
+                                        <% if ((Integer)request.getAttribute("nbPl") != 1) {%>
+                                        <button onclick="afficheBefore(<%=(Integer) request.getAttribute("nbPl")%>, <%=(Integer) request.getAttribute("nbPl") - k%>)">Place précédente</button>
+                                        <%}%>
                                         <form action="<%=request.getContextPath()%>/controleur" onsubmit="onclickFinalize(1, <%=(Integer) request.getAttribute("nbPl")%>);
-                                            return true;" method="post">
+                                                return true;" method="post">
                                             <button type="submit">
                                                 Réserver <span class="glyphicon glyphicon-arrow-down"></span>
                                             </button>

@@ -20,9 +20,9 @@
     </head>
     <body>
         <jsp:include page="jsp/navbar.jsp"/>
-        <h2>Les Places réservées : </h2><br>
 
         <div class="container" >
+            <h2>Les Places réservées : </h2><br>
             <div class="row">
                 <div class="col-md-2">
                     <p><b>Client</b></b></p>
@@ -56,6 +56,42 @@
                     }%>
 
             </div>
+
+            <h2>Les représentations : </h2><br>
+            <div class="row">
+                <div class="col-md-2">
+                    <p><b>Spectacle</b></b></p>
+                    <p><b>Date</b></p>
+                    <p><b>Heure</b></p>
+                    <p><b>Nombre de places restantes</b></p>
+                </div>
+
+                <% if (request.getAttribute("repres") != null) {
+                        Hashtable<String, List<Representation>> hashRepres = (Hashtable<String, List<Representation>>) request.getAttribute("repres");
+                        if (!hashRepres.isEmpty()) { // Si il y a des rangs
+                            Enumeration keys2 = hashRepres.keys();
+                            while (keys2.hasMoreElements()) {
+                                String NomR = (String) keys2.nextElement();
+                                List<Representation> repres = (List<Representation>) hashRepres.get(NomR);
+                                for (int i = 0; i < repres.size(); i++) {%>
+                <div class="col-md-2">
+                    <p><%=repres.get(i).getNomSpect()%></p> 
+                    <p><%=repres.get(i).getDate()%></p>
+                    <p><%=repres.get(i).getHeure()%></p>
+                    <p><%=repres.get(i).getNbP()%></p>
+                    <form method="post" action="<%=request.getContextPath()%>/controleur">
+                        <button type="submit">Annuler la représentation</button>
+                        <input name="action" value="annuleRepres" hidden="true">
+                        <input name="NR" value="<%=repres.get(i).getNR() %>" hidden="true">
+                    </form>
+                </div>
+                <%
+                                }
+                            }
+                        }
+                    }%>
+
+            </div> 
         </div>
     </body>
     <jsp:include page="jsp/footer.jsp"/>

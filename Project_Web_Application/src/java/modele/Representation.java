@@ -18,6 +18,7 @@ public class Representation {
     private int NSa;
     private int NbP;
     private String urlImg;
+    private String nomSpect;
 
     /**
      *
@@ -34,8 +35,9 @@ public class Representation {
      * @param NSa
      * @param NbP
      * @param urlImg
+     * @param nomSpect
      */
-    public Representation(int NR, String date, String heure, int NSp, int NSa, int NbP, String urlImg) {
+    public Representation(int NR, String date, String heure, int NSp, int NSa, int NbP, String urlImg, String nomSpect) {
         this.NR = NR;
         this.date = date;
         this.heure = heure;
@@ -43,6 +45,7 @@ public class Representation {
         this.NSa = NSa;
         this.NbP = NbP;
         this.urlImg = urlImg;
+        this.nomSpect = nomSpect;
     }
     
     /**
@@ -53,8 +56,9 @@ public class Representation {
      * @param NSp
      * @param NSa
      * @param NbP
+     * @param nomSpect
      */
-    public Representation(int NR, String date, String heure, int NSp, int NSa, int NbP) {
+    public Representation(int NR, String date, String heure, int NSp, int NSa, int NbP, String nomSpect) {
         this.NR = NR;
         this.date = date;
         this.heure = heure;
@@ -62,6 +66,7 @@ public class Representation {
         this.NSa = NSa;
         this.NbP = NbP;
         this.urlImg = "";
+        this.nomSpect = nomSpect;
     }
 
     /**
@@ -160,6 +165,20 @@ public class Representation {
      */
     public void setUrlImg(String urlImg) {
         this.urlImg = urlImg;
+    }
+
+    /**
+     * @return the nomSpect
+     */
+    public String getNomSpect() {
+        return nomSpect;
+    }
+
+    /**
+     * @param nomSpect the nomSpect to set
+     */
+    public void setNomSpect(String nomSpect) {
+        this.nomSpect = nomSpect;
     }
 
 }

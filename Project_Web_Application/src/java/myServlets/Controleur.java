@@ -76,7 +76,7 @@ public class Controleur extends HttpServlet {
             } else if (action.equals("addSalle")) {
                 actionAddSalle(request, response, salleDAO);
             } else if (action.equals("displayManageResas")) {
-                actionDisplayManageResas(request, response, dossierDAO);
+                actionDisplayManageResas(request, response, dossierDAO, represDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -129,7 +129,9 @@ public class Controleur extends HttpServlet {
             } else if (action.equals("confirmResa")) {
                 actionConfirmResa(request, response, dossierDAO);
             } else if (action.equals("annuleResa")) {
-                actionAnnuleResa(request, response, dossierDAO);
+                actionAnnuleResa(request, response, dossierDAO, represDAO);
+            } else if (action.equals("annuleRepres")) {
+                actionAnnuleRepres(request, response, represDAO, dossierDAO);
             } else if (action.equals("addSalle")) {
                 actionAddSalle(request, response, salleDAO);
             } else {
@@ -286,10 +288,9 @@ public class Controleur extends HttpServlet {
                 tabPl,
                 nbPl,
                 Integer.parseInt(request.getParameter("boolResa")))) {
-            if(Integer.parseInt(request.getParameter("boolResa"))==1){
+            if (Integer.parseInt(request.getParameter("boolResa")) == 1) {
                 request.setAttribute("logText", "Réservation effectuée avec succès !");
-            }
-            else{
+            } else {
                 request.setAttribute("logText", "Achat effectué avec succès !");
             }
         } else {
@@ -393,24 +394,40 @@ public class Controleur extends HttpServlet {
                 .forward(request, response);
     }
 
-    private void actionAnnuleResa(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO) throws DAOException, ServletException, IOException {
+    private void actionAnnuleResa(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO, RepresentationDAO represDAO) throws DAOException, ServletException, IOException {
         request.setAttribute("logBool", 1);
         if (dossierDAO.annuleResa(Integer.parseInt(request.getParameter("ND")))) {
             request.setAttribute("logText", "Annulation effectué avec succès !");
         } else {
             request.setAttribute("logText", "Pitit ploblém");
         }
-        request.setAttribute("dossiers", dossierDAO.getFolders(request.getParameter("login"), 0));
-        request.setAttribute("resas", dossierDAO.getFolders(request.getParameter("login"), 1));
         if (((String) request.getParameter("admin")).equals("false")) {
+            request.setAttribute("dossiers", dossierDAO.getFolders(request.getParameter("login"), 0));
+            request.setAttribute("resas", dossierDAO.getFolders(request.getParameter("login"), 1));
             getServletContext()
                     .getRequestDispatcher("/monCompte.jsp")
                     .forward(request, response);
         } else {
+            request.setAttribute("resas", dossierDAO.getAllResas());
+            request.setAttribute("repres", represDAO.getRepresFromSp());
             getServletContext()
                     .getRequestDispatcher("/managerAdmin.jsp")
                     .forward(request, response);
         }
+    }
+
+    private void actionAnnuleRepres(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO, DossierDAO dossierDAO) throws DAOException, ServletException, IOException {
+        request.setAttribute("logBool", 1);
+        if (represDAO.annuleResa(Integer.parseInt(request.getParameter("NR")))) {
+            request.setAttribute("logText", "Représentation annulée avec succès !");
+        } else {
+            request.setAttribute("logText", "Pitit ploblém");
+        }
+        request.setAttribute("resas", dossierDAO.getAllResas());
+        request.setAttribute("repres", represDAO.getRepresFromSp());
+        getServletContext()
+                .getRequestDispatcher("/managerAdmin.jsp")
+                .forward(request, response);
     }
 
     private void actionDisplayNbPlaces(HttpServletRequest request, HttpServletResponse response, RepresentationDAO represDAO, SpectacleDAO spectDAO) throws DAOException, ServletException, IOException, ParseException {
@@ -425,9 +442,10 @@ public class Controleur extends HttpServlet {
         actionFiltrerResa(request, response, represDAO, spectDAO, 0);
     }
 
-    private void actionDisplayManageResas(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO) throws DAOException, ServletException, IOException {
+    private void actionDisplayManageResas(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO, RepresentationDAO represDAO) throws DAOException, ServletException, IOException {
         request.setAttribute("logBool", 0);
         request.setAttribute("resas", dossierDAO.getAllResas());
+        request.setAttribute("repres", represDAO.getRepresFromSp());
         getServletContext()
                 .getRequestDispatcher("/managerAdmin.jsp")
                 .forward(request, response);
