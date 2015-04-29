@@ -4,6 +4,9 @@
     Author     : oswald
 --%>
 
+<%@page import="java.util.Enumeration"%>
+<%@page import="java.util.Hashtable"%>
+<%@page import="modele.Representation"%>
 <%@page import="modele.Dossier"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

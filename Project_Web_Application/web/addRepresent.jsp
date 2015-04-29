@@ -14,7 +14,7 @@
 <% HttpSession session2 = request.getSession(false);
     String userName = (String) session2.getAttribute("utilisateur");
     if (userName == null) {
-        String site = new String("./index.jsp");
+        String site = new String("./loading.jsp");
         response.setStatus(response.SC_MOVED_TEMPORARILY);
         response.setHeader("Location", site);
     }

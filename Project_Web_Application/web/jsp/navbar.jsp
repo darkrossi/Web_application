@@ -36,7 +36,10 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.jsp"><font id="comedimag">Comed'Imag <span class="glyphicon glyphicon-home"></span></font></a>
+            <a href="javascript:document.inputForm10.submit();" class="navbar-brand"><font id="comedimag">Comed'Imag <span class="glyphicon glyphicon-home"></span></font></a>
+            <form action="<%=request.getContextPath()%>/controleur" method="get" name="inputForm10">
+                <input name="action" value="loadingIndex" hidden="true">
+            </form>
         </div>
         <div>
             <ul class="nav navbar-nav">

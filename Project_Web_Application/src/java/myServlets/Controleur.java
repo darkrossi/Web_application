@@ -56,7 +56,7 @@ public class Controleur extends HttpServlet {
             } else if (action.equals("addS")) {
                 actionAddSpectacle(request, response, spectacleDAO);
             } else if (action.equals("addUser")) {
-                actionAddUser(request, response, userDAO);
+                actionAddUser(request, response, userDAO, afficheDAO);
             } else if (action.equals("addRepres")) {
                 actionAddRepres(request, response, represDAO, spectacleDAO, salleDAO);
             } else if (action.equals("displayAddSalle")) {
@@ -100,6 +100,7 @@ public class Controleur extends HttpServlet {
         try {
             String action = request.getParameter("action");
 
+            AfficheDAO afficheDAO = new AfficheDAO(ds);
             SpectacleDAO spectacleDAO = new SpectacleDAO(ds);
             UtilisateurDAO userDAO = new UtilisateurDAO(ds);
             RepresentationDAO represDAO = new RepresentationDAO(ds);
@@ -113,7 +114,7 @@ public class Controleur extends HttpServlet {
                         .getRequestDispatcher("/ErrorRequest.jsp")
                         .forward(request, response);
             } else if (action.equals("verifUser")) {
-                actionVerifUser(request, response, userDAO);
+                actionVerifUser(request, response, userDAO, afficheDAO);
             } else if (action.equals("filtrerCatalogue")) {
                 actionFiltrerCatalogue(request, response, spectacleDAO, 0);
             } else if (action.equals("filtrerResa")) {
@@ -170,7 +171,8 @@ public class Controleur extends HttpServlet {
 
     private void actionVerifUser(HttpServletRequest request,
             HttpServletResponse response,
-            UtilisateurDAO utilisateurDAO)
+            UtilisateurDAO utilisateurDAO,
+            AfficheDAO afficheDAO)
             throws DAOException, ServletException, IOException {
         request.setAttribute("logBool", 0);
         String sortie = utilisateurDAO.verifUser(request.getParameter("loginU"), request.getParameter("mdpU"));
@@ -182,13 +184,11 @@ public class Controleur extends HttpServlet {
         } else {
             HttpSession session = request.getSession(true);
             session.setAttribute("utilisateur", request.getParameter("loginU"));
-            getServletContext()
-                    .getRequestDispatcher("/index.jsp")
-                    .forward(request, response);
+            actionLoadingIndex(request, response, afficheDAO);
         }
     }
 
-    private void actionAddUser(HttpServletRequest request, HttpServletResponse response, UtilisateurDAO utilisateurDAO)
+    private void actionAddUser(HttpServletRequest request, HttpServletResponse response, UtilisateurDAO utilisateurDAO, AfficheDAO afficheDAO)
             throws ServletException, IOException, DAOException {
         request.setAttribute("logBool", 1);
         if (utilisateurDAO.ajouterUser(request.getParameter("login"),
@@ -202,9 +202,7 @@ public class Controleur extends HttpServlet {
         } else {
             request.setAttribute("logText", "Erreur lors de la création du compte utilisateur..");
         }
-        getServletContext()
-                .getRequestDispatcher("/index.jsp")
-                .forward(request, response);
+        actionLoadingIndex(request, response, afficheDAO);
     }
 
     private void actionAddRepres(HttpServletRequest request, HttpServletResponse response,
@@ -402,7 +400,7 @@ public class Controleur extends HttpServlet {
                     .forward(request, response);
         } else {
             getServletContext()
-                    .getRequestDispatcher("/managerResas.jsp")
+                    .getRequestDispatcher("/managerAdmin.jsp")
                     .forward(request, response);
         }
     }
@@ -423,7 +421,7 @@ public class Controleur extends HttpServlet {
         request.setAttribute("logBool", 0);
         request.setAttribute("resas", dossierDAO.getAllResas());
         getServletContext()
-                .getRequestDispatcher("/managerResas.jsp")
+                .getRequestDispatcher("/managerAdmin.jsp")
                 .forward(request, response);
     }
 
