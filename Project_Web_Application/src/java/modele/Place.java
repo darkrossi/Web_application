@@ -13,6 +13,7 @@ public class Place {
 
     private int NP;
     private int NumPl;
+    private int NRa;
 
     /**
      *
@@ -24,10 +25,12 @@ public class Place {
      *
      * @param NP
      * @param NumPl
+     * @param NRa
      */
-    public Place(int NP, int NumPl) {
+    public Place(int NP, int NumPl, int NRa) {
         this.NP = NP;
         this.NumPl = NumPl;
+        this.NRa = NRa;
     }
 
     /**
@@ -56,6 +59,20 @@ public class Place {
      */
     public void setNumPl(int NumPl) {
         this.NumPl = NumPl;
+    }
+
+    /**
+     * @return the NRa
+     */
+    public int getNRa() {
+        return NRa;
+    }
+
+    /**
+     * @param NRa the NRa to set
+     */
+    public void setNRa(int NRa) {
+        this.NRa = NRa;
     }
 
 }

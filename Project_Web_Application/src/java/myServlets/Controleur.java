@@ -47,6 +47,7 @@ public class Controleur extends HttpServlet {
             DossierDAO dossierDAO = new DossierDAO(ds);
             AchatDAO achatDAO = new AchatDAO(ds);
             RangDAO rangDAO = new RangDAO(ds);
+            PlaceDAO placeDAO = new PlaceDAO(ds);
             if (action == null) {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -113,6 +114,7 @@ public class Controleur extends HttpServlet {
             DossierDAO dossierDAO = new DossierDAO(ds);
             AchatDAO achatDAO = new AchatDAO(ds);
 //            RangDAO rangDAO = new RangDAO(ds);
+            PlaceDAO placeDAO = new PlaceDAO(ds);
 
             if (action == null) {
                 getServletContext()
@@ -134,6 +136,8 @@ public class Controleur extends HttpServlet {
                 actionAnnuleRepres(request, response, represDAO, dossierDAO);
             } else if (action.equals("addSalle")) {
                 actionAddSalle(request, response, salleDAO);
+            } else if (action.equals("printPDF")) {
+                actionPrintPDF(request, response, dossierDAO, placeDAO);
             } else {
                 getServletContext()
                         .getRequestDispatcher("/ErrorRequest.jsp")
@@ -451,4 +455,13 @@ public class Controleur extends HttpServlet {
                 .forward(request, response);
     }
 
+    
+    private void actionPrintPDF(HttpServletRequest request, HttpServletResponse response, DossierDAO dossierDAO, PlaceDAO placeDAO) throws DAOException, ServletException, IOException{
+        //request.setAttribute("places", dossierDAO.getPlaces(Integer.parseInt(request.getParameter("ND")))); // nom de colonne invalide
+        // ..
+        // récuperer les informations sur les places et les mettre en attributs
+        getServletContext()
+                .getRequestDispatcher("/printPDF")
+                .forward(request, response);
+    }
 }

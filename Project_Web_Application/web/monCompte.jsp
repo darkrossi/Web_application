@@ -50,12 +50,16 @@
                                         <p><%=dossiers.get(i).getDate()%></p>
                                         <p><%=dossiers.get(i).getHeure()%></p>
                                         <p><%=dossiers.get(i).getNbP()%></p>
-                                        <form method="post" action="<%=request.getContextPath()%>/printPDF">
+                                        <form method="post" action="<%=request.getContextPath()%>/controleur">
                                             <input name="login" value=<%=dossiers.get(i).getLoginU()%> hidden="true">
                                             <input name="ND" value=<%=dossiers.get(i).getND()%> hidden="true">
                                             <input name="NR" value=<%=dossiers.get(i).getNR()%> hidden="true">
                                             <input name="NT" value=<%=dossiers.get(i).getNT()%> hidden="true">
                                             <input name="NbP" value=<%=dossiers.get(i).getNbP()%> hidden="true">
+                                            <input name="NomSpectacle" value=<%=dossiers.get(i).getNomSpectacle()%> hidden="true">
+                                            <input name="Date" value=<%=dossiers.get(i).getDate()%> hidden="true">
+                                            <input name="Heure" value=<%=dossiers.get(i).getHeure()%> hidden="true">
+                                            <input hidden="true" name="action" value="printPDF">
                                             <button type="submit">Imprimer en PDF</button>
                                         </form>
                                     </div>

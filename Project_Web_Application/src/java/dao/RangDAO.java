@@ -64,7 +64,7 @@ public class RangDAO extends AbstractDataBaseDAO {
                 if (!rangs.containsKey(rang)) {
                     rangs.put(rang, new ArrayList<>());
                 }
-                place = new Place(rs.getInt("NP"), rs.getInt("NumPl"));
+                place = new Place(rs.getInt("NP"), rs.getInt("NumPl"), rs.getInt("NRa"));
                 rangs.get(rang).add(place);
             }
 
