@@ -75,12 +75,11 @@ CREATE TABLE Users (
     PrenomU varchar(30),
     MailU varchar(30),
     MdpU varchar(30),
-    RoleU int,
     constraint pk_users primary key (LoginU),
     CONSTRAINT bin_roleu CHECK(RoleU in (0, 1))
 );
-INSERT INTO Users (LoginU, NomU, PrenomU, MailU, MdpU, RoleU)
-SELECT LoginU, NomU, PrenomU, MailU, MdpU, RoleU
+INSERT INTO Users (LoginU, NomU, PrenomU, MailU, MdpU)
+SELECT LoginU, NomU, PrenomU, MailU, MdpU
 FROM Users3;
 
 CREATE TABLE Ticket (
