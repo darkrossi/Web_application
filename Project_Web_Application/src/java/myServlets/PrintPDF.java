@@ -52,9 +52,12 @@ public class PrintPDF extends HttpServlet {
       String NR = request.getParameter("NR");
       String NT = request.getParameter("NT");
       String NbP = request.getParameter("NbP");
+      String NomSpectacle = request.getParameter("NomSpectacle");
+      String Date = request.getParameter("Date");
+      String Heure = request.getParameter("Heure");
       
 
-      Document document = new Document(PageSize.A7);
+      Document document = new Document(PageSize.A6);
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
       PdfWriter.getInstance(document, baos);
       document.open();
@@ -65,52 +68,60 @@ public class PrintPDF extends HttpServlet {
       font0.setStyle(Font.ITALIC);
       
       Font font1 = new Font(Font.COURIER);
-      font1.setStyle(Font.BOLD);
+      //font1.setStyle(Font.BOLD);
+      
+      Font font3 = new Font(Font.COURIER);
+      font3.setStyle(Font.BOLD);
+      font3.setStyle(Font.ITALIC);
                     
-      //titre centré
-      Paragraph paragraph = new Paragraph();
-      paragraph.setFont(font0);
-      paragraph.add("Votre ticket");
-      paragraph.setAlignment(Element.ALIGN_CENTER);
-      document.add(paragraph);
+      //paragraphe
+      Paragraph paragraphNT = new Paragraph();
+      paragraphNT.setFont(font0);
+      paragraphNT.add("Ticket n°" + NT);
+      paragraphNT.setAlignment(Element.ALIGN_CENTER);
+      document.add(paragraphNT);    
       document.add(Chunk.NEWLINE);
       
-      //paragraphe 1
+      //paragraphe
       Paragraph paragraphND = new Paragraph();
       paragraphND.setFont(font1);
       paragraphND.add("Dossier n°" + ND);
       //paragraphND.setAlignment(Element.ALIGN_CENTER);
       document.add(paragraphND);    
-      document.add(Chunk.NEWLINE);
       
-      //paragraphe 2
+      //paragraphe
       Paragraph paragraphNR = new Paragraph();
       paragraphNR.setFont(font1);
       paragraphNR.add("Réservation n°" + NR);
-      document.add(paragraphNR);    
+      document.add(paragraphNR);
       document.add(Chunk.NEWLINE);
       
-      //paragraphe 3
+      //paragraphe
       Paragraph paragraphLogin = new Paragraph();
       paragraphLogin.setFont(font1);
       paragraphLogin.add("Votre login : " + login);      
       document.add(paragraphLogin);    
-      document.add(Chunk.NEWLINE);
       
-      //paragraphe 4
-      Paragraph paragraphNT = new Paragraph();
-      paragraphNT.setFont(font1);
-      paragraphNT.add("Ticket n°" + NT);
-      document.add(paragraphNT);    
-      document.add(Chunk.NEWLINE);
-      
-      //paragraphe 5
+      //paragraphe
       Paragraph paragraphNbP = new Paragraph();
       paragraphNbP.setFont(font1);
-      paragraphNbP.add("Nombre de places : " + NbP);
+      paragraphNbP.add("Nombre de places réservées : " + NbP);
       document.add(paragraphNbP);    
       document.add(Chunk.NEWLINE);
       
+      //paragraphe
+      Paragraph paragraphNomSpectacle = new Paragraph();
+      paragraphNomSpectacle.setFont(font3);
+      paragraphNomSpectacle.add(NomSpectacle);
+      document.add(paragraphNomSpectacle);    
+      
+      //paragraphe
+      Paragraph paragraphDate = new Paragraph();
+      paragraphDate.setFont(font1);
+      paragraphDate.add(Date);
+      paragraphDate.add(" à " + Heure);
+      document.add(paragraphDate);    
+      document.add(Chunk.NEWLINE);
       
       document.close();
 
